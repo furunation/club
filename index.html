@@ -4,24 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>nebbykit</title>
+
+  <!-- Apply dark mode before the browser paints the page. -->
+  <script>
+    document.documentElement.classList.add("dark-mode");
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg-color: #fff1e6;
-      --text-color: #542b3c;
-      --surface-color: #ffe0c2;
-      --accent-color: #c64f5d;
-      --shadow-color: rgba(84, 43, 60, 0.18);
-      --sidebar-width: 180px;
-    }
-
-    body.dark-mode {
+      color-scheme: dark;
       --bg-color: #02040b;
       --text-color: #ffffff;
       --surface-color: #080d19;
       --accent-color: #168cff;
       --shadow-color: rgba(0, 0, 0, 0.5);
+      --sidebar-width: 180px;
+    }
+
+    /* Light mode is used only when explicitly selected with the toggle. */
+    :root.light-mode {
+      color-scheme: light;
+      --bg-color: #fff1e6;
+      --text-color: #542b3c;
+      --surface-color: #ffe0c2;
+      --accent-color: #c64f5d;
+      --shadow-color: rgba(84, 43, 60, 0.18);
     }
 
     * {
@@ -637,7 +646,7 @@
       const canvas = document.getElementById("globeBackground");
 
       if (!canvas || typeof THREE === "undefined") {
-        return;
+        return null;
       }
 
       let renderer;
@@ -650,7 +659,7 @@
         });
       } catch (error) {
         console.warn("WebGL is unavailable; continuing without the plasma background.", error);
-        return;
+        return null;
       }
 
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -664,7 +673,9 @@
           uResolution: {
             value: new THREE.Vector2(window.innerWidth, window.innerHeight)
           },
-          uLightMode: { value: 0 }
+          uLightMode: {
+            value: document.documentElement.classList.contains("light-mode") ? 1 : 0
+          }
         },
         vertexShader: `
           void main() {
@@ -734,12 +745,11 @@
 
       function updatePlasmaTheme() {
         material.uniforms.uLightMode.value =
-          document.body.classList.contains("dark-mode") ? 0 : 1;
+          document.documentElement.classList.contains("light-mode") ? 1 : 0;
       }
 
       window.addEventListener("resize", resize);
       resize();
-      updatePlasmaTheme();
 
       const clock = new THREE.Clock();
 
@@ -1171,7 +1181,7 @@
 
     function updateThemeToggle() {
       const toggle = document.getElementById("side-toggle");
-      const isDark = document.body.classList.contains("dark-mode");
+      const isDark = !document.documentElement.classList.contains("light-mode");
 
       toggle.textContent = isDark ? "☀️" : "🌙";
       toggle.setAttribute(
@@ -1185,13 +1195,13 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      document.body.classList.add("dark-mode");
       updatePlasmaTheme = initPlasmaBackground();
       updateThemeToggle();
       renderVideos();
 
       document.getElementById("side-toggle").addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
+        const root = document.documentElement;
+        root.classList.toggle("light-mode");
         updateThemeToggle();
       });
 
