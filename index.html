@@ -14,21 +14,12 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg-color: #02040b;
+      --bg-color: #000000;
       --text-color: #ffffff;
-      --surface-color: #080d19;
-      --accent-color: #168cff;
-      --shadow-color: rgba(0, 0, 0, 0.5);
+      --surface-color: #090909;
+      --accent-color: #f5c400;
+      --shadow-color: rgba(0, 0, 0, 0.65);
       --sidebar-width: 180px;
-    }
-
-    :root.light-mode {
-      color-scheme: light;
-      --bg-color: #fff1e6;
-      --text-color: #542b3c;
-      --surface-color: #ffe0c2;
-      --accent-color: #c64f5d;
-      --shadow-color: rgba(84, 43, 60, 0.18);
     }
 
     * {
@@ -47,7 +38,6 @@
       background: var(--bg-color);
       color: var(--text-color);
       font-family: "Ubuntu", Arial, sans-serif;
-      transition: background-color 0.3s, color 0.3s;
     }
 
     button,
@@ -64,7 +54,6 @@
       display: block;
       width: 100%;
       height: 100%;
-      opacity: 1;
       pointer-events: none;
     }
 
@@ -102,7 +91,7 @@
     }
 
     #sidebar::-webkit-scrollbar-thumb {
-      background: var(--text-color);
+      background: var(--accent-color);
       border-radius: 3px;
     }
 
@@ -110,7 +99,7 @@
       width: 100%;
       margin: 15px 0 20px;
       padding: 10px 15px;
-      border: 1px solid var(--text-color);
+      border: 1px solid var(--accent-color);
       border-radius: 20px;
       background: var(--bg-color);
       color: var(--text-color);
@@ -125,33 +114,7 @@
     }
 
     #sidebar input[type="search"]:focus {
-      box-shadow: 0 0 0 2px var(--text-color);
-    }
-
-    #side-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1500;
-      display: flex;
-      width: 44px;
-      height: 44px;
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
-      border: 1px solid var(--text-color);
-      border-radius: 8px;
-      background: var(--accent-color);
-      color: var(--bg-color);
-      font-size: 1.25rem;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s, transform 0.2s;
-    }
-
-    #side-toggle:hover {
-      transform: scale(1.05);
-      background: var(--text-color);
-      color: var(--bg-color);
+      box-shadow: 0 0 0 2px var(--accent-color);
     }
 
     #sidebar-toggle {
@@ -160,10 +123,10 @@
       left: 12px;
       z-index: 1400;
       padding: 10px 12px;
-      border: 1px solid var(--text-color);
+      border: 1px solid var(--accent-color);
       border-radius: 8px;
       background: var(--accent-color);
-      color: var(--bg-color);
+      color: #000000;
       font: inherit;
       cursor: pointer;
       transition: left 0.3s ease, background-color 0.3s, color 0.3s;
@@ -194,7 +157,7 @@
     }
 
     #sidebar-bottom-logo a {
-      color: var(--text-color);
+      color: var(--accent-color);
       text-decoration: underline;
     }
 
@@ -202,10 +165,10 @@
       width: 100%;
       margin-bottom: 8px;
       padding: 10px;
-      border: 1px solid var(--text-color);
+      border: 1px solid var(--accent-color);
       border-radius: 12px;
       background: var(--accent-color);
-      color: var(--bg-color);
+      color: #000000;
       font-family: "Ubuntu", Arial, sans-serif;
       font-size: 0.9em;
       font-weight: bold;
@@ -213,15 +176,11 @@
       text-align: center;
     }
 
-    .page-button:hover {
-      transform: translateY(-2px);
-      background: var(--text-color);
-      color: var(--bg-color);
-    }
-
+    .page-button:hover,
     .page-button[aria-current="page"] {
-      background: var(--text-color);
-      color: var(--bg-color);
+      transform: translateY(-2px);
+      background: #000000;
+      color: var(--accent-color);
     }
 
     #favoritesList {
@@ -257,7 +216,7 @@
       padding: 0 2px;
       border: 0;
       background: transparent;
-      color: var(--text-color);
+      color: var(--accent-color);
       font: inherit;
       font-size: 1.1em;
       line-height: 1.2;
@@ -345,7 +304,7 @@
     }
 
     .youtube-placeholder:focus-visible {
-      outline: 3px solid var(--text-color);
+      outline: 3px solid var(--accent-color);
       outline-offset: 3px;
     }
 
@@ -353,7 +312,6 @@
       margin-bottom: 12px;
     }
 
-    /* Ecosystem category filters appear at the top of the ecosystem page. */
     #ecosystemFilters {
       display: flex;
       flex-wrap: wrap;
@@ -363,25 +321,21 @@
 
     .category-btn {
       padding: 9px 14px;
-      border: 1px solid var(--text-color);
+      border: 1px solid var(--accent-color);
       border-radius: 999px;
       background: var(--accent-color);
-      color: var(--bg-color);
+      color: #000000;
       font-family: "Ubuntu", Arial, sans-serif;
       font-size: 0.9em;
       font-weight: bold;
       transition: transform 0.2s, background-color 0.2s, color 0.2s;
     }
 
-    .category-btn:hover {
-      transform: translateY(-2px);
-      background: var(--text-color);
-      color: var(--bg-color);
-    }
-
+    .category-btn:hover,
     .category-btn[aria-pressed="true"] {
-      background: var(--text-color);
-      color: var(--bg-color);
+      transform: translateY(-2px);
+      background: #000000;
+      color: var(--accent-color);
     }
 
     #figures {
@@ -400,7 +354,7 @@
       align-items: center;
       align-self: start;
       padding: 15px;
-      border: 1px solid var(--text-color);
+      border: 1px solid rgba(245, 196, 0, 0.65);
       border-radius: 12px;
       background: var(--surface-color);
       color: var(--text-color);
@@ -410,7 +364,7 @@
 
     figure:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 20px var(--shadow-color);
+      box-shadow: 0 0 18px rgba(245, 196, 0, 0.25);
     }
 
     figure a {
@@ -467,22 +421,27 @@
       line-height: 1;
     }
 
-    .ecosystem-badge[data-ecosystem="ZANO"] {
-      background: #7040d8;
-      color: #fff;
-    }
-
     .ecosystem-badge[data-ecosystem="BCH"] {
       background: #178c55;
       color: #fff;
     }
 
-    .ecosystem-badge[data-ecosystem="ERGO"] {
+    .ecosystem-badge[data-ecosystem="Wallet"] {
+      background: #2861a9;
+      color: #fff;
+    }
+
+    .ecosystem-badge[data-ecosystem="DApp"] {
       background: #d18322;
       color: #fff;
     }
 
-    .ecosystem-badge[data-ecosystem="Uncategorized"] {
+    .ecosystem-badge[data-ecosystem="Creator"] {
+      background: #bd397b;
+      color: #fff;
+    }
+
+    .ecosystem-badge[data-ecosystem="Collectible"] {
       background: #596273;
       color: #fff;
     }
@@ -494,7 +453,7 @@
       padding: 2px;
       border: none;
       background: transparent;
-      color: var(--text-color);
+      color: var(--accent-color);
       font-size: 1.2em;
       cursor: pointer;
     }
@@ -509,10 +468,10 @@
       height: 60px;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--text-color);
+      border: 1px solid var(--accent-color);
       border-radius: 50%;
       background: var(--accent-color);
-      color: var(--bg-color);
+      color: #000000;
       box-shadow: 0 4px 8px var(--shadow-color);
       font-size: 2em;
       font-weight: bold;
@@ -527,8 +486,8 @@
 
     #backToTop:hover {
       transform: scale(1.1);
-      background: var(--text-color);
-      color: var(--bg-color);
+      background: #000000;
+      color: var(--accent-color);
     }
 
     @media (max-width: 768px) {
@@ -612,11 +571,6 @@
         width: 50px;
         height: 50px;
       }
-
-      #side-toggle {
-        top: 16px;
-        right: 16px;
-      }
     }
 
     @media (max-width: 360px) {
@@ -660,8 +614,6 @@
   <canvas id="globeBackground" aria-hidden="true"></canvas>
 
   <div id="mainContent">
-    <button id="side-toggle" type="button" title="Toggle Light/Dark Mode" aria-label="Toggle light and dark mode">☀️</button>
-
     <button
       id="sidebar-toggle"
       type="button"
@@ -676,7 +628,7 @@
         <button class="page-button" type="button" data-page="ecosystem">Ecosystem</button>
       </nav>
 
-      <input type="search" id="sidebar-search" placeholder="Search..." aria-label="Search ecosystem" hidden />
+      <input type="search" id="sidebar-search" placeholder="Search..." aria-label="Search BCH and Furu items" hidden />
 
       <h2>Favorites</h2>
       <div id="favoritesList"></div>
@@ -694,18 +646,19 @@
     <main id="content">
       <section id="home-page" class="page-section" aria-labelledby="home-title">
         <h1 id="home-title" class="page-title"></h1>
-        <div id="videoGallery" class="video-gallery" aria-label="Videos"></div>
+        <div id="videoGallery" class="video-gallery" aria-label="Bitcoin Cash and Furu videos"></div>
       </section>
 
       <section id="ecosystem-page" class="page-section" aria-labelledby="ecosystem-title" hidden>
         <h1 id="ecosystem-title" class="page-title"></h1>
 
-        <nav id="ecosystemFilters" aria-label="Filter ecosystem figures">
+        <nav id="ecosystemFilters" aria-label="Filter BCH and Furu items">
           <button class="category-btn" type="button" data-filter="All" aria-pressed="true">All</button>
-          <button class="category-btn" type="button" data-filter="ZANO" aria-pressed="false">ZANO</button>
           <button class="category-btn" type="button" data-filter="BCH" aria-pressed="false">BCH</button>
-          <button class="category-btn" type="button" data-filter="ERGO" aria-pressed="false">ERGO</button>
-          <button class="category-btn" type="button" data-filter="Uncategorized" aria-pressed="false">Uncategorized</button>
+          <button class="category-btn" type="button" data-filter="Wallet" aria-pressed="false">Wallet</button>
+          <button class="category-btn" type="button" data-filter="DApp" aria-pressed="false">DApp</button>
+          <button class="category-btn" type="button" data-filter="Creator" aria-pressed="false">Creator</button>
+          <button class="category-btn" type="button" data-filter="Collectible" aria-pressed="false">Collectible</button>
         </nav>
 
         <div id="figures"></div>
@@ -734,7 +687,7 @@
           antialias: true
         });
       } catch (error) {
-        console.warn("WebGL is unavailable; continuing without the plasma background.", error);
+        console.warn("WebGL is unavailable; continuing without the animated background.", error);
         return null;
       }
 
@@ -748,9 +701,6 @@
           uTime: { value: 0 },
           uResolution: {
             value: new THREE.Vector2(window.innerWidth, window.innerHeight)
-          },
-          uLightMode: {
-            value: document.documentElement.classList.contains("light-mode") ? 1 : 0
           }
         },
         vertexShader: `
@@ -761,7 +711,6 @@
         fragmentShader: `
           uniform float uTime;
           uniform vec2 uResolution;
-          uniform float uLightMode;
 
           float plasma(vec2 p, float t) {
             float v = 0.0;
@@ -781,25 +730,18 @@
             float glow = smoothstep(-0.7, 0.8, field);
             float highlights = pow(max(field, 0.0), 5.0);
 
-            vec3 darkBase = vec3(0.002, 0.004, 0.012);
-            vec3 darkBlue = vec3(0.005, 0.025, 0.12);
-            vec3 darkElectric = vec3(0.015, 0.22, 0.85);
-            vec3 darkCyan = vec3(0.12, 0.62, 1.0);
+            float pulse = 0.5 + 0.5 * sin(uTime * 1.6);
+            float pulseGlow = 0.65 + pulse * 0.35;
 
-            vec3 lightBase = vec3(1.0, 0.95, 0.89);
-            vec3 lightBlue = vec3(0.73, 0.85, 1.0);
-            vec3 lightElectric = vec3(0.16, 0.42, 0.85);
-            vec3 lightCyan = vec3(0.08, 0.35, 0.68);
+            vec3 blackBase = vec3(0.0, 0.0, 0.0);
+            vec3 deepGold = vec3(0.10, 0.065, 0.0);
+            vec3 yellow = vec3(1.0, 0.68, 0.0);
+            vec3 brightYellow = vec3(1.0, 0.9, 0.12);
 
-            vec3 darkColor = mix(darkBase, darkBlue, glow);
-            darkColor += darkElectric * pow(glow, 2.0) * 0.75;
-            darkColor += darkCyan * highlights * 0.35;
+            vec3 color = mix(blackBase, deepGold, glow * 0.75);
+            color += yellow * pow(glow, 2.0) * 0.26 * pulseGlow;
+            color += brightYellow * highlights * 0.15 * pulseGlow;
 
-            vec3 lightColor = mix(lightBase, lightBlue, glow * 0.72);
-            lightColor += lightElectric * pow(glow, 2.0) * 0.24;
-            lightColor += lightCyan * highlights * 0.12;
-
-            vec3 color = mix(darkColor, lightColor, uLightMode);
             gl_FragColor = vec4(color, 1.0);
           }
         `
@@ -819,11 +761,6 @@
         material.uniforms.uResolution.value.set(width, height);
       }
 
-      function updatePlasmaTheme() {
-        material.uniforms.uLightMode.value =
-          document.documentElement.classList.contains("light-mode") ? 1 : 0;
-      }
-
       window.addEventListener("resize", resize);
       resize();
 
@@ -836,11 +773,7 @@
       }
 
       animate();
-
-      return updatePlasmaTheme;
     }
-
-    let updatePlasmaTheme = null;
 
     const videoLinks = [
       "https://youtu.be/5YiLTTIptA4?si=R4WFcBI-RM1W5S-7",
@@ -968,116 +901,133 @@
         href: "https://gaze.cash/channel.html?chan=AAADKQ",
         src: "https://i.postimg.cc/Hc5qvNy7/nsfwbch.jpg",
         caption: "[nsfw]bch",
-        ecosystems: ["BCH"]
+        categories: ["BCH", "DApp"]
       },
       {
         href: "https://ergoplatform.org/en/",
         src: "https://i.postimg.cc/fTLHp9GY/ergoplatform.jpg",
         caption: "Ergo",
-        ecosystems: ["ERGO"]
+        categories: []
       },
       {
         href: "https://ergoplatform.org/en/blog/2021-05-12-ergomixer/",
         src: "https://i.postimg.cc/Q9VXZyhN/ergomixer.png",
         caption: "Ergo Mixer",
-        ecosystems: ["ERGO"]
+        categories: []
       },
       {
         href: "https://ariavpn.net/",
         src: "https://i.postimg.cc/PC8hfxzP/aria.png",
         caption: "AriaVPN",
-        ecosystems: []
+        categories: []
       },
       {
         href: "https://atomicmail.io/",
         src: "https://i.postimg.cc/6yQN1xZB/atomicmail.jpg",
         caption: "Atomic Mail",
-        ecosystems: []
+        categories: []
       },
       {
         href: "https://atomicwallet.io/",
         src: "https://i.postimg.cc/jnXk42cB/atomic.jpg",
         caption: "Atomic Wallet",
-        ecosystems: []
+        categories: []
       },
       {
         href: "https://www.cryptorefills.com/en",
         src: "https://i.postimg.cc/ZWtL8WRT/cryptorefills.png",
         caption: "Cryptorefills",
-        ecosystems: []
+        categories: []
       },
       {
         href: "https://trocador-app.us/",
         src: "https://i.postimg.cc/k6G5L7Sh/trocador.png",
         caption: "Trocador",
-        ecosystems: []
+        categories: []
       },
       {
         href: "https://sigmafi.app/#/",
         src: "https://i.postimg.cc/jw3KKnfh/sigmafi-modified.png",
         caption: "SigmaFi",
-        ecosystems: ["ERGO"]
+        categories: []
       },
       {
         href: "https://www.duckpools.io/",
         src: "https://i.postimg.cc/dk5CQXbj/duckpools.png",
         caption: "duckpools",
-        ecosystems: ["ERGO"]
+        categories: []
       },
       {
         href: "https://www.redbubble.com/i/mug/Party-Guru-by-dwnlives/169504252/7yqg",
         src: "https://i.postimg.cc/bdHFFNzM/gurumugparty.png",
         caption: "Party Guru Mug",
-        ecosystems: []
+        categories: ["BCH", "Creator", "Collectible"]
       },
       {
         href: "https://www.redbubble.com/i/mug/Jungle-Guru-by-dwnlives/169503332/7yqg",
         src: "https://i.postimg.cc/Sj7ttNS0/gurumugjungle.png",
         caption: "Jungle Guru Mug",
-        ecosystems: []
+        categories: ["BCH", "Creator", "Collectible"]
       },
       {
         href: "https://bch.guru/",
         src: "https://i.postimg.cc/CzxF7Db4/gurulogo.png",
         caption: "BCH Guru",
-        ecosystems: ["BCH"]
+        categories: ["BCH", "Creator"]
       },
       {
         href: "https://www.bitgree.com/",
         src: "https://i.postimg.cc/DSkcrSZn/bitgree.png",
         caption: "Bitgree",
-        ecosystems: ["BCH"]
+        categories: ["BCH", "DApp"]
       },
       {
         href: "https://www.zanobay.com/",
         src: "https://i.postimg.cc/YGzPvwCR/zanobay.png",
         caption: "ZanoBay",
-        ecosystems: ["ZANO"]
+        categories: []
       },
       {
         href: "https://app.cauldron.quest/swap/80cf212abf3b910f097c2d94eeb04d8e929d4ae6e3ad9c7b1df6cfff35b8ed71",
         src: "https://i.postimg.cc/8z36h1tS/CELQ.png",
         caption: "CELQ ~3% APY",
-        ecosystems: ["ERGO"]
+        categories: []
       },
       {
         href: "https://app.cauldron.quest/swap/d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea",
         src: "https://i.postimg.cc/3kXNhQsb/FURU.png",
         caption: "FURU ~1% APY",
-        ecosystems: ["ERGO"]
+        categories: ["BCH", "DApp"]
       },
       {
         href: "https://electroncash.org/",
         src: "https://i.postimg.cc/GtChXFrN/electroncash.png",
         caption: "Electron Cash",
-        ecosystems: ["BCH"]
+        categories: ["BCH", "Wallet"]
       }
     ];
 
-    function getFigureEcosystems(item) {
-      return Array.isArray(item.ecosystems) && item.ecosystems.length
-        ? item.ecosystems
-        : ["Uncategorized"];
+    /*
+      Keep only BCH- or Furu-related listings.
+      Unrelated listings are excluded from the displayed gallery.
+    */
+    const bchAndFuruFigures = figures.filter(item =>
+      item.categories.includes("BCH") ||
+      item.caption.toLowerCase().includes("furu")
+    );
+
+    function getFigureCategories(item) {
+      const allowedCategories = ["BCH", "Wallet", "DApp", "Creator", "Collectible"];
+      const categories = Array.isArray(item.categories)
+        ? item.categories.filter(category => allowedCategories.includes(category))
+        : [];
+
+      // Furu is always categorized under BCH.
+      if (item.caption.toLowerCase().includes("furu") && !categories.includes("BCH")) {
+        categories.unshift("BCH");
+      }
+
+      return categories.length ? [...new Set(categories)] : ["BCH"];
     }
 
     let favorites = [];
@@ -1121,15 +1071,26 @@
     function loadFavorites() {
       try {
         const saved = localStorage.getItem("favorites");
-        favorites = saved ? JSON.parse(saved) : [];
+        const savedFavorites = saved ? JSON.parse(saved) : [];
 
-        if (!Array.isArray(favorites)) {
+        if (!Array.isArray(savedFavorites)) {
           favorites = [];
+          return;
         }
 
-        favorites = favorites.filter(index =>
-          Number.isInteger(index) && figures[index]
+        const previousCaptions = figures.map(item => item.caption);
+        const allowedCaptions = new Set(
+          bchAndFuruFigures.map(item => item.caption)
         );
+
+        favorites = savedFavorites
+          .filter(index => Number.isInteger(index) && previousCaptions[index])
+          .map(index => previousCaptions[index])
+          .filter(caption => allowedCaptions.has(caption))
+          .map(caption =>
+            bchAndFuruFigures.findIndex(item => item.caption === caption)
+          )
+          .filter(index => index >= 0);
       } catch {
         favorites = [];
       }
@@ -1155,7 +1116,7 @@
       }
 
       favorites.forEach(index => {
-        const item = figures[index];
+        const item = bchAndFuruFigures[index];
         if (!item) return;
 
         const row = document.createElement("div");
@@ -1207,9 +1168,9 @@
       container.replaceChildren();
 
       shuffledFigures.forEach(({ item, index }) => {
-        const ecosystems = getFigureEcosystems(item);
+        const categories = getFigureCategories(item);
         const figure = document.createElement("figure");
-        figure.dataset.ecosystems = ecosystems.join(" ");
+        figure.dataset.categories = categories.join(" ");
         figure.dataset.index = index;
 
         const isFavorite = favorites.includes(index);
@@ -1240,13 +1201,13 @@
 
         const badgeList = document.createElement("div");
         badgeList.className = "ecosystem-badges";
-        badgeList.setAttribute("aria-label", "Ecosystem categories");
+        badgeList.setAttribute("aria-label", "Categories");
 
-        ecosystems.forEach(ecosystem => {
+        categories.forEach(category => {
           const badge = document.createElement("span");
           badge.className = "ecosystem-badge";
-          badge.dataset.ecosystem = ecosystem;
-          badge.textContent = ecosystem;
+          badge.dataset.ecosystem = category;
+          badge.textContent = category;
           badgeList.appendChild(badge);
         });
 
@@ -1262,7 +1223,7 @@
       const searchValue = activeSearch.toLowerCase();
 
       document.querySelectorAll("#figures figure").forEach(figure => {
-        const ecosystems = figure.dataset.ecosystems
+        const categories = figure.dataset.categories
           .toLowerCase()
           .split(/\s+/);
         const caption = figure
@@ -1271,12 +1232,12 @@
           .toLowerCase();
 
         const matchesCategory =
-          category === "all" || ecosystems.includes(category);
+          category === "all" || categories.includes(category);
 
         const matchesSearch =
           !searchValue ||
           caption.includes(searchValue) ||
-          ecosystems.some(ecosystem => ecosystem.includes(searchValue));
+          categories.some(itemCategory => itemCategory.includes(searchValue));
 
         figure.style.display = matchesCategory && matchesSearch ? "" : "none";
       });
@@ -1299,30 +1260,9 @@
       applyFigureFilters();
     }
 
-    function updateThemeToggle() {
-      const toggle = document.getElementById("side-toggle");
-      const isDark = !document.documentElement.classList.contains("light-mode");
-
-      toggle.textContent = isDark ? "☀️" : "🌙";
-      toggle.setAttribute(
-        "aria-label",
-        isDark ? "Switch to light mode" : "Switch to dark mode"
-      );
-
-      if (updatePlasmaTheme) {
-        updatePlasmaTheme();
-      }
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
-      updatePlasmaTheme = initPlasmaBackground();
-      updateThemeToggle();
+      initPlasmaBackground();
       renderVideos();
-
-      document.getElementById("side-toggle").addEventListener("click", () => {
-        document.documentElement.classList.toggle("light-mode");
-        updateThemeToggle();
-      });
 
       const sidebarToggle = document.getElementById("sidebar-toggle");
 
@@ -1343,7 +1283,7 @@
       loadFavorites();
 
       shuffledFigures = shuffleArray(
-        figures.map((item, index) => ({ item, index }))
+        bchAndFuruFigures.map((item, index) => ({ item, index }))
       );
 
       populateFigures();
