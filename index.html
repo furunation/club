@@ -647,7 +647,8 @@
       font-size: 0.9rem;
     }
 
-    .market-cap-calculator input {
+    .market-cap-calculator input,
+    .market-cap-calculator select {
       width: 100%;
       padding: 10px 12px;
       border: 1px solid rgba(245, 196, 0, 0.6);
@@ -655,10 +656,18 @@
       background: #111;
       color: var(--text-color);
       font: inherit;
+    }
+
+    .market-cap-calculator input {
       cursor: text;
     }
 
-    .market-cap-calculator input:focus {
+    .market-cap-calculator select {
+      cursor: pointer;
+    }
+
+    .market-cap-calculator input:focus,
+    .market-cap-calculator select:focus {
       outline: 2px solid var(--accent-color);
       outline-offset: 2px;
     }
@@ -895,9 +904,15 @@
       <section class="market-cap-calculator" aria-labelledby="calculatorTitle">
         <h3 id="calculatorTitle">Market Cap Calculator</h3>
 
-        <label for="tokenPriceBchSats">Token price (sats)</label>
+        <label for="tokenPriceUnit">Token price unit</label>
+        <select id="tokenPriceUnit">
+          <option value="sats">Satoshis per token</option>
+          <option value="usd">US dollars per token</option>
+        </select>
+
+        <label for="tokenPrice">Token price</label>
         <input
-          id="tokenPriceBchSats"
+          id="tokenPrice"
           type="number"
           min="0"
           step="any"
@@ -916,13 +931,17 @@
         />
 
         <div class="calculator-results" aria-live="polite">
-          <p>Market cap (sats): <strong id="marketCapBchSats">0 sats</strong></p>
-          <p>Market cap (BCH): <strong id="marketCapBch">0 BCH</strong></p>
+          <p>
+            Market cap (<span id="marketCapUnitLabel">sats</span>):
+            <strong id="marketCapPrimary">0 sats</strong>
+          </p>
+          <p id="marketCapSecondaryRow">
+            Market cap (BCH): <strong id="marketCapSecondary">0 BCH</strong>
+          </p>
         </div>
 
-        <p class="calculator-note">
-          Enter the token price in BCH satoshis and the number of tokens.
-          One BCH equals 100,000,000 satoshis.
+        <p class="calculator-note" id="calculatorNote">
+          Enter the token price in BCH satoshis. One BCH equals 100,000,000 satoshis.
         </p>
       </section>
     </section>
@@ -1040,47 +1059,65 @@
     }
 
     function initMarketCapCalculator() {
-      const tokenPriceInput = document.getElementById("tokenPriceBchSats");
+      const unitSelect = document.getElementById("tokenPriceUnit");
+      const tokenPriceInput = document.getElementById("tokenPrice");
       const tokenQuantityInput = document.getElementById("tokenQuantity");
-      const satsOutput = document.getElementById("marketCapBchSats");
-      const bchOutput = document.getElementById("marketCapBch");
+      const unitLabel = document.getElementById("marketCapUnitLabel");
+      const primaryOutput = document.getElementById("marketCapPrimary");
+      const secondaryOutput = document.getElementById("marketCapSecondary");
+      const secondaryRow = document.getElementById("marketCapSecondaryRow");
+      const note = document.getElementById("calculatorNote");
 
       const numberFormatter = new Intl.NumberFormat("en-US", {
         maximumFractionDigits: 8
       });
 
       function updateMarketCap() {
-        const tokenPriceSats = Number(tokenPriceInput.value);
-        const tokenQuantity = Number(tokenQuantityInput.value);
+        const price = Number(tokenPriceInput.value);
+        const quantity = Number(tokenQuantityInput.value);
+        const unit = unitSelect.value;
+
+        unitLabel.textContent = unit === "usd" ? "USD" : "sats";
+        note.textContent = unit === "usd"
+          ? "Enter the token price in US dollars."
+          : "Enter the token price in BCH satoshis. One BCH equals 100,000,000 satoshis.";
 
         const hasInputs =
           tokenPriceInput.value.trim() !== "" &&
           tokenQuantityInput.value.trim() !== "" &&
-          Number.isFinite(tokenPriceSats) &&
-          Number.isFinite(tokenQuantity) &&
-          tokenPriceSats >= 0 &&
-          tokenQuantity >= 0;
+          Number.isFinite(price) &&
+          Number.isFinite(quantity) &&
+          price >= 0 &&
+          quantity >= 0;
 
         if (!hasInputs) {
-          satsOutput.textContent = "0 sats";
-          bchOutput.textContent = "0 BCH";
+          primaryOutput.textContent = unit === "usd" ? "$0.00" : "0 sats";
+          secondaryRow.hidden = unit === "usd";
+          secondaryOutput.textContent = "0 BCH";
           return;
         }
 
-        const marketCapSats = tokenPriceSats * tokenQuantity;
+        const marketCap = price * quantity;
 
-        if (!Number.isFinite(marketCapSats)) {
-          satsOutput.textContent = "Value too large";
-          bchOutput.textContent = "Value too large";
+        if (!Number.isFinite(marketCap)) {
+          primaryOutput.textContent = "Value too large";
+          secondaryRow.hidden = unit === "usd";
+          secondaryOutput.textContent = "Value too large";
           return;
         }
 
-        const marketCapBch = marketCapSats / 100_000_000;
-
-        satsOutput.textContent = `${numberFormatter.format(marketCapSats)} sats`;
-        bchOutput.textContent = `${numberFormatter.format(marketCapBch)} BCH`;
+        if (unit === "usd") {
+          primaryOutput.textContent = `$${numberFormatter.format(marketCap)}`;
+          secondaryRow.hidden = true;
+        } else {
+          primaryOutput.textContent = `${numberFormatter.format(marketCap)} sats`;
+          secondaryOutput.textContent =
+            `${numberFormatter.format(marketCap / 100_000_000)} BCH`;
+          secondaryRow.hidden = false;
+        }
       }
 
+      unitSelect.addEventListener("change", updateMarketCap);
       tokenPriceInput.addEventListener("input", updateMarketCap);
       tokenQuantityInput.addEventListener("input", updateMarketCap);
 
