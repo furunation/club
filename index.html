@@ -47,7 +47,6 @@
       cursor: pointer;
     }
 
-    /* One-second black launch screen with centered logo */
     #loadingScreen {
       position: fixed;
       inset: 0;
@@ -173,6 +172,27 @@
       max-width: 50px;
       height: auto;
       border-radius: 8px;
+    }
+
+    #logoStatsButton {
+      display: inline-grid;
+      place-items: center;
+      padding: 4px;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    #logoStatsButton:hover img,
+    #logoStatsButton:focus-visible img {
+      box-shadow: 0 0 14px rgba(245, 196, 0, 0.55);
+      transform: scale(1.06);
+    }
+
+    #logoStatsButton img {
+      display: block;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     #sidebar-bottom-logo p {
@@ -516,6 +536,92 @@
       color: var(--accent-color);
     }
 
+    /* FURU holder stats modal */
+    #statsOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2500;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.78);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    #statsOverlay.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #statsPanel {
+      position: relative;
+      width: min(100%, 420px);
+      padding: 30px 24px;
+      border: 1px solid var(--accent-color);
+      border-radius: 16px;
+      background: var(--surface-color);
+      color: var(--text-color);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75);
+      text-align: center;
+      transform: translateY(10px);
+      transition: transform 0.2s ease;
+    }
+
+    #statsOverlay.is-open #statsPanel {
+      transform: translateY(0);
+    }
+
+    #statsPanel h2 {
+      margin: 0 32px 20px;
+      color: var(--accent-color);
+      font-size: 1.4rem;
+    }
+
+    #statsClose {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--accent-color);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--accent-color);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .stat-card {
+      padding: 20px 12px;
+      border: 1px solid rgba(245, 196, 0, 0.4);
+      border-radius: 12px;
+      background: #000;
+    }
+
+    .stat-value {
+      display: block;
+      color: var(--accent-color);
+      font-size: clamp(2.5rem, 12vw, 4rem);
+      font-weight: bold;
+      line-height: 1.1;
+    }
+
+    .stat-label {
+      display: block;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    .stat-note {
+      margin-top: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.78rem;
+      line-height: 1.4;
+    }
+
     @media (max-width: 768px) {
       :root {
         --sidebar-width: 140px;
@@ -667,7 +773,18 @@
       <div id="favoritesList"></div>
 
       <div id="sidebar-bottom-logo">
-        <img src="https://i.postimg.cc/9MJrV5TZ/furunation.webp" alt="Created by Furu Nation" />
+        <button
+          id="logoStatsButton"
+          type="button"
+          aria-label="Show FURU holder statistics"
+          aria-haspopup="dialog"
+          aria-controls="statsOverlay"
+        >
+          <img
+            src="https://i.postimg.cc/9MJrV5TZ/furunation.webp"
+            alt="Furu Nation logo"
+          />
+        </button>
         <p>
           <a href="https://bsky.app/profile/furunation.bsky.social" target="_blank" rel="noopener noreferrer">
             @furunation.bsky.social
@@ -693,13 +810,36 @@
       </section>
     </main>
 
-    <button id="backToTop" class="hidden" aria-label="Back to top">↑</button>
+    <button id="backToTop" class="hidden" type="button" aria-label="Back to top">↑</button>
+  </div>
+
+  <div
+    id="statsOverlay"
+    role="presentation"
+    aria-hidden="true"
+  >
+    <section
+      id="statsPanel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="statsTitle"
+      tabindex="-1"
+    >
+      <button id="statsClose" type="button" aria-label="Close statistics">×</button>
+      <h2 id="statsTitle">FURU Holder Statistics</h2>
+
+      <div class="stat-card">
+        <span class="stat-value">1,243</span>
+        <span class="stat-label">User addresses holding FURU</span>
+      </div>
+
+      <p class="stat-note">Holder count displayed as provided.</p>
+    </section>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 
   <script>
-    // Keep the splash visible for one second after the page launches.
     window.setTimeout(() => {
       document.getElementById("loadingScreen")?.classList.add("is-hidden");
     }, 1000);
@@ -1207,6 +1347,22 @@
       applyFigureFilters();
     }
 
+    function openStats() {
+      const overlay = document.getElementById("statsOverlay");
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      document.getElementById("statsPanel").focus();
+    }
+
+    function closeStats() {
+      const overlay = document.getElementById("statsOverlay");
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      document.getElementById("logoStatsButton").focus();
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       initPlasmaBackground();
       renderVideos();
@@ -1256,6 +1412,24 @@
         if (!button) return;
 
         filterFigures("category", button.dataset.filter);
+      });
+
+      document.getElementById("logoStatsButton").addEventListener("click", openStats);
+      document.getElementById("statsClose").addEventListener("click", closeStats);
+
+      document.getElementById("statsOverlay").addEventListener("click", event => {
+        if (event.target.id === "statsOverlay") {
+          closeStats();
+        }
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+          const overlay = document.getElementById("statsOverlay");
+          if (overlay.classList.contains("is-open")) {
+            closeStats();
+          }
+        }
       });
 
       window.addEventListener("scroll", () => {
