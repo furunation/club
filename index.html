@@ -558,6 +558,8 @@
     #statsPanel {
       position: relative;
       width: min(100%, 420px);
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
       padding: 30px 24px;
       border: 1px solid var(--accent-color);
       border-radius: 16px;
@@ -619,6 +621,65 @@
       margin-top: 14px;
       color: rgba(255, 255, 255, 0.7);
       font-size: 0.78rem;
+      line-height: 1.4;
+    }
+
+    /* Market cap calculator */
+    .market-cap-calculator {
+      margin-top: 20px;
+      padding: 18px;
+      border: 1px solid rgba(245, 196, 0, 0.4);
+      border-radius: 12px;
+      background: #000;
+      text-align: left;
+    }
+
+    .market-cap-calculator h3 {
+      margin-bottom: 16px;
+      color: var(--accent-color);
+      font-size: 1.15rem;
+      text-align: center;
+    }
+
+    .market-cap-calculator label {
+      display: block;
+      margin: 12px 0 6px;
+      font-size: 0.9rem;
+    }
+
+    .market-cap-calculator input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid rgba(245, 196, 0, 0.6);
+      border-radius: 8px;
+      background: #111;
+      color: var(--text-color);
+      font: inherit;
+      cursor: text;
+    }
+
+    .market-cap-calculator input:focus {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
+    }
+
+    .calculator-results {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #111;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .calculator-results strong {
+      color: var(--accent-color);
+    }
+
+    .calculator-note {
+      margin-top: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.75rem;
       line-height: 1.4;
     }
 
@@ -813,11 +874,7 @@
     <button id="backToTop" class="hidden" type="button" aria-label="Back to top">↑</button>
   </div>
 
-  <div
-    id="statsOverlay"
-    role="presentation"
-    aria-hidden="true"
-  >
+  <div id="statsOverlay" role="presentation" aria-hidden="true">
     <section
       id="statsPanel"
       role="dialog"
@@ -834,6 +891,40 @@
       </div>
 
       <p class="stat-note">Holder count displayed as provided.</p>
+
+      <section class="market-cap-calculator" aria-labelledby="calculatorTitle">
+        <h3 id="calculatorTitle">Market Cap Calculator</h3>
+
+        <label for="tokenPriceBchSats">Token price (BCH sats)</label>
+        <input
+          id="tokenPriceBchSats"
+          type="number"
+          min="0"
+          step="any"
+          inputmode="decimal"
+          placeholder="e.g. 100"
+        />
+
+        <label for="tokenQuantity">Number of tokens</label>
+        <input
+          id="tokenQuantity"
+          type="number"
+          min="0"
+          step="any"
+          inputmode="decimal"
+          placeholder="e.g. 1000000"
+        />
+
+        <div class="calculator-results" aria-live="polite">
+          <p>Market cap (BCH sats): <strong id="marketCapBchSats">0 sats</strong></p>
+          <p>Market cap (BCH): <strong id="marketCapBch">0 BCH</strong></p>
+        </div>
+
+        <p class="calculator-note">
+          Enter the token price in BCH satoshis and the number of tokens.
+          One BCH equals 100,000,000 satoshis.
+        </p>
+      </section>
     </section>
   </div>
 
@@ -946,6 +1037,54 @@
       }
 
       animate();
+    }
+
+    function initMarketCapCalculator() {
+      const tokenPriceInput = document.getElementById("tokenPriceBchSats");
+      const tokenQuantityInput = document.getElementById("tokenQuantity");
+      const satsOutput = document.getElementById("marketCapBchSats");
+      const bchOutput = document.getElementById("marketCapBch");
+
+      const numberFormatter = new Intl.NumberFormat("en-US", {
+        maximumFractionDigits: 8
+      });
+
+      function updateMarketCap() {
+        const tokenPriceSats = Number(tokenPriceInput.value);
+        const tokenQuantity = Number(tokenQuantityInput.value);
+
+        const hasInputs =
+          tokenPriceInput.value.trim() !== "" &&
+          tokenQuantityInput.value.trim() !== "" &&
+          Number.isFinite(tokenPriceSats) &&
+          Number.isFinite(tokenQuantity) &&
+          tokenPriceSats >= 0 &&
+          tokenQuantity >= 0;
+
+        if (!hasInputs) {
+          satsOutput.textContent = "0 sats";
+          bchOutput.textContent = "0 BCH";
+          return;
+        }
+
+        const marketCapSats = tokenPriceSats * tokenQuantity;
+
+        if (!Number.isFinite(marketCapSats)) {
+          satsOutput.textContent = "Value too large";
+          bchOutput.textContent = "Value too large";
+          return;
+        }
+
+        const marketCapBch = marketCapSats / 100_000_000;
+
+        satsOutput.textContent = `${numberFormatter.format(marketCapSats)} sats`;
+        bchOutput.textContent = `${numberFormatter.format(marketCapBch)} BCH`;
+      }
+
+      tokenPriceInput.addEventListener("input", updateMarketCap);
+      tokenQuantityInput.addEventListener("input", updateMarketCap);
+
+      updateMarketCap();
     }
 
     const videoLinks = [
@@ -1365,6 +1504,7 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       initPlasmaBackground();
+      initMarketCapCalculator();
       renderVideos();
       createCategoryFilters();
 
