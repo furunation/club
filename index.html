@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>nebbykit</title>
 
-  <!-- Apply dark mode before the browser paints the page. -->
   <script>
     document.documentElement.classList.add("dark-mode");
   </script>
@@ -23,7 +22,6 @@
       --sidebar-width: 180px;
     }
 
-    /* Light mode is used only when explicitly selected with the toggle. */
     :root.light-mode {
       color-scheme: light;
       --bg-color: #fff1e6;
@@ -200,11 +198,6 @@
       text-decoration: underline;
     }
 
-    #categoriesContainer {
-      width: 100%;
-    }
-
-    .category-btn,
     .page-button {
       width: 100%;
       margin-bottom: 8px;
@@ -220,7 +213,6 @@
       text-align: center;
     }
 
-    .category-btn:hover,
     .page-button:hover {
       transform: translateY(-2px);
       background: var(--text-color);
@@ -361,6 +353,37 @@
       margin-bottom: 12px;
     }
 
+    /* Ecosystem category filters appear at the top of the ecosystem page. */
+    #ecosystemFilters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 18px;
+    }
+
+    .category-btn {
+      padding: 9px 14px;
+      border: 1px solid var(--text-color);
+      border-radius: 999px;
+      background: var(--accent-color);
+      color: var(--bg-color);
+      font-family: "Ubuntu", Arial, sans-serif;
+      font-size: 0.9em;
+      font-weight: bold;
+      transition: transform 0.2s, background-color 0.2s, color 0.2s;
+    }
+
+    .category-btn:hover {
+      transform: translateY(-2px);
+      background: var(--text-color);
+      color: var(--bg-color);
+    }
+
+    .category-btn[aria-pressed="true"] {
+      background: var(--text-color);
+      color: var(--bg-color);
+    }
+
     #figures {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -419,6 +442,49 @@
       font-size: 1.1em;
       overflow-wrap: anywhere;
       text-align: center;
+    }
+
+    .ecosystem-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+      width: 100%;
+      margin-top: 9px;
+    }
+
+    .ecosystem-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 23px;
+      padding: 3px 8px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .ecosystem-badge[data-ecosystem="ZANO"] {
+      background: #7040d8;
+      color: #fff;
+    }
+
+    .ecosystem-badge[data-ecosystem="BCH"] {
+      background: #178c55;
+      color: #fff;
+    }
+
+    .ecosystem-badge[data-ecosystem="ERGO"] {
+      background: #d18322;
+      color: #fff;
+    }
+
+    .ecosystem-badge[data-ecosystem="Uncategorized"] {
+      background: #596273;
+      color: #fff;
     }
 
     .figure-favorite {
@@ -507,6 +573,15 @@
         gap: 10px;
         padding-right: 0;
         padding-left: 0;
+      }
+
+      #ecosystemFilters {
+        gap: 6px;
+      }
+
+      .category-btn {
+        padding: 8px 11px;
+        font-size: 0.82em;
       }
 
       figure {
@@ -601,18 +676,10 @@
         <button class="page-button" type="button" data-page="ecosystem">Ecosystem</button>
       </nav>
 
-      <input type="search" id="sidebar-search" placeholder="Search..." aria-label="Search ecosystem" />
+      <input type="search" id="sidebar-search" placeholder="Search..." aria-label="Search ecosystem" hidden />
+
       <h2>Favorites</h2>
       <div id="favoritesList"></div>
-
-      <div id="categoriesContainer" style="display: none;">
-        <button class="category-btn" data-filter="All"><span>All</span></button>
-        <button class="category-btn" data-filter="Water and Hygiene"><span>Water &amp; Hygiene</span></button>
-        <button class="category-btn" data-filter="Hunger"><span>Hunger</span></button>
-        <button class="category-btn" data-filter="Homelessness"><span>Homelessness</span></button>
-        <button class="category-btn" data-filter="Environment"><span>Environment</span></button>
-        <button class="category-btn" data-filter="Animals"><span>Animals</span></button>
-      </div>
 
       <div id="sidebar-bottom-logo">
         <img src="https://i.postimg.cc/N0hsqjnW/download(22).jpg" alt="Created by nebbykit" />
@@ -632,6 +699,15 @@
 
       <section id="ecosystem-page" class="page-section" aria-labelledby="ecosystem-title" hidden>
         <h1 id="ecosystem-title" class="page-title"></h1>
+
+        <nav id="ecosystemFilters" aria-label="Filter ecosystem figures">
+          <button class="category-btn" type="button" data-filter="All" aria-pressed="true">All</button>
+          <button class="category-btn" type="button" data-filter="ZANO" aria-pressed="false">ZANO</button>
+          <button class="category-btn" type="button" data-filter="BCH" aria-pressed="false">BCH</button>
+          <button class="category-btn" type="button" data-filter="ERGO" aria-pressed="false">ERGO</button>
+          <button class="category-btn" type="button" data-filter="Uncategorized" aria-pressed="false">Uncategorized</button>
+        </nav>
+
         <div id="figures"></div>
       </section>
     </main>
@@ -892,114 +968,123 @@
         href: "https://gaze.cash/channel.html?chan=AAADKQ",
         src: "https://i.postimg.cc/Hc5qvNy7/nsfwbch.jpg",
         caption: "[nsfw]bch",
-        categoryLabel: "NA"
+        ecosystems: ["BCH"]
       },
       {
         href: "https://ergoplatform.org/en/",
         src: "https://i.postimg.cc/fTLHp9GY/ergoplatform.jpg",
         caption: "Ergo",
-        categoryLabel: "NA"
+        ecosystems: ["ERGO"]
       },
       {
         href: "https://ergoplatform.org/en/blog/2021-05-12-ergomixer/",
         src: "https://i.postimg.cc/Q9VXZyhN/ergomixer.png",
         caption: "Ergo Mixer",
-        categoryLabel: "NA"
+        ecosystems: ["ERGO"]
       },
       {
         href: "https://ariavpn.net/",
         src: "https://i.postimg.cc/PC8hfxzP/aria.png",
         caption: "AriaVPN",
-        categoryLabel: "NA"
+        ecosystems: []
       },
       {
         href: "https://atomicmail.io/",
         src: "https://i.postimg.cc/6yQN1xZB/atomicmail.jpg",
         caption: "Atomic Mail",
-        categoryLabel: "NA"
+        ecosystems: []
       },
       {
         href: "https://atomicwallet.io/",
         src: "https://i.postimg.cc/jnXk42cB/atomic.jpg",
         caption: "Atomic Wallet",
-        categoryLabel: "NA"
+        ecosystems: []
       },
       {
         href: "https://www.cryptorefills.com/en",
         src: "https://i.postimg.cc/ZWtL8WRT/cryptorefills.png",
         caption: "Cryptorefills",
-        categoryLabel: "NA"
+        ecosystems: []
       },
       {
         href: "https://trocador-app.us/",
         src: "https://i.postimg.cc/k6G5L7Sh/trocador.png",
         caption: "Trocador",
-        categoryLabel: "NA"
+        ecosystems: []
       },
       {
         href: "https://sigmafi.app/#/",
         src: "https://i.postimg.cc/jw3KKnfh/sigmafi-modified.png",
         caption: "SigmaFi",
-        categoryLabel: "NA"
+        ecosystems: ["ERGO"]
       },
       {
         href: "https://www.duckpools.io/",
         src: "https://i.postimg.cc/dk5CQXbj/duckpools.png",
         caption: "duckpools",
-        categoryLabel: "NA"
+        ecosystems: ["ERGO"]
       },
       {
         href: "https://www.redbubble.com/i/mug/Party-Guru-by-dwnlives/169504252/7yqg",
         src: "https://i.postimg.cc/bdHFFNzM/gurumugparty.png",
         caption: "Party Guru Mug",
-        categoryLabel: "NA"
+        ecosystems: []
       },
       {
         href: "https://www.redbubble.com/i/mug/Jungle-Guru-by-dwnlives/169503332/7yqg",
         src: "https://i.postimg.cc/Sj7ttNS0/gurumugjungle.png",
         caption: "Jungle Guru Mug",
-        categoryLabel: "NA"
+        ecosystems: []
       },
       {
         href: "https://bch.guru/",
         src: "https://i.postimg.cc/CzxF7Db4/gurulogo.png",
         caption: "BCH Guru",
-        categoryLabel: "NA"
+        ecosystems: ["BCH"]
       },
       {
         href: "https://www.bitgree.com/",
         src: "https://i.postimg.cc/DSkcrSZn/bitgree.png",
         caption: "Bitgree",
-        categoryLabel: "NA"
+        ecosystems: ["BCH"]
       },
       {
         href: "https://www.zanobay.com/",
         src: "https://i.postimg.cc/YGzPvwCR/zanobay.png",
         caption: "ZanoBay",
-        categoryLabel: "NA"
+        ecosystems: ["ZANO"]
       },
       {
         href: "https://app.cauldron.quest/swap/80cf212abf3b910f097c2d94eeb04d8e929d4ae6e3ad9c7b1df6cfff35b8ed71",
         src: "https://i.postimg.cc/8z36h1tS/CELQ.png",
         caption: "CELQ ~3% APY",
-        categoryLabel: "NA"
+        ecosystems: ["ERGO"]
       },
       {
         href: "https://app.cauldron.quest/swap/d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea",
         src: "https://i.postimg.cc/3kXNhQsb/FURU.png",
         caption: "FURU ~1% APY",
-        categoryLabel: "NA"
+        ecosystems: ["ERGO"]
       },
       {
         href: "https://electroncash.org/",
         src: "https://i.postimg.cc/GtChXFrN/electroncash.png",
         caption: "Electron Cash",
-        categoryLabel: "NA"
+        ecosystems: ["BCH"]
       }
     ];
 
+    function getFigureEcosystems(item) {
+      return Array.isArray(item.ecosystems) && item.ecosystems.length
+        ? item.ecosystems
+        : ["Uncategorized"];
+    }
+
     let favorites = [];
     let shuffledFigures = [];
+    let activeCategory = "All";
+    let activeSearch = "";
+
     const backBtn = document.getElementById("backToTop");
     let hideTimeout = null;
 
@@ -1027,9 +1112,8 @@
         }
       });
 
-      const isEcosystem = pageName === "ecosystem";
-      document.getElementById("sidebar-search").hidden = !isEcosystem;
-      document.getElementById("categoriesContainer").hidden = !isEcosystem;
+      document.getElementById("sidebar-search").hidden =
+        pageName !== "ecosystem";
 
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -1061,7 +1145,7 @@
 
     function updateFavoritesList() {
       const container = document.getElementById("favoritesList");
-      container.innerHTML = "";
+      container.replaceChildren();
 
       if (favorites.length === 0) {
         const emptyMessage = document.createElement("p");
@@ -1120,11 +1204,12 @@
 
     function populateFigures() {
       const container = document.getElementById("figures");
-      container.innerHTML = "";
+      container.replaceChildren();
 
       shuffledFigures.forEach(({ item, index }) => {
+        const ecosystems = getFigureEcosystems(item);
         const figure = document.createElement("figure");
-        figure.dataset.category = item.categoryLabel;
+        figure.dataset.ecosystems = ecosystems.join(" ");
         figure.dataset.index = index;
 
         const isFavorite = favorites.includes(index);
@@ -1153,30 +1238,65 @@
         const caption = document.createElement("figcaption");
         caption.textContent = item.caption;
 
-        figure.append(favoriteButton, link, caption);
+        const badgeList = document.createElement("div");
+        badgeList.className = "ecosystem-badges";
+        badgeList.setAttribute("aria-label", "Ecosystem categories");
+
+        ecosystems.forEach(ecosystem => {
+          const badge = document.createElement("span");
+          badge.className = "ecosystem-badge";
+          badge.dataset.ecosystem = ecosystem;
+          badge.textContent = ecosystem;
+          badgeList.appendChild(badge);
+        });
+
+        figure.append(favoriteButton, link, caption, badgeList);
         container.appendChild(figure);
+      });
+
+      applyFigureFilters();
+    }
+
+    function applyFigureFilters() {
+      const category = activeCategory.toLowerCase();
+      const searchValue = activeSearch.toLowerCase();
+
+      document.querySelectorAll("#figures figure").forEach(figure => {
+        const ecosystems = figure.dataset.ecosystems
+          .toLowerCase()
+          .split(/\s+/);
+        const caption = figure
+          .querySelector("figcaption")
+          .textContent
+          .toLowerCase();
+
+        const matchesCategory =
+          category === "all" || ecosystems.includes(category);
+
+        const matchesSearch =
+          !searchValue ||
+          caption.includes(searchValue) ||
+          ecosystems.some(ecosystem => ecosystem.includes(searchValue));
+
+        figure.style.display = matchesCategory && matchesSearch ? "" : "none";
       });
     }
 
     function filterFigures(type, value) {
-      const searchValue = value.toLowerCase();
+      if (type === "category") {
+        activeCategory = value;
 
-      document.querySelectorAll("#figures figure").forEach(figure => {
-        const category = figure.dataset.category.toLowerCase();
-        const caption = figure.querySelector("figcaption").textContent.toLowerCase();
+        document.querySelectorAll(".category-btn").forEach(button => {
+          button.setAttribute(
+            "aria-pressed",
+            String(button.dataset.filter === value)
+          );
+        });
+      } else if (type === "search") {
+        activeSearch = value.trim();
+      }
 
-        if (type === "category") {
-          figure.style.display =
-            searchValue === "all" || category === searchValue ? "" : "none";
-        } else if (type === "search") {
-          figure.style.display =
-            !searchValue ||
-            category.includes(searchValue) ||
-            caption.includes(searchValue)
-              ? ""
-              : "none";
-        }
-      });
+      applyFigureFilters();
     }
 
     function updateThemeToggle() {
@@ -1200,8 +1320,7 @@
       renderVideos();
 
       document.getElementById("side-toggle").addEventListener("click", () => {
-        const root = document.documentElement;
-        root.classList.toggle("light-mode");
+        document.documentElement.classList.toggle("light-mode");
         updateThemeToggle();
       });
 
@@ -1228,7 +1347,6 @@
       );
 
       populateFigures();
-      filterFigures("category", "All");
       updateFavoritesList();
       showPage("home");
 
