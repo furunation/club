@@ -47,6 +47,32 @@
       cursor: pointer;
     }
 
+    /* One-second black launch screen with centered logo */
+    #loadingScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: grid;
+      place-items: center;
+      background: #000;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    #loadingScreen img {
+      display: block;
+      width: min(180px, 45vw);
+      height: auto;
+      object-fit: contain;
+    }
+
+    #loadingScreen.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
     #globeBackground {
       position: fixed;
       inset: 0;
@@ -605,6 +631,13 @@
 </head>
 
 <body>
+  <div id="loadingScreen" role="status" aria-label="Loading">
+    <img
+      src="https://i.postimg.cc/9MJrV5TZ/furunation.webp"
+      alt="Furu Nation"
+    />
+  </div>
+
   <script
     data-goatcounter="https://furunation.goatcounter.com/count"
     async
@@ -628,7 +661,7 @@
         <button class="page-button" type="button" data-page="ecosystem">Ecosystem</button>
       </nav>
 
-      <input type="search" id="sidebar-search" placeholder="Search..." aria-label="Search BCH and Furu items" hidden />
+      <input type="search" id="sidebar-search" placeholder="Search..." aria-label="Search gallery items" hidden />
 
       <h2>Favorites</h2>
       <div id="favoritesList"></div>
@@ -652,13 +685,8 @@
       <section id="ecosystem-page" class="page-section" aria-labelledby="ecosystem-title" hidden>
         <h1 id="ecosystem-title" class="page-title"></h1>
 
-        <nav id="ecosystemFilters" aria-label="Filter BCH and Furu items">
+        <nav id="ecosystemFilters" aria-label="Filter gallery items">
           <button class="category-btn" type="button" data-filter="All" aria-pressed="true">All</button>
-          <button class="category-btn" type="button" data-filter="BCH" aria-pressed="false">BCH</button>
-          <button class="category-btn" type="button" data-filter="Wallet" aria-pressed="false">Wallet</button>
-          <button class="category-btn" type="button" data-filter="DApp" aria-pressed="false">DApp</button>
-          <button class="category-btn" type="button" data-filter="Creator" aria-pressed="false">Creator</button>
-          <button class="category-btn" type="button" data-filter="Collectible" aria-pressed="false">Collectible</button>
         </nav>
 
         <div id="figures"></div>
@@ -671,6 +699,11 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 
   <script>
+    // Keep the splash visible for one second after the page launches.
+    window.setTimeout(() => {
+      document.getElementById("loadingScreen")?.classList.add("is-hidden");
+    }, 1000);
+
     function initPlasmaBackground() {
       const canvas = document.getElementById("globeBackground");
 
@@ -903,27 +936,46 @@
       }
     ];
 
-    /*
-      Keep only BCH- or Furu-related listings.
-      Unrelated listings are excluded from the displayed gallery.
-    */
-    const bchAndFuruFigures = figures.filter(item =>
-      item.categories.includes("BCH") ||
-      item.caption.toLowerCase().includes("furu")
-    );
+    const galleryFigures = figures;
 
     function getFigureCategories(item) {
-      const allowedCategories = ["BCH", "Wallet", "DApp", "Creator", "Collectible"];
-      const categories = Array.isArray(item.categories)
-        ? item.categories.filter(category => allowedCategories.includes(category))
-        : [];
-
-      // Furu is always categorized under BCH.
-      if (item.caption.toLowerCase().includes("furu") && !categories.includes("BCH")) {
-        categories.unshift("BCH");
+      if (!Array.isArray(item.categories)) {
+        return [];
       }
 
-      return categories.length ? [...new Set(categories)] : ["BCH"];
+      return [...new Set(
+        item.categories
+          .filter(category => typeof category === "string")
+          .map(category => category.trim())
+          .filter(Boolean)
+      )];
+    }
+
+    function createCategoryFilters() {
+      const filterContainer = document.getElementById("ecosystemFilters");
+      filterContainer.replaceChildren();
+
+      const allButton = document.createElement("button");
+      allButton.className = "category-btn";
+      allButton.type = "button";
+      allButton.dataset.filter = "All";
+      allButton.setAttribute("aria-pressed", "true");
+      allButton.textContent = "All";
+      filterContainer.appendChild(allButton);
+
+      const categories = [
+        ...new Set(galleryFigures.flatMap(getFigureCategories))
+      ].sort((a, b) => a.localeCompare(b));
+
+      categories.forEach(category => {
+        const button = document.createElement("button");
+        button.className = "category-btn";
+        button.type = "button";
+        button.dataset.filter = category;
+        button.setAttribute("aria-pressed", "false");
+        button.textContent = category;
+        filterContainer.appendChild(button);
+      });
     }
 
     let favorites = [];
@@ -975,16 +1027,16 @@
         }
 
         const previousCaptions = figures.map(item => item.caption);
-        const allowedCaptions = new Set(
-          bchAndFuruFigures.map(item => item.caption)
+        const availableCaptions = new Set(
+          galleryFigures.map(item => item.caption)
         );
 
         favorites = savedFavorites
           .filter(index => Number.isInteger(index) && previousCaptions[index])
           .map(index => previousCaptions[index])
-          .filter(caption => allowedCaptions.has(caption))
+          .filter(caption => availableCaptions.has(caption))
           .map(caption =>
-            bchAndFuruFigures.findIndex(item => item.caption === caption)
+            galleryFigures.findIndex(item => item.caption === caption)
           )
           .filter(index => index >= 0);
       } catch {
@@ -1012,7 +1064,7 @@
       }
 
       favorites.forEach(index => {
-        const item = bchAndFuruFigures[index];
+        const item = galleryFigures[index];
         if (!item) return;
 
         const row = document.createElement("div");
@@ -1066,7 +1118,7 @@
       shuffledFigures.forEach(({ item, index }) => {
         const categories = getFigureCategories(item);
         const figure = document.createElement("figure");
-        figure.dataset.categories = categories.join(" ");
+        figure.dataset.categories = JSON.stringify(categories);
         figure.dataset.index = index;
 
         const isFavorite = favorites.includes(index);
@@ -1115,25 +1167,24 @@
     }
 
     function applyFigureFilters() {
-      const category = activeCategory.toLowerCase();
       const searchValue = activeSearch.toLowerCase();
 
       document.querySelectorAll("#figures figure").forEach(figure => {
-        const categories = figure.dataset.categories
-          .toLowerCase()
-          .split(/\s+/);
+        const categories = JSON.parse(figure.dataset.categories || "[]");
         const caption = figure
           .querySelector("figcaption")
           .textContent
           .toLowerCase();
 
         const matchesCategory =
-          category === "all" || categories.includes(category);
+          activeCategory === "All" || categories.includes(activeCategory);
 
         const matchesSearch =
           !searchValue ||
           caption.includes(searchValue) ||
-          categories.some(itemCategory => itemCategory.includes(searchValue));
+          categories.some(category =>
+            category.toLowerCase().includes(searchValue)
+          );
 
         figure.style.display = matchesCategory && matchesSearch ? "" : "none";
       });
@@ -1159,6 +1210,7 @@
     document.addEventListener("DOMContentLoaded", () => {
       initPlasmaBackground();
       renderVideos();
+      createCategoryFilters();
 
       const sidebarToggle = document.getElementById("sidebar-toggle");
 
@@ -1179,7 +1231,7 @@
       loadFavorites();
 
       shuffledFigures = shuffleArray(
-        bchAndFuruFigures.map((item, index) => ({ item, index }))
+        galleryFigures.map((item, index) => ({ item, index }))
       );
 
       populateFigures();
@@ -1199,10 +1251,11 @@
         toggleFavorite(Number(button.dataset.index));
       });
 
-      document.querySelectorAll(".category-btn").forEach(button => {
-        button.addEventListener("click", () => {
-          filterFigures("category", button.dataset.filter);
-        });
+      document.getElementById("ecosystemFilters").addEventListener("click", event => {
+        const button = event.target.closest(".category-btn");
+        if (!button) return;
+
+        filterFigures("category", button.dataset.filter);
       });
 
       window.addEventListener("scroll", () => {
