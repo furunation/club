@@ -536,7 +536,7 @@
       color: var(--accent-color);
     }
 
-    /* FURU holder stats modal */
+    /* FURU statistics modal */
     #statsOverlay {
       position: fixed;
       inset: 0;
@@ -603,12 +603,17 @@
       background: #000;
     }
 
+    .stat-card + .stat-card {
+      margin-top: 12px;
+    }
+
     .stat-value {
       display: block;
       color: var(--accent-color);
-      font-size: clamp(2.5rem, 12vw, 4rem);
+      font-size: clamp(2rem, 9vw, 3.5rem);
       font-weight: bold;
       line-height: 1.1;
+      overflow-wrap: anywhere;
     }
 
     .stat-label {
@@ -837,7 +842,13 @@
         <button class="page-button" type="button" data-page="ecosystem">Ecosystem</button>
       </nav>
 
-      <input type="search" id="sidebar-search" placeholder="Search..." aria-label="Search gallery items" hidden />
+      <input
+        type="search"
+        id="sidebar-search"
+        placeholder="Search..."
+        aria-label="Search gallery items"
+        hidden
+      />
 
       <h2>Favorites</h2>
       <div id="favoritesList"></div>
@@ -846,7 +857,7 @@
         <button
           id="logoStatsButton"
           type="button"
-          aria-label="Show FURU holder statistics"
+          aria-label="Show FURU statistics"
           aria-haspopup="dialog"
           aria-controls="statsOverlay"
         >
@@ -892,14 +903,20 @@
       tabindex="-1"
     >
       <button id="statsClose" type="button" aria-label="Close statistics">×</button>
-      <h2 id="statsTitle">FURU Holder Statistics</h2>
+
+      <h2 id="statsTitle">FURU Statistics</h2>
 
       <div class="stat-card">
         <span class="stat-value">1,243</span>
         <span class="stat-label">User addresses holding FURU</span>
       </div>
 
-      <p class="stat-note">Holder count displayed as provided.</p>
+      <div class="stat-card">
+        <span class="stat-value">252,132,456</span>
+        <span class="stat-label">Total FURU</span>
+      </div>
+
+      <p class="stat-note">Statistics displayed as provided.</p>
 
       <section class="market-cap-calculator" aria-labelledby="calculatorTitle">
         <h3 id="calculatorTitle">Market Cap Calculator</h3>
@@ -970,7 +987,10 @@
           antialias: true
         });
       } catch (error) {
-        console.warn("WebGL is unavailable; continuing without the animated background.", error);
+        console.warn(
+          "WebGL is unavailable; continuing without the animated background.",
+          error
+        );
         return null;
       }
 
@@ -1072,7 +1092,6 @@
         maximumFractionDigits: 8
       });
 
-      // BCH is displayed with at most 2 decimal places.
       const bchFormatter = new Intl.NumberFormat("en-US", {
         maximumFractionDigits: 2
       });
