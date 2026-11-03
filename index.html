@@ -1072,6 +1072,11 @@
         maximumFractionDigits: 8
       });
 
+      // BCH is displayed with at most 2 decimal places.
+      const bchFormatter = new Intl.NumberFormat("en-US", {
+        maximumFractionDigits: 2
+      });
+
       function updateMarketCap() {
         const price = Number(tokenPriceInput.value);
         const quantity = Number(tokenQuantityInput.value);
@@ -1112,7 +1117,7 @@
         } else {
           primaryOutput.textContent = `${numberFormatter.format(marketCap)} sats`;
           secondaryOutput.textContent =
-            `${numberFormatter.format(marketCap / 100_000_000)} BCH`;
+            `${bchFormatter.format(marketCap / 100_000_000)} BCH`;
           secondaryRow.hidden = false;
         }
       }
