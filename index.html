@@ -295,6 +295,33 @@
       margin-bottom: 16px;
     }
 
+    .gift-notice {
+      width: min(100%, 900px);
+      margin: 0 auto 22px;
+      padding: 16px 18px;
+      border: 1px solid rgba(245, 196, 0, 0.65);
+      border-radius: 12px;
+      background: rgba(9, 9, 9, 0.92);
+      box-shadow: 0 4px 12px var(--shadow-color);
+      line-height: 1.5;
+    }
+
+    .gift-notice strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent-color);
+    }
+
+    .gift-notice p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.92rem;
+    }
+
+    .gift-notice a {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
     .video-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
@@ -880,6 +907,22 @@
     <main id="content">
       <section id="home-page" class="page-section" aria-labelledby="home-title">
         <h1 id="home-title" class="page-title"></h1>
+
+        <aside class="gift-notice" aria-label="Community thank-you">
+          <strong>Community thank-you</strong>
+          <p>
+            Small FURU gifts may occasionally be shared with selected members
+            of the Furu Nation Top 100, at the organizer’s discretion. Follow
+            <a
+              href="https://bsky.app/profile/furunation.bsky.social"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Furu Nation on Bluesky</a>
+            and turn on post notifications for announcements. Gifts aren’t
+            guaranteed or an entitlement.
+          </p>
+        </aside>
+
         <div id="videoGallery" class="video-gallery" aria-label="Bitcoin Cash and Furu videos"></div>
       </section>
 
