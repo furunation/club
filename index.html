@@ -322,6 +322,39 @@
       text-decoration: underline;
     }
 
+    .gift-token-copy {
+      display: inline;
+      margin-left: 4px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--accent-color);
+      font: inherit;
+      font-size: inherit;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      cursor: pointer;
+    }
+
+    .gift-token-copy:hover,
+    .gift-token-copy:focus-visible {
+      color: #fff;
+    }
+
+    .gift-token-copy:focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    #copyTokenIdStatus {
+      display: inline-block;
+      min-width: 0;
+      margin-left: 6px;
+      color: var(--accent-color);
+      font-size: 0.8em;
+    }
+
     .video-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
@@ -919,6 +952,14 @@
           <p>
             Small gifts may occasionally be shared with FURU HODLers, at discretion.
             Gifts aren’t guaranteed or an entitlement.
+            <button
+              id="copyTokenIdButton"
+              class="gift-token-copy"
+              type="button"
+              data-token-id="d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea"
+              aria-label="Copy FURU token ID"
+            >Copy FURU token ID</button>
+            <span id="copyTokenIdStatus" role="status" aria-live="polite"></span>
           </p>
         </aside>
 
@@ -1121,6 +1162,45 @@
       }
 
       animate();
+    }
+
+    async function copyTokenId() {
+      const button = document.getElementById("copyTokenIdButton");
+      const status = document.getElementById("copyTokenIdStatus");
+      const tokenId = button.dataset.tokenId;
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(tokenId);
+        } else {
+          const temporaryInput = document.createElement("textarea");
+          temporaryInput.value = tokenId;
+          temporaryInput.setAttribute("readonly", "");
+          temporaryInput.style.position = "fixed";
+          temporaryInput.style.left = "-9999px";
+          document.body.appendChild(temporaryInput);
+          temporaryInput.select();
+
+          const copied = document.execCommand("copy");
+          temporaryInput.remove();
+
+          if (!copied) {
+            throw new Error("Clipboard copy was not successful.");
+          }
+        }
+
+        button.textContent = "Copied!";
+        status.textContent = "FURU token ID copied to clipboard.";
+      } catch (error) {
+        button.textContent = "Copy failed — try again";
+        status.textContent = "Could not copy the token ID. Please try again.";
+        console.warn("Could not copy token ID.", error);
+      }
+
+      window.setTimeout(() => {
+        button.textContent = "Copy FURU token ID";
+        status.textContent = "";
+      }, 2200);
     }
 
     function initMarketCapCalculator() {
@@ -1712,11 +1792,54 @@
       document.getElementById("logoStatsButton").focus();
     }
 
+    async function copyTokenId() {
+      const button = document.getElementById("copyTokenIdButton");
+      const status = document.getElementById("copyTokenIdStatus");
+      const tokenId = button.dataset.tokenId;
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(tokenId);
+        } else {
+          const temporaryInput = document.createElement("textarea");
+          temporaryInput.value = tokenId;
+          temporaryInput.setAttribute("readonly", "");
+          temporaryInput.style.position = "fixed";
+          temporaryInput.style.left = "-9999px";
+          document.body.appendChild(temporaryInput);
+          temporaryInput.select();
+
+          const copied = document.execCommand("copy");
+          temporaryInput.remove();
+
+          if (!copied) {
+            throw new Error("Clipboard copy was not successful.");
+          }
+        }
+
+        button.textContent = "Copied!";
+        status.textContent = "FURU token ID copied to clipboard.";
+      } catch (error) {
+        button.textContent = "Copy failed — try again";
+        status.textContent = "Could not copy the token ID. Please try again.";
+        console.warn("Could not copy token ID.", error);
+      }
+
+      window.setTimeout(() => {
+        button.textContent = "Copy FURU token ID";
+        status.textContent = "";
+      }, 2200);
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       initPlasmaBackground();
       initMarketCapCalculator();
       renderVideos();
       createCategoryFilters();
+
+      document
+        .getElementById("copyTokenIdButton")
+        .addEventListener("click", copyTokenId);
 
       const sidebarToggle = document.getElementById("sidebar-toggle");
 
