@@ -66,7 +66,7 @@
       pointer-events: none;
     }
 
-    body.stats-open {
+    body.dialog-open {
       overflow: hidden;
       overscroll-behavior: none;
     }
@@ -354,6 +354,10 @@
       margin-bottom: 38px;
     }
 
+    .video-heading {
+      align-items: end;
+    }
+
     .video-gallery {
       display: flex;
       gap: 15px;
@@ -441,6 +445,35 @@
     .youtube-placeholder:hover .youtube-play {
       background: #d00000;
       transform: translate(-50%, -50%) scale(1.08);
+    }
+
+    .video-gallery-toggle {
+      display: inline-flex;
+      min-height: 42px;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 10px 15px;
+      border: 1px solid rgba(245, 196, 0, 0.38);
+      border-radius: 999px;
+      background: rgba(245, 196, 0, 0.08);
+      color: var(--accent-light);
+      font-size: 0.82rem;
+      font-weight: 700;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .video-gallery-toggle:hover {
+      border-color: var(--accent);
+      background: rgba(245, 196, 0, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .video-gallery-toggle .toggle-icon {
+      font-size: 1rem;
+      line-height: 1;
     }
 
     .community-card {
@@ -858,8 +891,8 @@
       transform: translateY(8px);
     }
 
-    /* Statistics dialog: avoid opacity/visibility and transform compositing flashes on mobile. */
-    #statsOverlay {
+    /* Shared overlay styling for the video gallery and stats panel. */
+    .dialog-overlay {
       position: fixed;
       inset: 0;
       z-index: 2500;
@@ -870,11 +903,11 @@
       overscroll-behavior: contain;
     }
 
-    #statsOverlay.is-open {
+    .dialog-overlay.is-open {
       display: grid;
     }
 
-    #statsPanel {
+    .dialog-panel {
       position: relative;
       width: min(100%, 680px);
       max-height: calc(100vh - 48px);
@@ -882,7 +915,7 @@
       overflow-y: auto;
       overscroll-behavior: contain;
       -webkit-overflow-scrolling: touch;
-      padding: 34px 34px 30px;
+      padding: 34px;
       border: 1px solid rgba(245, 196, 0, 0.32);
       border-radius: 24px;
       background:
@@ -892,14 +925,21 @@
       box-shadow: 0 25px 80px rgba(0, 0, 0, 0.62);
     }
 
-    #statsPanel h2 {
-      margin: 0 50px 28px 0;
+    .dialog-title {
+      margin: 0 58px 7px 0;
       font-family: "Space Grotesk", sans-serif;
       font-size: 1.7rem;
       letter-spacing: -0.04em;
     }
 
-    #statsClose {
+    .dialog-subtitle {
+      margin: 0 0 23px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .dialog-close {
       position: absolute;
       top: 18px;
       right: 18px;
@@ -915,9 +955,91 @@
       cursor: pointer;
     }
 
-    #statsClose:hover {
+    .dialog-close:hover {
       border-color: rgba(245, 196, 0, 0.45);
       color: var(--accent-light);
+    }
+
+    /* Full video gallery dialog */
+    #videoGalleryOverlay {
+      z-index: 2400;
+    }
+
+    #videoGalleryPanel {
+      display: flex;
+      width: min(100%, 1220px);
+      max-height: calc(100vh - 48px);
+      max-height: calc(100dvh - 48px);
+      flex-direction: column;
+      overflow: hidden;
+      padding: 30px;
+    }
+
+    .video-dialog-header {
+      position: relative;
+      flex: 0 0 auto;
+      padding-right: 55px;
+    }
+
+    #videoGalleryPanel .dialog-close {
+      top: 0;
+      right: 0;
+    }
+
+    #allVideosGrid {
+      display: grid;
+      min-height: 0;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+      padding: 2px 8px 5px 2px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-color: rgba(245, 196, 0, 0.65) rgba(255, 255, 255, 0.08);
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #allVideosGrid::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    #allVideosGrid::-webkit-scrollbar-track {
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    #allVideosGrid::-webkit-scrollbar-thumb {
+      border-radius: 99px;
+      background: rgba(245, 196, 0, 0.65);
+    }
+
+    #allVideosGrid .youtube-embed {
+      width: 100%;
+      min-width: 0;
+      scroll-snap-align: none;
+    }
+
+    #allVideosGrid .youtube-placeholder,
+    #allVideosGrid .youtube-frame {
+      border-radius: 14px;
+    }
+
+    .video-gallery-empty {
+      grid-column: 1 / -1;
+      padding: 40px 20px;
+      border: 1px dashed rgba(255, 255, 255, 0.16);
+      border-radius: 16px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Statistics dialog */
+    #statsOverlay {
+      z-index: 2500;
+    }
+
+    #statsPanel {
+      width: min(100%, 680px);
     }
 
     .stats-grid {
@@ -1028,6 +1150,12 @@
       line-height: 1.55;
     }
 
+    @media (max-width: 900px) {
+      #allVideosGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 760px) {
       .page-shell {
         padding: 25px 20px 105px;
@@ -1058,6 +1186,40 @@
       #figures {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         gap: 12px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      #videoGalleryOverlay {
+        padding: 12px;
+        padding-top: max(12px, env(safe-area-inset-top));
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+      }
+
+      #videoGalleryPanel {
+        width: 100%;
+        max-height: calc(100vh - 24px);
+        max-height: calc(100dvh - 24px);
+        padding: 22px 17px 17px;
+        border-radius: 20px;
+      }
+
+      #allVideosGrid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding-right: 4px;
+      }
+
+      .video-dialog-header {
+        padding-right: 46px;
+      }
+
+      #videoGalleryPanel .dialog-title {
+        font-size: 1.4rem;
+      }
+
+      #videoGalleryPanel .dialog-subtitle {
+        margin-bottom: 17px;
       }
     }
 
@@ -1113,6 +1275,11 @@
       .section-heading {
         align-items: start;
         margin-top: 31px;
+      }
+
+      .video-heading {
+        flex-direction: column;
+        gap: 12px;
       }
 
       .video-gallery {
@@ -1207,14 +1374,14 @@
         border-radius: 13px;
       }
 
-      #statsOverlay {
+      .dialog-overlay {
         place-items: center;
         padding: 12px;
         padding-top: max(12px, env(safe-area-inset-top));
         padding-bottom: max(12px, env(safe-area-inset-bottom));
       }
 
-      #statsPanel {
+      .dialog-panel {
         width: 100%;
         max-height: calc(100vh - 24px);
         max-height: calc(100dvh - 24px);
@@ -1222,8 +1389,7 @@
         border-radius: 20px;
       }
 
-      #statsPanel h2 {
-        margin-bottom: 22px;
+      .dialog-title {
         font-size: 1.45rem;
       }
 
@@ -1313,14 +1479,25 @@
       </section>
 
       <section class="video-section" aria-labelledby="videos-title">
-        <div class="section-heading">
+        <div class="section-heading video-heading">
           <div>
             <span class="section-kicker">Watch &amp; explore</span>
             <h2 id="videos-title">From the community</h2>
             <p>Videos about FURU, Bitcoin Cash, and the people behind them.</p>
           </div>
+          <button
+            id="openVideoGallery"
+            class="video-gallery-toggle"
+            type="button"
+            aria-haspopup="dialog"
+            aria-controls="videoGalleryOverlay"
+          >
+            <span>View all videos</span>
+            <span aria-hidden="true">↗</span>
+          </button>
         </div>
-        <div id="videoGallery" class="video-gallery" aria-label="Bitcoin Cash and Furu videos"></div>
+
+        <div id="videoGallery" class="video-gallery" aria-label="Seven most recent Bitcoin Cash and Furu videos"></div>
       </section>
 
       <aside class="community-card" aria-label="Community appreciation">
@@ -1389,16 +1566,41 @@
 
   <button id="backToTop" class="hidden" type="button" aria-label="Back to top">↑</button>
 
-  <div id="statsOverlay" role="presentation" aria-hidden="true">
+  <!-- Full video gallery dialog -->
+  <div id="videoGalleryOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
+    <section
+      id="videoGalleryPanel"
+      class="dialog-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="videoGalleryTitle"
+      aria-describedby="videoGalleryDescription"
+      tabindex="-1"
+    >
+      <div class="video-dialog-header">
+        <button id="videoGalleryClose" class="dialog-close" type="button" aria-label="Close video gallery">×</button>
+        <span class="section-kicker">Watch &amp; explore</span>
+        <h2 id="videoGalleryTitle" class="dialog-title">All community videos</h2>
+        <p id="videoGalleryDescription" class="dialog-subtitle">
+          Browse the full video feed. Scroll the grid to explore all videos.
+        </p>
+      </div>
+      <div id="allVideosGrid" aria-label="All community videos"></div>
+    </section>
+  </div>
+
+  <!-- Statistics dialog -->
+  <div id="statsOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
     <section
       id="statsPanel"
+      class="dialog-panel"
       role="dialog"
       aria-modal="true"
       aria-labelledby="statsTitle"
       tabindex="-1"
     >
-      <button id="statsClose" type="button" aria-label="Close statistics">×</button>
-      <h2 id="statsTitle">FURU at a glance</h2>
+      <button id="statsClose" class="dialog-close" type="button" aria-label="Close statistics">×</button>
+      <h2 id="statsTitle" class="dialog-title">FURU at a glance</h2>
 
       <div class="stats-grid">
         <div class="stat-card">
@@ -1445,6 +1647,8 @@
   </div>
 
   <script>
+    // Maintain this list in newest-first order. The first seven display above;
+    // the dialog contains every valid video in the array.
     const videoLinks = [
       "https://youtu.be/y1-HrkdiMNE?si=RgVmcw5g3zden8F7",
       "https://youtu.be/z7TivVhdsng?si=9Z2BN-f-oAniwIRW",
@@ -1690,50 +1894,83 @@
       }
     }
 
+    function createVideoCard(videoId, index) {
+      const card = document.createElement("div");
+      card.className = "youtube-embed";
+
+      const placeholder = document.createElement("button");
+      placeholder.className = "youtube-placeholder";
+      placeholder.type = "button";
+      placeholder.style.backgroundImage =
+        `url("https://i.ytimg.com/vi/${videoId}/hqdefault.jpg")`;
+      placeholder.setAttribute("aria-label", `Play community video ${index + 1}`);
+
+      const playIcon = document.createElement("span");
+      playIcon.className = "youtube-play";
+      playIcon.setAttribute("aria-hidden", "true");
+      playIcon.textContent = "▶";
+      placeholder.appendChild(playIcon);
+
+      placeholder.addEventListener("click", () => {
+        const iframe = document.createElement("iframe");
+        iframe.className = "youtube-frame";
+        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+        iframe.title = `Community video ${index + 1}`;
+        iframe.loading = "lazy";
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.allow =
+          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        card.replaceChildren(iframe);
+      }, { once: true });
+
+      card.appendChild(placeholder);
+      return card;
+    }
+
+    function getValidVideos() {
+      return videoLinks
+        .map((link, originalIndex) => ({
+          videoId: getYouTubeId(link),
+          originalIndex
+        }))
+        .filter(video => {
+          if (!video.videoId) {
+            console.warn("Skipping invalid YouTube link:", videoLinks[video.originalIndex]);
+            return false;
+          }
+          return true;
+        });
+    }
+
     function renderVideos() {
-      const gallery = document.getElementById("videoGallery");
-      gallery.replaceChildren();
+      const previewGallery = document.getElementById("videoGallery");
+      const fullGallery = document.getElementById("allVideosGrid");
+      const validVideos = getValidVideos();
 
-      videoLinks.forEach((link, index) => {
-        const videoId = getYouTubeId(link);
+      previewGallery.replaceChildren();
+      fullGallery.replaceChildren();
 
-        if (!videoId) {
-          console.warn("Skipping invalid YouTube link:", link);
-          return;
-        }
-
-        const card = document.createElement("div");
-        card.className = "youtube-embed";
-
-        const placeholder = document.createElement("button");
-        placeholder.className = "youtube-placeholder";
-        placeholder.type = "button";
-        placeholder.style.backgroundImage =
-          `url("https://i.ytimg.com/vi/${videoId}/hqdefault.jpg")`;
-        placeholder.setAttribute("aria-label", `Play community video ${index + 1}`);
-
-        const playIcon = document.createElement("span");
-        playIcon.className = "youtube-play";
-        playIcon.setAttribute("aria-hidden", "true");
-        playIcon.textContent = "▶";
-        placeholder.appendChild(playIcon);
-
-        placeholder.addEventListener("click", () => {
-          const iframe = document.createElement("iframe");
-          iframe.className = "youtube-frame";
-          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
-          iframe.title = `Community video ${index + 1}`;
-          iframe.loading = "lazy";
-          iframe.referrerPolicy = "strict-origin-when-cross-origin";
-          iframe.allow =
-            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-          iframe.allowFullscreen = true;
-          card.replaceChildren(iframe);
-        }, { once: true });
-
-        card.appendChild(placeholder);
-        gallery.appendChild(card);
+      validVideos.slice(0, 7).forEach(({ videoId, originalIndex }) => {
+        previewGallery.appendChild(createVideoCard(videoId, originalIndex));
       });
+
+      validVideos.forEach(({ videoId, originalIndex }) => {
+        fullGallery.appendChild(createVideoCard(videoId, originalIndex));
+      });
+
+      if (validVideos.length === 0) {
+        const message = document.createElement("div");
+        message.className = "video-gallery-empty";
+        message.textContent = "No videos are available right now.";
+        fullGallery.appendChild(message);
+        document.getElementById("openVideoGallery").hidden = true;
+        return;
+      }
+
+      document.getElementById("openVideoGallery").hidden = false;
+      document.getElementById("videoGalleryDescription").textContent =
+        `${validVideos.length} videos in the feed. Scroll the grid to explore them all.`;
     }
 
     function getFigureCategories(item) {
@@ -1769,6 +2006,7 @@
 
     let activeCategory = "All";
     let activeSearch = "";
+    let lastDialogTrigger = null;
 
     function shuffleArray(array) {
       const shuffled = [...array];
@@ -1887,6 +2125,35 @@
       applyFigureFilters();
     }
 
+    function openDialog(overlayId, panelId, trigger) {
+      const overlay = document.getElementById(overlayId);
+      const panel = document.getElementById(panelId);
+
+      lastDialogTrigger = trigger || document.activeElement;
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("dialog-open");
+      panel.focus();
+    }
+
+    function closeDialog(overlayId) {
+      const overlay = document.getElementById(overlayId);
+      if (!overlay.classList.contains("is-open")) return;
+
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+
+      const anotherDialogIsOpen = document.querySelector(".dialog-overlay.is-open");
+      if (!anotherDialogIsOpen) {
+        document.body.classList.remove("dialog-open");
+      }
+
+      if (lastDialogTrigger && typeof lastDialogTrigger.focus === "function") {
+        lastDialogTrigger.focus();
+      }
+      lastDialogTrigger = null;
+    }
+
     async function copyTokenId() {
       const button = document.getElementById("copyTokenIdButton");
       const status = document.getElementById("copyTokenIdStatus");
@@ -1990,31 +2257,41 @@
       updateMarketCap();
     }
 
-    function openStats() {
-      const overlay = document.getElementById("statsOverlay");
-      overlay.classList.add("is-open");
-      overlay.setAttribute("aria-hidden", "false");
-      document.body.classList.add("stats-open");
-      document.getElementById("statsPanel").focus();
-    }
-
-    function closeStats() {
-      const overlay = document.getElementById("statsOverlay");
-      overlay.classList.remove("is-open");
-      overlay.setAttribute("aria-hidden", "true");
-      document.body.classList.remove("stats-open");
-      document.getElementById("logoStatsButton").focus();
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
       renderVideos();
       createCategoryFilters();
       populateFigures();
       initMarketCapCalculator();
 
-      document
-        .getElementById("copyTokenIdButton")
-        .addEventListener("click", copyTokenId);
+      document.getElementById("openVideoGallery").addEventListener("click", event => {
+        openDialog("videoGalleryOverlay", "videoGalleryPanel", event.currentTarget);
+      });
+
+      document.getElementById("videoGalleryClose").addEventListener("click", () => {
+        closeDialog("videoGalleryOverlay");
+      });
+
+      document.getElementById("logoStatsButton").addEventListener("click", event => {
+        openDialog("statsOverlay", "statsPanel", event.currentTarget);
+      });
+
+      document.getElementById("statsClose").addEventListener("click", () => {
+        closeDialog("statsOverlay");
+      });
+
+      document.getElementById("videoGalleryOverlay").addEventListener("click", event => {
+        if (event.target.id === "videoGalleryOverlay") {
+          closeDialog("videoGalleryOverlay");
+        }
+      });
+
+      document.getElementById("statsOverlay").addEventListener("click", event => {
+        if (event.target.id === "statsOverlay") {
+          closeDialog("statsOverlay");
+        }
+      });
+
+      document.getElementById("copyTokenIdButton").addEventListener("click", copyTokenId);
 
       document.getElementById("gallery-search").addEventListener("input", event => {
         activeSearch = event.target.value.trim();
@@ -2026,19 +2303,10 @@
         if (button) setActiveCategory(button.dataset.filter);
       });
 
-      document.getElementById("logoStatsButton").addEventListener("click", openStats);
-      document.getElementById("statsClose").addEventListener("click", closeStats);
-
-      document.getElementById("statsOverlay").addEventListener("click", event => {
-        if (event.target.id === "statsOverlay") closeStats();
-      });
-
       document.addEventListener("keydown", event => {
-        if (
-          event.key === "Escape" &&
-          document.getElementById("statsOverlay").classList.contains("is-open")
-        ) {
-          closeStats();
+        if (event.key === "Escape") {
+          const openOverlay = document.querySelector(".dialog-overlay.is-open");
+          if (openOverlay) closeDialog(openOverlay.id);
         }
       });
 
