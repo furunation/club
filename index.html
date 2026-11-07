@@ -471,11 +471,6 @@
       transform: translateY(-1px);
     }
 
-    .video-gallery-toggle .toggle-icon {
-      font-size: 1rem;
-      line-height: 1;
-    }
-
     .appreciation-card {
       display: flex;
       align-items: center;
@@ -712,73 +707,6 @@
       white-space: pre-line;
     }
 
-    .ecosystem-badges {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 5px;
-      width: 100%;
-      margin-top: 12px;
-    }
-
-    .ecosystem-badge {
-      display: inline-flex;
-      min-height: 22px;
-      align-items: center;
-      justify-content: center;
-      padding: 3px 8px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.055);
-      color: #c5c1b3;
-      font-size: 0.66rem;
-      font-weight: 700;
-      letter-spacing: 0.035em;
-      line-height: 1;
-    }
-
-    .ecosystem-badge[data-ecosystem="Zano"] {
-      border-color: rgba(92, 92, 190, 0.48);
-      background: rgba(12, 12, 58, 0.72);
-      color: #b9b9ff;
-    }
-
-    .ecosystem-badge[data-ecosystem="Wallet"] {
-      border-color: rgba(89, 153, 235, 0.35);
-      background: rgba(40, 97, 169, 0.2);
-      color: #9cc7ff;
-    }
-
-    .ecosystem-badge[data-ecosystem="DApp"] {
-      border-color: rgba(232, 157, 63, 0.34);
-      background: rgba(209, 131, 34, 0.18);
-      color: #ffc77e;
-    }
-
-    .ecosystem-badge[data-ecosystem="Social"] {
-      border-color: rgba(227, 95, 159, 0.32);
-      background: rgba(189, 57, 123, 0.18);
-      color: #f2a5cb;
-    }
-
-    .ecosystem-badge[data-ecosystem="Collectible"] {
-      border-color: rgba(161, 170, 191, 0.3);
-      background: rgba(89, 98, 115, 0.22);
-      color: #c5cede;
-    }
-
-    .ecosystem-badge[data-ecosystem="POS"] {
-      border-color: rgba(57, 200, 200, 0.32);
-      background: rgba(0, 140, 140, 0.2);
-      color: #7de4df;
-    }
-
-    .ecosystem-badge[data-ecosystem="Merch"] {
-      border-color: rgba(115, 136, 255, 0.32);
-      background: rgba(61, 73, 190, 0.2);
-      color: #b0b8ff;
-    }
-
     .empty-state {
       grid-column: 1 / -1;
       padding: 44px 20px;
@@ -891,7 +819,6 @@
       transform: translateY(8px);
     }
 
-    /* Shared overlay styling for the video gallery and stats panel. */
     .dialog-overlay {
       position: fixed;
       inset: 0;
@@ -960,7 +887,6 @@
       color: var(--accent-light);
     }
 
-    /* Full video gallery dialog */
     #videoGalleryOverlay {
       z-index: 2400;
     }
@@ -1033,7 +959,6 @@
       text-align: center;
     }
 
-    /* Statistics dialog */
     #statsOverlay {
       z-index: 2500;
     }
@@ -1342,17 +1267,6 @@
         font-size: 0.84rem;
       }
 
-      .ecosystem-badges {
-        gap: 4px;
-        margin-top: 9px;
-      }
-
-      .ecosystem-badge {
-        min-height: 20px;
-        padding: 3px 6px;
-        font-size: 0.6rem;
-      }
-
       .footer {
         flex-direction: column;
         gap: 7px;
@@ -1565,7 +1479,6 @@
 
   <button id="backToTop" class="hidden" type="button" aria-label="Back to top">↑</button>
 
-  <!-- Full video gallery dialog -->
   <div id="videoGalleryOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
     <section
       id="videoGalleryPanel"
@@ -1588,7 +1501,6 @@
     </section>
   </div>
 
-  <!-- Statistics dialog -->
   <div id="statsOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
     <section
       id="statsPanel"
@@ -1646,8 +1558,6 @@
   </div>
 
   <script>
-    // Maintain this list in newest-first order. The first seven display above;
-    // the dialog contains every valid video in the array.
     const videoLinks = [
       "https://youtu.be/y1-HrkdiMNE?si=RgVmcw5g3zden8F7",
       "https://youtu.be/z7TivVhdsng?si=9Z2BN-f-oAniwIRW",
@@ -1698,186 +1608,190 @@
       "https://youtu.be/QJECkbuK3qo?si=V0yNB-5Ta2arQjQO"
     ];
 
+    // Explorer and Projects are swapped in filter order.
+    const categoryOrder = [
+      "Projects",
+      "DEX",
+      "Wrapped BCH",
+      "Explorer",
+      "Spend BCH",
+      "Merchants"
+    ];
+
     const figures = [
-      {
-        href: "https://zano.org/wallets",
-        src: "https://i.postimg.cc/sg952LXj/zano.png",
-        caption: "Zano",
-        categories: ["Wallet"]
-      },
       {
         href: "https://trade.zano.org/dex/trading/773",
         src: "https://i.postimg.cc/T3y6czz9/bchx.png",
         caption: "BCHX",
-        categories: ["Zano"]
+        categories: ["Wrapped BCH"]
       },
       {
         href: "https://www.hijackingbitcoin.com/",
         src: "https://i.postimg.cc/76YYYb3M/hijackingbtc.png",
-        caption: "Hijacking Bicoin",
-        categories: ["Merch"]
+        caption: "Hijacking Bitcoin",
+        categories: ["Merchants"]
       },
       {
         href: "https://bsky.app/profile/furunation.bsky.social",
         src: "https://i.postimg.cc/9MJrV5TZ/furunation.webp",
         caption: "Furu Nation",
-        categories: ["Social"]
+        categories: ["Projects"]
       },
       {
         href: "https://youtube.com/@niolifer?si=0FNUQB-UDsRvRM-k",
         src: "https://i.postimg.cc/GtcySHf2/niolifer.jpg",
         caption: "NIOlifer",
-        categories: ["Social"]
+        categories: ["Projects"]
       },
       {
         href: "https://bsky.app/profile/nsfwbch.bsky.social",
         src: "https://i.postimg.cc/bJFqrcYL/nsfwbch.jpg",
         caption: "nsfwbch",
-        categories: ["Social"]
+        categories: ["Projects"]
       },
       {
         href: "https://bsky.app/profile/dwellersart.bsky.social",
         src: "https://i.postimg.cc/gkh7VJfM/dwellers.png",
         caption: "Dwellers Art",
-        categories: ["Social"]
+        categories: ["Projects"]
       },
       {
         href: "https://cashmint.cash/collection/8c44b485cedda5b9faccb5aa5350657f5891c2693cfcbbe857ddebbd05923a2a",
         src: "https://i.postimg.cc/pVGJpcxF/bafybeicmgcfeyljscvwmnq5uoa7jzvlq5yjh5vkcboctvmmgf3zl244uye.webp",
         caption: "Furu Plasma",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/YqzGzsbP/guru12.webp",
         caption: "BCH Guru #12",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/hP1z15pw/guru11.webp",
         caption: "BCH Guru #11",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/MKmMmFd3/guru10.webp",
         caption: "BCH Guru #10",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/ZKxBxMVD/guru9.webp",
         caption: "BCH Guru #9",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://bitcart.ai/",
         src: "https://i.postimg.cc/8cHQqwQt/bitcart.jpg",
         caption: "Accept FURU\nusing Bitcart",
-        categories: ["POS"]
+        categories: ["Merchants"]
       },
       {
         href: "https://www.paytaca.com/",
         src: "https://i.postimg.cc/3NTJtX7s/paytaca.png",
         caption: "Spend FURU\nusing Paytaca",
-        categories: ["Wallet"]
+        categories: ["Spend BCH"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/BQBLBVMm/guru8.webp",
         caption: "BCH Guru #8",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/vHtgtN3W/guru1.webp",
         caption: "BCH Guru #1",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/020M0Bcd/guru2.webp",
         caption: "BCH Guru #2",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/BQBLBVMB/guru3.webp",
         caption: "BCH Guru #3",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/WbwFwHXm/guru4.webp",
         caption: "BCH Guru #4",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/8PmJm0tH/guru5.webp",
         caption: "BCH Guru #5",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/8PmJm0t4/guru6.webp",
         caption: "BCH Guru #6",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/RVL6LDXG/guru7.webp",
         caption: "BCH Guru #7",
-        categories: ["Collectible"]
+        categories: ["Projects"]
       },
       {
         href: "https://www.cryptorefills.com/en",
         src: "https://i.postimg.cc/ZWtL8WRT/cryptorefills.png",
         caption: "Cryptorefills",
-        categories: ["DApp"]
+        categories: ["Spend BCH"]
       },
       {
         href: "https://trocador-app.us/",
         src: "https://i.postimg.cc/k6G5L7Sh/trocador.png",
         caption: "Trocador",
-        categories: ["DApp"]
+        categories: ["DEX"]
       },
       {
         href: "https://www.redbubble.com/i/mug/Party-Guru-by-dwnlives/169504252/7yqg",
         src: "https://i.postimg.cc/bdHFFNzM/gurumugparty.png",
         caption: "Party Guru Mug",
-        categories: ["Merch"]
+        categories: ["Merchants"]
       },
       {
         href: "https://www.redbubble.com/i/mug/Jungle-Guru-by-dwnlives/169503332/7yqg",
         src: "https://i.postimg.cc/Sj7ttNS0/gurumugjungle.png",
         caption: "Jungle Guru Mug",
-        categories: ["Merch"]
+        categories: ["Merchants"]
       },
       {
         href: "https://bch.guru/",
         src: "https://i.postimg.cc/CzxF7Db4/gurulogo.png",
         caption: "Win FURU\non BCH Guru",
-        categories: ["DApp"]
+        categories: ["Projects"]
       },
       {
         href: "https://www.bitgree.com/",
         src: "https://i.postimg.cc/DSkcrSZn/bitgree.png",
         caption: "Bitgree",
-        categories: ["DApp"]
+        categories: ["Spend BCH"]
       },
       {
         href: "https://app.cauldron.quest/swap/d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea",
         src: "https://i.postimg.cc/L4JGsFGy/cauldron.png",
         caption: "Earn FURU fees\nwith Cauldron",
-        categories: ["DApp"]
+        categories: ["DEX"]
       },
       {
         href: "https://electroncash.org/",
         src: "https://i.postimg.cc/GtChXFrN/electroncash.png",
         caption: "Electron Cash",
-        categories: ["Wallet"]
+        categories: ["Projects"]
       }
     ];
 
@@ -1939,8 +1853,11 @@
       return card;
     }
 
-    function getValidVideos() {
-      return videoLinks
+    function renderVideos() {
+      const previewGallery = document.getElementById("videoGallery");
+      const fullGallery = document.getElementById("allVideosGrid");
+
+      const validVideos = videoLinks
         .map((link, originalIndex) => ({
           videoId: getYouTubeId(link),
           originalIndex
@@ -1952,12 +1869,6 @@
           }
           return true;
         });
-    }
-
-    function renderVideos() {
-      const previewGallery = document.getElementById("videoGallery");
-      const fullGallery = document.getElementById("allVideosGrid");
-      const validVideos = getValidVideos();
 
       previewGallery.replaceChildren();
       fullGallery.replaceChildren();
@@ -1991,7 +1902,7 @@
         item.categories
           .filter(category => typeof category === "string")
           .map(category => category.trim())
-          .filter(Boolean)
+          .filter(category => categoryOrder.includes(category))
       )];
     }
 
@@ -1999,12 +1910,7 @@
       const filterContainer = document.getElementById("ecosystemFilters");
       filterContainer.replaceChildren();
 
-      const categories = [
-        "All",
-        ...new Set(figures.flatMap(getFigureCategories))
-      ];
-
-      categories.forEach(category => {
+      ["All", ...categoryOrder].forEach(category => {
         const button = document.createElement("button");
         button.className = "category-btn";
         button.type = "button";
@@ -2062,21 +1968,9 @@
         const caption = document.createElement("span");
         caption.className = "card-caption";
         caption.textContent = item.caption;
+
         link.append(imageWrap, caption);
-
-        const badgeList = document.createElement("div");
-        badgeList.className = "ecosystem-badges";
-        badgeList.setAttribute("aria-label", "Categories");
-
-        categories.forEach(category => {
-          const badge = document.createElement("span");
-          badge.className = "ecosystem-badge";
-          badge.dataset.ecosystem = category;
-          badge.textContent = category;
-          badgeList.appendChild(badge);
-        });
-
-        card.append(link, badgeList);
+        card.appendChild(link);
         container.appendChild(card);
       });
 
@@ -2107,7 +2001,7 @@
       });
 
       document.getElementById("galleryCount").textContent =
-        `Showing ${visibleCount} of ${cards.length} projects`;
+        `Showing ${visibleCount} of ${cards.length} items`;
 
       document.querySelector(".empty-state")?.remove();
 
@@ -2127,6 +2021,8 @@
     }
 
     function setActiveCategory(category) {
+      if (category !== "All" && !categoryOrder.includes(category)) return;
+
       activeCategory = category;
 
       document.querySelectorAll(".category-btn").forEach(button => {
@@ -2154,8 +2050,7 @@
       overlay.classList.remove("is-open");
       overlay.setAttribute("aria-hidden", "true");
 
-      const anotherDialogIsOpen = document.querySelector(".dialog-overlay.is-open");
-      if (!anotherDialogIsOpen) {
+      if (!document.querySelector(".dialog-overlay.is-open")) {
         document.body.classList.remove("dialog-open");
       }
 
