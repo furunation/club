@@ -513,24 +513,17 @@
       line-height: 1.55;
     }
 
-    .gift-token-copy {
+    .solo-miners-link {
       display: inline;
-      padding: 0;
-      border: 0;
-      background: transparent;
       color: var(--accent-light);
       font: inherit;
       font-weight: 600;
       text-decoration: underline;
       text-underline-offset: 3px;
-      cursor: pointer;
     }
 
-    #copyTokenIdStatus {
-      display: inline-block;
-      margin-left: 6px;
-      color: var(--accent-light);
-      font-size: 0.78rem;
+    .solo-miners-link:hover {
+      color: #fff;
     }
 
     .ecosystem-section {
@@ -1382,8 +1375,7 @@
           <p class="eyebrow">Built around Bitcoin Cash</p>
           <h1 id="page-title">The Furu <span>ecosystem.</span></h1>
           <p class="hero-description">
-            Discover the people, projects, tools, collectibles, and places driving
-            the FURU ecosystem forward.
+            Discover the people and projects powering a more distributed network.
           </p>
         </div>
 
@@ -1413,24 +1405,22 @@
         <div id="videoGallery" class="video-gallery" aria-label="Seven most recent Bitcoin Cash and Furu videos"></div>
       </section>
 
-      <aside class="appreciation-card" aria-label="FURU appreciation">
-        <div class="appreciation-icon" aria-hidden="true">✦</div>
-        <div class="appreciation-copy">
-          <strong>FURU appreciation</strong>
-          <p>
-            Small gifts may occasionally be shared with FURU HODLers, at discretion.
-            Gifts aren’t guaranteed or an entitlement.
-            <button
-              id="copyTokenIdButton"
-              class="gift-token-copy"
-              type="button"
-              data-token-id="d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea"
-              aria-label="Copy FURU token ID"
-            >Copy FURU token ID</button>
-            <span id="copyTokenIdStatus" role="status" aria-live="polite"></span>
-          </p>
-        </div>
-      </aside>
+<aside class="appreciation-card" aria-label="Community appreciation">
+  <div class="appreciation-icon" aria-hidden="true">✦</div>
+  <div class="appreciation-copy">
+    <strong>Community Appreciation</strong>
+    <p>
+      Discretionary solo miner gifts on the 1st monthly.
+      Gifts aren’t guaranteed or an entitlement.
+      <a
+        class="solo-miners-link"
+        href="https://bch.solopool.org/miners"
+        target="_blank"
+        rel="noopener noreferrer"
+      >View BCH solo miners</a>
+    </p>
+  </div>
+</aside>
 
       <section id="ecosystem" class="ecosystem-section" aria-labelledby="ecosystem-title">
         <div class="section-heading">
@@ -2060,44 +2050,6 @@
       lastDialogTrigger = null;
     }
 
-    async function copyTokenId() {
-      const button = document.getElementById("copyTokenIdButton");
-      const status = document.getElementById("copyTokenIdStatus");
-      const tokenId = button.dataset.tokenId;
-      const originalText = "Copy FURU token ID";
-
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(tokenId);
-        } else {
-          const temporaryInput = document.createElement("textarea");
-          temporaryInput.value = tokenId;
-          temporaryInput.setAttribute("readonly", "");
-          temporaryInput.style.position = "fixed";
-          temporaryInput.style.left = "-9999px";
-          document.body.appendChild(temporaryInput);
-          temporaryInput.select();
-
-          const copied = document.execCommand("copy");
-          temporaryInput.remove();
-
-          if (!copied) throw new Error("Clipboard copy was not successful.");
-        }
-
-        button.textContent = "Copied!";
-        status.textContent = "Token ID copied.";
-      } catch (error) {
-        button.textContent = "Copy failed — try again";
-        status.textContent = "Could not copy. Please try again.";
-        console.warn("Could not copy token ID.", error);
-      }
-
-      window.setTimeout(() => {
-        button.textContent = originalText;
-        status.textContent = "";
-      }, 2200);
-    }
-
     function initMarketCapCalculator() {
       const unitSelect = document.getElementById("tokenPriceUnit");
       const tokenPriceInput = document.getElementById("tokenPrice");
@@ -2196,8 +2148,6 @@
           closeDialog("statsOverlay");
         }
       });
-
-      document.getElementById("copyTokenIdButton").addEventListener("click", copyTokenId);
 
       document.getElementById("gallery-search").addEventListener("input", event => {
         activeSearch = event.target.value.trim();
