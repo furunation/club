@@ -26,6 +26,7 @@
       --shadow: 0 20px 60px rgba(0, 0, 0, 0.38);
       --radius-lg: 22px;
       --content-width: 1440px;
+      --nebby-image: url("https://i.postimg.cc/28XLxW1g/ezimage-dmpoe7rkgan78fte9p-1.png");
     }
 
     *,
@@ -45,24 +46,62 @@
       min-height: 100vh;
       margin: 0;
       overflow-x: hidden;
-      background:
-        radial-gradient(ellipse at 15% 5%, rgba(245, 196, 0, 0.075), transparent 33rem),
-        radial-gradient(ellipse at 92% 40%, rgba(187, 126, 0, 0.055), transparent 30rem),
-        var(--bg);
+      background: var(--bg);
       color: var(--text);
       font-family: "DM Sans", Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
 
-    body::before {
+    /*
+      Nebby background:
+      Image is centered slightly right, modestly sized, and bright enough
+      to see her face while remaining behind the readable page content.
+    */
+    .nebby-background {
+      position: fixed;
+      z-index: 0;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .nebby-background::before {
+      position: absolute;
+      top: 50%;
+      left: 57%;
+      width: min(56vw, 760px);
+      height: min(56vw, 760px);
+      background-image: var(--nebby-image);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: "";
+      opacity: 0.43;
+      filter: saturate(0.92);
+      transform: translate(-50%, -50%);
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 56%, rgba(0, 0, 0, 0.9) 69%, transparent 88%);
+      mask-image: radial-gradient(ellipse at center, #000 56%, rgba(0, 0, 0, 0.9) 69%, transparent 88%);
+    }
+
+    .nebby-background::after {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(8, 8, 7, 0.46), rgba(8, 8, 7, 0.12) 55%, rgba(8, 8, 7, 0.26)),
+        linear-gradient(180deg, rgba(8, 8, 7, 0.34), rgba(8, 8, 7, 0.08) 36%, rgba(8, 8, 7, 0.3) 74%, rgba(8, 8, 7, 0.58));
+      content: "";
+    }
+
+    body::after {
       position: fixed;
       inset: 0;
-      z-index: -1;
+      z-index: 0;
       background-image: radial-gradient(rgba(255, 255, 255, 0.16) 0.55px, transparent 0.55px);
       background-size: 6px 6px;
       content: "";
-      opacity: 0.075;
+      opacity: 0.055;
       pointer-events: none;
     }
 
@@ -199,10 +238,11 @@
       padding: 9px 12px;
       border: 1px solid rgba(255, 255, 255, 0.09);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(15, 15, 13, 0.78);
       color: #d5d2c6;
       font-size: 0.78rem;
       white-space: nowrap;
+      backdrop-filter: blur(8px);
     }
 
     .status-dot {
@@ -226,8 +266,9 @@
       border-radius: var(--radius-lg);
       background:
         radial-gradient(ellipse at 82% 18%, rgba(245, 196, 0, 0.13), transparent 24rem),
-        linear-gradient(135deg, rgba(25, 24, 18, 0.96), rgba(12, 12, 10, 0.96));
+        rgba(12, 12, 10, 0.85);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(9px);
     }
 
     .hero::after {
@@ -301,7 +342,7 @@
       padding: 8px;
       border: 1px solid rgba(245, 196, 0, 0.4);
       border-radius: 50%;
-      background: rgba(0, 0, 0, 0.25);
+      background: rgba(0, 0, 0, 0.35);
       box-shadow: 0 0 30px rgba(245, 196, 0, 0.12);
       cursor: pointer;
       transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
@@ -457,12 +498,13 @@
       padding: 10px 15px;
       border: 1px solid rgba(245, 196, 0, 0.38);
       border-radius: 999px;
-      background: rgba(245, 196, 0, 0.08);
+      background: rgba(19, 18, 14, 0.88);
       color: var(--accent-light);
       font-size: 0.82rem;
       font-weight: 700;
       transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
       cursor: pointer;
+      backdrop-filter: blur(8px);
     }
 
     .video-gallery-toggle:hover {
@@ -483,6 +525,7 @@
       background:
         linear-gradient(105deg, rgba(245, 196, 0, 0.09), transparent 48%),
         rgba(18, 18, 16, 0.9);
+      backdrop-filter: blur(8px);
     }
 
     .appreciation-icon {
@@ -550,12 +593,13 @@
       padding: 8px 14px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.045);
+      background: rgba(17, 17, 15, 0.88);
       color: #c9c6ba;
       font-size: 0.82rem;
       font-weight: 600;
       transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
       cursor: pointer;
+      backdrop-filter: blur(8px);
     }
 
     .category-btn:hover {
@@ -594,11 +638,12 @@
       padding: 10px 14px 10px 40px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.045);
+      background: rgba(17, 17, 15, 0.9);
       color: var(--text);
       font-size: 0.87rem;
       transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
       cursor: text;
+      backdrop-filter: blur(8px);
     }
 
     #gallery-search::placeholder {
@@ -607,7 +652,7 @@
 
     #gallery-search:focus {
       border-color: rgba(245, 196, 0, 0.65);
-      background: rgba(255, 255, 255, 0.065);
+      background: rgba(20, 20, 17, 0.96);
       box-shadow: 0 0 0 3px rgba(245, 196, 0, 0.08);
       outline: none;
     }
@@ -639,6 +684,7 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
       text-align: center;
       transition: border-color 0.22s, background 0.22s, transform 0.22s, box-shadow 0.22s;
+      backdrop-filter: blur(7px);
     }
 
     .ecosystem-card:hover {
@@ -705,6 +751,7 @@
       padding: 44px 20px;
       border: 1px dashed rgba(255, 255, 255, 0.16);
       border-radius: 18px;
+      background: rgba(17, 17, 15, 0.88);
       color: var(--muted);
       text-align: center;
     }
@@ -724,7 +771,7 @@
       margin-top: 56px;
       padding-top: 20px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
-      color: #878477;
+      color: #aaa698;
       font-size: 0.78rem;
       line-height: 1.5;
     }
@@ -749,7 +796,7 @@
       place-items: center;
       border: 1px solid rgba(245, 196, 0, 0.5);
       border-radius: 15px;
-      background: rgba(20, 19, 15, 0.9);
+      background: rgba(20, 19, 15, 0.93);
       color: var(--accent-light);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
       font-size: 1.35rem;
@@ -1024,6 +1071,13 @@
       #allVideosGrid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .nebby-background::before {
+        left: 60%;
+        width: min(68vw, 650px);
+        height: min(68vw, 650px);
+        opacity: 0.39;
+      }
     }
 
     @media (max-width: 760px) {
@@ -1060,6 +1114,16 @@
     }
 
     @media (max-width: 600px) {
+      .nebby-background::before {
+        top: 52%;
+        left: 62%;
+        width: 92vw;
+        height: 92vw;
+        opacity: 0.35;
+        -webkit-mask-image: radial-gradient(ellipse at center, #000 60%, rgba(0, 0, 0, 0.88) 72%, transparent 91%);
+        mask-image: radial-gradient(ellipse at center, #000 60%, rgba(0, 0, 0, 0.88) 72%, transparent 91%);
+      }
+
       #videoGalleryOverlay {
         padding: 12px;
         padding-top: max(12px, env(safe-area-inset-top));
@@ -1281,6 +1345,8 @@
 </head>
 
 <body>
+  <div class="nebby-background" aria-hidden="true"></div>
+
   <div id="loadingScreen" class="loading-screen" role="status" aria-label="Loading Furu Nation">
     <img src="https://i.postimg.cc/9MJrV5TZ/furunation.webp" alt="Furu Nation" />
   </div>
@@ -1978,6 +2044,7 @@
       if (lastDialogTrigger && typeof lastDialogTrigger.focus === "function") {
         lastDialogTrigger.focus();
       }
+
       lastDialogTrigger = null;
     }
 
