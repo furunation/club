@@ -71,37 +71,6 @@
       pointer-events: none;
     }
 
-    .mascot-background {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .mascot-background::before {
-      position: absolute;
-      inset: -18px;
-      background-image: url("https://i.postimg.cc/qvkzYmx9/nebby5.png");
-      background-repeat: no-repeat;
-      background-position: center 38%;
-      background-size: contain;
-      content: "";
-      filter: blur(2px) saturate(1.12);
-      opacity: 0.18;
-    }
-
-    .mascot-background::after {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 50% 35%, rgba(17, 12, 24, 0.02), rgba(17, 12, 24, 0.68) 78%),
-        linear-gradient(90deg, rgba(11, 8, 16, 0.4), transparent 48%, rgba(11, 8, 16, 0.42)),
-        linear-gradient(180deg, rgba(11, 8, 16, 0.1), transparent 42%, rgba(11, 8, 16, 0.4));
-      content: "";
-    }
-
     body.dialog-open {
       overflow: hidden;
       overscroll-behavior: none;
@@ -1117,11 +1086,6 @@
       #allVideosGrid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-
-      .mascot-background::before {
-        background-position: center 38%;
-        opacity: 0.15;
-      }
     }
 
     @media (max-width: 760px) {
@@ -1158,20 +1122,6 @@
     }
 
     @media (max-width: 600px) {
-      .mascot-background::before {
-        inset: -10px;
-        background-position: center 34%;
-        background-size: contain;
-        filter: blur(2px) saturate(1.08);
-        opacity: 0.13;
-      }
-
-      .mascot-background::after {
-        background:
-          radial-gradient(ellipse at center, rgba(17, 12, 24, 0.04), rgba(17, 12, 24, 0.72)),
-          linear-gradient(90deg, rgba(11, 8, 16, 0.24), transparent 50%, rgba(11, 8, 16, 0.24));
-      }
-
       #videoGalleryOverlay {
         padding: 12px;
         padding-top: max(12px, env(safe-area-inset-top));
@@ -1393,8 +1343,6 @@
 </head>
 
 <body>
-  <div class="mascot-background" aria-hidden="true"></div>
-
   <div id="loadingScreen" class="loading-screen" role="status" aria-label="Loading Furu Nation">
     <img src="https://i.postimg.cc/9MJrV5TZ/furunation.webp" alt="Furu Nation" />
   </div>
