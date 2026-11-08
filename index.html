@@ -245,8 +245,7 @@
       pointer-events: none;
     }
 
-    .hero-copy,
-    .hero-mark {
+    .hero-copy {
       position: relative;
       z-index: 1;
     }
@@ -291,28 +290,9 @@
       color: var(--accent);
     }
 
-    .hero-mark {
-      display: grid;
-      width: clamp(100px, 12vw, 150px);
-      aspect-ratio: 1;
-      place-items: center;
-      padding: 9px;
-      border: 1px solid rgba(245, 196, 0, 0.24);
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.25);
-      box-shadow:
-        0 0 42px rgba(245, 196, 0, 0.13),
-        inset 0 0 25px rgba(245, 196, 0, 0.05);
-    }
-
-    .hero-mark img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
     .hero-stats-button {
+      position: relative;
+      z-index: 1;
       display: grid;
       width: clamp(100px, 12vw, 150px);
       aspect-ratio: 1;
@@ -997,8 +977,7 @@
       font-weight: 600;
     }
 
-    .market-cap-calculator input,
-    .market-cap-calculator select {
+    .market-cap-calculator input {
       width: 100%;
       min-height: 48px;
       padding: 12px 14px;
@@ -1006,14 +985,10 @@
       border-radius: 11px;
       background: #0b0b09;
       color: var(--text);
-    }
-
-    .market-cap-calculator input {
       cursor: text;
     }
 
-    .market-cap-calculator input:focus,
-    .market-cap-calculator select:focus {
+    .market-cap-calculator input:focus {
       border-color: rgba(245, 196, 0, 0.65);
       outline: none;
     }
@@ -1064,7 +1039,6 @@
         padding: 28px;
       }
 
-      .hero-mark,
       .hero-stats-button {
         width: 100px;
       }
@@ -1159,7 +1133,6 @@
         font-size: clamp(2.45rem, 11vw, 3.5rem);
       }
 
-      .hero-mark,
       .hero-stats-button {
         width: 68px;
         padding: 5px;
@@ -1286,8 +1259,7 @@
         padding-top: 20px;
       }
 
-      .market-cap-calculator input,
-      .market-cap-calculator select {
+      .market-cap-calculator input {
         min-height: 46px;
       }
     }
@@ -1480,29 +1452,34 @@
       <section class="market-cap-calculator" aria-labelledby="calculatorTitle">
         <h3 id="calculatorTitle">Market cap calculator</h3>
 
-        <label for="tokenPriceUnit">Token price unit</label>
-        <select id="tokenPriceUnit">
-          <option value="sats">Satoshis per token</option>
-          <option value="usd">US dollars per token</option>
-        </select>
-
-        <label for="tokenPrice">Token price</label>
-        <input id="tokenPrice" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 100" />
+        <label for="tokenPrice">Token price (Ꞩ per token)</label>
+        <input
+          id="tokenPrice"
+          type="number"
+          min="0"
+          step="any"
+          inputmode="decimal"
+          placeholder="e.g. 100"
+        />
 
         <label for="tokenQuantity">Number of tokens</label>
-        <input id="tokenQuantity" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 1000000" />
+        <input
+          id="tokenQuantity"
+          type="number"
+          min="0"
+          step="any"
+          inputmode="decimal"
+          placeholder="e.g. 1000000"
+        />
 
-        <div class="calculator-results" aria-live="polite">
-          <p>
-            Market cap (<span id="marketCapUnitLabel">sats</span>):
-            <strong id="marketCapPrimary">0 sats</strong>
-          </p>
-          <p id="marketCapSecondaryRow">
-            Market cap (BCH): <strong id="marketCapSecondary">0 BCH</strong>
-          </p>
+        <div class="calculator-results" aria-live="polite" aria-atomic="true">
+          <p>Market cap (SATS): <strong id="marketCapSats">Ꞩ0</strong></p>
+          <p>Market cap (VND): <strong id="marketCapVnd">Loading exchange rate…</strong></p>
+          <p>Market cap (PHP): <strong id="marketCapPhp">Loading exchange rate…</strong></p>
+          <p>Market cap (USD): <strong id="marketCapUsd">Loading exchange rate…</strong></p>
         </div>
         <p class="calculator-note" id="calculatorNote">
-          Enter the token price in satoshis. One BCH equals 100,000,000 satoshis.
+          Enter the token price in Ꞩ. Currency conversions use the BCH exchange rate and update automatically when exchange-rate data is available.
         </p>
       </section>
     </section>
@@ -1591,12 +1568,6 @@
         href: "https://youtube.com/@niolifer?si=0FNUQB-UDsRvRM-k",
         src: "https://i.postimg.cc/GtcySHf2/niolifer.jpg",
         caption: "NIOlifer",
-        categories: ["Projects"]
-      },
-      {
-        href: "https://bsky.app/profile/nsfwbch.bsky.social",
-        src: "https://i.postimg.cc/28XLxW1g/ezimage-dmpoe7rkgan78fte9p-1.png",
-        caption: "nsfwbch",
         categories: ["Projects"]
       },
       {
@@ -2011,68 +1982,150 @@
     }
 
     function initMarketCapCalculator() {
-      const unitSelect = document.getElementById("tokenPriceUnit");
       const tokenPriceInput = document.getElementById("tokenPrice");
       const tokenQuantityInput = document.getElementById("tokenQuantity");
-      const unitLabel = document.getElementById("marketCapUnitLabel");
-      const primaryOutput = document.getElementById("marketCapPrimary");
-      const secondaryOutput = document.getElementById("marketCapSecondary");
-      const secondaryRow = document.getElementById("marketCapSecondaryRow");
+      const satsOutput = document.getElementById("marketCapSats");
+      const vndOutput = document.getElementById("marketCapVnd");
+      const phpOutput = document.getElementById("marketCapPhp");
+      const usdOutput = document.getElementById("marketCapUsd");
       const note = document.getElementById("calculatorNote");
 
-      const numberFormatter = new Intl.NumberFormat("en-US", {
+      const SATS_PER_BCH = 100_000_000;
+      const formatter = new Intl.NumberFormat("en-US", {
+        maximumFractionDigits: 2
+      });
+      const satsFormatter = new Intl.NumberFormat("en-US", {
         maximumFractionDigits: 8
       });
 
-      function updateMarketCap() {
-        const price = Number(tokenPriceInput.value);
-        const quantity = Number(tokenQuantityInput.value);
-        const unit = unitSelect.value;
+      let bchRates = null;
+      let ratesUnavailable = false;
 
-        unitLabel.textContent = unit === "usd" ? "USD" : "sats";
-        note.textContent = unit === "usd"
-          ? "Enter the token price in US dollars."
-          : "Enter the token price in BCH satoshis. One BCH equals 100,000,000 satoshis.";
+      function formatCurrency(amount, currency) {
+        if (!Number.isFinite(amount)) return "Value too large";
 
-        const hasInputs =
-          tokenPriceInput.value.trim() !== "" &&
-          tokenQuantityInput.value.trim() !== "" &&
-          Number.isFinite(price) &&
-          Number.isFinite(quantity) &&
-          price >= 0 &&
-          quantity >= 0;
-
-        if (!hasInputs) {
-          primaryOutput.textContent = unit === "usd" ? "$0.00" : "0 sats";
-          secondaryRow.hidden = unit === "usd";
-          secondaryOutput.textContent = "0 BCH";
-          return;
-        }
-
-        const marketCap = price * quantity;
-
-        if (!Number.isFinite(marketCap)) {
-          primaryOutput.textContent = "Value too large";
-          secondaryRow.hidden = unit === "usd";
-          secondaryOutput.textContent = "Value too large";
-          return;
-        }
-
-        if (unit === "usd") {
-          primaryOutput.textContent = `$${numberFormatter.format(marketCap)}`;
-          secondaryRow.hidden = true;
-        } else {
-          primaryOutput.textContent = `${numberFormatter.format(marketCap)} sats`;
-          secondaryOutput.textContent =
-            `${numberFormatter.format(marketCap / 100_000_000)} BCH`;
-          secondaryRow.hidden = false;
+        try {
+          return new Intl.NumberFormat(
+            currency === "VND" ? "vi-VN" : currency === "PHP" ? "en-PH" : "en-US",
+            {
+              style: "currency",
+              currency,
+              maximumFractionDigits: currency === "VND" ? 0 : 2
+            }
+          ).format(amount);
+        } catch {
+          return `${currency} ${formatter.format(amount)}`;
         }
       }
 
-      unitSelect.addEventListener("change", updateMarketCap);
+      function getInputValues() {
+        const priceText = tokenPriceInput.value.trim();
+        const quantityText = tokenQuantityInput.value.trim();
+
+        if (!priceText || !quantityText) return null;
+
+        const priceSats = Number(priceText);
+        const quantity = Number(quantityText);
+
+        if (
+          !Number.isFinite(priceSats) ||
+          !Number.isFinite(quantity) ||
+          priceSats < 0 ||
+          quantity < 0
+        ) {
+          return null;
+        }
+
+        return { priceSats, quantity };
+      }
+
+      function updateMarketCap() {
+        const values = getInputValues();
+
+        if (!values) {
+          satsOutput.textContent = "Ꞩ0";
+          vndOutput.textContent = bchRates ? formatCurrency(0, "VND") : "Rate unavailable";
+          phpOutput.textContent = bchRates ? formatCurrency(0, "PHP") : "Rate unavailable";
+          usdOutput.textContent = bchRates ? formatCurrency(0, "USD") : "Rate unavailable";
+          return;
+        }
+
+        const marketCapSats = values.priceSats * values.quantity;
+
+        if (!Number.isFinite(marketCapSats)) {
+          satsOutput.textContent = "Value too large";
+          vndOutput.textContent = "Value too large";
+          phpOutput.textContent = "Value too large";
+          usdOutput.textContent = "Value too large";
+          return;
+        }
+
+        satsOutput.textContent = `Ꞩ${satsFormatter.format(marketCapSats)}`;
+
+        if (!bchRates) {
+          const rateMessage = ratesUnavailable ? "Rate unavailable" : "Loading exchange rate…";
+          vndOutput.textContent = rateMessage;
+          phpOutput.textContent = rateMessage;
+          usdOutput.textContent = rateMessage;
+          return;
+        }
+
+        const marketCapBch = marketCapSats / SATS_PER_BCH;
+        vndOutput.textContent = formatCurrency(marketCapBch * bchRates.VND, "VND");
+        phpOutput.textContent = formatCurrency(marketCapBch * bchRates.PHP, "PHP");
+        usdOutput.textContent = formatCurrency(marketCapBch * bchRates.USD, "USD");
+      }
+
+      async function fetchBchRates() {
+        ratesUnavailable = false;
+        updateMarketCap();
+
+        try {
+          const response = await fetch(
+            "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash&vs_currencies=usd,vnd,php",
+            { headers: { Accept: "application/json" } }
+          );
+
+          if (!response.ok) {
+            throw new Error(`Exchange-rate service returned ${response.status}`);
+          }
+
+          const data = await response.json();
+          const rates = data?.["bitcoin-cash"];
+
+          if (
+            !rates ||
+            !Number.isFinite(Number(rates.usd)) ||
+            !Number.isFinite(Number(rates.vnd)) ||
+            !Number.isFinite(Number(rates.php))
+          ) {
+            throw new Error("Exchange-rate response is incomplete");
+          }
+
+          bchRates = {
+            USD: Number(rates.usd),
+            VND: Number(rates.vnd),
+            PHP: Number(rates.php)
+          };
+          ratesUnavailable = false;
+          note.textContent =
+            "Enter the token price in Ꞩ. VND, PHP, and USD conversions use live BCH exchange rates.";
+        } catch (error) {
+          console.warn("Unable to load BCH currency rates:", error);
+          bchRates = null;
+          ratesUnavailable = true;
+          note.textContent =
+            "Enter the token price in Ꞩ. Live currency rates could not be loaded; currency conversions are unavailable.";
+        }
+
+        updateMarketCap();
+      }
+
       tokenPriceInput.addEventListener("input", updateMarketCap);
       tokenQuantityInput.addEventListener("input", updateMarketCap);
+
       updateMarketCap();
+      fetchBchRates();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
