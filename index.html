@@ -38,29 +38,6 @@
       box-sizing: border-box;
     }
 
-    /*
-      Suppress the blue tap flash and prevent accidental page-text selection
-      across the interface. Inputs remain selectable and editable.
-    */
-    html,
-    body,
-    body * {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body,
-    body * {
-      -webkit-user-select: none;
-      user-select: none;
-    }
-
-    input,
-    textarea,
-    [contenteditable="true"] {
-      -webkit-user-select: text;
-      user-select: text;
-    }
-
     html {
       min-width: 320px;
       scroll-behavior: smooth;
@@ -1897,14 +1874,18 @@
 
       placeholder.addEventListener("click", () => {
         const iframe = document.createElement("iframe");
+
         iframe.className = "youtube-frame";
-        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
         iframe.title = `Video ${index + 1}`;
-        iframe.loading = "lazy";
+        iframe.src =
+          `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}` +
+          `?autoplay=1&playsinline=1&rel=0`;
         iframe.referrerPolicy = "strict-origin-when-cross-origin";
         iframe.allow =
-          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          "autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
         iframe.allowFullscreen = true;
+
+        // Do not use loading="lazy" after the user has clicked play.
         card.replaceChildren(iframe);
       }, { once: true });
 
