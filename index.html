@@ -38,6 +38,29 @@
       box-sizing: border-box;
     }
 
+    /*
+      Suppress the blue tap flash and prevent accidental page-text selection
+      across the interface. Inputs remain selectable and editable.
+    */
+    html,
+    body,
+    body * {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body,
+    body * {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    input,
+    textarea,
+    [contenteditable="true"] {
+      -webkit-user-select: text;
+      user-select: text;
+    }
+
     html {
       min-width: 320px;
       scroll-behavior: smooth;
