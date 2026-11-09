@@ -238,6 +238,7 @@
       margin-bottom: 30px;
       padding: 44px 42px;
       overflow: hidden;
+      isolation: isolate;
       border: 1px solid rgba(255, 168, 201, 0.3);
       border-radius: var(--radius-lg);
       background:
@@ -250,28 +251,64 @@
 
     .hero::before {
       position: absolute;
-      top: -100px;
-      right: 18%;
-      width: 370px;
-      height: 370px;
-      border: 1px solid rgba(255, 209, 102, 0.21);
-      border-radius: 44% 56% 58% 42%;
+      z-index: -2;
+      top: 50%;
+      right: 7%;
+      width: min(49%, 560px);
+      height: 145%;
+      background-image:
+        linear-gradient(
+          90deg,
+          rgba(23, 15, 31, 0.99) 0%,
+          rgba(23, 15, 31, 0.82) 20%,
+          rgba(23, 15, 31, 0.36) 58%,
+          rgba(23, 15, 31, 0.12) 100%
+        ),
+        linear-gradient(
+          0deg,
+          rgba(23, 15, 31, 0.52),
+          rgba(23, 15, 31, 0.02) 34%,
+          rgba(23, 15, 31, 0.12)
+        ),
+        url("https://i.postimg.cc/6QR7QMf4/ezimage-dmqg59qugped3ws4bt-1.png");
+      background-position: center, center, center 42%;
+      background-repeat: no-repeat;
+      background-size: cover;
       content: "";
-      transform: rotate(22deg);
-      box-shadow:
-        0 0 0 22px rgba(255, 168, 201, 0.035),
-        0 0 0 54px rgba(185, 154, 255, 0.025);
+      opacity: 0.72;
       pointer-events: none;
+      transform: translateY(-50%);
+      -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.42) 12%,
+        #000 38%,
+        #000 87%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.42) 12%,
+        #000 38%,
+        #000 87%,
+        transparent 100%
+      );
     }
 
     .hero::after {
       position: absolute;
-      right: 4%;
-      bottom: -85px;
-      width: 190px;
-      height: 190px;
-      border: 1px solid rgba(255, 168, 201, 0.18);
-      border-radius: 50%;
+      z-index: -1;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(26, 17, 34, 0.34) 0%,
+          rgba(26, 17, 34, 0.06) 48%,
+          rgba(26, 17, 34, 0.15) 100%
+        ),
+        radial-gradient(ellipse at 80% 52%, rgba(255, 168, 201, 0.08), transparent 38%);
       content: "";
       pointer-events: none;
     }
@@ -325,7 +362,7 @@
 
     .hero-stats-button {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       display: grid;
       width: clamp(104px, 12vw, 148px);
       aspect-ratio: 1;
@@ -1101,10 +1138,6 @@
         padding: 32px 28px;
       }
 
-      .hero-stats-button {
-        width: 100px;
-      }
-
       .gallery-toolbar {
         align-items: stretch;
         flex-direction: column;
@@ -1122,6 +1155,26 @@
     }
 
     @media (max-width: 600px) {
+      .hero::before {
+        right: 0;
+        width: 67%;
+        opacity: 0.52;
+        background-image:
+          linear-gradient(
+            90deg,
+            rgba(23, 15, 31, 0.99) 0%,
+            rgba(23, 15, 31, 0.68) 34%,
+            rgba(23, 15, 31, 0.18) 100%
+          ),
+          linear-gradient(
+            0deg,
+            rgba(23, 15, 31, 0.5),
+            rgba(23, 15, 31, 0.02) 40%,
+            rgba(23, 15, 31, 0.18)
+          ),
+          url("https://i.postimg.cc/6QR7QMf4/ezimage-dmqg59qugped3ws4bt-1.png");
+      }
+
       #videoGalleryOverlay {
         padding: 12px;
         padding-top: max(12px, env(safe-area-inset-top));
