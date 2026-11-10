@@ -23,7 +23,6 @@
       --accent: #ffa8c9;
       --accent-bright: #ffd166;
       --accent-cool: #b99aff;
-      --border: rgba(255, 168, 201, 0.22);
       --shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
       --radius-lg: 26px;
       --content-width: 1440px;
@@ -693,6 +692,7 @@
       min-width: 0;
       min-height: 225px;
       perspective: 1000px;
+      -webkit-perspective: 1000px;
     }
 
     .card-inner {
@@ -701,11 +701,14 @@
       height: 100%;
       min-height: 225px;
       transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
       transition: transform 0.55s ease;
+      will-change: transform;
     }
 
     .ecosystem-card.is-flipped .card-inner {
       transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
     }
 
     .card-face {
@@ -725,10 +728,12 @@
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      backdrop-filter: blur(9px);
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
     }
 
     .card-front {
+      z-index: 2;
       cursor: pointer;
       transition: border-color 0.22s, background 0.22s, box-shadow 0.22s;
     }
@@ -742,10 +747,12 @@
     }
 
     .card-back {
+      z-index: 1;
       align-items: flex-start;
       justify-content: center;
       padding: 22px;
       transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
       cursor: pointer;
       text-align: left;
     }
@@ -791,15 +798,6 @@
       overflow-wrap: anywhere;
       white-space: pre-line;
       text-align: center;
-    }
-
-    .card-description-title {
-      margin: 0 0 10px;
-      color: var(--accent);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1rem;
-      line-height: 1.3;
-      overflow-wrap: anywhere;
     }
 
     .card-description {
@@ -1799,28 +1797,28 @@
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/YqzGzsbP/guru12.webp",
         caption: "BCH Guru #12",
-        description: "BCH Guru #12 is part of the BCH Guru digital collectible series.",
+        description: "Part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/hP1z15pw/guru11.webp",
         caption: "BCH Guru #11",
-        description: "BCH Guru #11 is part of the BCH Guru digital collectible series.",
+        description: "Part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/MKmMmFd3/guru10.webp",
         caption: "BCH Guru #10",
-        description: "BCH Guru #10 is part of the BCH Guru digital collectible series.",
+        description: "Part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/ZKxBxMVD/guru9.webp",
         caption: "BCH Guru #9",
-        description: "BCH Guru #9 is part of the BCH Guru digital collectible series.",
+        description: "Part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
@@ -1841,56 +1839,56 @@
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/BQBLBVMm/guru8.webp",
         caption: "BCH Guru #8",
-        description: "BCH Guru #8 is part of the BCH Guru digital collectible series.",
+        description: "Part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/vHtgtN3W/guru1.webp",
         caption: "BCH Guru #1",
-        description: "BCH Guru #1 is part of the BCH Guru digital collectible series.",
+        description: "Part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/020M0Bcd/guru2.webp",
         caption: "BCH Guru #2",
-        description: "BCH Guru #2 is part of the BCH Guru digital collectible series.",
+        description: "Part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/BQBLBVMB/guru3.webp",
         caption: "BCH Guru #3",
-        description: "BCH Guru #3 is part of the BCH Guru digital collectible series.",
+        description: "Part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/WbwFwHXm/guru4.webp",
         caption: "BCH Guru #4",
-        description: "BCH Guru #4 is part of the BCH Guru digital collectible series.",
+        description: "Part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/8PmJm0tH/guru5.webp",
         caption: "BCH Guru #5",
-        description: "BCH Guru #5 is part of the BCH Guru digital collectible series.",
+        description: "Part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/8PmJm0t4/guru6.webp",
         caption: "BCH Guru #6",
-        description: "BCH Guru #6 is part of the BCH Guru digital collectible series.",
+        description: "Part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/RVL6LDXG/guru7.webp",
         caption: "BCH Guru #7",
-        description: "BCH Guru #7 is part of the BCH Guru digital collectible series.",
+        description: "Part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
@@ -2113,10 +2111,7 @@
         front.className = "card-face card-front";
         front.tabIndex = 0;
         front.setAttribute("role", "button");
-        front.setAttribute(
-          "aria-label",
-          `Show description for ${item.caption.replace(/\n/g, " ")}`
-        );
+        front.setAttribute("aria-label", "Show description");
         front.setAttribute("aria-expanded", "false");
 
         const imageLink = document.createElement("a");
@@ -2124,17 +2119,14 @@
         imageLink.href = item.href;
         imageLink.target = "_blank";
         imageLink.rel = "noopener noreferrer";
-        imageLink.setAttribute(
-          "aria-label",
-          `Visit ${item.caption.replace(/\n/g, " ")}`
-        );
+        imageLink.setAttribute("aria-label", "Visit this project");
 
         const image = document.createElement("img");
         image.src = item.src;
         image.alt = item.caption.replace(/\n/g, " ");
         image.loading = "lazy";
         image.onerror = () => {
-          image.alt = `${item.caption.replace(/\n/g, " ")} image unavailable`;
+          image.alt = "Project image unavailable";
           image.style.visibility = "hidden";
         };
 
@@ -2150,24 +2142,17 @@
         back.className = "card-face card-back";
         back.tabIndex = 0;
         back.setAttribute("role", "button");
-        back.setAttribute(
-          "aria-label",
-          `Hide description for ${item.caption.replace(/\n/g, " ")}`
-        );
-
-        const descriptionTitle = document.createElement("h3");
-        descriptionTitle.className = "card-description-title";
-        descriptionTitle.textContent = item.caption.replace(/\n/g, " ");
+        back.setAttribute("aria-label", "Hide description");
 
         const description = document.createElement("p");
         description.className = "card-description";
-        description.textContent = item.description?.trim() || "Description coming soon.";
+        description.textContent = item.description || "Description coming soon.";
 
         const hint = document.createElement("p");
         hint.className = "card-hint";
-        hint.textContent = "Click to flip back";
+        hint.textContent = "Tap to flip back";
 
-        back.append(descriptionTitle, description, hint);
+        back.append(description, hint);
         inner.append(front, back);
         card.appendChild(inner);
         container.appendChild(card);
