@@ -767,7 +767,7 @@
       height: 128px;
       flex: 0 0 auto;
       place-items: center;
-      margin-bottom: 13px;
+      margin-bottom: 12px;
       border: 1px solid rgba(255, 168, 201, 0.08);
       border-radius: 15px;
       background:
@@ -789,19 +789,39 @@
       transform: scale(1.055) rotate(-1deg);
     }
 
+    /* Professional, consistent two-line figure labels */
     .card-caption {
-      display: grid;
-      min-height: 42px;
-      place-items: center;
+      display: flex;
+      width: 100%;
+      min-height: 48px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
       margin: 0;
+      text-align: center;
+    }
+
+    .card-caption-name {
+      display: block;
+      max-width: 100%;
       color: #fff8f3;
       font-family: "Space Grotesk", sans-serif;
-      font-size: 0.96rem;
-      font-weight: 600;
-      line-height: 1.35;
+      font-size: 0.94rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
       overflow-wrap: anywhere;
-      white-space: pre-line;
-      text-align: center;
+    }
+
+    .card-caption-detail {
+      display: block;
+      max-width: 100%;
+      color: #c1adbd;
+      font-size: 0.72rem;
+      font-weight: 500;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
     }
 
     .card-description {
@@ -1369,8 +1389,16 @@
       }
 
       .card-caption {
-        min-height: 39px;
-        font-size: 0.84rem;
+        min-height: 43px;
+        gap: 2px;
+      }
+
+      .card-caption-name {
+        font-size: 0.82rem;
+      }
+
+      .card-caption-detail {
+        font-size: 0.66rem;
       }
 
       .card-back {
@@ -1751,21 +1779,24 @@
       {
         href: "https://kth.cash/",
         src: "https://i.postimg.cc/x18d9jt0/knuth.jpg",
-        caption: "Knuth: \nperformance node",
+        caption: "Knuth",
+        detail: "Performance node",
         description: "Knuth is a high-performance Bitcoin Cash node implementation focused on fast synchronization and reliable network operation.",
         categories: ["Projects"]
       },
       {
         href: "https://www.guanaco.fi/",
         src: "https://i.postimg.cc/bJ836L0r/logo-body-pink-144.png",
-        caption: "Quanacofi: \nearn 100% of fees",
+        caption: "Guanaco",
+        detail: "Earn 100% of fees",
         description: "Guanaco is a Bitcoin Cash decentralized exchange that shares trading fees with liquidity providers.",
         categories: ["DEX"]
       },
       {
         href: "https://trade.zano.org/dex/trading/773",
         src: "https://i.postimg.cc/x8V0WgPL/discover.png",
-        caption: "BCHX: \nprivacy by default",
+        caption: "BCHX",
+        detail: "Privacy by default",
         description: "BCHX is a privacy-focused wrapped Bitcoin Cash asset available through the Zano decentralized exchange.",
         categories: ["Wrapped BCH"]
       },
@@ -1793,7 +1824,8 @@
       {
         href: "https://cashmint.cash/collection/8c44b485cedda5b9faccb5aa5350657f5891c2693cfcbbe857ddebbd05923a2a",
         src: "https://i.postimg.cc/pVGJpcxF/bafybeicmgcfeyljscvwmnq5uoa7jzvlq5yjh5vkcboctvmmgf3zl244uye.webp",
-        caption: "Furu Plasma: \nFURU for solo miners",
+        caption: "Furu Plasma",
+        detail: "FURU for solo miners",
         description: "Furu Plasma is a FURU collection intended to support and recognize Bitcoin Cash solo miners.",
         categories: ["Projects"]
       },
@@ -1828,14 +1860,16 @@
       {
         href: "https://bitcart.ai/",
         src: "https://i.postimg.cc/8cHQqwQt/bitcart.jpg",
-        caption: "Bitcart: \npoint of sale",
+        caption: "Bitcart",
+        detail: "Point of sale",
         description: "Bitcart provides point-of-sale and payment tools for businesses accepting cryptocurrency.",
         categories: ["Merchants"]
       },
       {
         href: "https://www.paytaca.com/",
         src: "https://i.postimg.cc/3NTJtX7s/paytaca.png",
-        caption: "Paytaca: \nmobile wallet",
+        caption: "Paytaca",
+        detail: "Mobile wallet",
         description: "Paytaca is a mobile wallet and payment app for using Bitcoin Cash.",
         categories: ["Spend BCH"]
       },
@@ -1912,42 +1946,46 @@
       {
         href: "https://www.redbubble.com/i/mug/Party-Guru-by-dwnlives/169504252/7yqg",
         src: "https://i.postimg.cc/bdHFFNzM/gurumugparty.png",
-        caption: "Party guru mug",
+        caption: "Party Guru Mug",
         description: "A BCH Guru-themed mug sold through the Redbubble online marketplace.",
         categories: ["Merchants"]
       },
       {
         href: "https://www.redbubble.com/i/mug/Jungle-Guru-by-dwnlives/169503332/7yqg",
         src: "https://i.postimg.cc/Sj7ttNS0/gurumugjungle.png",
-        caption: "Jungle guru mug",
+        caption: "Jungle Guru Mug",
         description: "A BCH Guru-themed mug sold through the Redbubble online marketplace.",
         categories: ["Merchants"]
       },
       {
         href: "https://bch.guru/",
         src: "https://i.postimg.cc/CzxF7Db4/gurulogo.png",
-        caption: "BCH Guru: \nprediction market",
+        caption: "BCH Guru",
+        detail: "Prediction market",
         description: "BCH Guru is a Bitcoin Cash prediction market where users can participate in markets and explore outcomes.",
         categories: ["Projects"]
       },
       {
         href: "https://www.bitgree.com/",
         src: "https://i.postimg.cc/DSkcrSZn/bitgree.png",
-        caption: "Bitgree: \nbuy almost anything",
+        caption: "Bitgree",
+        detail: "Buy almost anything",
         description: "Bitgree is a shopping platform that lets users buy products with cryptocurrency.",
         categories: ["Spend BCH"]
       },
       {
         href: "https://app.cauldron.quest/swap/d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea",
         src: "https://i.postimg.cc/L4JGsFGy/cauldron.png",
-        caption: "Cauldron: \nearn 100% of fees",
+        caption: "Cauldron",
+        detail: "Earn 100% of fees",
         description: "Cauldron is a decentralized exchange that lets liquidity providers earn trading fees.",
         categories: ["DEX"]
       },
       {
         href: "https://electroncash.org/",
         src: "https://i.postimg.cc/GtChXFrN/electroncash.png",
-        caption: "Electron Cash: \n#1 desktop wallet",
+        caption: "Electron Cash",
+        detail: "Desktop wallet",
         description: "Electron Cash is a desktop wallet for Bitcoin Cash, with tools for managing and spending BCH.",
         categories: ["Projects"]
       }
@@ -2123,11 +2161,11 @@
         imageLink.href = item.href;
         imageLink.target = "_blank";
         imageLink.rel = "noopener noreferrer";
-        imageLink.setAttribute("aria-label", "Visit this project");
+        imageLink.setAttribute("aria-label", `Visit ${item.caption}`);
 
         const image = document.createElement("img");
         image.src = item.src;
-        image.alt = item.caption.replace(/\n/g, " ");
+        image.alt = item.caption;
         image.loading = "lazy";
         image.onerror = () => {
           image.alt = "Project image unavailable";
@@ -2138,7 +2176,19 @@
 
         const caption = document.createElement("span");
         caption.className = "card-caption";
-        caption.textContent = item.caption;
+
+        const captionName = document.createElement("span");
+        captionName.className = "card-caption-name";
+        captionName.textContent = item.caption;
+
+        caption.appendChild(captionName);
+
+        if (item.detail) {
+          const captionDetail = document.createElement("span");
+          captionDetail.className = "card-caption-detail";
+          captionDetail.textContent = item.detail;
+          caption.appendChild(captionDetail);
+        }
 
         front.append(imageLink, caption);
 
