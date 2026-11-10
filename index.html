@@ -18,9 +18,6 @@
     :root {
       color-scheme: dark;
       --bg: #110c18;
-      --bg-deep: #0b0810;
-      --surface: rgba(25, 17, 34, 0.85);
-      --surface-strong: rgba(32, 21, 42, 0.94);
       --text: #fff9f1;
       --muted: #c1adbd;
       --accent: #ffa8c9;
@@ -89,7 +86,8 @@
     button:focus-visible,
     input:focus-visible,
     select:focus-visible,
-    a:focus-visible {
+    a:focus-visible,
+    [tabindex="0"]:focus-visible {
       outline: 3px solid var(--accent-bright);
       outline-offset: 3px;
     }
@@ -257,19 +255,8 @@
       width: min(49%, 560px);
       height: 145%;
       background-image:
-        linear-gradient(
-          90deg,
-          rgba(23, 15, 31, 0.99) 0%,
-          rgba(23, 15, 31, 0.82) 20%,
-          rgba(23, 15, 31, 0.36) 58%,
-          rgba(23, 15, 31, 0.12) 100%
-        ),
-        linear-gradient(
-          0deg,
-          rgba(23, 15, 31, 0.52),
-          rgba(23, 15, 31, 0.02) 34%,
-          rgba(23, 15, 31, 0.12)
-        ),
+        linear-gradient(90deg, rgba(23, 15, 31, 0.99) 0%, rgba(23, 15, 31, 0.82) 20%, rgba(23, 15, 31, 0.36) 58%, rgba(23, 15, 31, 0.12) 100%),
+        linear-gradient(0deg, rgba(23, 15, 31, 0.52), rgba(23, 15, 31, 0.02) 34%, rgba(23, 15, 31, 0.12)),
         url("https://i.postimg.cc/6QR7QMf4/ezimage-dmqg59qugped3ws4bt-1.png");
       background-position: center, center, center 42%;
       background-repeat: no-repeat;
@@ -278,22 +265,8 @@
       opacity: 0.72;
       pointer-events: none;
       transform: translateY(-50%);
-      -webkit-mask-image: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(0, 0, 0, 0.42) 12%,
-        #000 38%,
-        #000 87%,
-        transparent 100%
-      );
-      mask-image: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(0, 0, 0, 0.42) 12%,
-        #000 38%,
-        #000 87%,
-        transparent 100%
-      );
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.42) 12%, #000 38%, #000 87%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.42) 12%, #000 38%, #000 87%, transparent 100%);
     }
 
     .hero::after {
@@ -302,12 +275,7 @@
       inset: 0;
       border-radius: inherit;
       background:
-        linear-gradient(
-          90deg,
-          rgba(26, 17, 34, 0.34) 0%,
-          rgba(26, 17, 34, 0.06) 48%,
-          rgba(26, 17, 34, 0.15) 100%
-        ),
+        linear-gradient(90deg, rgba(26, 17, 34, 0.34) 0%, rgba(26, 17, 34, 0.06) 48%, rgba(26, 17, 34, 0.15) 100%),
         radial-gradient(ellipse at 80% 52%, rgba(255, 168, 201, 0.08), transparent 38%);
       content: "";
       pointer-events: none;
@@ -722,45 +690,71 @@
 
     .ecosystem-card {
       position: relative;
+      min-width: 0;
+      min-height: 225px;
+      perspective: 1000px;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 225px;
+      transform-style: preserve-3d;
+      transition: transform 0.55s ease;
+    }
+
+    .ecosystem-card.is-flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
       display: flex;
       min-width: 0;
       flex-direction: column;
       align-items: center;
       padding: 16px 14px 15px;
+      overflow: hidden;
       border: 1px solid rgba(255, 168, 201, 0.14);
       border-radius: 21px;
       background:
         linear-gradient(155deg, rgba(255, 255, 255, 0.055), transparent 44%),
-        rgba(24, 16, 32, 0.84);
+        rgba(24, 16, 32, 0.94);
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      transition: border-color 0.22s, background 0.22s, transform 0.22s, box-shadow 0.22s;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
       backdrop-filter: blur(9px);
     }
 
-    .ecosystem-card:hover {
+    .card-front {
+      cursor: pointer;
+      transition: border-color 0.22s, background 0.22s, box-shadow 0.22s;
+    }
+
+    .card-front:hover {
       border-color: rgba(255, 168, 201, 0.54);
       background:
         linear-gradient(155deg, rgba(255, 168, 201, 0.1), transparent 48%),
         rgba(34, 21, 42, 0.96);
       box-shadow: 0 17px 38px rgba(0, 0, 0, 0.34), 0 0 25px rgba(255, 168, 201, 0.07);
-      transform: translateY(-5px);
     }
 
-    .card-link {
-      display: flex;
-      width: 100%;
-      flex: 1;
-      flex-direction: column;
-      align-items: center;
-      color: inherit;
-      text-decoration: none;
+    .card-back {
+      align-items: flex-start;
+      justify-content: center;
+      padding: 22px;
+      transform: rotateY(180deg);
+      cursor: pointer;
+      text-align: left;
     }
 
-    .card-image-wrap {
+    .card-image-link {
       display: grid;
       width: 100%;
       height: 128px;
+      flex: 0 0 auto;
       place-items: center;
       margin-bottom: 13px;
       border: 1px solid rgba(255, 168, 201, 0.08);
@@ -770,7 +764,7 @@
         rgba(9, 7, 13, 0.28);
     }
 
-    .card-image-wrap img {
+    .card-image-link img {
       display: block;
       width: 112px;
       height: 112px;
@@ -780,7 +774,7 @@
       transition: transform 0.25s ease;
     }
 
-    .ecosystem-card:hover .card-image-wrap img {
+    .card-image-link:hover img {
       transform: scale(1.055) rotate(-1deg);
     }
 
@@ -796,6 +790,30 @@
       line-height: 1.35;
       overflow-wrap: anywhere;
       white-space: pre-line;
+      text-align: center;
+    }
+
+    .card-description-title {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+    }
+
+    .card-description {
+      margin: 0;
+      color: #dfcbd9;
+      font-size: 0.86rem;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .card-hint {
+      margin: 14px 0 0;
+      color: #ae98a9;
+      font-size: 0.72rem;
     }
 
     .empty-state {
@@ -1195,18 +1213,8 @@
         width: 67%;
         opacity: 0.52;
         background-image:
-          linear-gradient(
-            90deg,
-            rgba(23, 15, 31, 0.99) 0%,
-            rgba(23, 15, 31, 0.68) 34%,
-            rgba(23, 15, 31, 0.18) 100%
-          ),
-          linear-gradient(
-            0deg,
-            rgba(23, 15, 31, 0.5),
-            rgba(23, 15, 31, 0.02) 40%,
-            rgba(23, 15, 31, 0.18)
-          ),
+          linear-gradient(90deg, rgba(23, 15, 31, 0.99) 0%, rgba(23, 15, 31, 0.68) 34%, rgba(23, 15, 31, 0.18) 100%),
+          linear-gradient(0deg, rgba(23, 15, 31, 0.5), rgba(23, 15, 31, 0.02) 40%, rgba(23, 15, 31, 0.18)),
           url("https://i.postimg.cc/6QR7QMf4/ezimage-dmqg59qugped3ws4bt-1.png");
       }
 
@@ -1338,17 +1346,22 @@
         gap: 9px;
       }
 
-      .ecosystem-card {
+      .ecosystem-card,
+      .card-inner {
+        min-height: 205px;
+      }
+
+      .card-face {
         padding: 12px 9px;
         border-radius: 17px;
       }
 
-      .card-image-wrap {
+      .card-image-link {
         height: 104px;
         margin-bottom: 8px;
       }
 
-      .card-image-wrap img {
+      .card-image-link img {
         width: 88px;
         height: 88px;
       }
@@ -1356,6 +1369,14 @@
       .card-caption {
         min-height: 39px;
         font-size: 0.84rem;
+      }
+
+      .card-back {
+        padding: 16px;
+      }
+
+      .card-description {
+        font-size: 0.8rem;
       }
 
       .footer {
@@ -1426,6 +1447,10 @@
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+      }
+
+      .card-inner {
+        transition: none;
       }
     }
   </style>
@@ -1503,7 +1528,7 @@
       <aside class="appreciation-card" aria-label="Network appreciation">
         <div class="appreciation-icon" aria-hidden="true">✦</div>
         <div class="appreciation-copy">
-          <Strong>Network appreciation</Strong>
+          <strong>Network appreciation</strong>
           <p>
             FURU contributions sustain a more decentralized network.<br />
             <a
@@ -1725,174 +1750,203 @@
         href: "https://kth.cash/",
         src: "https://i.postimg.cc/x18d9jt0/knuth.jpg",
         caption: "Knuth: \nperformance node",
+        description: "Knuth is a high-performance Bitcoin Cash node implementation focused on fast synchronization and reliable network operation.",
         categories: ["Projects"]
       },
       {
         href: "https://www.guanaco.fi/",
         src: "https://i.postimg.cc/bJ836L0r/logo-body-pink-144.png",
         caption: "Quanacofi: \nearn 100% of fees",
+        description: "Guanaco is a Bitcoin Cash decentralized exchange that shares trading fees with liquidity providers.",
         categories: ["DEX"]
       },
       {
         href: "https://trade.zano.org/dex/trading/773",
         src: "https://i.postimg.cc/x8V0WgPL/discover.png",
         caption: "BCHX: \nprivacy by default",
+        description: "BCHX is a privacy-focused wrapped Bitcoin Cash asset available through the Zano decentralized exchange.",
         categories: ["Wrapped BCH"]
       },
       {
         href: "https://www.hijackingbitcoin.com/",
         src: "https://i.postimg.cc/76YYYb3M/hijackingbtc.png",
         caption: "Hijacking Bitcoin",
+        description: "Hijacking Bitcoin is a book exploring Bitcoin's history, development, and the debates that shaped the network.",
         categories: ["Merchants"]
       },
       {
         href: "https://youtube.com/@niolifer?si=0FNUQB-UDsRvRM-k",
         src: "https://i.postimg.cc/GtcySHf2/niolifer.jpg",
         caption: "NIOlifer",
+        description: "NIOlifer shares content and community updates related to Bitcoin Cash and its ecosystem.",
         categories: ["Projects"]
       },
       {
         href: "https://bsky.app/profile/dwellersart.bsky.social",
         src: "https://i.postimg.cc/gkh7VJfM/dwellers.png",
         caption: "Dwellers Art",
+        description: "Dwellers Art is a creative project and artist profile in the Bitcoin Cash community.",
         categories: ["Projects"]
       },
       {
         href: "https://cashmint.cash/collection/8c44b485cedda5b9faccb5aa5350657f5891c2693cfcbbe857ddebbd05923a2a",
         src: "https://i.postimg.cc/pVGJpcxF/bafybeicmgcfeyljscvwmnq5uoa7jzvlq5yjh5vkcboctvmmgf3zl244uye.webp",
         caption: "Furu Plasma: \nFURU for solo miners",
+        description: "Furu Plasma is a FURU collection intended to support and recognize Bitcoin Cash solo miners.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/YqzGzsbP/guru12.webp",
         caption: "BCH Guru #12",
+        description: "BCH Guru #12 is part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/hP1z15pw/guru11.webp",
         caption: "BCH Guru #11",
+        description: "BCH Guru #11 is part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/MKmMmFd3/guru10.webp",
         caption: "BCH Guru #10",
+        description: "BCH Guru #10 is part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/ZKxBxMVD/guru9.webp",
         caption: "BCH Guru #9",
+        description: "BCH Guru #9 is part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://bitcart.ai/",
         src: "https://i.postimg.cc/8cHQqwQt/bitcart.jpg",
         caption: "Bitcart: \npoint of sale",
+        description: "Bitcart provides point-of-sale and payment tools for businesses accepting cryptocurrency.",
         categories: ["Merchants"]
       },
       {
         href: "https://www.paytaca.com/",
         src: "https://i.postimg.cc/3NTJtX7s/paytaca.png",
         caption: "Paytaca: \nmobile wallet",
+        description: "Paytaca is a mobile wallet and payment app for using Bitcoin Cash.",
         categories: ["Spend BCH"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/BQBLBVMm/guru8.webp",
         caption: "BCH Guru #8",
+        description: "BCH Guru #8 is part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/vHtgtN3W/guru1.webp",
         caption: "BCH Guru #1",
+        description: "BCH Guru #1 is part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/020M0Bcd/guru2.webp",
         caption: "BCH Guru #2",
+        description: "BCH Guru #2 is part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/BQBLBVMB/guru3.webp",
         caption: "BCH Guru #3",
+        description: "BCH Guru #3 is part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/WbwFwHXm/guru4.webp",
         caption: "BCH Guru #4",
+        description: "BCH Guru #4 is part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/8PmJm0tH/guru5.webp",
         caption: "BCH Guru #5",
+        description: "BCH Guru #5 is part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/8PmJm0t4/guru6.webp",
         caption: "BCH Guru #6",
+        description: "BCH Guru #6 is part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://nfts.bch.guru/purchase",
         src: "https://i.postimg.cc/RVL6LDXG/guru7.webp",
         caption: "BCH Guru #7",
+        description: "BCH Guru #7 is part of the BCH Guru digital collectible series.",
         categories: ["Projects"]
       },
       {
         href: "https://www.cryptorefills.com/en",
         src: "https://i.postimg.cc/ZWtL8WRT/cryptorefills.png",
         caption: "Cryptorefills",
+        description: "Cryptorefills lets customers use cryptocurrency to purchase mobile top-ups, gift cards, and other digital products.",
         categories: ["Spend BCH"]
       },
       {
         href: "https://www.wizardswap.io/",
         src: "https://i.postimg.cc/Vk75Q0wL/wizardswap.jpg",
         caption: "Wizard Swap",
+        description: "Wizard Swap is a decentralized exchange for swapping tokens in the Bitcoin Cash ecosystem.",
         categories: ["DEX"]
       },
       {
         href: "https://www.redbubble.com/i/mug/Party-Guru-by-dwnlives/169504252/7yqg",
         src: "https://i.postimg.cc/bdHFFNzM/gurumugparty.png",
         caption: "Party guru mug",
+        description: "A BCH Guru-themed mug sold through the Redbubble online marketplace.",
         categories: ["Merchants"]
       },
       {
         href: "https://www.redbubble.com/i/mug/Jungle-Guru-by-dwnlives/169503332/7yqg",
         src: "https://i.postimg.cc/Sj7ttNS0/gurumugjungle.png",
         caption: "Jungle guru mug",
+        description: "A BCH Guru-themed mug sold through the Redbubble online marketplace.",
         categories: ["Merchants"]
       },
       {
         href: "https://bch.guru/",
         src: "https://i.postimg.cc/CzxF7Db4/gurulogo.png",
         caption: "BCH Guru: \nprediction market",
+        description: "BCH Guru is a Bitcoin Cash prediction market where users can participate in markets and explore outcomes.",
         categories: ["Projects"]
       },
       {
         href: "https://www.bitgree.com/",
         src: "https://i.postimg.cc/DSkcrSZn/bitgree.png",
         caption: "Bitgree: \nbuy almost anything",
+        description: "Bitgree is a shopping platform that lets users buy products with cryptocurrency.",
         categories: ["Spend BCH"]
       },
       {
         href: "https://app.cauldron.quest/swap/d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea",
         src: "https://i.postimg.cc/L4JGsFGy/cauldron.png",
         caption: "Cauldron: \nearn 100% of fees",
+        description: "Cauldron is a decentralized exchange that lets liquidity providers earn trading fees.",
         categories: ["DEX"]
       },
       {
         href: "https://electroncash.org/",
         src: "https://i.postimg.cc/GtChXFrN/electroncash.png",
         caption: "Electron Cash: \n#1 desktop wallet",
+        description: "Electron Cash is a desktop wallet for Bitcoin Cash, with tools for managing and spending BCH.",
         categories: ["Projects"]
       }
     ];
@@ -1951,7 +2005,6 @@
           "autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
         iframe.allowFullscreen = true;
 
-        // Do not use loading="lazy" after the user has clicked play.
         card.replaceChildren(iframe);
       }, { once: true });
 
@@ -2048,18 +2101,33 @@
 
       shuffleArray(figures).forEach(item => {
         const categories = getFigureCategories(item);
+
         const card = document.createElement("article");
         card.className = "ecosystem-card";
         card.dataset.categories = JSON.stringify(categories);
 
-        const link = document.createElement("a");
-        link.className = "card-link";
-        link.href = item.href;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
+        const inner = document.createElement("div");
+        inner.className = "card-inner";
 
-        const imageWrap = document.createElement("span");
-        imageWrap.className = "card-image-wrap";
+        const front = document.createElement("div");
+        front.className = "card-face card-front";
+        front.tabIndex = 0;
+        front.setAttribute("role", "button");
+        front.setAttribute(
+          "aria-label",
+          `Show description for ${item.caption.replace(/\n/g, " ")}`
+        );
+        front.setAttribute("aria-expanded", "false");
+
+        const imageLink = document.createElement("a");
+        imageLink.className = "card-image-link";
+        imageLink.href = item.href;
+        imageLink.target = "_blank";
+        imageLink.rel = "noopener noreferrer";
+        imageLink.setAttribute(
+          "aria-label",
+          `Visit ${item.caption.replace(/\n/g, " ")}`
+        );
 
         const image = document.createElement("img");
         image.src = item.src;
@@ -2069,15 +2137,69 @@
           image.alt = `${item.caption.replace(/\n/g, " ")} image unavailable`;
           image.style.visibility = "hidden";
         };
-        imageWrap.appendChild(image);
+
+        imageLink.appendChild(image);
 
         const caption = document.createElement("span");
         caption.className = "card-caption";
         caption.textContent = item.caption;
 
-        link.append(imageWrap, caption);
-        card.appendChild(link);
+        front.append(imageLink, caption);
+
+        const back = document.createElement("div");
+        back.className = "card-face card-back";
+        back.tabIndex = 0;
+        back.setAttribute("role", "button");
+        back.setAttribute(
+          "aria-label",
+          `Hide description for ${item.caption.replace(/\n/g, " ")}`
+        );
+
+        const descriptionTitle = document.createElement("h3");
+        descriptionTitle.className = "card-description-title";
+        descriptionTitle.textContent = item.caption.replace(/\n/g, " ");
+
+        const description = document.createElement("p");
+        description.className = "card-description";
+        description.textContent = item.description?.trim() || "Description coming soon.";
+
+        const hint = document.createElement("p");
+        hint.className = "card-hint";
+        hint.textContent = "Click to flip back";
+
+        back.append(descriptionTitle, description, hint);
+        inner.append(front, back);
+        card.appendChild(inner);
         container.appendChild(card);
+
+        function flipCard() {
+          const flipped = card.classList.toggle("is-flipped");
+          front.setAttribute("aria-expanded", String(flipped));
+        }
+
+        front.addEventListener("click", event => {
+          if (event.target.closest(".card-image-link")) return;
+          flipCard();
+        });
+
+        front.addEventListener("keydown", event => {
+          if (
+            (event.key === "Enter" || event.key === " ") &&
+            !event.target.closest(".card-image-link")
+          ) {
+            event.preventDefault();
+            flipCard();
+          }
+        });
+
+        back.addEventListener("click", flipCard);
+
+        back.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            flipCard();
+          }
+        });
       });
 
       applyFigureFilters();
@@ -2091,6 +2213,7 @@
       cards.forEach(card => {
         const categories = JSON.parse(card.dataset.categories || "[]");
         const caption = card.querySelector(".card-caption").textContent.toLocaleLowerCase();
+        const description = card.querySelector(".card-description").textContent.toLocaleLowerCase();
 
         const matchesCategory =
           activeCategory === "All" || categories.includes(activeCategory);
@@ -2098,6 +2221,7 @@
         const matchesSearch =
           !searchValue ||
           caption.includes(searchValue) ||
+          description.includes(searchValue) ||
           categories.some(category => category.toLocaleLowerCase().includes(searchValue));
 
         const isVisible = matchesCategory && matchesSearch;
