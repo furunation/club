@@ -1206,6 +1206,30 @@
       font-size: 0.8rem;
     }
 
+    .miner-prefix-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 0 0 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 168, 201, 0.17);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.035);
+      color: #dfcbd9;
+      font-size: 0.84rem;
+      line-height: 1.45;
+      cursor: pointer;
+    }
+
+    .miner-prefix-option input {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      margin: 1px 0 0;
+      accent-color: #ff9dc1;
+      cursor: pointer;
+    }
+
     .miner-address-list {
       display: block;
       width: 100%;
@@ -1840,10 +1864,15 @@
       <span class="section-kicker">Supporting decentralization</span>
       <h2 id="soloMinerTitle" class="dialog-title">Solo miner addresses</h2>
       <p id="soloMinerDescription" class="dialog-subtitle">
-        Copy the complete list of addresses.
+        Choose whether to include the CashAddr prefix, then copy the complete list.
       </p>
 
       <p id="minerAddressCount" class="miner-address-count" aria-live="polite"></p>
+
+      <label class="miner-prefix-option" for="includeCashAddrPrefix">
+        <input id="includeCashAddrPrefix" type="checkbox" />
+        <span>Add <code>bitcoincash:</code> prefix before copying</span>
+      </label>
 
       <div class="miner-copy-row">
         <button id="copyMinerAddresses" class="miner-copy-button" type="button">
@@ -1868,6 +1897,9 @@
         readonly
         spellcheck="false"
       ></textarea>
+      <p class="miner-address-note">
+        The prefix option only changes formatting; it does not verify that an address is valid.
+      </p>
     </section>
   </div>
 
@@ -1922,218 +1954,218 @@
       "https://youtu.be/QJECkbuK3qo?si=V0yNB-5Ta2arQjQO"
     ];
 
-const soloMinerAddresses = [
-  "qqcl9753chu5nq3vy9g3yvkg0y3xhjvgk5tcpcsadl",
-  "qzah8kp6w6623wvnzlf8hth49h88tvsk8qc6dpg494",
-  "qqsr5xar67scgy3y47ynzacsm65q8p3m0qwjrj6672",
-  "qq45ya7q4kctpc0f54lr8280cne9da4q9gpze9y87l",
-  "qz6c0dr220wwdrnh8fnsyhfzjfttyh4jp5lvvxwyhp",
-  "qrt5aq9n4a6ce0nhg8vwefs472d4mu4crcdk3araf5",
-  "qr4klpuwr0np32nqzey720knqlmakyxmy50rnz8gz7",
-  "qrhz5lpnu0u7r4hskm3mdawxt07chsagkqx04727e4",
-  "qq8nflk2hpdzdrurpzf2e6dkudaeux7uecf45ngeef",
-  "qzdmrxv04aqhe8pt0sg0dgu29u02w2u3a5vxmw650u",
-  "qpp6wehvsxhw2jkpycevcte7vz2gwrvllga3xu7dxj",
-  "qrz8yp2lwc0xgkk3u4h5xmrvg8fc8zcaqul8thkfhl",
-  "qz26q5n23j8rd6nr8x3jgzcveyr8k8krwgtgrnt6kr",
-  "qpqrdc8at9ptsmfzs2pk9n7cxyjzvexumycuxr9vvy",
-  "qz7ceu2q77zy4994nt3vcjlypf29gfa3fuutuu90uc",
-  "qrwmflauj3z06p367qcn6s0q3pysp8gcuy6xzsczyc",
-  "qrkm04jfzuqdje3kyy9lusv5fhresyhx4q8j94gd0j",
-  "qz3z6gcy8a5ju2p6drzzcgyhz0g2u28u7sclpemvew",
-  "qrmf4m5j2ew5hf808xes2ulfapqv2q875qchnuylrr",
-  "qr004lat42lty0u0hucy93y70tyyqw39kqnj0yauup",
-  "qqt5f42amd5cheavdjyy5w940jjekexvhgjse5qhuf",
-  "qrhnq27jrcpsvlhnt644rwshsg5s20k8lgjz8h053a",
-  "qqxgw9uxrftfltv9tk80p0eeyqze5gkzscj3tlq7p7",
-  "qqmhht6qrmaj70e30jktk37szurk378wk5amytsjl2",
-  "qz7r7u9s7q2pxeyhv29px690r79s5c673ufc7d96aj",
-  "qp3ta37r4w8kdedmnqjezpp5f9f40f3g7v7xwd9z9l",
-  "qqlfh3xlashy23ujclqa82m0sxes8jy7kqdqlutg7j",
-  "qrp8yd528ac6cq9d8x27szng0yf2a69zduq86dgda9",
-  "qq0wa6ma3dpxxcald3h8xw6z0gdtwqe5zvueykr8wt",
-  "qq0y59ad2x9jea37ccd5wme6lp7322820c3cvm5n4z",
-  "qqdk0wepfqz9ap56tzsu6qg89u7ue72zuyxvxplp62",
-  "qq6exvmtlcwezua5w04nd0kfqw9883e53sjmx8753j",
-  "qzequm8p3l9haehxsqd2nntdztrh40xkgy80dq2tu3",
-  "qrw3ppk3sll7gxhws0dest47nl05q50msst9mplgj5",
-  "qrhrqhwvdz98uyfdzx50x4znp8mu0ajnmcyp883780",
-  "qpt0peeh5g5uayf2ls9593qv3wkl50xwmskkvqvau9",
-  "qrrny9pkrx94ru4cp9aswze3zhnx7u96myqkpdw2pq",
-  "qpewmxu780zwpa6k4hf7gymllpf70xh0yuxyvxxp8p",
-  "qqeynr03cneal8x9sjte58xmt86mtwytncud0d7kag",
-  "qp50e0cmmerz30tzy4ptc9vrya6kfuxcyyn9lce8zy",
-  "qpu79xue0g23g9c8c7xf4tu0fzvjmhwnrumvssu8wn",
-  "qzjt9xl963wtdgrrkspn52prrtzzf6hhuyfqnrqd7l",
-  "qr20pm4a89ct6etcs6he98m4q3sqeccxhqa4lzjuef",
-  "qzxau949w4lwzrzraq3kt8mcvqhx2ycsrys563g03r",
-  "qrhjapn2geuhyxvklnkmdkkeej335g8trgc547vtr6",
-  "qq8m5pm2mt08zlfwq54rdkrchdrw6mvrncmw4lgx4v",
-  "qq89pnd3j93tulm9az4fdc3ms83dv2hkyckzg07vh7",
-  "qzjtx7pam9yw5ck4gmuvfqm5leyvvc43wqjjxae75h",
-  "qpj3jp0dqu9q5a62dcelcrf6m9ulhllauvh3sd25j5",
-  "qqpxm3f68x4dt5r02ltgqj2djzd9jpze2sayzqu3s3",
-  "qrwfgaa3xzw8ml3s9yglyf888lwnyt4u6sq2epwrg0",
-  "qqxkh5yfzn92s78pu42h45fzrkvp75fadvmjtzeqh0",
-  "qrnhremsl2v0wu2aqdfka90k03gp4g3k9ux9f89ekw",
-  "qz72vymvrkfnp2apms0fl4myhsnn6dq0c5xfqj0rax",
-  "qrhvdpcx56j9ucm9hhq4zf62dv4uwcdq0ykvvet6m4",
-  "qr62khq2uawjjhk9ej834hjckh5457fjmq7g467g7j",
-  "qzk42vzq2ev8hhxeynkfthneagunytuapsextyt52v",
-  "qzfrc406v8gfn5kuk5q4g5uga5sjlyq55uh5n48hvg",
-  "pzgc00hp0s9hkk89xe5duw7cm8kattwqdsahvknx4w",
-  "qqw0ejrpc6xpwmnlvl7rqtkwwg8qu36f9gfz7vhkmj",
-  "qzwlf895g63rht9cj70aqc8dv88azghjk5dam3w40a",
-  "qpzsrk69acql33p5q7u4x2ykewft9revjvwx7sdk33",
-  "qqdn5dgac5eedjlfxzw569ee5ta4zhc0m5pasem0px",
-  "qpj4a5ykqp5mtnv29fytecdsss52yzvwl54xjj6cma",
-  "qq3nukwkcuz03kvnyrtplhj8q00pqt9la5mgfeh3qj",
-  "qquvw8c9djahuxw87nrm2yl4v5uxx64jxuzj54k9hd",
-  "qqjaqz7uz8wws97qxc9284e0vt3u3njceq8n7z97z8",
-  "qz47tc6a8f06w4l3664729ary4vhhlrd9s0wg8u6yg",
-  "qpaeze6t9l6jrpa90nks79y7q0gyx98scq9v4ad0c2",
-  "qzv556eqx5azuaaxxhrv2zuxn5jj8vlcz5qpxt8e26",
-  "qp7zphm5thd2urehv0u4tz7x82x9gmvazgdwmvhr9s",
-  "qrm802c9whwsv43rlpgymx9wy57h4m024g64s6n8sr",
-  "qzxcyr3dlt78c4hv3qsdlrygacdr8n0atucsp9kgpt",
-  "qp5jfqhu0gmp0xd0l00pa8qngyu2k596wcqlwpk6g2",
-  "qp0m8rm6t20cvaka04hswfad83jc0jrkfs2yspelcz",
-  "qpuxnegz49ajndxats85jz3yuhs0ywamfc0jyu884p",
-  "qq3z6njr4k7ug7ztwtzwa0p2dzj0kh70jg8wlw6fr0",
-  "qqx4rhcxl8dxu45gq3y48hh38snlxh4q9g4ve4ltlr",
-  "qp5uyy8lshtr8gpya04hw5e99vqk8dm3rcz5wsw5em",
-  "qpht8e9650w8zj7fkcgwspe372jv3raftc52faukmf",
-  "qqg4mtvv8xfyhezxm97wuqn6l8fr5u9tqs2slz3h4x",
-  "qpflm6vnxx9xkrf6addfhn47g9u0p387vqu0z8pxs8",
-  "qr0d2hkxd5qj579k50cfuhpaxaz4fws4vqtuxcxreq",
-  "qqatja2yqqg68ayj3y7y7zvgvrhg7ekjsgm43ue5v7",
-  "qq3kjw5pf3utkdt5zth6mrpk6xxqgvle0cqnuufykr",
-  "qpu9sndrl25yqzavfk0lmsfwduwywa3255tf7u55cv",
-  "prewncpxvxchuhvjss7c3sf7dsswgh3ssqdq03l2qw",
-  "qpm7jgynracznkel5va75jr2rh3vhqjtecc0azs6ge",
-  "qr48rp29slz59vv67zua3t2ggvs6eglpyukzqmkzl0",
-  "qz9j05kkrdfy3yt00mu8gc3v99rru8xc8vl4qcmvnn",
-  "qzgkzl35qr0etemgztqmustlyz0gyyp4dv60m035yf",
-  "qrk2464xgau028vhm2lrfgn3trfpyk0xysqeuwzrxe",
-  "qpztkkesxtpu2f57tahntakltqlncc45rq28j4sg6k",
-  "qrx0d8te9xskcrqezqq54f744unfmsnyhsyhyhasz9",
-  "qqmw9zy89cn7xuw6hetsjcm7vk4nzjx3fudcsv577l",
-  "qr985ltjkk6kedckt7wsd69esnuukvj56ssmtksxa4",
-  "qqwv9umf0cnhjjryv0ktl3ux084slqgdrv7waeqj2u",
-  "qrfyjwr8aze2xh7ps7hqguq84qfpxt2nyvqcxqgq3w",
-  "qr6t9l04avv7aq54qu57aceucear6l8y4vessh9qgw",
-  "qpkc2k8hvhvatedk5thqkeanee8rtad6rstu4h64dm",
-  "qq8xnfmm6ws9mgth2773ujq7nl6l0tvmncl6w2up3q",
-  "qr0ak8zfsg9hy63jp37ps4sfug93wqjupcfzclku96",
-  "qrqn46tze8erfh759nrj8swx7500yffztup9w7wjud",
-  "qphj8x085e2q9dn9x5xdxrc7c0uk4q05egfjualrkm",
-  "qzd3lpkdrg3qf6dj3pwkq8rlyqq4q2hg957t8sz3xm",
-  "qqdea8qsg32tx5uk672x08e4k39f3pe5dyte063t8z",
-  "qz6htvuuchy2pl9u28zrp2d69zj9w93llq85wjf6rp",
-  "qqcdpl3zqdtxj92u0saez3q6qjv0tyjk3uxgmjc4rq",
-  "qzdkcpym594damj7jfhn8frpmw9pvr7hrg878lqtff",
-  "qqhr98zfkd8vftrmvjk8r5ls8vt9uqtcyuqys0ur2c",
-  "qr7v4pta8k8e3tz0mxjrhv4q9m3hwrqt7528x95cnp",
-  "qq9agppfm8u8g506g9zqeljqtvrw20c5cq542ysgjh",
-  "qzt7ghax73zh0e57uyualfs70qxcyzj83g5laaa6aa",
-  "qzkmmh0zd7j8yvjmzcc09n8yzm77lzwnucdapn98gy",
-  "qzywn590d34xz6gwrc7fmzjdpfjs0gntjg5080lxdp",
-  "qqs3ckyc6mlk4snw28v22w4rz7auxlsancwtmag247",
-  "pzw52hw8pgmx5mt3ts6jphtgjn66ck9lzvhu4tlf5f",
-  "qzchwhegxwkwpw2ma7n5hypcq5tsxgezay7rdmvk9x",
-  "qpstnusvtv6lvx4fdqsptqv4hysafv830c0qg3js0e",
-  "qp7psuu67lxzvfsamdgde8nyv4dmyxpe4ulzk0llr7",
-  "pppmc8mmrsax4hftjvphg7m2erna348lrqef7mvqck",
-  "qzqcuft5qzs52l4nn890aj8pzu23lefar5h0465j8r",
-  "qpf39g54sn9jc5jr707raqlhxa7ga09alv99uljalp",
-  "qrj3p62fpv96w8zsm9x5rx0g85fhvjhw95868550xp",
-  "qq45aphx8ac4z4ypqvuqdsxvdxmvrd056cfmcjzasq",
-  "qr7uuhvuhtudqt20px53qrcju84m6g03ecc30xgp26",
-  "pqnyex4pfwdkrj8lus0ks734q2srdylcgulhsdxft2",
-  "qqz6meavt0z0q98l5kytfwzf98t6mgs8nuluxh2sk2",
-  "qrj8z03ruy8c4mfvvud9new56w73wnlhsvxd4wvn4q",
-  "qpcq0h04gw7ux4ts5ahf5dlu6ya0x2r3qgjkramk27",
-  "qpv9gjhd6m473uzhw6rhxfevfd0vdxwq9u87yhfy3n",
-  "qz3alq79qhkhwmwjgusx6zvl9t04dnfnk5l5n8cad4",
-  "qpcv6uslktn3qcd34s4ma45yg8qycdp5aq7h9a55k9",
-  "qqhhxnycaavartrd4d9d9vz0leyzd6ls6vkxmfl2hv",
-  "qparmxa2xxe27d529dkrr2z5ler56xj5wyxyrskd6q",
-  "qpxwpyyk65hz37hteyz0t20zqzv59qrtyg2ycedfsw",
-  "qqftuah9m6c8hh5xwyx0pw3ukhvjf82u6u563qlxfv",
-  "qq5mf3374vxp2yzycrup7cwnl9tr4kueugnup735pk",
-  "qrsrzjluqlxpue9746nkcuxf54pk7pkkmc0vs2kyfy",
-  "qz03537rusgepyvtu4sre75gyv3933rz4gd8ag35pt",
-  "qzkl5d0zjmmn8rzn523prlc3upvunvcavvkhd52ukz",
-  "qqqx5rz59lh9ke832sljekl5ajzkm3d97u9pqeje6q",
-  "qzlfy4vk9tq4n85vuuew9zwr69tf0pfkysevx9murq",
-  "qqd5x8c7dk9vcxxsdh8v9vt4fymlck854ssahgqr5a",
-  "qq7qazrksmsgw8x35qm2azd5q2vyhe62yun9qeajwu",
-  "qz6d2qadzc9fnzz37s0xkswcav70v7yuxcatj4gtjn",
-  "qqw3y0j78fk2v6gkjylvhqk3zxgs0s5z8g6cxn2zm2",
-  "qrn9g9quzwl0zzrjhl46fvhenhyenyc4avu7e4fp2r",
-  "qptqvchs6y8za6tt7knpj3jal0r8tv29zvcptxe549",
-  "qzkn55653gyxu04wfsgywj6r2f5mnql4mg8zxvuueh",
-  "qrr8kgntjxe82m0kn08e3xwzvcltpa465vegh7e9nw",
-  "qp9szjwy5wwufrhh78dvuy77fshynz5pcgwp02p8fa",
-  "qzth6x6064kvl8c3nr8ytsgqzz64vnnvlynp0et8ea",
-  "qz30hrq3prl9tljgrndttyucdtccvca93qkkk86qfy",
-  "qqcqvqqsnnjmzcyc2d5xfzuamv33js684qgjqfqk54",
-  "qz3fhqjgk9synnvw3tvk4ltk2lln3ua9eqw93gfp6m",
-  "qrfyd2grxzmafwq0qe8xdvy4tf428flwkc3gqhwju0",
-  "qq9er6ng7qqa6u045spclgx3qz4zsg5f4v6kxzpgkq",
-  "qp8x7nvh2zs6a0ldlyxyhhjgfdkn828srusk24ssqy",
-  "qqxxeakrcxm5rvezqdqk99wsvlr68jc2lclqqfu27y",
-  "qzdhmn4k8945h3a5xjuqezzazdyz2s8sh5nm78ynw4",
-  "qza75txcd0j5zx59j3sa23053645elhfts43h6drsm",
-  "qrlm46pefwn75hjxwqth5vp60ayr5fu97s57x0ynu5",
-  "qzx2dl00nmvfxnkrt6cfmnphfaxnpjswkv9pzu807h",
-  "prnas732pq3z2ap5kpmj806u8pfrz3azjcyhr7p8s9",
-  "qq6rptj9wu34hwr04sl6lhd6jegrpn6dwy7n3dy2he",
-  "qrak873lp6wk7vp662hq679nlxvnslupqsv336h26x",
-  "qqsmu7hra6zz258c73e09303k567uqrufvk8ndu0cz",
-  "qzqchdz4r5mv76gsaj9cus07sxvxcux9jvkyvnklqt",
-  "pqjewhlpaw8vg9v6m4vlu2y05cuh9pgc2upu73h83t",
-  "qrn3mc4vvzqgwc748vfs2rpaj7m9pwzfkc5tgsl60h",
-  "qrmfr96egjhvkkjcc6kspz0xgemw6ly7vyh22xu5q4",
-  "qq4e6ccv87lzwunc2neal9sl5yw6rh6jqq7ea2derx",
-  "qp9kfun0ncf0vjwsynhqvec3dc29uhxzcc8cucmygc",
-  "qqwd7d4ghxctzs6rtzvjj8c2wka88mt20qfqft8zq9",
-  "qqnfkld25vsu2x4fmlgqgnyhdykeu7q22ca0gscmnx",
-  "qpc62pds34s69t5pfzketu0tg6k99nqfvq9kqvmc8f",
-  "qzhr3zpupgn3vtk2a6kveqsvh9lrx5h9dckshn3fnk",
-  "qpmzz5k0q48gpaly6dn2xuxemn76qdvsny5u84jlcz",
-  "qprhjyulal634n4vhrak3v5yd94lv2xzpywk0evt3k",
-  "qrywaz5ye68tm86jk0kfg4n3hjf574euss4ytsr020",
-  "qpe6ejpre6nvy08lhrgc2ew4p8h0kupyqcmxyn2lsy",
-  "qrq0s0naj77d44cv79sx9ft8l5h7njuzq59cdqxzhv",
-  "qrm2ggmpeuwwq28cu7ezrufjg4846yz9fs3cpah43t",
-  "qqygpwr7fkskqed9gvkgcyuseh3myangyyc9l8nl3x",
-  "qqjlfkvfy8zq4qlwzs6c0ujk4suq5em4acn0jjgwrs",
-  "qrqncarsfp9f5ug6ntnhzutnlag3q4f9c5gfh7sd3j",
-  "pz7e55wj2fdfkch5wmqtlz539zven6rlfy9nxz7vzs",
-  "qr5zh0etzaktgwe2g39ynqn9ntrwh8g34y6gt0qlp6",
-  "qzcpnncgpecymku5h6e03hv4jp2plkcup5zvgddrg0",
-  "qpyaypz8epjtamledwlv7nzlet9yu4vj2532kfcc0y",
-  "qplen9avj5ehdpywmuwkxw3f944q968k4vug7knye0",
-  "qpr3ymgf0uexzad28grdx4zs2g328hs23ccc2xfqv9",
-  "pqc6d6wpm7f4cr6xsg4ztz9vvp3x7kzmcs98kacngg",
-  "qz0qkm44pglg8rcc373aj5eafhxvcfttcsdgf2pkfs",
-  "qrnfm8ayh3xmytsu4zn67lcpvyyjp5cvd5kdktesag",
-  "qzy6k9n36qmzdpda49mrnkwxu6jstqaw7g5dpvep09",
-  "qqm4kak3qm7ctg44ck93px4lw80dxnmypgt7ddghsc",
-  "qz3rqwy04vzz3acgz0fz0a48txt66mgefg8j9x22k3",
-  "qqq3r4h3ljnnxwt0a22s2ghy2hymmkrusq0s0ht0sk",
-  "qrcplugak39dflhmmhnnhza60mkhj5hjgyha07ejxs",
-  "qrgterl7yeu8n55096vkllhqxtxapx7tvgleyqs83f",
-  "qqrnn5yag5rs3a5v9qhk3vrfvphs9uqclyqdef7t4h",
-  "qr2symq4s4wp8z3kvrj2z9hc8amp9l8juu6gh0xlkk",
-  "qq3pxuq8plzemqpa4858urw4ze5kx97zhuk36xuuyp",
-  "qz4njlc27wvtgj4ef8v0euzqldfhchm64yr7jgkgkp",
-  "qz7e2apknmaamvxew24aaw9lg9jl0ehj3cyulnn5kz",
-  "qr4d5d8cfmpvsam66mj5gpu7usvmdj8jyyzjd0p6uu",
-  "qqfl9750nhkmn39detnadwmjv7mq7ztj9vwrcmt28y",
-  "pzttv0ztxt8tefl9zd2c0kg7vukjwhtxduku9sdp56"
-];
+    const soloMinerAddresses = [
+      "qqcl9753chu5nq3vy9g3yvkg0y3xhjvgk5tcpcsadl",
+      "qzah8kp6w6623wvnzlf8hth49h88tvsk8qc6dpg494",
+      "qqsr5xar67scgy3y47ynzacsm65q8p3m0qwjrj6672",
+      "qq45ya7q4kctpc0f54lr8280cne9da4q9gpze9y87l",
+      "qz6c0dr220wwdrnh8fnsyhfzjfttyh4jp5lvvxwyhp",
+      "qrt5aq9n4a6ce0nhg8vwefs472d4mu4crcdk3araf5",
+      "qr4klpuwr0np32nqzey720knqlmakyxmy50rnz8gz7",
+      "qrhz5lpnu0u7r4hskm3mdawxt07chsagkqx04727e4",
+      "qq8nflk2hpdzdrurpzf2e6dkudaeux7uecf45ngeef",
+      "qzdmrxv04aqhe8pt0sg0dgu29u02w2u3a5vxmw650u",
+      "qpp6wehvsxhw2jkpycevcte7vz2gwrvllga3xu7dxj",
+      "qrz8yp2lwc0xgkk3u4h5xmrvg8fc8zcaqul8thkfhl",
+      "qz26q5n23j8rd6nr8x3jgzcveyr8k8krwgtgrnt6kr",
+      "qpqrdc8at9ptsmfzs2pk9n7cxyjzvexumycuxr9vvy",
+      "qz7ceu2q77zy4994nt3vcjlypf29gfa3fuutuu90uc",
+      "qrwmflauj3z06p367qcn6s0q3pysp8gcuy6xzsczyc",
+      "qrkm04jfzuqdje3kyy9lusv5fhresyhx4q8j94gd0j",
+      "qz3z6gcy8a5ju2p6drzzcgyhz0g2u28u7sclpemvew",
+      "qrmf4m5j2ew5hf808xes2ulfapqv2q875qchnuylrr",
+      "qr004lat42lty0u0hucy93y70tyyqw39kqnj0yauup",
+      "qqt5f42amd5cheavdjyy5w940jjekexvhgjse5qhuf",
+      "qrhnq27jrcpsvlhnt644rwshsg5s20k8lgjz8h053a",
+      "qqxgw9uxrftfltv9tk80p0eeyqze5gkzscj3tlq7p7",
+      "qqmhht6qrmaj70e30jktk37szurk378wk5amytsjl2",
+      "qz7r7u9s7q2pxeyhv29px690r79s5c673ufc7d96aj",
+      "qp3ta37r4w8kdedmnqjezpp5f9f40f3g7v7xwd9z9l",
+      "qqlfh3xlashy23ujclqa82m0sxes8jy7kqdqlutg7j",
+      "qrp8yd528ac6cq9d8x27szng0yf2a69zduq86dgda9",
+      "qq0wa6ma3dpxxcald3h8xw6z0gdtwqe5zvueykr8wt",
+      "qq0y59ad2x9jea37ccd5wme6lp7322820c3cvm5n4z",
+      "qqdk0wepfqz9ap56tzsu6qg89u7ue72zuyxvxplp62",
+      "qq6exvmtlcwezua5w04nd0kfqw9883e53sjmx8753j",
+      "qzequm8p3l9haehxsqd2nntdztrh40xkgy80dq2tu3",
+      "qrw3ppk3sll7gxhws0dest47nl05q50msst9mplgj5",
+      "qrhrqhwvdz98uyfdzx50x4znp8mu0ajnmcyp883780",
+      "qpt0peeh5g5uayf2ls9593qv3wkl50xwmskkvqvau9",
+      "qrrny9pkrx94ru4cp9aswze3zhnx7u96myqkpdw2pq",
+      "qpewmxu780zwpa6k4hf7gymllpf70xh0yuxyvxxp8p",
+      "qqeynr03cneal8x9sjte58xmt86mtwytncud0d7kag",
+      "qp50e0cmmerz30tzy4ptc9vrya6kfuxcyyn9lce8zy",
+      "qpu79xue0g23g9c8c7xf4tu0fzvjmhwnrumvssu8wn",
+      "qzjt9xl963wtdgrrkspn52prrtzzf6hhuyfqnrqd7l",
+      "qr20pm4a89ct6etcs6he98m4q3sqeccxhqa4lzjuef",
+      "qzxau949w4lwzrzraq3kt8mcvqhx2ycsrys563g03r",
+      "qrhjapn2geuhyxvklnkmdkkeej335g8trgc547vtr6",
+      "qq8m5pm2mt08zlfwq54rdkrchdrw6mvrncmw4lgx4v",
+      "qq89pnd3j93tulm9az4fdc3ms83dv2hkyckzg07vh7",
+      "qzjtx7pam9yw5ck4gmuvfqm5leyvvc43wqjjxae75h",
+      "qpj3jp0dqu9q5a62dcelcrf6m9ulhllauvh3sd25j5",
+      "qqpxm3f68x4dt5r02ltgqj2djzd9jpze2sayzqu3s3",
+      "qrwfgaa3xzw8ml3s9yglyf888lwnyt4u6sq2epwrg0",
+      "qqxkh5yfzn92s78pu42h45fzrkvp75fadvmjtzeqh0",
+      "qrnhremsl2v0wu2aqdfka90k03gp4g3k9ux9f89ekw",
+      "qz72vymvrkfnp2apms0fl4myhsnn6dq0c5xfqj0rax",
+      "qrhvdpcx56j9ucm9hhq4zf62dv4uwcdq0ykvvet6m4",
+      "qr62khq2uawjjhk9ej834hjckh5457fjmq7g467g7j",
+      "qzk42vzq2ev8hhxeynkfthneagunytuapsextyt52v",
+      "qzfrc406v8gfn5kuk5q4g5uga5sjlyq55uh5n48hvg",
+      "pzgc00hp0s9hkk89xe5duw7cm8kattwqdsahvknx4w",
+      "qqw0ejrpc6xpwmnlvl7rqtkwwg8qu36f9gfz7vhkmj",
+      "qzwlf895g63rht9cj70aqc8dv88azghjk5dam3w40a",
+      "qpzsrk69acql33p5q7u4x2ykewft9revjvwx7sdk33",
+      "qqdn5dgac5eedjlfxzw569ee5ta4zhc0m5pasem0px",
+      "qpj4a5ykqp5mtnv29fytecdsss52yzvwl54xjj6cma",
+      "qq3nukwkcuz03kvnyrtplhj8q00pqt9la5mgfeh3qj",
+      "qquvw8c9djahuxw87nrm2yl4v5uxx64jxuzj54k9hd",
+      "qqjaqz7uz8wws97qxc9284e0vt3u3njceq8n7z97z8",
+      "qz47tc6a8f06w4l3664729ary4vhhlrd9s0wg8u6yg",
+      "qpaeze6t9l6jrpa90nks79y7q0gyx98scq9v4ad0c2",
+      "qzv556eqx5azuaaxxhrv2zuxn5jj8vlcz5qpxt8e26",
+      "qp7zphm5thd2urehv0u4tz7x82x9gmvazgdwmvhr9s",
+      "qrm802c9whwsv43rlpgymx9wy57h4m024g64s6n8sr",
+      "qzxcyr3dlt78c4hv3qsdlrygacdr8n0atucsp9kgpt",
+      "qp5jfqhu0gmp0xd0l00pa8qngyu2k596wcqlwpk6g2",
+      "qp0m8rm6t20cvaka04hswfad83jc0jrkfs2yspelcz",
+      "qpuxnegz49ajndxats85jz3yuhs0ywamfc0jyu884p",
+      "qq3z6njr4k7ug7ztwtzwa0p2dzj0kh70jg8wlw6fr0",
+      "qqx4rhcxl8dxu45gq3y48hh38snlxh4q9g4ve4ltlr",
+      "qp5uyy8lshtr8gpya04hw5e99vqk8dm3rcz5wsw5em",
+      "qpht8e9650w8zj7fkcgwspe372jv3raftc52faukmf",
+      "qqg4mtvv8xfyhezxm97wuqn6l8fr5u9tqs2slz3h4x",
+      "qpflm6vnxx9xkrf6addfhn47g9u0p387vqu0z8pxs8",
+      "qr0d2hkxd5qj579k50cfuhpaxaz4fws4vqtuxcxreq",
+      "qqatja2yqqg68ayj3y7y7zvgvrhg7ekjsgm43ue5v7",
+      "qq3kjw5pf3utkdt5zth6mrpk6xxqgvle0cqnuufykr",
+      "qpu9sndrl25yqzavfk0lmsfwduwywa3255tf7u55cv",
+      "prewncpxvxchuhvjss7c3sf7dsswgh3ssqdq03l2qw",
+      "qpm7jgynracznkel5va75jr2rh3vhqjtecc0azs6ge",
+      "qr48rp29slz59vv67zua3t2ggvs6eglpyukzqmkzl0",
+      "qz9j05kkrdfy3yt00mu8gc3v99rru8xc8vl4qcmvnn",
+      "qzgkzl35qr0etemgztqmustlyz0gyyp4dv60m035yf",
+      "qrk2464xgau028vhm2lrfgn3trfpyk0xysqeuwzrxe",
+      "qpztkkesxtpu2f57tahntakltqlncc45rq28j4sg6k",
+      "qrx0d8te9xskcrqezqq54f744unfmsnyhsyhyhasz9",
+      "qqmw9zy89cn7xuw6hetsjcm7vk4nzjx3fudcsv577l",
+      "qr985ltjkk6kedckt7wsd69esnuukvj56ssmtksxa4",
+      "qqwv9umf0cnhjjryv0ktl3ux084slqgdrv7waeqj2u",
+      "qrfyjwr8aze2xh7ps7hqguq84qfpxt2nyvqcxqgq3w",
+      "qr6t9l04avv7aq54qu57aceucear6l8y4vessh9qgw",
+      "qpkc2k8hvhvatedk5thqkeanee8rtad6rstu4h64dm",
+      "qq8xnfmm6ws9mgth2773ujq7nl6l0tvmncl6w2up3q",
+      "qr0ak8zfsg9hy63jp37ps4sfug93wqjupcfzclku96",
+      "qrqn46tze8erfh759nrj8swx7500yffztup9w7wjud",
+      "qphj8x085e2q9dn9x5xdxrc7c0uk4q05egfjualrkm",
+      "qzd3lpkdrg3qf6dj3pwkq8rlyqq4q2hg957t8sz3xm",
+      "qqdea8qsg32tx5uk672x08e4k39f3pe5dyte063t8z",
+      "qz6htvuuchy2pl9u28zrp2d69zj9w93llq85wjf6rp",
+      "qqcdpl3zqdtxj92u0saez3q6qjv0tyjk3uxgmjc4rq",
+      "qzdkcpym594damj7jfhn8frpmw9pvr7hrg878lqtff",
+      "qqhr98zfkd8vftrmvjk8r5ls8vt9uqtcyuqys0ur2c",
+      "qr7v4pta8k8e3tz0mxjrhv4q9m3hwrqt7528x95cnp",
+      "qq9agppfm8u8g506g9zqeljqtvrw20c5cq542ysgjh",
+      "qzt7ghax73zh0e57uyualfs70qxcyzj83g5laaa6aa",
+      "qzkmmh0zd7j8yvjmzcc09n8yzm77lzwnucdapn98gy",
+      "qzywn590d34xz6gwrc7fmzjdpfjs0gntjg5080lxdp",
+      "qqs3ckyc6mlk4snw28v22w4rz7auxlsancwtmag247",
+      "pzw52hw8pgmx5mt3ts6jphtgjn66ck9lzvhu4tlf5f",
+      "qzchwhegxwkwpw2ma7n5hypcq5tsxgezay7rdmvk9x",
+      "qpstnusvtv6lvx4fdqsptqv4hysafv830c0qg3js0e",
+      "qp7psuu67lxzvfsamdgde8nyv4dmyxpe4ulzk0llr7",
+      "pppmc8mmrsax4hftjvphg7m2erna348lrqef7mvqck",
+      "qzqcuft5qzs52l4nn890aj8pzu23lefar5h0465j8r",
+      "qpf39g54sn9jc5jr707raqlhxa7ga09alv99uljalp",
+      "qrj3p62fpv96w8zsm9x5rx0g85fhvjhw95868550xp",
+      "qq45aphx8ac4z4ypqvuqdsxvdxmvrd056cfmcjzasq",
+      "qr7uuhvuhtudqt20px53qrcju84m6g03ecc30xgp26",
+      "pqnyex4pfwdkrj8lus0ks734q2srdylcgulhsdxft2",
+      "qqz6meavt0z0q98l5kytfwzf98t6mgs8nuluxh2sk2",
+      "qrj8z03ruy8c4mfvvud9new56w73wnlhsvxd4wvn4q",
+      "qpcq0h04gw7ux4ts5ahf5dlu6ya0x2r3qgjkramk27",
+      "qpv9gjhd6m473uzhw6rhxfevfd0vdxwq9u87yhfy3n",
+      "qz3alq79qhkhwmwjgusx6zvl9t04dnfnk5l5n8cad4",
+      "qpcv6uslktn3qcd34s4ma45yg8qycdp5aq7h9a55k9",
+      "qqhhxnycaavartrd4d9d9vz0leyzd6ls6vkxmfl2hv",
+      "qparmxa2xxe27d529dkrr2z5ler56xj5wyxyrskd6q",
+      "qpxwpyyk65hz37hteyz0t20zqzv59qrtyg2ycedfsw",
+      "qqftuah9m6c8hh5xwyx0pw3ukhvjf82u6u563qlxfv",
+      "qq5mf3374vxp2yzycrup7cwnl9tr4kueugnup735pk",
+      "qrsrzjluqlxpue9746nkcuxf54pk7pkkmc0vs2kyfy",
+      "qz03537rusgepyvtu4sre75gyv3933rz4gd8ag35pt",
+      "qzkl5d0zjmmn8rzn523prlc3upvunvcavvkhd52ukz",
+      "qqqx5rz59lh9ke832sljekl5ajzkm3d97u9pqeje6q",
+      "qzlfy4vk9tq4n85vuuew9zwr69tf0pfkysevx9murq",
+      "qqd5x8c7dk9vcxxsdh8v9vt4fymlck854ssahgqr5a",
+      "qq7qazrksmsgw8x35qm2azd5q2vyhe62yun9qeajwu",
+      "qz6d2qadzc9fnzz37s0xkswcav70v7yuxcatj4gtjn",
+      "qqw3y0j78fk2v6gkjylvhqk3zxgs0s5z8g6cxn2zm2",
+      "qrn9g9quzwl0zzrjhl46fvhenhyenyc4avu7e4fp2r",
+      "qptqvchs6y8za6tt7knpj3jal0r8tv29zvcptxe549",
+      "qzkn55653gyxu04wfsgywj6r2f5mnql4mg8zxvuueh",
+      "qrr8kgntjxe82m0kn08e3xwzvcltpa465vegh7e9nw",
+      "qp9szjwy5wwufrhh78dvuy77fshynz5pcgwp02p8fa",
+      "qzth6x6064kvl8c3nr8ytsgqzz64vnnvlynp0et8ea",
+      "qz30hrq3prl9tljgrndttyucdtccvca93qkkk86qfy",
+      "qqcqvqqsnnjmzcyc2d5xfzuamv33js684qgjqfqk54",
+      "qz3fhqjgk9synnvw3tvk4ltk2lln3ua9eqw93gfp6m",
+      "qrfyd2grxzmafwq0qe8xdvy4tf428flwkc3gqhwju0",
+      "qq9er6ng7qqa6u045spclgx3qz4zsg5f4v6kxzpgkq",
+      "qp8x7nvh2zs6a0ldlyxyhhjgfdkn828srusk24ssqy",
+      "qqxxeakrcxm5rvezqdqk99wsvlr68jc2lclqqfu27y",
+      "qzdhmn4k8945h3a5xjuqezzazdyz2s8sh5nm78ynw4",
+      "qza75txcd0j5zx59j3sa23053645elhfts43h6drsm",
+      "qrlm46pefwn75hjxwqth5vp60ayr5fu97s57x0ynu5",
+      "qzx2dl00nmvfxnkrt6cfmnphfaxnpjswkv9pzu807h",
+      "prnas732pq3z2ap5kpmj806u8pfrz3azjcyhr7p8s9",
+      "qq6rptj9wu34hwr04sl6lhd6jegrpn6dwy7n3dy2he",
+      "qrak873lp6wk7vp662hq679nlxvnslupqsv336h26x",
+      "qqsmu7hra6zz258c73e09303k567uqrufvk8ndu0cz",
+      "qzqchdz4r5mv76gsaj9cus07sxvxcux9jvkyvnklqt",
+      "pqjewhlpaw8vg9v6m4vlu2y05cuh9pgc2upu73h83t",
+      "qrn3mc4vvzqgwc748vfs2rpaj7m9pwzfkc5tgsl60h",
+      "qrmfr96egjhvkkjcc6kspz0xgemw6ly7vyh22xu5q4",
+      "qq4e6ccv87lzwunc2neal9sl5yw6rh6jqq7ea2derx",
+      "qp9kfun0ncf0vjwsynhqvec3dc29uhxzcc8cucmygc",
+      "qqwd7d4ghxctzs6rtzvjj8c2wka88mt20qfqft8zq9",
+      "qqnfkld25vsu2x4fmlgqgnyhdykeu7q22ca0gscmnx",
+      "qpc62pds34s69t5pfzketu0tg6k99nqfvq9kqvmc8f",
+      "qzhr3zpupgn3vtk2a6kveqsvh9lrx5h9dckshn3fnk",
+      "qpmzz5k0q48gpaly6dn2xuxemn76qdvsny5u84jlcz",
+      "qprhjyulal634n4vhrak3v5yd94lv2xzpywk0evt3k",
+      "qrywaz5ye68tm86jk0kfg4n3hjf574euss4ytsr020",
+      "qpe6ejpre6nvy08lhrgc2ew4p8h0kupyqcmxyn2lsy",
+      "qrq0s0naj77d44cv79sx9ft8l5h7njuzq59cdqxzhv",
+      "qrm2ggmpeuwwq28cu7ezrufjg4846yz9fs3cpah43t",
+      "qqygpwr7fkskqed9gvkgcyuseh3myangyyc9l8nl3x",
+      "qqjlfkvfy8zq4qlwzs6c0ujk4suq5em4acn0jjgwrs",
+      "qrqncarsfp9f5ug6ntnhzutnlag3q4f9c5gfh7sd3j",
+      "pz7e55wj2fdfkch5wmqtlz539zven6rlfy9nxz7vzs",
+      "qr5zh0etzaktgwe2g39ynqn9ntrwh8g34y6gt0qlp6",
+      "qzcpnncgpecymku5h6e03hv4jp2plkcup5zvgddrg0",
+      "qpyaypz8epjtamledwlv7nzlet9yu4vj2532kfcc0y",
+      "qplen9avj5ehdpywmuwkxw3f944q968k4vug7knye0",
+      "qpr3ymgf0uexzad28grdx4zs2g328hs23ccc2xfqv9",
+      "pqc6d6wpm7f4cr6xsg4ztz9vvp3x7kzmcs98kacngg",
+      "qz0qkm44pglg8rcc373aj5eafhxvcfttcsdgf2pkfs",
+      "qrnfm8ayh3xmytsu4zn67lcpvyyjp5cvd5kdktesag",
+      "qzy6k9n36qmzdpda49mrnkwxu6jstqaw7g5dpvep09",
+      "qqm4kak3qm7ctg44ck93px4lw80dxnmypgt7ddghsc",
+      "qz3rqwy04vzz3acgz0fz0a48txt66mgefg8j9x22k3",
+      "qqq3r4h3ljnnxwt0a22s2ghy2hymmkrusq0s0ht0sk",
+      "qrcplugak39dflhmmhnnhza60mkhj5hjgyha07ejxs",
+      "qrgterl7yeu8n55096vkllhqxtxapx7tvgleyqs83f",
+      "qqrnn5yag5rs3a5v9qhk3vrfvphs9uqclyqdef7t4h",
+      "qr2symq4s4wp8z3kvrj2z9hc8amp9l8juu6gh0xlkk",
+      "qq3pxuq8plzemqpa4858urw4ze5kx97zhuk36xuuyp",
+      "qz4njlc27wvtgj4ef8v0euzqldfhchm64yr7jgkgkp",
+      "qz7e2apknmaamvxew24aaw9lg9jl0ehj3cyulnn5kz",
+      "qr4d5d8cfmpvsam66mj5gpu7usvmdj8jyyzjd0p6uu",
+      "qqfl9750nhkmn39detnadwmjv7mq7ztj9vwrcmt28y",
+      "pzttv0ztxt8tefl9zd2c0kg7vukjwhtxduku9sdp56"
+    ];
 
     const categoryOrder = [
       "Projects",
@@ -2698,15 +2730,24 @@ const soloMinerAddresses = [
       lastDialogTrigger = null;
     }
 
-    function renderMinerAddresses() {
-      const cleanedAddresses = soloMinerAddresses
+    function getFormattedMinerAddresses() {
+      const includePrefix = document.getElementById("includeCashAddrPrefix").checked;
+
+      return soloMinerAddresses
         .map(address => String(address).trim())
-        .filter(Boolean);
+        .filter(Boolean)
+        .map(address => {
+          const withoutPrefix = address.replace(/^bitcoincash:/i, "");
+          return includePrefix ? `bitcoincash:${withoutPrefix}` : withoutPrefix;
+        });
+    }
 
-      document.getElementById("minerAddressList").value =
-        cleanedAddresses.join("\n");
+    function renderMinerAddresses() {
+      const addresses = getFormattedMinerAddresses();
 
-      const count = cleanedAddresses.length;
+      document.getElementById("minerAddressList").value = addresses.join("\n");
+
+      const count = addresses.length;
       document.getElementById("minerAddressCount").textContent =
         `${count} ${count === 1 ? "address" : "addresses"}`;
     }
@@ -2715,6 +2756,8 @@ const soloMinerAddresses = [
       const addressList = document.getElementById("minerAddressList");
       const copyStatus = document.getElementById("minerCopyStatus");
       const copyButtonText = document.getElementById("copyMinerButtonText");
+
+      renderMinerAddresses();
       const text = addressList.value;
 
       if (!text) {
@@ -2905,6 +2948,12 @@ const soloMinerAddresses = [
       createCategoryFilters();
       populateFigures();
       initMarketCapCalculator();
+
+      document.getElementById("includeCashAddrPrefix").addEventListener("change", () => {
+        renderMinerAddresses();
+        document.getElementById("minerCopyStatus").textContent = "";
+        document.getElementById("copyMinerButtonText").textContent = "Copy all addresses";
+      });
 
       document.getElementById("openVideoGallery").addEventListener("click", event => {
         openDialog("videoGalleryOverlay", "videoGalleryPanel", event.currentTarget);
