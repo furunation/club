@@ -516,88 +516,6 @@
       transform: translateY(-2px);
     }
 
-    .appreciation-card {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin: 30px 0 42px;
-      padding: 20px 23px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 209, 102, 0.29);
-      border-radius: 20px;
-      background:
-        linear-gradient(105deg, rgba(255, 209, 102, 0.1), transparent 55%),
-        rgba(28, 19, 36, 0.88);
-      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
-      backdrop-filter: blur(12px);
-    }
-
-    .appreciation-card::after {
-      position: absolute;
-      top: -48px;
-      right: 8%;
-      width: 140px;
-      height: 140px;
-      border: 1px solid rgba(255, 209, 102, 0.12);
-      border-radius: 44%;
-      content: "";
-      transform: rotate(30deg);
-      pointer-events: none;
-    }
-
-    .appreciation-icon {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      width: 44px;
-      height: 44px;
-      flex: 0 0 auto;
-      place-items: center;
-      border: 1px solid rgba(255, 209, 102, 0.34);
-      border-radius: 15px;
-      background: rgba(255, 209, 102, 0.1);
-      color: var(--accent-bright);
-      font-size: 1.25rem;
-    }
-
-    .appreciation-copy {
-      position: relative;
-      z-index: 1;
-    }
-
-    .appreciation-copy strong {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--accent-bright);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 0.98rem;
-    }
-
-    .appreciation-copy p {
-      margin: 0;
-      color: #d0bdcc;
-      font-size: 0.87rem;
-      line-height: 1.55;
-    }
-
-    .solo-miners-link {
-      display: inline;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      color: #ffd5e5;
-      font: inherit;
-      font-weight: 600;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      cursor: pointer;
-    }
-
-    .solo-miners-link:hover {
-      color: #fff;
-    }
-
     .ecosystem-section {
       scroll-margin-top: 20px;
     }
@@ -1092,8 +1010,7 @@
       z-index: 2500;
     }
 
-    #statsPanel,
-    #soloMinerPanel {
+    #statsPanel {
       width: min(100%, 680px);
     }
 
@@ -1195,98 +1112,6 @@
 
     .calculator-note {
       margin: 12px 0 0;
-      color: #ab97a7;
-      font-size: 0.76rem;
-      line-height: 1.55;
-    }
-
-    .miner-address-count {
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-
-    .miner-address-list {
-      display: block;
-      width: 100%;
-      min-height: 100px;
-      max-height: 280px;
-      padding: 15px;
-      resize: vertical;
-      overflow: auto;
-      border: 1px solid rgba(255, 168, 201, 0.19);
-      border-radius: 15px;
-      background: rgba(9, 7, 13, 0.48);
-      color: #fff2f8;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.84rem;
-      line-height: 1.75;
-      overflow-wrap: anywhere;
-      white-space: pre-wrap;
-      user-select: text !important;
-      -webkit-user-select: text !important;
-      -webkit-touch-callout: default;
-      cursor: text;
-    }
-
-    .miner-copy-row {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 0 0 15px;
-    }
-
-    .miner-copy-button {
-      display: inline-flex;
-      min-height: 44px;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 10px 16px;
-      border: 1px solid rgba(255, 209, 102, 0.7);
-      border-radius: 999px;
-      background: linear-gradient(135deg, #ffc0d7, #ff9dc1);
-      color: #271321;
-      font-weight: 700;
-      cursor: pointer;
-      transition: filter 0.2s ease, transform 0.2s ease;
-    }
-
-    .miner-copy-button:hover {
-      filter: brightness(1.08);
-      transform: translateY(-2px);
-    }
-
-    .miner-resources-link {
-      display: inline-flex;
-      min-height: 44px;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 16px;
-      border: 1px solid rgba(255, 168, 201, 0.35);
-      border-radius: 999px;
-      background: rgba(255, 168, 201, 0.08);
-      color: #ffd5e5;
-      font-weight: 700;
-      text-decoration: none;
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-    }
-
-    .miner-resources-link:hover {
-      border-color: var(--accent);
-      background: rgba(255, 168, 201, 0.16);
-      transform: translateY(-2px);
-    }
-
-    .miner-copy-status {
-      min-height: 1.4em;
-      color: #a9edc7;
-      font-size: 0.82rem;
-    }
-
-    .miner-address-note {
-      margin: 15px 0 0;
       color: #ab97a7;
       font-size: 0.76rem;
       line-height: 1.55;
@@ -1434,23 +1259,6 @@
         flex-basis: min(82vw, 360px);
       }
 
-      .appreciation-card {
-        align-items: flex-start;
-        gap: 12px;
-        margin: 23px 0 32px;
-        padding: 15px;
-      }
-
-      .appreciation-icon {
-        width: 37px;
-        height: 37px;
-        border-radius: 13px;
-      }
-
-      .appreciation-copy p {
-        font-size: 0.81rem;
-      }
-
       #ecosystemFilters {
         gap: 6px;
       }
@@ -1562,12 +1370,6 @@
       .market-cap-calculator input {
         min-height: 46px;
       }
-
-      .miner-address-list {
-        min-height: 94px;
-        padding: 12px;
-        font-size: 0.76rem;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1658,23 +1460,6 @@
 
         <div id="videoGallery" class="video-gallery" aria-label="Seven most recent Bitcoin Cash and Furu videos"></div>
       </section>
-
-      <aside class="appreciation-card" aria-label="Network appreciation">
-        <div class="appreciation-icon" aria-hidden="true">✦</div>
-        <div class="appreciation-copy">
-          <strong>Network appreciation</strong>
-          <p>
-            help sustain a more decentralized network.<br />
-            <button
-              id="openSoloMinerDialog"
-              class="solo-miners-link"
-              type="button"
-              aria-haspopup="dialog"
-              aria-controls="soloMinerOverlay"
-            >View solo miner addresses</button>
-          </p>
-        </div>
-      </aside>
 
       <section id="ecosystem" class="ecosystem-section" aria-labelledby="ecosystem-title">
         <div class="section-heading">
@@ -1820,57 +1605,6 @@
     </section>
   </div>
 
-  <div id="soloMinerOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
-    <section
-      id="soloMinerPanel"
-      class="dialog-panel"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="soloMinerTitle"
-      aria-describedby="soloMinerDescription"
-      tabindex="-1"
-    >
-      <button
-        id="soloMinerClose"
-        class="dialog-close"
-        type="button"
-        aria-label="Close solo miner addresses"
-      >×</button>
-
-      <span class="section-kicker">Supporting decentralization</span>
-      <h2 id="soloMinerTitle" class="dialog-title">Solo miner addresses</h2>
-      <p id="soloMinerDescription" class="dialog-subtitle">
-        Copy the complete list of addresses.
-      </p>
-
-      <p id="minerAddressCount" class="miner-address-count" aria-live="polite"></p>
-
-      <div class="miner-copy-row">
-        <button id="copyMinerAddresses" class="miner-copy-button" type="button">
-          <span aria-hidden="true">▣</span>
-          <span id="copyMinerButtonText">Copy all addresses</span>
-        </button>
-
-        <a
-          class="miner-resources-link"
-          href="https://bch.solopool.org/miners"
-          target="_blank"
-          rel="noopener noreferrer"
-        >SoloPool miners ↗</a>
-
-        <span id="minerCopyStatus" class="miner-copy-status" role="status" aria-live="polite"></span>
-      </div>
-
-      <textarea
-        id="minerAddressList"
-        class="miner-address-list"
-        aria-label="Solo miner addresses, one address per line"
-        readonly
-        spellcheck="false"
-      ></textarea>
-    </section>
-  </div>
-
   <script>
     const videoLinks = [
       "https://youtu.be/y1-HrkdiMNE?si=RgVmcw5g3zden8F7",
@@ -1921,219 +1655,6 @@
       "https://youtu.be/Do4n3uCJT7Q?si=ayeVUDSQmq7SQO57",
       "https://youtu.be/QJECkbuK3qo?si=V0yNB-5Ta2arQjQO"
     ];
-
-const soloMinerAddresses = [
-  "15Z7BryzPddFZyrDSroGYTyARfQ8eqzpdo",
-  "1J6A8u9fx3VHnyPSu2PhiueHDrQZvM3oTY",
-  "13wQEYxedhmWBAwpeySPSuAkW8Zkr9AaDT",
-  "14wjgWeyh8mg2CVmyisMtaktLKejZKS5pq",
-  "1HYqseqsKg4qSGY2DTZAXJbN1xfs8fJmKP",
-  "1LdSKiAJepVdh2dWyAbk1mjKRv6FEucyQZ",
-  "1NTsQHcop4TZ1yieDCgtkn9PPQUvU9D258",
-  "1NiJiaTHUiz7teDT71tpL6E7d4FCcRtMV8",
-  "12PQd493ooDw6ioVdDxaDLty9ERz5FqgWe",
-  "1FCEVb5U9VpKXFCb5frXMSkK64zWUyfWhq",
-  "17Aip9k3PQ7m1dGnTPm4sSYTv2m37g4CQw",
-  "1Jui2v83cs3wCkPXAimkiXZBCuRnt8wDHm",
-  "1Ee9jwtL1SEWiJiCowd7a5Yw9hXYC8qXvV",
-  "16rXzL11e7zfnmSiZTtiC2wYRdxAoLE5Ld",
-  "1JHFZ77cDWFG5bCNy4yMkEJSZqf7zRz5dc",
-  "1MDHARZiGQUyubgbp4ouShMgoLGqKSVHxC",
-  "1NfwNgoG2tjZAdhVetdMFhNHWcJPJqaA6W",
-  "1FnWYEeKKJjjGEHsdGjNuHyWKzF9AtauRg",
-  "1PUvq3qHNpUiUPafp2KKjRKr8hHXf54Z61",
-  "1ML1hHPwukc35ym2NLu5HtfdU8bpUfhG1e",
-  "138313cKSX2qrgcETDX9UdijMU53inu7aC",
-  "1NoiCqgfiZhSThdEGzXNoQLowEGFF7YSaX",
-  "129Ewem5uHw2vruFcBv2ATMDdbrHYfZ4Db",
-  "164NLJiPFGf6B9qk7cdy6ew9DHUJXEyxMx",
-  "1JAN2y4EyRyaQSRgDDxFfW3Ff7DuPmvESr",
-  "1A17mT3dZ86UBTo2NjX7jc8MJPvuqGWN92",
-  "16i3Vv9GKYojMPqycjmB5MnamNgFvVBi4y",
-  "1Jj8usrKAnFPX1Hxad8njGjSzPi8Syok3J",
-  "13pZVCa91fsk8qZEUpXTR4CjZKDjY7Si4n",
-  "13mA2ntndFuWsMVPFMhgv9zQq8cAj5n8Jf",
-  "13VuWXyUDMpAd7tzzN9HN9J62bjqmxBZq8",
-  "15tH9s2YDoSzMgiV7hvruDzUP3chihAn1m",
-  "1HEUZSCK6ZnXffjW9mWuB3D7YGfQi6KYqq",
-  "1M9t8gk81PMtSui7QW5LnqkHEfwGgXKa8Z",
-  "1NiRmDJKcFN4BEBCkaYACbxVWDaQJkSraJ",
-  "18vhhkC7VuhkyJqFSuHcou2NRjg7A4JRCN",
-  "1KAFTioYyCFbm2KZ7NxBnGgt5ZyMCjwHwY",
-  "1BUgg9vT6v5MSbmU4FuEukPwo7cZRjqF5w",
-  "15atuFFbNm6VmRXgXBMwiikKk7UoDziS4y",
-  "1Aa8461Yrk695JZsZdR1cCmgZQ4MpyATs8",
-  "1C7UECViRdyi9fBvcWFYL9mYtZKuzVRHNW",
-  "1G1qnRuS9Yk3CTYUvEYobJZCwTw9vBXre4",
-  "1LQvsxVm8YCRLeQCCfM6H6J9oeUuSYZ4w2",
-  "1Dw8L2SzDcogLJEejrxuyMmL1Zhf41q7PD",
-  "1NogETz6wGK3zij6WBm3rBm29qxE7F74x2",
-  "12S9zQ38bZvjggLHdpv16P9AgKjG8vT5uf",
-  "12JhG1ccdrF1kNvuiDQwJs9ZxgpF5pHNng",
-  "1G1rpEXDQpGLh6W15iUQP6ksQo9kuVaz8h",
-  "1ADZE1o1MGKJ9rubPkYZdBJU1m29k44heW",
-  "1DqrNEfdCqnCaJQDZhznmNiT3VnszAH2w",
-  "1M7KWuhzGUZko3vLi9vu9rkjnVdSf1b3T9",
-  "12Dxwap4JmmB8eiM2JhYNWAjmnMbdHvBXd",
-  "1N6mYWMqVm7JrZmp15eTh4KoMT1HTCqSaN",
-  "1JCUzDdXXtgzE4pjWvnSkpyApCvf6piL6M",
-  "1NmXeatnPEXbmmvGTnUSWs9EK62ukYmubS",
-  "1PJhA5Rdm2P5SQGazHSho16gtm2c6E64Tj",
-  "1GoVxBoAuio6n5eUKNfiTMguTLmPB9FppG",
-  "1ELDwDWfzuLQtaRoVJxNvU86yQZDcecukh",
-  "3ExWX8Y7qQbxtY743SKL72Fr9MnfJV82At",
-  "13eGk2PywUjS7u6A9WAAKHakYQRKypG5Zh",
-  "1FQC84pUBWiy1BbEvr5fbPnVmZ8LMHpPdU",
-  "17HsrENxx9tFCtHEeEJc4N9KPe7ehdP7ZE",
-  "13UxyWNauADfBtvk5HVYHDJHMcW7jyh1R1",
-  "1AEzqDsTAY8bV3AGVEZpjHJXdNpCWwkEwy",
-  "14DMLw7BfChZenCeNGQgRJFMaQJscikx3F",
-  "16BDNvcfemLAWteeEN1dquSeAqgb233Nxu",
-  "14SwEQmzcEjQwhB1Dahtv4vHMFyM1FRd8t",
-  "1GfuwiF5pHEw1Qdzpo4xs5a2gGSBSZszWw",
-  "1CGNJQbWr5YZdBEwcuAiJGQQ5xPp1VvEUW",
-  "1EyXY33oqsEnh6K4E6tXf9vRvvPqL8eECr",
-  "1CKLAqNW1ZGCKfBFVrcSqRGUF1KpqdXRPd",
-  "1PUCasbSbWsiP8qb458Ht9bDvBPddJoJsk",
-  "1DuE5TPRrRgCmLUpY3b4PZiYcSAeVdFWsg",
-  "1Aawh1zhgTzupqHJTXc9kRhuc3NpBW6QK1",
-  "19j2JJbi9C715Hw8m7qpKWK9Q6LvyArmPh",
-  "1BygwhoYsQiH95Ky9NU8L7a96WLbCaDmdL",
-  "147iFRJ3ZRk1uWn5ALNh97v6Me6WRWxLRo",
-  "12DRs1GBDBEq9Wf5UFYXdK6beLV9ckRsfQ",
-  "1AeCS7ViUTqrGVGqCci54eiRRoAekAVupm",
-  "1B6LqKW1kcQDs1smNYRQkkty1BK7awvEwv",
-  "12api7oAGxhDWmy7YhZSD5WhJnPQbrvALd",
-  "18f7G4mPjpWt5HZb7BBsCAqH4B1VVt9tvS",
-  "1MKEcouqpgjpbmdxxoTHmQmbsD2vRvirVs",
-  "16MWMymKcpyQ8h2vGNdW5eUm3GeaL4Nycp",
-  "14EEi81f4tdT46ecReNwmCm61C2zZbX2AP",
-  "1ByKsSUwZ5wSSN6G4jETE9iDzuPiQTCWa7",
-  "3PqRcvjedEUd2F7DqeUpTwmDq7n47NDJ6u",
-  "1Bw2gnysBJ9jvwwZMqhzzwidcG12G9F8w5",
-  "1NNd7SNDiJn79T2E5X3nRrrSgJmbdgFKoZ",
-  "1Dgndf1ERwTyE7qdkm1uqbHJLh2VJdWDiF",
-  "1EFhmkJBSmW7dpmYCoNjxtCUfVgsgkm1x8",
-  "1NaPDmQCvbXWKNPjWNSWXstS2Q88rfV8GA",
-  "17GRPnLpHXzL9fUWESoV42bsWyth36kyBd",
-  "1KgkHFgE8ZVP9S6X1QVdKKv9MENvtDwmUt",
-  "161CsApgMvVaZ3NPPadNuCUwtupSVe8pCZ",
-  "1KTcEWNLYJ2SQdK3VZNE8w2WcopY5qhs18",
-  "13d5TnxEAF6J8erZ5s9K8Gikm4aX8pyeLS",
-  "1LAtciuTK3ftgcfnxmQcyczfTy3uKrrz1q",
-  "1PJrJPgpxrFMSUZ3ZscZcfPoNJStFANPiM",
-  "1Az6Q4N3pBd5oBS7Xsm7ZMKANpfUwMQJrV",
-  "12KD2ftNk394hPcff8gZRNHTaC4vNbVwDX",
-  "1MQeAqrndvYZYuKKEo6pmEKAXmjZUknDzT",
-  "1JchzH6F8nKye1Aj2VGfrtXGVJbJQtUws5",
-  "1B8eeud7vXTNcebti3dQtNtBkiCjgSrZ9B",
-  "1F9DWEodeC7rfKS3mvQVYRYs837qPDsssg",
-  "13X3Fa1w4kikxQbrjiZNLoLQKq1yzRFXqX",
-  "1HYUJmp361ZNG2W6c9sA7SoAj6X6GHb3ey",
-  "15T7oGzPHbkKbBZAX3r4SoY8Yy6jAN7KXe",
-  "1FAo8xSgtLn8s1wqeGosZHQBLRG6WQsV64",
-  "15DGiJbVoZBZNHVgVMVgrUcLvKQNZLQuWs",
-  "1Q3dtn7PyABUbPMYjFRTEWcMNDBKAnoArg",
-  "125YRFzCqVuSxkXK6oznFYnFY8tUEfQJ2G",
-  "1Er8ceRLyvvsrunwJ1BtMZP1VpWqnfDVqk",
-  "1GqfMMowYaL9e1uraX7VvKVqU9ARaFppz8",
-  "1DUvzrRtLBW7b5hs2JsRfZnbxCRjadGo2K",
-  "1425FrLpd3DC3bC82DBtUjWN2Hd7YyXNDE",
-  "3G2b7KN4nAdRSDdHsSvppHApGDGZMtZZ6A",
-  "1HBMc3eQyaVtYQWUznHcTv2rqSjTFb4GjH",
-  "19pSd8sGA3sXRqjpGdfDxJ1MZETMubm2XM",
-  "1CKA5iLknQTjp6yiTFuqUxcrczUE1eqv3i",
-  "37sAZQiLGssLSjDaD4rCK7Jvbubbi1WHB1",
-  "1Cp2TFAn3w3ymG8EfWT98G1aMm2ZWigs7d",
-  "18aFQiEeXwYFappYVByTgtuuV8ZYhiCtXX",
-  "1MtBzwoWfBmyeGrtUVT7qJfQ8RAYNXMinj",
-  "14wz8Q2BSya2QFkpVMk9UkVth2eyW7mPxu",
-  "1Q91B59EDZ8GHw8oBh7YifdtrZFvqz9LqM",
-  "35BXNNf1cdKYRv6zzv8BRz8xkxmkQ8NXCP",
-  "1X2i68upRsup9HFXec2xcpPLMggfX1oNw",
-  "1MptiysQXzvBkBXGUfac9VmsRkSZPByKhd",
-  "1BDN76XuruMbfCYJasfh2VTWBT2bVnaQk5",
-  "1943Se7rURoARMdRHBiznXqCFubd1dEHNx",
-  "1FwUuLwGU6wyyfCHaSfQBHM1Cy62F7iGsv",
-  "1BHSo7LGjhwtd82hmKu8pQdWPBdksMW7P3",
-  "15Ktt9SRSne9912MHEXCDu1WCHkNFGxgZo",
-  "1C9MF1Pk46oMQGR2QLvV4vTwqgAfCmG2d4",
-  "181VNcg4sHuzCKx1WhL8LuVfePqTNEgQ7j",
-  "12i7L9y3Zmxmy4zgNDYiEMDANQRKEM7RSE",
-  "14oXGHpyYJgMSAXcn9qMt1a8EUgyPDaE93",
-  "1MSRRB24PJD77qwjqFProcrUcuiLmSBfh6",
-  "1FWFvVTHUaXftHLUYLmHSKeVLG58RW3aLX",
-  "1Grue7jtf45J2SrfAaWQrAWJPWAEQg7upt",
-  "113C3McFCK2SLULmqDFKYkWPhRnWJkjUKN",
-  "1JNegwDYWcXgj2HKWVQrfzERZe4c9UM3xn",
-  "13V9esHhkmjCBugXAGGo3Losfim8dcNa6g",
-  "16UYxHVrC2CSmwXimAKPPQjKxkYw4Gs3Y9",
-  "1HV9p2Yi3cFCVmnHm8diC7nUUCjprbTSmX",
-  "13eiT9qeJTsAkTsjT9R5KcdcUEUpKmfap1",
-  "1Mzs915PJp5ss2AoFd1dUsf1JbLb3QDztB",
-  "18qrmEphWZVZR2dfZ5RoTBNyfCcC9FpiUT",
-  "1GnwmiR5TJCTHtWtGgeaSz4MJZGa2pdfS4",
-  "1K6UJWpzdipLLiGoYYu2K7XH3c2JMdsxXw",
-  "17qbDtctjxTbN6WtAfMZemNZZU4MwqXS1f",
-  "1EozuXpbnrE4mRW5dBTwkXRCtxMZifRYje",
-  "1Frmosv9vNXwHGS9G3JYXy8tXoZ5fzo2ao",
-  "15Nvd7YQ3sdjgkcEyH292LNseKvme2hq2h",
-  "1Fpnm2Vu3c6KTKXAQRdsZudX83uAjcD1bU",
-  "1LAqYqooALJMJwksciEj6Cko8rqLKU4Vun",
-  "124BEWUYZULiVRwQYATXPzWkWy1okYv61J",
-  "189j3SMF7HfCZoASDy3CFzhrHUZnvMA3wW",
-  "128heFPqUkwJu8U7yE2pt9za9hefr6uGC4",
-  "1FBASzQpDiCbbyTeXKZkmCbyRvHtn73Wqz",
-  "1J8btedkSHPvpQatBb71xx7hjYKgfUQ3Kd",
-  "1QKBDTBaS83rL4oqHT1FHfifG4FYtSn4px",
-  "1DphefFXmVvmLry98maaikhfvqNmRhrZeu",
-  "3NpuLxRZMMhRhpGunVco3DwmyBq3RgBLTk",
-  "15kxTNd9DCFdX9piwazW4chPHPGv5a7f3S",
-  "1PvENiACYhB3b5PNLBYVpijc6TUCsAvK6F",
-  "145RV7i1534vaVfLYqUBYaufJGxmf2XUwx",
-  "1CoyXacyB1zh8PMmfqkaxEDQwtEMqZ82Rj",
-  "357nGL2vxfWxrMuVi6pP5TUmZMsiyWQPuq",
-  "1N52tnos95kjhAb3yfw2EGzCxnxPpvssjV",
-  "1PUje3b51hUfew24bBYL5mEZeVVET1jfY2",
-  "14ycbgbM8WAbXW9hvzh9E9pbs3GXCwFVKL",
-  "17secJv7LR7kXBXCA584RNoQKqZEkQb7HB",
-  "13dfKX3ReJLgbzCHcM6z35LKr3CcbpSWTZ",
-  "14X8wzAiAnXwCrnNRxME5rgznQZxRxyE7h",
-  "1BMu3d5btA5NRoZwJmur7wMcf1msb9PxSG",
-  "1GtCJJXnyVBjVxv62LWHT6i8235KrY1fKz",
-  "1BmcezVyde8utA4A6UjSqPPyTeghtk22Aq",
-  "17Wv2B5QSVS6vvXzdq3eeu13vkisqjQMgu",
-  "1KKRuVWSRpWhuqeEiJ5sLCauiVxv24qTkp",
-  "1BYdh9iBhg2BkiEotdQRd6LA24Hcc3iRvt",
-  "1JbL88nKdxdyQTXNLDP8khyjskNVfmsVGn",
-  "1PV7riMybnTyi7gcbR4PgiVrC2zXkjUeNL",
-  "1mxcCqZYGcHEamAAgU3ctbVFqRBUbmRhJ",
-  "14ThKZH7iWNoC17ruA7zKpSv7SKD9dvNAL",
-  "1JcjqVwtW3ZVtuYj2XFKjWvvREw1hENi6u",
-  "3JyYW7beJmHK2hg6ELcjQ1NuM7STQNQDQW",
-  "1NAcB5mbkAVHbpN6fiW2GmL2tjjhJDfv61",
-  "1H48qz2aDVnvxrnuCeaHRdpY3v3Kk6sSxR",
-  "17jKvDq1MmPeTZKTUT2fgWYu9wTgFCkNqR",
-  "1Cdgp9yy3FaNrAVy1KTjC2wUq2ZgqQo4ud",
-  "17Uo3so35fiM1E915RdVz2xYE8KQGFZ8Nm",
-  "36DYzGcPM9BbBkc5MksAPQyWmgjho7R9PC",
-  "1FQfTegmvvht25rxxc6SKR1DY1khRsnCVC",
-  "1N2PF15Am3fMf36my5xoV3sbvPwf9xoELx",
-  "1DYvXfKpfBndMpWkVcBfWQr4Am75zNY3Dg",
-  "163hjbCWckNFBAEnmgynqPQKwPdeN2x7bG",
-  "1FnaEXXaBLhURRACTjVkmypEcBWnjsEKwG",
-  "16f3iExzyfTTTkJRuoMniXhUaELarguHK",
-  "1NtfSQ7uyeNWJa22AH8b3sphoyDhihW3uY",
-  "1L2hSTA17mdrN8BtkQ8fnqUwrYZzWRkZhf",
-  "1fCzPmGkzghiTfA41dNQMcsa9uvjdXD83",
-  "1LRHqA8uDr6nivC3XmaKdo3wEG6rGK5PMT",
-  "147BG57VxvkkA3gtufUA9ghq6uMeE4t4HM",
-  "1GcMRiNLzpLcCpJYaFpayYmDN2AQW2zW2Z",
-  "1JHRkVwjqTAb7zLb6rPCQqNwoP2WEmP5rs",
-  "1NQnXAtXWYLoi96yoVZfr4L6osWwJMknxs",
-  "12pUv74mp6M8n8bqKsbGaHdMqEVo38xtQ8",
-  "3FRubGHgCs537VkzLUGm8AyyrixvKLrJRz"
-];
 
     const categoryOrder = [
       "Projects",
@@ -2188,14 +1709,6 @@ const soloMinerAddresses = [
         src: "https://i.postimg.cc/gkh7VJfM/dwellers.png",
         caption: "Dwellers Art",
         description: "Dwellers Art is a creative project and artist profile in the Bitcoin Cash community.",
-        categories: ["Projects"]
-      },
-      {
-        href: "https://cashmint.cash/collection/8c44b485cedda5b9faccb5aa5350657f5891c2693cfcbbe857ddebbd05923a2a",
-        src: "https://i.postimg.cc/pVGJpcxF/bafybeicmgcfeyljscvwmnq5uoa7jzvlq5yjh5vkcboctvmmgf3zl244uye.webp",
-        caption: "Furu Plasma",
-        detail: "FURU for solo miners",
-        description: "Furu Plasma is a FURU collection intended to support and recognize Bitcoin Cash solo miners.",
         categories: ["Projects"]
       },
       {
@@ -2698,60 +2211,6 @@ const soloMinerAddresses = [
       lastDialogTrigger = null;
     }
 
-    function renderMinerAddresses() {
-      const cleanedAddresses = soloMinerAddresses
-        .map(address => String(address).trim())
-        .filter(Boolean);
-
-      document.getElementById("minerAddressList").value =
-        cleanedAddresses.join("\n");
-
-      const count = cleanedAddresses.length;
-      document.getElementById("minerAddressCount").textContent =
-        `${count} ${count === 1 ? "address" : "addresses"}`;
-    }
-
-    async function copyMinerAddressList() {
-      const addressList = document.getElementById("minerAddressList");
-      const copyStatus = document.getElementById("minerCopyStatus");
-      const copyButtonText = document.getElementById("copyMinerButtonText");
-      const text = addressList.value;
-
-      if (!text) {
-        copyStatus.textContent = "There are no addresses to copy.";
-        return;
-      }
-
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-        } else {
-          addressList.focus();
-          addressList.select();
-          addressList.setSelectionRange(0, addressList.value.length);
-
-          if (!document.execCommand("copy")) {
-            throw new Error("Clipboard copy was unavailable.");
-          }
-        }
-
-        copyStatus.textContent = "All addresses copied.";
-        copyButtonText.textContent = "Copied!";
-      } catch (error) {
-        console.warn("Unable to copy miner addresses:", error);
-        addressList.focus();
-        addressList.select();
-        addressList.setSelectionRange(0, addressList.value.length);
-        copyStatus.textContent =
-          "Copy was blocked. The list is selected—copy it manually.";
-      }
-
-      window.setTimeout(() => {
-        copyButtonText.textContent = "Copy all addresses";
-        copyStatus.textContent = "";
-      }, 2500);
-    }
-
     function initMarketCapCalculator() {
       const tokenPriceInput = document.getElementById("tokenPrice");
       const tokenQuantityInput = document.getElementById("tokenQuantity");
@@ -2901,7 +2360,6 @@ const soloMinerAddresses = [
 
     document.addEventListener("DOMContentLoaded", () => {
       renderVideos();
-      renderMinerAddresses();
       createCategoryFilters();
       populateFigures();
       initMarketCapCalculator();
@@ -2922,16 +2380,6 @@ const soloMinerAddresses = [
         closeDialog("statsOverlay");
       });
 
-      document.getElementById("openSoloMinerDialog").addEventListener("click", event => {
-        openDialog("soloMinerOverlay", "soloMinerPanel", event.currentTarget);
-      });
-
-      document.getElementById("soloMinerClose").addEventListener("click", () => {
-        closeDialog("soloMinerOverlay");
-      });
-
-      document.getElementById("copyMinerAddresses").addEventListener("click", copyMinerAddressList);
-
       document.getElementById("videoGalleryOverlay").addEventListener("click", event => {
         if (event.target.id === "videoGalleryOverlay") {
           closeDialog("videoGalleryOverlay");
@@ -2941,12 +2389,6 @@ const soloMinerAddresses = [
       document.getElementById("statsOverlay").addEventListener("click", event => {
         if (event.target.id === "statsOverlay") {
           closeDialog("statsOverlay");
-        }
-      });
-
-      document.getElementById("soloMinerOverlay").addEventListener("click", event => {
-        if (event.target.id === "soloMinerOverlay") {
-          closeDialog("soloMinerOverlay");
         }
       });
 
