@@ -1234,7 +1234,7 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 15px;
+      margin: 0 0 15px;
     }
 
     .miner-copy-button {
@@ -1255,6 +1255,27 @@
 
     .miner-copy-button:hover {
       filter: brightness(1.08);
+      transform: translateY(-2px);
+    }
+
+    .miner-resources-link {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border: 1px solid rgba(255, 168, 201, 0.35);
+      border-radius: 999px;
+      background: rgba(255, 168, 201, 0.08);
+      color: #ffd5e5;
+      font-weight: 700;
+      text-decoration: none;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .miner-resources-link:hover {
+      border-color: var(--accent);
+      background: rgba(255, 168, 201, 0.16);
       transform: translateY(-2px);
     }
 
@@ -1824,6 +1845,22 @@
 
       <p id="minerAddressCount" class="miner-address-count" aria-live="polite"></p>
 
+      <div class="miner-copy-row">
+        <button id="copyMinerAddresses" class="miner-copy-button" type="button">
+          <span aria-hidden="true">▣</span>
+          <span id="copyMinerButtonText">Copy all addresses</span>
+        </button>
+
+        <a
+          class="miner-resources-link"
+          href="https://bch.solopool.org/miners"
+          target="_blank"
+          rel="noopener noreferrer"
+        >SoloPool miners ↗</a>
+
+        <span id="minerCopyStatus" class="miner-copy-status" role="status" aria-live="polite"></span>
+      </div>
+
       <textarea
         id="minerAddressList"
         class="miner-address-list"
@@ -1831,14 +1868,6 @@
         readonly
         spellcheck="false"
       ></textarea>
-
-      <div class="miner-copy-row">
-        <button id="copyMinerAddresses" class="miner-copy-button" type="button">
-          <span aria-hidden="true">▣</span>
-          <span id="copyMinerButtonText">Copy all addresses</span>
-        </button>
-        <span id="minerCopyStatus" class="miner-copy-status" role="status" aria-live="polite"></span>
-      </div>
     </section>
   </div>
 
