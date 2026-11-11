@@ -519,9 +519,10 @@
     .appreciation-card {
       position: relative;
       display: flex;
+      width: 100%;
       align-items: center;
       gap: 16px;
-      margin: 30px 0 42px;
+      margin: 30px 0 22px;
       padding: 20px 23px;
       overflow: hidden;
       border: 1px solid rgba(255, 209, 102, 0.29);
@@ -529,8 +530,20 @@
       background:
         linear-gradient(105deg, rgba(255, 209, 102, 0.1), transparent 55%),
         rgba(28, 19, 36, 0.88);
+      color: inherit;
+      text-align: left;
       box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
       backdrop-filter: blur(12px);
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .appreciation-card:hover {
+      border-color: rgba(255, 209, 102, 0.58);
+      background:
+        linear-gradient(105deg, rgba(255, 209, 102, 0.14), transparent 55%),
+        rgba(34, 22, 42, 0.95);
+      transform: translateY(-2px);
     }
 
     .appreciation-card::after {
@@ -564,6 +577,7 @@
     .appreciation-copy {
       position: relative;
       z-index: 1;
+      flex: 1 1 auto;
     }
 
     .appreciation-copy strong {
@@ -581,21 +595,11 @@
       line-height: 1.55;
     }
 
-    .solo-miners-link {
-      display: inline;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      color: #ffd5e5;
-      font: inherit;
-      font-weight: 600;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      cursor: pointer;
-    }
-
-    .solo-miners-link:hover {
-      color: #fff;
+    .appreciation-open-hint {
+      position: relative;
+      z-index: 1;
+      color: #ffe9a9;
+      font-size: 1.2rem;
     }
 
     .ecosystem-section {
@@ -1016,6 +1020,112 @@
       color: var(--accent);
     }
 
+    #minerOverlay {
+      z-index: 2600;
+    }
+
+    #minerPanel {
+      display: flex;
+      width: min(100%, 780px);
+      max-height: calc(100vh - 48px);
+      max-height: calc(100dvh - 48px);
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .miner-dialog-heading {
+      flex: 0 0 auto;
+      padding-right: 55px;
+    }
+
+    #minerPanel .dialog-close {
+      top: 0;
+      right: 0;
+    }
+
+    .miner-dialog-toolbar {
+      display: flex;
+      flex: 0 0 auto;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: 4px 0 14px;
+    }
+
+    .miner-address-count {
+      margin-right: auto;
+      color: #f2dce9;
+      font-size: 0.87rem;
+      font-weight: 700;
+    }
+
+    .miner-copy-button,
+    .miner-pool-link {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 168, 201, 0.38);
+      border-radius: 13px;
+      background: rgba(255, 168, 201, 0.09);
+      color: #ffd5e5;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .miner-copy-button:hover,
+    .miner-pool-link:hover {
+      border-color: var(--accent);
+      background: rgba(255, 168, 201, 0.17);
+      transform: translateY(-1px);
+    }
+
+    .miner-pool-link {
+      border-color: rgba(255, 209, 102, 0.35);
+      background: rgba(255, 209, 102, 0.07);
+      color: #ffe8aa;
+    }
+
+    .miner-pool-link:hover {
+      border-color: var(--accent-bright);
+      background: rgba(255, 209, 102, 0.13);
+    }
+
+    .miner-copy-status {
+      min-height: 20px;
+      flex: 0 0 auto;
+      margin: 0 0 10px;
+      color: #a9efc2;
+      font-size: 0.78rem;
+    }
+
+    .miner-dialog-addresses {
+      display: block;
+      width: 100%;
+      min-height: 180px;
+      flex: 1 1 auto;
+      padding: 14px;
+      resize: vertical;
+      overflow: auto;
+      border: 1px solid rgba(255, 168, 201, 0.19);
+      border-radius: 14px;
+      background: rgba(9, 7, 13, 0.72);
+      color: #fff2f8;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.8rem;
+      line-height: 1.7;
+      white-space: pre;
+      user-select: text !important;
+      -webkit-user-select: text !important;
+      -webkit-touch-callout: default;
+      cursor: text;
+    }
+
     #videoGalleryOverlay {
       z-index: 2400;
     }
@@ -1092,8 +1202,7 @@
       z-index: 2500;
     }
 
-    #statsPanel,
-    #soloMinerPanel {
+    #statsPanel {
       width: min(100%, 680px);
     }
 
@@ -1195,122 +1304,6 @@
 
     .calculator-note {
       margin: 12px 0 0;
-      color: #ab97a7;
-      font-size: 0.76rem;
-      line-height: 1.55;
-    }
-
-    .miner-address-count {
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-
-    .miner-prefix-option {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin: 0 0 14px;
-      padding: 12px 14px;
-      border: 1px solid rgba(255, 168, 201, 0.17);
-      border-radius: 13px;
-      background: rgba(255, 255, 255, 0.035);
-      color: #dfcbd9;
-      font-size: 0.84rem;
-      line-height: 1.45;
-      cursor: pointer;
-    }
-
-    .miner-prefix-option input {
-      width: 18px;
-      height: 18px;
-      flex: 0 0 auto;
-      margin: 1px 0 0;
-      accent-color: #ff9dc1;
-      cursor: pointer;
-    }
-
-    .miner-address-list {
-      display: block;
-      width: 100%;
-      min-height: 100px;
-      max-height: 280px;
-      padding: 15px;
-      resize: vertical;
-      overflow: auto;
-      border: 1px solid rgba(255, 168, 201, 0.19);
-      border-radius: 15px;
-      background: rgba(9, 7, 13, 0.48);
-      color: #fff2f8;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.84rem;
-      line-height: 1.75;
-      overflow-wrap: anywhere;
-      white-space: pre-wrap;
-      user-select: text !important;
-      -webkit-user-select: text !important;
-      -webkit-touch-callout: default;
-      cursor: text;
-    }
-
-    .miner-copy-row {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 0 0 15px;
-    }
-
-    .miner-copy-button {
-      display: inline-flex;
-      min-height: 44px;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 10px 16px;
-      border: 1px solid rgba(255, 209, 102, 0.7);
-      border-radius: 999px;
-      background: linear-gradient(135deg, #ffc0d7, #ff9dc1);
-      color: #271321;
-      font-weight: 700;
-      cursor: pointer;
-      transition: filter 0.2s ease, transform 0.2s ease;
-    }
-
-    .miner-copy-button:hover {
-      filter: brightness(1.08);
-      transform: translateY(-2px);
-    }
-
-    .miner-resources-link {
-      display: inline-flex;
-      min-height: 44px;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 16px;
-      border: 1px solid rgba(255, 168, 201, 0.35);
-      border-radius: 999px;
-      background: rgba(255, 168, 201, 0.08);
-      color: #ffd5e5;
-      font-weight: 700;
-      text-decoration: none;
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-    }
-
-    .miner-resources-link:hover {
-      border-color: var(--accent);
-      background: rgba(255, 168, 201, 0.16);
-      transform: translateY(-2px);
-    }
-
-    .miner-copy-status {
-      min-height: 1.4em;
-      color: #a9edc7;
-      font-size: 0.82rem;
-    }
-
-    .miner-address-note {
-      margin: 15px 0 0;
       color: #ab97a7;
       font-size: 0.76rem;
       line-height: 1.55;
@@ -1461,7 +1454,7 @@
       .appreciation-card {
         align-items: flex-start;
         gap: 12px;
-        margin: 23px 0 32px;
+        margin: 23px 0 18px;
         padding: 15px;
       }
 
@@ -1473,6 +1466,10 @@
 
       .appreciation-copy p {
         font-size: 0.81rem;
+      }
+
+      .appreciation-open-hint {
+        padding-top: 7px;
       }
 
       #ecosystemFilters {
@@ -1565,6 +1562,32 @@
         font-size: 1.45rem;
       }
 
+      #minerPanel {
+        padding: 22px 16px 17px;
+      }
+
+      .miner-dialog-toolbar {
+        gap: 8px;
+      }
+
+      .miner-address-count {
+        width: 100%;
+        margin: 0 0 2px;
+      }
+
+      .miner-copy-button,
+      .miner-pool-link {
+        min-height: 40px;
+        padding: 9px 11px;
+        font-size: 0.76rem;
+      }
+
+      .miner-dialog-addresses {
+        min-height: 180px;
+        padding: 11px;
+        font-size: 0.72rem;
+      }
+
       .stats-grid {
         grid-template-columns: 1fr;
         gap: 11px;
@@ -1585,12 +1608,6 @@
 
       .market-cap-calculator input {
         min-height: 46px;
-      }
-
-      .miner-address-list {
-        min-height: 94px;
-        padding: 12px;
-        font-size: 0.76rem;
       }
     }
 
@@ -1683,22 +1700,21 @@
         <div id="videoGallery" class="video-gallery" aria-label="Seven most recent Bitcoin Cash and Furu videos"></div>
       </section>
 
-      <aside class="appreciation-card" aria-label="Network appreciation">
-        <div class="appreciation-icon" aria-hidden="true">✦</div>
-        <div class="appreciation-copy">
+      <button
+        id="appreciationButton"
+        class="appreciation-card"
+        type="button"
+        aria-haspopup="dialog"
+        aria-controls="minerOverlay"
+        aria-label="Open solo miner addresses and pool link"
+      >
+        <span class="appreciation-icon" aria-hidden="true">✦</span>
+        <span class="appreciation-copy">
           <strong>Network appreciation</strong>
-          <p>
-            help sustain a more decentralized network.<br />
-            <button
-              id="openSoloMinerDialog"
-              class="solo-miners-link"
-              type="button"
-              aria-haspopup="dialog"
-              aria-controls="soloMinerOverlay"
-            >View solo miner addresses</button>
-          </p>
-        </div>
-      </aside>
+          <p>Support solo miners and help sustain a more decentralized network.</p>
+        </span>
+        <span class="appreciation-open-hint" aria-hidden="true">↗</span>
+      </button>
 
       <section id="ecosystem" class="ecosystem-section" aria-labelledby="ecosystem-title">
         <div class="section-heading">
@@ -1760,6 +1776,49 @@
   </div>
 
   <button id="backToTop" class="hidden" type="button" aria-label="Back to top">↑</button>
+
+  <div id="minerOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
+    <section
+      id="minerPanel"
+      class="dialog-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="minerDialogTitle"
+      aria-describedby="minerDialogDescription"
+      tabindex="-1"
+    >
+      <div class="miner-dialog-heading">
+        <button id="minerClose" class="dialog-close" type="button" aria-label="Close solo miner addresses">×</button>
+        <span class="section-kicker">Supporting decentralization</span>
+        <h2 id="minerDialogTitle" class="dialog-title">Solo miner addresses</h2>
+      </div>
+
+      <div class="miner-dialog-toolbar">
+        <span id="minerAddressCount" class="miner-address-count" aria-live="polite"></span>
+        <button id="copyMinerAddresses" class="miner-copy-button" type="button">
+          <span aria-hidden="true">▣</span>
+          Copy all addresses
+        </button>
+        <a
+          class="miner-pool-link"
+          href="https://bch.solopool.org/miners"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          All solo miners ↗
+        </a>
+      </div>
+
+      <p id="minerCopyStatus" class="miner-copy-status" aria-live="polite"></p>
+      <textarea
+        id="minerDialogAddressList"
+        class="miner-dialog-addresses"
+        aria-label="Solo miner addresses, one address per line"
+        readonly
+        spellcheck="false"
+      ></textarea>
+    </section>
+  </div>
 
   <div id="videoGalleryOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
     <section
@@ -1844,275 +1903,269 @@
     </section>
   </div>
 
-  <div id="soloMinerOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
-    <section
-      id="soloMinerPanel"
-      class="dialog-panel"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="soloMinerTitle"
-      aria-describedby="soloMinerDescription"
-      tabindex="-1"
-    >
-      <button
-        id="soloMinerClose"
-        class="dialog-close"
-        type="button"
-        aria-label="Close solo miner addresses"
-      >×</button>
-
-      <span class="section-kicker">Supporting decentralization</span>
-      <h2 id="soloMinerTitle" class="dialog-title">Solo miner addresses</h2>
-      <p id="soloMinerDescription" class="dialog-subtitle">
-        Choose whether to include the CashAddr prefix, then copy the complete list.
-      </p>
-
-      <p id="minerAddressCount" class="miner-address-count" aria-live="polite"></p>
-
-      <label class="miner-prefix-option" for="includeCashAddrPrefix">
-        <input id="includeCashAddrPrefix" type="checkbox" />
-        <span>Add <code>bitcoincash:</code> prefix before copying</span>
-      </label>
-
-      <div class="miner-copy-row">
-        <button id="copyMinerAddresses" class="miner-copy-button" type="button">
-          <span aria-hidden="true">▣</span>
-          <span id="copyMinerButtonText">Copy all addresses</span>
-        </button>
-
-        <a
-          class="miner-resources-link"
-          href="https://bch.solopool.org/miners"
-          target="_blank"
-          rel="noopener noreferrer"
-        >SoloPool miners ↗</a>
-
-        <span id="minerCopyStatus" class="miner-copy-status" role="status" aria-live="polite"></span>
-      </div>
-
-      <textarea
-        id="minerAddressList"
-        class="miner-address-list"
-        aria-label="Solo miner addresses, one address per line"
-        readonly
-        spellcheck="false"
-      ></textarea>
-    </section>
-  </div>
-
   <script>
-const soloMinerAddresses = [
-  "bitcoincash:qqcl9753chu5nq3vy9g3yvkg0y3xhjvgk5tcpcsadl",
-  "bitcoincash:qzah8kp6w6623wvnzlf8hth49h88tvsk8qc6dpg494",
-  "bitcoincash:qqsr5xar67scgy3y47ynzacsm65q8p3m0qwjrj6672",
-  "bitcoincash:qq45ya7q4kctpc0f54lr8280cne9da4q9gpze9y87l",
-  "bitcoincash:qz6c0dr220wwdrnh8fnsyhfzjfttyh4jp5lvvxwyhp",
-  "bitcoincash:qrt5aq9n4a6ce0nhg8vwefs472d4mu4crcdk3araf5",
-  "bitcoincash:qr4klpuwr0np32nqzey720knqlmakyxmy50rnz8gz7",
-  "bitcoincash:qrhz5lpnu0u7r4hskm3mdawxt07chsagkqx04727e4",
-  "bitcoincash:qq8nflk2hpdzdrurpzf2e6dkudaeux7uecf45ngeef",
-  "bitcoincash:qzdmrxv04aqhe8pt0sg0dgu29u02w2u3a5vxmw650u",
-  "bitcoincash:qpp6wehvsxhw2jkpycevcte7vz2gwrvllga3xu7dxj",
-  "bitcoincash:qrz8yp2lwc0xgkk3u4h5xmrvg8fc8zcaqul8thkfhl",
-  "bitcoincash:qz26q5n23j8rd6nr8x3jgzcveyr8k8krwgtgrnt6kr",
-  "bitcoincash:qpqrdc8at9ptsmfzs2pk9n7cxyjzvexumycuxr9vvy",
-  "bitcoincash:qz7ceu2q77zy4994nt3vcjlypf29gfa3fuutuu90uc",
-  "bitcoincash:qrwmflauj3z06p367qcn6s0q3pysp8gcuy6xzsczyc",
-  "bitcoincash:qrkm04jfzuqdje3kyy9lusv5fhresyhx4q8j94gd0j",
-  "bitcoincash:qz3z6gcy8a5ju2p6drzzcgyhz0g2u28u7sclpemvew",
-  "bitcoincash:qrmf4m5j2ew5hf808xes2ulfapqv2q875qchnuylrr",
-  "bitcoincash:qr004lat42lty0u0hucy93y70tyyqw39kqnj0yauup",
-  "bitcoincash:qqt5f42amd5cheavdjyy5w940jjekexvhgjse5qhuf",
-  "bitcoincash:qrhnq27jrcpsvlhnt644rwshsg5s20k8lgjz8h053a",
-  "bitcoincash:qqxgw9uxrftfltv9tk80p0eeyqze5gkzscj3tlq7p7",
-  "bitcoincash:qqmhht6qrmaj70e30jktk37szurk378wk5amytsjl2",
-  "bitcoincash:qz7r7u9s7q2pxeyhv29px690r79s5c673ufc7d96aj",
-  "bitcoincash:qp3ta37r4w8kdedmnqjezpp5f9f40f3g7v7xwd9z9l",
-  "bitcoincash:qqlfh3xlashy23ujclqa82m0sxes8jy7kqdqlutg7j",
-  "bitcoincash:qrp8yd528ac6cq9d8x27szng0yf2a69zduq86dgda9",
-  "bitcoincash:qq0wa6ma3dpxxcald3h8xw6z0gdtwqe5zvueykr8wt",
-  "bitcoincash:qq0y59ad2x9jea37ccd5wme6lp7322820c3cvm5n4z",
-  "bitcoincash:qqdk0wepfqz9ap56tzsu6qg89u7ue72zuyxvxplp62",
-  "bitcoincash:qq6exvmtlcwezua5w04nd0kfqw9883e53sjmx8753j",
-  "bitcoincash:qzequm8p3l9haehxsqd2nntdztrh40xkgy80dq2tu3",
-  "bitcoincash:qrw3ppk3sll7gxhws0dest47nl05q50msst9mplgj5",
-  "bitcoincash:qrhrqhwvdz98uyfdzx50x4znp8mu0ajnmcyp883780",
-  "bitcoincash:qpt0peeh5g5uayf2ls9593qv3wkl50xwmskkvqvau9",
-  "bitcoincash:qrrny9pkrx94ru4cp9aswze3zhnx7u96myqkpdw2pq",
-  "bitcoincash:qpewmxu780zwpa6k4hf7gymllpf70xh0yuxyvxxp8p",
-  "bitcoincash:qqeynr03cneal8x9sjte58xmt86mtwytncud0d7kag",
-  "bitcoincash:qp50e0cmmerz30tzy4ptc9vrya6kfuxcyyn9lce8zy",
-  "bitcoincash:qpu79xue0g23g9c8c7xf4tu0fzvjmhwnrumvssu8wn",
-  "bitcoincash:qzjt9xl963wtdgrrkspn52prrtzzf6hhuyfqnrqd7l",
-  "bitcoincash:qr20pm4a89ct6etcs6he98m4q3sqeccxhqa4lzjuef",
-  "bitcoincash:qzxau949w4lwzrzraq3kt8mcvqhx2ycsrys563g03r",
-  "bitcoincash:qrhjapn2geuhyxvklnkmdkkeej335g8trgc547vtr6",
-  "bitcoincash:qq8m5pm2mt08zlfwq54rdkrchdrw6mvrncmw4lgx4v",
-  "bitcoincash:qq89pnd3j93tulm9az4fdc3ms83dv2hkyckzg07vh7",
-  "bitcoincash:qzjtx7pam9yw5ck4gmuvfqm5leyvvc43wqjjxae75h",
-  "bitcoincash:qpj3jp0dqu9q5a62dcelcrf6m9ulhllauvh3sd25j5",
-  "bitcoincash:qqpxm3f68x4dt5r02ltgqj2djzd9jpze2sayzqu3s3",
-  "bitcoincash:qrwfgaa3xzw8ml3s9yglyf888lwnyt4u6sq2epwrg0",
-  "bitcoincash:qqxkh5yfzn92s78pu42h45fzrkvp75fadvmjtzeqh0",
-  "bitcoincash:qrnhremsl2v0wu2aqdfka90k03gp4g3k9ux9f89ekw",
-  "bitcoincash:qz72vymvrkfnp2apms0fl4myhsnn6dq0c5xfqj0rax",
-  "bitcoincash:qrhvdpcx56j9ucm9hhq4zf62dv4uwcdq0ykvvet6m4",
-  "bitcoincash:qr62khq2uawjjhk9ej834hjckh5457fjmq7g467g7j",
-  "bitcoincash:qzk42vzq2ev8hhxeynkfthneagunytuapsextyt52v",
-  "bitcoincash:qzfrc406v8gfn5kuk5q4g5uga5sjlyq55uh5n48hvg",
-  "bitcoincash:pzgc00hp0s9hkk89xe5duw7cm8kattwqdsahvknx4w",
-  "bitcoincash:qqw0ejrpc6xpwmnlvl7rqtkwwg8qu36f9gfz7vhkmj",
-  "bitcoincash:qzwlf895g63rht9cj70aqc8dv88azghjk5dam3w40a",
-  "bitcoincash:qpzsrk69acql33p5q7u4x2ykewft9revjvwx7sdk33",
-  "bitcoincash:qqdn5dgac5eedjlfxzw569ee5ta4zhc0m5pasem0px",
-  "bitcoincash:qpj4a5ykqp5mtnv29fytecdsss52yzvwl54xjj6cma",
-  "bitcoincash:qq3nukwkcuz03kvnyrtplhj8q00pqt9la5mgfeh3qj",
-  "bitcoincash:qquvw8c9djahuxw87nrm2yl4v5uxx64jxuzj54k9hd",
-  "bitcoincash:qqjaqz7uz8wws97qxc9284e0vt3u3njceq8n7z97z8",
-  "bitcoincash:qz47tc6a8f06w4l3664729ary4vhhlrd9s0wg8u6yg",
-  "bitcoincash:qpaeze6t9l6jrpa90nks79y7q0gyx98scq9v4ad0c2",
-  "bitcoincash:qzv556eqx5azuaaxxhrv2zuxn5jj8vlcz5qpxt8e26",
-  "bitcoincash:qp7zphm5thd2urehv0u4tz7x82x9gmvazgdwmvhr9s",
-  "bitcoincash:qrm802c9whwsv43rlpgymx9wy57h4m024g64s6n8sr",
-  "bitcoincash:qzxcyr3dlt78c4hv3qsdlrygacdr8n0atucsp9kgpt",
-  "bitcoincash:qp5jfqhu0gmp0xd0l00pa8qngyu2k596wcqlwpk6g2",
-  "bitcoincash:qp0m8rm6t20cvaka04hswfad83jc0jrkfs2yspelcz",
-  "bitcoincash:qpuxnegz49ajndxats85jz3yuhs0ywamfc0jyu884p",
-  "bitcoincash:qq3z6njr4k7ug7ztwtzwa0p2dzj0kh70jg8wlw6fr0",
-  "bitcoincash:qqx4rhcxl8dxu45gq3y48hh38snlxh4q9g4ve4ltlr",
-  "bitcoincash:qp5uyy8lshtr8gpya04hw5e99vqk8dm3rcz5wsw5em",
-  "bitcoincash:qpht8e9650w8zj7fkcgwspe372jv3raftc52faukmf",
-  "bitcoincash:qqg4mtvv8xfyhezxm97wuqn6l8fr5u9tqs2slz3h4x",
-  "bitcoincash:qpflm6vnxx9xkrf6addfhn47g9u0p387vqu0z8pxs8",
-  "bitcoincash:qr0d2hkxd5qj579k50cfuhpaxaz4fws4vqtuxcxreq",
-  "bitcoincash:qqatja2yqqg68ayj3y7y7zvgvrhg7ekjsgm43ue5v7",
-  "bitcoincash:qq3kjw5pf3utkdt5zth6mrpk6xxqgvle0cqnuufykr",
-  "bitcoincash:qpu9sndrl25yqzavfk0lmsfwduwywa3255tf7u55cv",
-  "bitcoincash:prewncpxvxchuhvjss7c3sf7dsswgh3ssqdq03l2qw",
-  "bitcoincash:qpm7jgynracznkel5va75jr2rh3vhqjtecc0azs6ge",
-  "bitcoincash:qr48rp29slz59vv67zua3t2ggvs6eglpyukzqmkzl0",
-  "bitcoincash:qz9j05kkrdfy3yt00mu8gc3v99rru8xc8vl4qcmvnn",
-  "bitcoincash:qzgkzl35qr0etemgztqmustlyz0gyyp4dv60m035yf",
-  "bitcoincash:qrk2464xgau028vhm2lrfgn3trfpyk0xysqeuwzrxe",
-  "bitcoincash:qpztkkesxtpu2f57tahntakltqlncc45rq28j4sg6k",
-  "bitcoincash:qrx0d8te9xskcrqezqq54f744unfmsnyhsyhyhasz9",
-  "bitcoincash:qqmw9zy89cn7xuw6hetsjcm7vk4nzjx3fudcsv577l",
-  "bitcoincash:qr985ltjkk6kedckt7wsd69esnuukvj56ssmtksxa4",
-  "bitcoincash:qqwv9umf0cnhjjryv0ktl3ux084slqgdrv7waeqj2u",
-  "bitcoincash:qrfyjwr8aze2xh7ps7hqguq84qfpxt2nyvqcxqgq3w",
-  "bitcoincash:qr6t9l04avv7aq54qu57aceucear6l8y4vessh9qgw",
-  "bitcoincash:qpkc2k8hvhvatedk5thqkeanee8rtad6rstu4h64dm",
-  "bitcoincash:qq8xnfmm6ws9mgth2773ujq7nl6l0tvmncl6w2up3q",
-  "bitcoincash:qr0ak8zfsg9hy63jp37ps4sfug93wqjupcfzclku96",
-  "bitcoincash:qrqn46tze8erfh759nrj8swx7500yffztup9w7wjud",
-  "bitcoincash:qphj8x085e2q9dn9x5xdxrc7c0uk4q05egfjualrkm",
-  "bitcoincash:qzd3lpkdrg3qf6dj3pwkq8rlyqq4q2hg957t8sz3xm",
-  "bitcoincash:qqdea8qsg32tx5uk672x08e4k39f3pe5dyte063t8z",
-  "bitcoincash:qz6htvuuchy2pl9u28zrp2d69zj9w93llq85wjf6rp",
-  "bitcoincash:qqcdpl3zqdtxj92u0saez3q6qjv0tyjk3uxgmjc4rq",
-  "bitcoincash:qzdkcpym594damj7jfhn8frpmw9pvr7hrg878lqtff",
-  "bitcoincash:qqhr98zfkd8vftrmvjk8r5ls8vt9uqtcyuqys0ur2c",
-  "bitcoincash:qr7v4pta8k8e3tz0mxjrhv4q9m3hwrqt7528x95cnp",
-  "bitcoincash:qq9agppfm8u8g506g9zqeljqtvrw20c5cq542ysgjh",
-  "bitcoincash:qzt7ghax73zh0e57uyualfs70qxcyzj83g5laaa6aa",
-  "bitcoincash:qzkmmh0zd7j8yvjmzcc09n8yzm77lzwnucdapn98gy",
-  "bitcoincash:qzywn590d34xz6gwrc7fmzjdpfjs0gntjg5080lxdp",
-  "bitcoincash:qqs3ckyc6mlk4snw28v22w4rz7auxlsancwtmag247",
-  "bitcoincash:pzw52hw8pgmx5mt3ts6jphtgjn66ck9lzvhu4tlf5f",
-  "bitcoincash:qzchwhegxwkwpw2ma7n5hypcq5tsxgezay7rdmvk9x",
-  "bitcoincash:qpstnusvtv6lvx4fdqsptqv4hysafv830c0qg3js0e",
-  "bitcoincash:qp7psuu67lxzvfsamdgde8nyv4dmyxpe4ulzk0llr7",
-  "bitcoincash:pppmc8mmrsax4hftjvphg7m2erna348lrqef7mvqck",
-  "bitcoincash:qzqcuft5qzs52l4nn890aj8pzu23lefar5h0465j8r",
-  "bitcoincash:qpf39g54sn9jc5jr707raqlhxa7ga09alv99uljalp",
-  "bitcoincash:qrj3p62fpv96w8zsm9x5rx0g85fhvjhw95868550xp",
-  "bitcoincash:qq45aphx8ac4z4ypqvuqdsxvdxmvrd056cfmcjzasq",
-  "bitcoincash:qr7uuhvuhtudqt20px53qrcju84m6g03ecc30xgp26",
-  "bitcoincash:pqnyex4pfwdkrj8lus0ks734q2srdylcgulhsdxft2",
-  "bitcoincash:qqz6meavt0z0q98l5kytfwzf98t6mgs8nuluxh2sk2",
-  "bitcoincash:qrj8z03ruy8c4mfvvud9new56w73wnlhsvxd4wvn4q",
-  "bitcoincash:qpcq0h04gw7ux4ts5ahf5dlu6ya0x2r3qgjkramk27",
-  "bitcoincash:qpv9gjhd6m473uzhw6rhxfevfd0vdxwq9u87yhfy3n",
-  "bitcoincash:qz3alq79qhkhwmwjgusx6zvl9t04dnfnk5l5n8cad4",
-  "bitcoincash:qpcv6uslktn3qcd34s4ma45yg8qycdp5aq7h9a55k9",
-  "bitcoincash:qqhhxnycaavartrd4d9d9vz0leyzd6ls6vkxmfl2hv",
-  "bitcoincash:qparmxa2xxe27d529dkrr2z5ler56xj5wyxyrskd6q",
-  "bitcoincash:qpxwpyyk65hz37hteyz0t20zqzv59qrtyg2ycedfsw",
-  "bitcoincash:qqftuah9m6c8hh5xwyx0pw3ukhvjf82u6u563qlxfv",
-  "bitcoincash:qq5mf3374vxp2yzycrup7cwnl9tr4kueugnup735pk",
-  "bitcoincash:qrsrzjluqlxpue9746nkcuxf54pk7pkkmc0vs2kyfy",
-  "bitcoincash:qz03537rusgepyvtu4sre75gyv3933rz4gd8ag35pt",
-  "bitcoincash:qzkl5d0zjmmn8rzn523prlc3upvunvcavvkhd52ukz",
-  "bitcoincash:qqqx5rz59lh9ke832sljekl5ajzkm3d97u9pqeje6q",
-  "bitcoincash:qzlfy4vk9tq4n85vuuew9zwr69tf0pfkysevx9murq",
-  "bitcoincash:qqd5x8c7dk9vcxxsdh8v9vt4fymlck854ssahgqr5a",
-  "bitcoincash:qq7qazrksmsgw8x35qm2azd5q2vyhe62yun9qeajwu",
-  "bitcoincash:qz6d2qadzc9fnzz37s0xkswcav70v7yuxcatj4gtjn",
-  "bitcoincash:qqw3y0j78fk2v6gkjylvhqk3zxgs0s5z8g6cxn2zm2",
-  "bitcoincash:qrn9g9quzwl0zzrjhl46fvhenhyenyc4avu7e4fp2r",
-  "bitcoincash:qptqvchs6y8za6tt7knpj3jal0r8tv29zvcptxe549",
-  "bitcoincash:qzkn55653gyxu04wfsgywj6r2f5mnql4mg8zxvuueh",
-  "bitcoincash:qrr8kgntjxe82m0kn08e3xwzvcltpa465vegh7e9nw",
-  "bitcoincash:qp9szjwy5wwufrhh78dvuy77fshynz5pcgwp02p8fa",
-  "bitcoincash:qzth6x6064kvl8c3nr8ytsgqzz64vnnvlynp0et8ea",
-  "bitcoincash:qz30hrq3prl9tljgrndttyucdtccvca93qkkk86qfy",
-  "bitcoincash:qqcqvqqsnnjmzcyc2d5xfzuamv33js684qgjqfqk54",
-  "bitcoincash:qz3fhqjgk9synnvw3tvk4ltk2lln3ua9eqw93gfp6m",
-  "bitcoincash:qrfyd2grxzmafwq0qe8xdvy4tf428flwkc3gqhwju0",
-  "bitcoincash:qq9er6ng7qqa6u045spclgx3qz4zsg5f4v6kxzpgkq",
-  "bitcoincash:qp8x7nvh2zs6a0ldlyxyhhjgfdkn828srusk24ssqy",
-  "bitcoincash:qqxxeakrcxm5rvezqdqk99wsvlr68jc2lclqqfu27y",
-  "bitcoincash:qzdhmn4k8945h3a5xjuqezzazdyz2s8sh5nm78ynw4",
-  "bitcoincash:qza75txcd0j5zx59j3sa23053645elhfts43h6drsm",
-  "bitcoincash:qrlm46pefwn75hjxwqth5vp60ayr5fu97s57x0ynu5",
-  "bitcoincash:qzx2dl00nmvfxnkrt6cfmnphfaxnpjswkv9pzu807h",
-  "bitcoincash:prnas732pq3z2ap5kpmj806u8pfrz3azjcyhr7p8s9",
-  "bitcoincash:qq6rptj9wu34hwr04sl6lhd6jegrpn6dwy7n3dy2he",
-  "bitcoincash:qrak873lp6wk7vp662hq679nlxvnslupqsv336h26x",
-  "bitcoincash:qqsmu7hra6zz258c73e09303k567uqrufvk8ndu0cz",
-  "bitcoincash:qzqchdz4r5mv76gsaj9cus07sxvxcux9jvkyvnklqt",
-  "bitcoincash:pqjewhlpaw8vg9v6m4vlu2y05cuh9pgc2upu73h83t",
-  "bitcoincash:qrn3mc4vvzqgwc748vfs2rpaj7m9pwzfkc5tgsl60h",
-  "bitcoincash:qrmfr96egjhvkkjcc6kspz0xgemw6ly7vyh22xu5q4",
-  "bitcoincash:qq4e6ccv87lzwunc2neal9sl5yw6rh6jqq7ea2derx",
-  "bitcoincash:qp9kfun0ncf0vjwsynhqvec3dc29uhxzcc8cucmygc",
-  "bitcoincash:qqwd7d4ghxctzs6rtzvjj8c2wka88mt20qfqft8zq9",
-  "bitcoincash:qqnfkld25vsu2x4fmlgqgnyhdykeu7q22ca0gscmnx",
-  "bitcoincash:qpc62pds34s69t5pfzketu0tg6k99nqfvq9kqvmc8f",
-  "bitcoincash:qzhr3zpupgn3vtk2a6kveqsvh9lrx5h9dckshn3fnk",
-  "bitcoincash:qpmzz5k0q48gpaly6dn2xuxemn76qdvsny5u84jlcz",
-  "bitcoincash:qprhjyulal634n4vhrak3v5yd94lv2xzpywk0evt3k",
-  "bitcoincash:qrywaz5ye68tm86jk0kfg4n3hjf574euss4ytsr020",
-  "bitcoincash:qpe6ejpre6nvy08lhrgc2ew4p8h0kupyqcmxyn2lsy",
-  "bitcoincash:qrq0s0naj77d44cv79sx9ft8l5h7njuzq59cdqxzhv",
-  "bitcoincash:qrm2ggmpeuwwq28cu7ezrufjg4846yz9fs3cpah43t",
-  "bitcoincash:qqygpwr7fkskqed9gvkgcyuseh3myangyyc9l8nl3x",
-  "bitcoincash:qqjlfkvfy8zq4qlwzs6c0ujk4suq5em4acn0jjgwrs",
-  "bitcoincash:qrqncarsfp9f5ug6ntnhzutnlag3q4f9c5gfh7sd3j",
-  "bitcoincash:pz7e55wj2fdfkch5wmqtlz539zven6rlfy9nxz7vzs",
-  "bitcoincash:qr5zh0etzaktgwe2g39ynqn9ntrwh8g34y6gt0qlp6",
-  "bitcoincash:qzcpnncgpecymku5h6e03hv4jp2plkcup5zvgddrg0",
-  "bitcoincash:qpyaypz8epjtamledwlv7nzlet9yu4vj2532kfcc0y",
-  "bitcoincash:qplen9avj5ehdpywmuwkxw3f944q968k4vug7knye0",
-  "bitcoincash:qpr3ymgf0uexzad28grdx4zs2g328hs23ccc2xfqv9",
-  "bitcoincash:pqc6d6wpm7f4cr6xsg4ztz9vvp3x7kzmcs98kacngg",
-  "bitcoincash:qz0qkm44pglg8rcc373aj5eafhxvcfttcsdgf2pkfs",
-  "bitcoincash:qrnfm8ayh3xmytsu4zn67lcpvyyjp5cvd5kdktesag",
-  "bitcoincash:qzy6k9n36qmzdpda49mrnkwxu6jstqaw7g5dpvep09",
-  "bitcoincash:qqm4kak3qm7ctg44ck93px4lw80dxnmypgt7ddghsc",
-  "bitcoincash:qz3rqwy04vzz3acgz0fz0a48txt66mgefg8j9x22k3",
-  "bitcoincash:qqq3r4h3ljnnxwt0a22s2ghy2hymmkrusq0s0ht0sk",
-  "bitcoincash:qrcplugak39dflhmmhnnhza60mkhj5hjgyha07ejxs",
-  "bitcoincash:qrgterl7yeu8n55096vkllhqxtxapx7tvgleyqs83f",
-  "bitcoincash:qqrnn5yag5rs3a5v9qhk3vrfvphs9uqclyqdef7t4h",
-  "bitcoincash:qr2symq4s4wp8z3kvrj2z9hc8amp9l8juu6gh0xlkk",
-  "bitcoincash:qq3pxuq8plzemqpa4858urw4ze5kx97zhuk36xuuyp",
-  "bitcoincash:qz4njlc27wvtgj4ef8v0euzqldfhchm64yr7jgkgkp",
-  "bitcoincash:qz7e2apknmaamvxew24aaw9lg9jl0ehj3cyulnn5kz",
-  "bitcoincash:qr4d5d8cfmpvsam66mj5gpu7usvmdj8jyyzjd0p6uu",
-  "bitcoincash:qqfl9750nhkmn39detnadwmjv7mq7ztj9vwrcmt28y",
-  "bitcoincash:pzttv0ztxt8tefl9zd2c0kg7vukjwhtxduku9sdp56"
-];
+    const videoLinks = [
+      "https://youtu.be/y1-HrkdiMNE?si=RgVmcw5g3zden8F7",
+      "https://youtu.be/z7TivVhdsng?si=9Z2BN-f-oAniwIRW",
+      "https://youtu.be/NzFPMteJ2sU?si=LgEuBWZqfLrEocpY",
+      "https://youtu.be/eVxxF6M2j_o?si=mQAFpy9YxOzXGY5v",
+      "https://youtu.be/3A7Q4IUOd_o?si=M0G_dw-WvfcVBX8E",
+      "https://youtu.be/vqRvO13BeD0?si=Os7GEzwptQZm6P3v",
+      "https://youtu.be/OgOV5V8uEZw?si=Y6EUyNvPXidbv29K",
+      "https://youtu.be/hFOzRzBV210?si=Q8HvwhLNxAEE_f13",
+      "https://youtu.be/GwHz0HM1l7o?si=5qGck7dBH2zOrtK1",
+      "https://youtu.be/0Df2ms4RGJ8?si=3AgZsSmMbOsyhajJ",
+      "https://youtu.be/edqiGnVo3Sc?si=8NM08673sB8SUK2s",
+      "https://youtu.be/Wq3L3YCZgXo?si=D4sJrgZ5FdoGD5O9",
+      "https://youtu.be/wuiCZWqHjw0?si=IeC3uuzI25Mo-plY",
+      "https://youtu.be/TUvm-A4rq0g?si=huzr1zXBo1VBjIKo",
+      "https://youtu.be/Q8xjkBXBfMU?si=jia4prZUPMIwk3Gp",
+      "https://youtu.be/f-wIsao-zFs?si=vGWrudCi7wpP8ujH",
+      "https://youtu.be/kOfTrKjYTvE?si=8Jc27jahg8fOn93g",
+      "https://youtu.be/BSMlA0FwpIA?si=R9-ljgHkQANCm9-Q",
+      "https://youtu.be/a5diuVE6H8c?si=6Nm8JK4nfBHfj144",
+      "https://youtu.be/fx98rdMEjIE?si=LV6-AP_M_IRZtB4E",
+      "https://youtu.be/5IwCLLvnDUk?si=llxaKheQm3VFDaPr",
+      "https://youtu.be/7C3I9wKXqp0?si=Gy5l0kzX05Y-9zqr",
+      "https://youtu.be/UERfWyBT148?si=p2eF0WAmaaIArbO8",
+      "https://youtu.be/acsoeenNaPw?si=mdSNETHHAeTR7HKf",
+      "https://youtu.be/T_kWyoetnHE?si=vaNlI1_hOx8mH3AK",
+      "https://youtu.be/IXeFfqL1tyc?si=4VsUNKm2M5KULqIY",
+      "https://youtu.be/UHiQVMsfqlU?si=yB6JnOFHRi0Yp9t0",
+      "https://youtu.be/-T7DsynLDps?si=sufqNyo7z6YMB61D",
+      "https://youtu.be/JiVUIT49ciA?si=8hGvXVbsyQV0vswJ",
+      "https://youtu.be/605yQwnxz6g?si=y0c7dXkddeHWggSw",
+      "https://youtu.be/lOneGz6C9cQ?si=MFD-D3Vk5wBrJ-r6",
+      "https://youtu.be/gEoZXFUc_V0?si=H4UpI0i1ArrLdMSi",
+      "https://youtu.be/yk2datItUUc?si=RgcYLncKQuW40sDQ",
+      "https://youtu.be/Ud56SFYCPyg?si=w6lv4H9J51L4N-ME",
+      "https://youtu.be/Bgs6PWyW4iU?si=oPiWlnD2TpRqud5v",
+      "https://youtu.be/NnTFEm22qRU?si=R7TcIy6Xi3iAE6jD",
+      "https://youtu.be/eaKiQtujy70?si=nYqLXjvEYM5-sFD",
+      "https://youtu.be/GVBk6hSFc-8?si=t9SkueT51q3lwGRs",
+      "https://youtu.be/rXuUIa7tM2Y?si=SoryGhorW2TznI3v",
+      "https://youtu.be/jHHCgEl7uz4?si=qoX3tMDzkQorwxQT",
+      "https://youtu.be/lPGPt7zLKpI?si=LfdJx2f4KwMXQB23",
+      "https://youtu.be/SUFUzBj9cX0?si=Mv88U61tyEPy8AT-",
+      "https://youtu.be/m_UMaNMNIM8?si=hwkizArkKla3INzI",
+      "https://youtu.be/vfzAPetoSL8?si=tznuQeGkJ90stdHL",
+      "https://youtu.be/xIBJJo7KeLY?si=9X8v7masPVrce3FU",
+      "https://youtu.be/Do4n3uCJT7Q?si=ayeVUDSQmq7SQO57",
+      "https://youtu.be/QJECkbuK3qo?si=V0yNB-5Ta2arQjQO"
+    ];
+
+    const soloMinerAddresses = [
+      "bitcoincash:qqcl9753chu5nq3vy9g3yvkg0y3xhjvgk5tcpcsadl",
+      "bitcoincash:qzah8kp6w6623wvnzlf8hth49h88tvsk8qc6dpg494",
+      "bitcoincash:qqsr5xar67scgy3y47ynzacsm65q8p3m0qwjrj6672",
+      "bitcoincash:qq45ya7q4kctpc0f54lr8280cne9da4q9gpze9y87l",
+      "bitcoincash:qz6c0dr220wwdrnh8fnsyhfzjfttyh4jp5lvvxwyhp",
+      "bitcoincash:qrt5aq9n4a6ce0nhg8vwefs472d4mu4crcdk3araf5",
+      "bitcoincash:qr4klpuwr0np32nqzey720knqlmakyxmy50rnz8gz7",
+      "bitcoincash:qrhz5lpnu0u7r4hskm3mdawxt07chsagkqx04727e4",
+      "bitcoincash:qq8nflk2hpdzdrurpzf2e6dkudaeux7uecf45ngeef",
+      "bitcoincash:qzdmrxv04aqhe8pt0sg0dgu29u02w2u3a5vxmw650u",
+      "bitcoincash:qpp6wehvsxhw2jkpycevcte7vz2gwrvllga3xu7dxj",
+      "bitcoincash:qrz8yp2lwc0xgkk3u4h5xmrvg8fc8zcaqul8thkfhl",
+      "bitcoincash:qz26q5n23j8rd6nr8x3jgzcveyr8k8krwgtgrnt6kr",
+      "bitcoincash:qpqrdc8at9ptsmfzs2pk9n7cxyjzvexumycuxr9vvy",
+      "bitcoincash:qz7ceu2q77zy4994nt3vcjlypf29gfa3fuutuu90uc",
+      "bitcoincash:qrwmflauj3z06p367qcn6s0q3pysp8gcuy6xzsczyc",
+      "bitcoincash:qrkm04jfzuqdje3kyy9lusv5fhresyhx4q8j94gd0j",
+      "bitcoincash:qz3z6gcy8a5ju2p6drzzcgyhz0g2u28u7sclpemvew",
+      "bitcoincash:qrmf4m5j2ew5hf808xes2ulfapqv2q875qchnuylrr",
+      "bitcoincash:qr004lat42lty0u0hucy93y70tyyqw39kqnj0yauup",
+      "bitcoincash:qqt5f42amd5cheavdjyy5w940jjekexvhgjse5qhuf",
+      "bitcoincash:qrhnq27jrcpsvlhnt644rwshsg5s20k8lgjz8h053a",
+      "bitcoincash:qqxgw9uxrftfltv9tk80p0eeyqze5gkzscj3tlq7p7",
+      "bitcoincash:qqmhht6qrmaj70e30jktk37szurk378wk5amytsjl2",
+      "bitcoincash:qz7r7u9s7q2pxeyhv29px690r79s5c673ufc7d96aj",
+      "bitcoincash:qp3ta37r4w8kdedmnqjezpp5f9f40f3g7v7xwd9z9l",
+      "bitcoincash:qqlfh3xlashy23ujclqa82m0sxes8jy7kqdqlutg7j",
+      "bitcoincash:qrp8yd528ac6cq9d8x27szng0yf2a69zduq86dgda9",
+      "bitcoincash:qq0wa6ma3dpxxcald3h8xw6z0gdtwqe5zvueykr8wt",
+      "bitcoincash:qq0y59ad2x9jea37ccd5wme6lp7322820c3cvm5n4z",
+      "bitcoincash:qqdk0wepfqz9ap56tzsu6qg89u7ue72zuyxvxplp62",
+      "bitcoincash:qq6exvmtlcwezua5w04nd0kfqw9883e53sjmx8753j",
+      "bitcoincash:qzequm8p3l9haehxsqd2nntdztrh40xkgy80dq2tu3",
+      "bitcoincash:qrw3ppk3sll7gxhws0dest47nl05q50msst9mplgj5",
+      "bitcoincash:qrhrqhwvdz98uyfdzx50x4znp8mu0ajnmcyp883780",
+      "bitcoincash:qpt0peeh5g5uayf2ls9593qv3wkl50xwmskkvqvau9",
+      "bitcoincash:qrrny9pkrx94ru4cp9aswze3zhnx7u96myqkpdw2pq",
+      "bitcoincash:qpewmxu780zwpa6k4hf7gymllpf70xh0yuxyvxxp8p",
+      "bitcoincash:qqeynr03cneal8x9sjte58xmt86mtwytncud0d7kag",
+      "bitcoincash:qp50e0cmmerz30tzy4ptc9vrya6kfuxcyyn9lce8zy",
+      "bitcoincash:qpu79xue0g23g9c8c7xf4tu0fzvjmhwnrumvssu8wn",
+      "bitcoincash:qzjt9xl963wtdgrrkspn52prrtzzf6hhuyfqnrqd7l",
+      "bitcoincash:qr20pm4a89ct6etcs6he98m4q3sqeccxhqa4lzjuef",
+      "bitcoincash:qzxau949w4lwzrzraq3kt8mcvqhx2ycsrys563g03r",
+      "bitcoincash:qrhjapn2geuhyxvklnkmdkkeej335g8trgc547vtr6",
+      "bitcoincash:qq8m5pm2mt08zlfwq54rdkrchdrw6mvrncmw4lgx4v",
+      "bitcoincash:qq89pnd3j93tulm9az4fdc3ms83dv2hkyckzg07vh7",
+      "bitcoincash:qzjtx7pam9yw5ck4gmuvfqm5leyvvc43wqjjxae75h",
+      "bitcoincash:qpj3jp0dqu9q5a62dcelcrf6m9ulhllauvh3sd25j5",
+      "bitcoincash:qqpxm3f68x4dt5r02ltgqj2djzd9jpze2sayzqu3s3",
+      "bitcoincash:qrwfgaa3xzw8ml3s9yglyf888lwnyt4u6sq2epwrg0",
+      "bitcoincash:qqxkh5yfzn92s78pu42h45fzrkvp75fadvmjtzeqh0",
+      "bitcoincash:qrnhremsl2v0wu2aqdfka90k03gp4g3k9ux9f89ekw",
+      "bitcoincash:qz72vymvrkfnp2apms0fl4myhsnn6dq0c5xfqj0rax",
+      "bitcoincash:qrhvdpcx56j9ucm9hhq4zf62dv4uwcdq0ykvvet6m4",
+      "bitcoincash:qr62khq2uawjjhk9ej834hjckh5457fjmq7g467g7j",
+      "bitcoincash:qzk42vzq2ev8hhxeynkfthneagunytuapsextyt52v",
+      "bitcoincash:qzfrc406v8gfn5kuk5q4g5uga5sjlyq55uh5n48hvg",
+      "bitcoincash:pzgc00hp0s9hkk89xe5duw7cm8kattwqdsahvknx4w",
+      "bitcoincash:qqw0ejrpc6xpwmnlvl7rqtkwwg8qu36f9gfz7vhkmj",
+      "bitcoincash:qzwlf895g63rht9cj70aqc8dv88azghjk5dam3w40a",
+      "bitcoincash:qpzsrk69acql33p5q7u4x2ykewft9revjvwx7sdk33",
+      "bitcoincash:qqdn5dgac5eedjlfxzw569ee5ta4zhc0m5pasem0px",
+      "bitcoincash:qpj4a5ykqp5mtnv29fytecdsss52yzvwl54xjj6cma",
+      "bitcoincash:qq3nukwkcuz03kvnyrtplhj8q00pqt9la5mgfeh3qj",
+      "bitcoincash:qquvw8c9djahuxw87nrm2yl4v5uxx64jxuzj54k9hd",
+      "bitcoincash:qqjaqz7uz8wws97qxc9284e0vt3u3njceq8n7z97z8",
+      "bitcoincash:qz47tc6a8f06w4l3664729ary4vhhlrd9s0wg8u6yg",
+      "bitcoincash:qpaeze6t9l6jrpa90nks79y7q0gyx98scq9v4ad0c2",
+      "bitcoincash:qzv556eqx5azuaaxxhrv2zuxn5jj8vlcz5qpxt8e26",
+      "bitcoincash:qp7zphm5thd2urehv0u4tz7x82x9gmvazgdwmvhr9s",
+      "bitcoincash:qrm802c9whwsv43rlpgymx9wy57h4m024g64s6n8sr",
+      "bitcoincash:qzxcyr3dlt78c4hv3qsdlrygacdr8n0atucsp9kgpt",
+      "bitcoincash:qp5jfqhu0gmp0xd0l00pa8qngyu2k596wcqlwpk6g2",
+      "bitcoincash:qp0m8rm6t20cvaka04hswfad83jc0jrkfs2yspelcz",
+      "bitcoincash:qpuxnegz49ajndxats85jz3yuhs0ywamfc0jyu884p",
+      "bitcoincash:qq3z6njr4k7ug7ztwtzwa0p2dzj0kh70jg8wlw6fr0",
+      "bitcoincash:qqx4rhcxl8dxu45gq3y48hh38snlxh4q9g4ve4ltlr",
+      "bitcoincash:qp5uyy8lshtr8gpya04hw5e99vqk8dm3rcz5wsw5em",
+      "bitcoincash:qpht8e9650w8zj7fkcgwspe372jv3raftc52faukmf",
+      "bitcoincash:qqg4mtvv8xfyhezxm97wuqn6l8fr5u9tqs2slz3h4x",
+      "bitcoincash:qpflm6vnxx9xkrf6addfhn47g9u0p387vqu0z8pxs8",
+      "bitcoincash:qr0d2hkxd5qj579k50cfuhpaxaz4fws4vqtuxcxreq",
+      "bitcoincash:qqatja2yqqg68ayj3y7y7zvgvrhg7ekjsgm43ue5v7",
+      "bitcoincash:qq3kjw5pf3utkdt5zth6mrpk6xxqgvle0cqnuufykr",
+      "bitcoincash:qpu9sndrl25yqzavfk0lmsfwduwywa3255tf7u55cv",
+      "bitcoincash:prewncpxvxchuhvjss7c3sf7dsswgh3ssqdq03l2qw",
+      "bitcoincash:qpm7jgynracznkel5va75jr2rh3vhqjtecc0azs6ge",
+      "bitcoincash:qr48rp29slz59vv67zua3t2ggvs6eglpyukzqmkzl0",
+      "bitcoincash:qz9j05kkrdfy3yt00mu8gc3v99rru8xc8vl4qcmvnn",
+      "bitcoincash:qzgkzl35qr0etemgztqmustlyz0gyyp4dv60m035yf",
+      "bitcoincash:qrk2464xgau028vhm2lrfgn3trfpyk0xysqeuwzrxe",
+      "bitcoincash:qpztkkesxtpu2f57tahntakltqlncc45rq28j4sg6k",
+      "bitcoincash:qrx0d8te9xskcrqezqq54f744unfmsnyhsyhyhasz9",
+      "bitcoincash:qqmw9zy89cn7xuw6hetsjcm7vk4nzjx3fudcsv577l",
+      "bitcoincash:qr985ltjkk6kedckt7wsd69esnuukvj56ssmtksxa4",
+      "bitcoincash:qqwv9umf0cnhjjryv0ktl3ux084slqgdrv7waeqj2u",
+      "bitcoincash:qrfyjwr8aze2xh7ps7hqguq84qfpxt2nyvqcxqgq3w",
+      "bitcoincash:qr6t9l04avv7aq54qu57aceucear6l8y4vessh9qgw",
+      "bitcoincash:qpkc2k8hvhvatedk5thqkeanee8rtad6rstu4h64dm",
+      "bitcoincash:qq8xnfmm6ws9mgth2773ujq7nl6l0tvmncl6w2up3q",
+      "bitcoincash:qr0ak8zfsg9hy63jp37ps4sfug93wqjupcfzclku96",
+      "bitcoincash:qrqn46tze8erfh759nrj8swx7500yffztup9w7wjud",
+      "bitcoincash:qphj8x085e2q9dn9x5xdxrc7c0uk4q05egfjualrkm",
+      "bitcoincash:qzd3lpkdrg3qf6dj3pwkq8rlyqq4q2hg957t8sz3xm",
+      "bitcoincash:qqdea8qsg32tx5uk672x08e4k39f3pe5dyte063t8z",
+      "bitcoincash:qz6htvuuchy2pl9u28zrp2d69zj9w93llq85wjf6rp",
+      "bitcoincash:qqcdpl3zqdtxj92u0saez3q6qjv0tyjk3uxgmjc4rq",
+      "bitcoincash:qzdkcpym594damj7jfhn8frpmw9pvr7hrg878lqtff",
+      "bitcoincash:qqhr98zfkd8vftrmvjk8r5ls8vt9uqtcyuqys0ur2c",
+      "bitcoincash:qr7v4pta8k8e3tz0mxjrhv4q9m3hwrqt7528x95cnp",
+      "bitcoincash:qq9agppfm8u8g506g9zqeljqtvrw20c5cq542ysgjh",
+      "bitcoincash:qzt7ghax73zh0e57uyualfs70qxcyzj83g5laaa6aa",
+      "bitcoincash:qzkmmh0zd7j8yvjmzcc09n8yzm77lzwnucdapn98gy",
+      "bitcoincash:qzywn590d34xz6gwrc7fmzjdpfjs0gntjg5080lxdp",
+      "bitcoincash:qqs3ckyc6mlk4snw28v22w4rz7auxlsancwtmag247",
+      "bitcoincash:pzw52hw8pgmx5mt3ts6jphtgjn66ck9lzvhu4tlf5f",
+      "bitcoincash:qzchwhegxwkwpw2ma7n5hypcq5tsxgezay7rdmvk9x",
+      "bitcoincash:qpstnusvtv6lvx4fdqsptqv4hysafv830c0qg3js0e",
+      "bitcoincash:qp7psuu67lxzvfsamdgde8nyv4dmyxpe4ulzk0llr7",
+      "bitcoincash:pppmc8mmrsax4hftjvphg7m2erna348lrqef7mvqck",
+      "bitcoincash:qzqcuft5qzs52l4nn890aj8pzu23lefar5h0465j8r",
+      "bitcoincash:qpf39g54sn9jc5jr707raqlhxa7ga09alv99uljalp",
+      "bitcoincash:qrj3p62fpv96w8zsm9x5rx0g85fhvjhw95868550xp",
+      "bitcoincash:qq45aphx8ac4z4ypqvuqdsxvdxmvrd056cfmcjzasq",
+      "bitcoincash:qr7uuhvuhtudqt20px53qrcju84m6g03ecc30xgp26",
+      "bitcoincash:pqnyex4pfwdkrj8lus0ks734q2srdylcgulhsdxft2",
+      "bitcoincash:qqz6meavt0z0q98l5kytfwzf98t6mgs8nuluxh2sk2",
+      "bitcoincash:qrj8z03ruy8c4mfvvud9new56w73wnlhsvxd4wvn4q",
+      "bitcoincash:qpcq0h04gw7ux4ts5ahf5dlu6ya0x2r3qgjkramk27",
+      "bitcoincash:qpv9gjhd6m473uzhw6rhxfevfd0vdxwq9u87yhfy3n",
+      "bitcoincash:qz3alq79qhkhwmwjgusx6zvl9t04dnfnk5l5n8cad4",
+      "bitcoincash:qpcv6uslktn3qcd34s4ma45yg8qycdp5aq7h9a55k9",
+      "bitcoincash:qqhhxnycaavartrd4d9d9vz0leyzd6ls6vkxmfl2hv",
+      "bitcoincash:qparmxa2xxe27d529dkrr2z5ler56xj5wyxyrskd6q",
+      "bitcoincash:qpxwpyyk65hz37hteyz0t20zqzv59qrtyg2ycedfsw",
+      "bitcoincash:qqftuah9m6c8hh5xwyx0pw3ukhvjf82u6u563qlxfv",
+      "bitcoincash:qq5mf3374vxp2yzycrup7cwnl9tr4kueugnup735pk",
+      "bitcoincash:qrsrzjluqlxpue9746nkcuxf54pk7pkkmc0vs2kyfy",
+      "bitcoincash:qz03537rusgepyvtu4sre75gyv3933rz4gd8ag35pt",
+      "bitcoincash:qzkl5d0zjmmn8rzn523prlc3upvunvcavvkhd52ukz",
+      "bitcoincash:qqqx5rz59lh9ke832sljekl5ajzkm3d97u9pqeje6q",
+      "bitcoincash:qzlfy4vk9tq4n85vuuew9zwr69tf0pfkysevx9murq",
+      "bitcoincash:qqd5x8c7dk9vcxxsdh8v9vt4fymlck854ssahgqr5a",
+      "bitcoincash:qq7qazrksmsgw8x35qm2azd5q2vyhe62yun9qeajwu",
+      "bitcoincash:qz6d2qadzc9fnzz37s0xkswcav70v7yuxcatj4gtjn",
+      "bitcoincash:qqw3y0j78fk2v6gkjylvhqk3zxgs0s5z8g6cxn2zm2",
+      "bitcoincash:qrn9g9quzwl0zzrjhl46fvhenhyenyc4avu7e4fp2r",
+      "bitcoincash:qptqvchs6y8za6tt7knpj3jal0r8tv29zvcptxe549",
+      "bitcoincash:qzkn55653gyxu04wfsgywj6r2f5mnql4mg8zxvuueh",
+      "bitcoincash:qrr8kgntjxe82m0kn08e3xwzvcltpa465vegh7e9nw",
+      "bitcoincash:qp9szjwy5wwufrhh78dvuy77fshynz5pcgwp02p8fa",
+      "bitcoincash:qzth6x6064kvl8c3nr8ytsgqzz64vnnvlynp0et8ea",
+      "bitcoincash:qz30hrq3prl9tljgrndttyucdtccvca93qkkk86qfy",
+      "bitcoincash:qqcqvqqsnnjmzcyc2d5xfzuamv33js684qgjqfqk54",
+      "bitcoincash:qz3fhqjgk9synnvw3tvk4ltk2lln3ua9eqw93gfp6m",
+      "bitcoincash:qrfyd2grxzmafwq0qe8xdvy4tf428flwkc3gqhwju0",
+      "bitcoincash:qq9er6ng7qqa6u045spclgx3qz4zsg5f4v6kxzpgkq",
+      "bitcoincash:qp8x7nvh2zs6a0ldlyxyhhjgfdkn828srusk24ssqy",
+      "bitcoincash:qqxxeakrcxm5rvezqdqk99wsvlr68jc2lclqqfu27y",
+      "bitcoincash:qzdhmn4k8945h3a5xjuqezzazdyz2s8sh5nm78ynw4",
+      "bitcoincash:qza75txcd0j5zx59j3sa23053645elhfts43h6drsm",
+      "bitcoincash:qrlm46pefwn75hjxwqth5vp60ayr5fu97s57x0ynu5",
+      "bitcoincash:qzx2dl00nmvfxnkrt6cfmnphfaxnpjswkv9pzu807h",
+      "bitcoincash:prnas732pq3z2ap5kpmj806u8pfrz3azjcyhr7p8s9",
+      "bitcoincash:qq6rptj9wu34hwr04sl6lhd6jegrpn6dwy7n3dy2he",
+      "bitcoincash:qrak873lp6wk7vp662hq679nlxvnslupqsv336h26x",
+      "bitcoincash:qqsmu7hra6zz258c73e09303k567uqrufvk8ndu0cz",
+      "bitcoincash:qzqchdz4r5mv76gsaj9cus07sxvxcux9jvkyvnklqt",
+      "bitcoincash:pqjewhlpaw8vg9v6m4vlu2y05cuh9pgc2upu73h83t",
+      "bitcoincash:qrn3mc4vvzqgwc748vfs2rpaj7m9pwzfkc5tgsl60h",
+      "bitcoincash:qrmfr96egjhvkkjcc6kspz0xgemw6ly7vyh22xu5q4",
+      "bitcoincash:qq4e6ccv87lzwunc2neal9sl5yw6rh6jqq7ea2derx",
+      "bitcoincash:qp9kfun0ncf0vjwsynhqvec3dc29uhxzcc8cucmygc",
+      "bitcoincash:qqwd7d4ghxctzs6rtzvjj8c2wka88mt20qfqft8zq9",
+      "bitcoincash:qqnfkld25vsu2x4fmlgqgnyhdykeu7q22ca0gscmnx",
+      "bitcoincash:qpc62pds34s69t5pfzketu0tg6k99nqfvq9kqvmc8f",
+      "bitcoincash:qzhr3zpupgn3vtk2a6kveqsvh9lrx5h9dckshn3fnk",
+      "bitcoincash:qpmzz5k0q48gpaly6dn2xuxemn76qdvsny5u84jlcz",
+      "bitcoincash:qprhjyulal634n4vhrak3v5yd94lv2xzpywk0evt3k",
+      "bitcoincash:qrywaz5ye68tm86jk0kfg4n3hjf574euss4ytsr020",
+      "bitcoincash:qpe6ejpre6nvy08lhrgc2ew4p8h0kupyqcmxyn2lsy",
+      "bitcoincash:qrq0s0naj77d44cv79sx9ft8l5h7njuzq59cdqxzhv",
+      "bitcoincash:qrm2ggmpeuwwq28cu7ezrufjg4846yz9fs3cpah43t",
+      "bitcoincash:qqygpwr7fkskqed9gvkgcyuseh3myangyyc9l8nl3x",
+      "bitcoincash:qqjlfkvfy8zq4qlwzs6c0ujk4suq5em4acn0jjgwrs",
+      "bitcoincash:qrqncarsfp9f5ug6ntnhzutnlag3q4f9c5gfh7sd3j",
+      "bitcoincash:pz7e55wj2fdfkch5wmqtlz539zven6rlfy9nxz7vzs",
+      "bitcoincash:qr5zh0etzaktgwe2g39ynqn9ntrwh8g34y6gt0qlp6",
+      "bitcoincash:qzcpnncgpecymku5h6e03hv4jp2plkcup5zvgddrg0",
+      "bitcoincash:qpyaypz8epjtamledwlv7nzlet9yu4vj2532kfcc0y",
+      "bitcoincash:qplen9avj5ehdpywmuwkxw3f944q968k4vug7knye0",
+      "bitcoincash:qpr3ymgf0uexzad28grdx4zs2g328hs23ccc2xfqv9",
+      "bitcoincash:pqc6d6wpm7f4cr6xsg4ztz9vvp3x7kzmcs98kacngg",
+      "bitcoincash:qz0qkm44pglg8rcc373aj5eafhxvcfttcsdgf2pkfs",
+      "bitcoincash:qrnfm8ayh3xmytsu4zn67lcpvyyjp5cvd5kdktesag",
+      "bitcoincash:qzy6k9n36qmzdpda49mrnkwxu6jstqaw7g5dpvep09",
+      "bitcoincash:qqm4kak3qm7ctg44ck93px4lw80dxnmypgt7ddghsc",
+      "bitcoincash:qz3rqwy04vzz3acgz0fz0a48txt66mgefg8j9x22k3",
+      "bitcoincash:qqq3r4h3ljnnxwt0a22s2ghy2hymmkrusq0s0ht0sk",
+      "bitcoincash:qrcplugak39dflhmmhnnhza60mkhj5hjgyha07ejxs",
+      "bitcoincash:qrgterl7yeu8n55096vkllhqxtxapx7tvgleyqs83f",
+      "bitcoincash:qqrnn5yag5rs3a5v9qhk3vrfvphs9uqclyqdef7t4h",
+      "bitcoincash:qr2symq4s4wp8z3kvrj2z9hc8amp9l8juu6gh0xlkk",
+      "bitcoincash:qq3pxuq8plzemqpa4858urw4ze5kx97zhuk36xuuyp",
+      "bitcoincash:qz4njlc27wvtgj4ef8v0euzqldfhchm64yr7jgkgkp",
+      "bitcoincash:qz7e2apknmaamvxew24aaw9lg9jl0ehj3cyulnn5kz",
+      "bitcoincash:qr4d5d8cfmpvsam66mj5gpu7usvmdj8jyyzjd0p6uu",
+      "bitcoincash:qqfl9750nhkmn39detnadwmjv7mq7ztj9vwrcmt28y",
+      "bitcoincash:pzttv0ztxt8tefl9zd2c0kg7vukjwhtxduku9sdp56"
+    ];
 
     const categoryOrder = [
       "Projects",
@@ -2442,6 +2495,74 @@ const soloMinerAddresses = [
         `${validVideos.length} videos in the feed. Scroll the grid to explore them all.`;
     }
 
+    function getMinerAddressText() {
+      return soloMinerAddresses
+        .map(address => String(address).trim())
+        .filter(Boolean)
+        .join("\n");
+    }
+
+    function renderMinerAddresses() {
+      const addresses = soloMinerAddresses
+        .map(address => String(address).trim())
+        .filter(Boolean);
+
+      document.getElementById("minerDialogAddressList").value =
+        addresses.join("\n");
+
+      document.getElementById("minerAddressCount").textContent =
+        `${addresses.length.toLocaleString()} ${addresses.length === 1 ? "address" : "addresses"}`;
+    }
+
+    async function copyMinerAddresses() {
+      const addresses = soloMinerAddresses
+        .map(address => String(address).trim())
+        .filter(Boolean);
+      const addressText = addresses.join("\n");
+      const status = document.getElementById("minerCopyStatus");
+      const copyButton = document.getElementById("copyMinerAddresses");
+
+      if (!addressText) {
+        status.textContent = "There are no addresses to copy.";
+        return;
+      }
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(addressText);
+        } else {
+          const temporaryTextarea = document.createElement("textarea");
+          temporaryTextarea.value = addressText;
+          temporaryTextarea.setAttribute("readonly", "");
+          temporaryTextarea.style.position = "fixed";
+          temporaryTextarea.style.left = "-9999px";
+          temporaryTextarea.style.top = "0";
+          document.body.appendChild(temporaryTextarea);
+          temporaryTextarea.focus();
+          temporaryTextarea.select();
+
+          const copied = document.execCommand("copy");
+          temporaryTextarea.remove();
+
+          if (!copied) {
+            throw new Error("Copy command was not successful");
+          }
+        }
+
+        status.textContent = `Copied all ${addresses.length.toLocaleString()} addresses.`;
+        copyButton.innerHTML = "<span aria-hidden=\"true\">✓</span> Copied";
+      } catch (error) {
+        console.warn("Unable to copy miner addresses:", error);
+        status.textContent = "Copy failed. Select the addresses below and copy them manually.";
+      }
+
+      window.setTimeout(() => {
+        if (copyButton.isConnected) {
+          copyButton.innerHTML = "<span aria-hidden=\"true\">▣</span> Copy all addresses";
+        }
+      }, 2200);
+    }
+
     function getFigureCategories(item) {
       if (!Array.isArray(item.categories)) return [];
 
@@ -2677,71 +2798,6 @@ const soloMinerAddresses = [
       lastDialogTrigger = null;
     }
 
-    function getFormattedMinerAddresses() {
-      const includePrefix = document.getElementById("includeCashAddrPrefix").checked;
-
-      return soloMinerAddresses
-        .map(address => String(address).trim())
-        .filter(Boolean)
-        .map(address => {
-          const withoutPrefix = address.replace(/^bitcoincash:/i, "");
-          return includePrefix ? `bitcoincash:${withoutPrefix}` : withoutPrefix;
-        });
-    }
-
-    function renderMinerAddresses() {
-      const addresses = getFormattedMinerAddresses();
-
-      document.getElementById("minerAddressList").value = addresses.join("\n");
-
-      const count = addresses.length;
-      document.getElementById("minerAddressCount").textContent =
-        `${count} ${count === 1 ? "address" : "addresses"}`;
-    }
-
-    async function copyMinerAddressList() {
-      const addressList = document.getElementById("minerAddressList");
-      const copyStatus = document.getElementById("minerCopyStatus");
-      const copyButtonText = document.getElementById("copyMinerButtonText");
-
-      renderMinerAddresses();
-      const text = addressList.value;
-
-      if (!text) {
-        copyStatus.textContent = "There are no addresses to copy.";
-        return;
-      }
-
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-        } else {
-          addressList.focus();
-          addressList.select();
-          addressList.setSelectionRange(0, addressList.value.length);
-
-          if (!document.execCommand("copy")) {
-            throw new Error("Clipboard copy was unavailable.");
-          }
-        }
-
-        copyStatus.textContent = "All addresses copied.";
-        copyButtonText.textContent = "Copied!";
-      } catch (error) {
-        console.warn("Unable to copy miner addresses:", error);
-        addressList.focus();
-        addressList.select();
-        addressList.setSelectionRange(0, addressList.value.length);
-        copyStatus.textContent =
-          "Copy was blocked. The list is selected—copy it manually.";
-      }
-
-      window.setTimeout(() => {
-        copyButtonText.textContent = "Copy all addresses";
-        copyStatus.textContent = "";
-      }, 2500);
-    }
-
     function initMarketCapCalculator() {
       const tokenPriceInput = document.getElementById("tokenPrice");
       const tokenQuantityInput = document.getElementById("tokenQuantity");
@@ -2896,10 +2952,21 @@ const soloMinerAddresses = [
       populateFigures();
       initMarketCapCalculator();
 
-      document.getElementById("includeCashAddrPrefix").addEventListener("change", () => {
-        renderMinerAddresses();
+      document.getElementById("appreciationButton").addEventListener("click", event => {
         document.getElementById("minerCopyStatus").textContent = "";
-        document.getElementById("copyMinerButtonText").textContent = "Copy all addresses";
+        openDialog("minerOverlay", "minerPanel", event.currentTarget);
+      });
+
+      document.getElementById("minerClose").addEventListener("click", () => {
+        closeDialog("minerOverlay");
+      });
+
+      document.getElementById("copyMinerAddresses").addEventListener("click", copyMinerAddresses);
+
+      document.getElementById("minerOverlay").addEventListener("click", event => {
+        if (event.target.id === "minerOverlay") {
+          closeDialog("minerOverlay");
+        }
       });
 
       document.getElementById("openVideoGallery").addEventListener("click", event => {
@@ -2918,16 +2985,6 @@ const soloMinerAddresses = [
         closeDialog("statsOverlay");
       });
 
-      document.getElementById("openSoloMinerDialog").addEventListener("click", event => {
-        openDialog("soloMinerOverlay", "soloMinerPanel", event.currentTarget);
-      });
-
-      document.getElementById("soloMinerClose").addEventListener("click", () => {
-        closeDialog("soloMinerOverlay");
-      });
-
-      document.getElementById("copyMinerAddresses").addEventListener("click", copyMinerAddressList);
-
       document.getElementById("videoGalleryOverlay").addEventListener("click", event => {
         if (event.target.id === "videoGalleryOverlay") {
           closeDialog("videoGalleryOverlay");
@@ -2937,12 +2994,6 @@ const soloMinerAddresses = [
       document.getElementById("statsOverlay").addEventListener("click", event => {
         if (event.target.id === "statsOverlay") {
           closeDialog("statsOverlay");
-        }
-      });
-
-      document.getElementById("soloMinerOverlay").addEventListener("click", event => {
-        if (event.target.id === "soloMinerOverlay") {
-          closeDialog("soloMinerOverlay");
         }
       });
 
