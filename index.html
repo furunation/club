@@ -606,12 +606,13 @@
       scroll-margin-top: 20px;
     }
 
-    .gallery-toolbar {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin: 20px 0 19px;
-    }
+.gallery-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 20px 0 19px;
+}
 
     #ecosystemFilters {
       display: flex;
@@ -649,7 +650,8 @@
 
     .search-wrap {
       position: relative;
-      flex: 0 1 260px;
+      flex: 0 1 auto;
+      width: min(100%, 360px);
       min-width: 190px;
     }
 
