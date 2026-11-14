@@ -516,17 +516,103 @@
       transform: translateY(-2px);
     }
 
+    .community-support-card {
+      position: relative;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      gap: 16px;
+      margin: 30px 0 22px;
+      padding: 20px 23px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 209, 102, 0.29);
+      border-radius: 20px;
+      background:
+        linear-gradient(105deg, rgba(255, 209, 102, 0.1), transparent 55%),
+        rgba(28, 19, 36, 0.88);
+      color: inherit;
+      text-align: left;
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(12px);
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .community-support-card:hover {
+      border-color: rgba(255, 209, 102, 0.58);
+      background:
+        linear-gradient(105deg, rgba(255, 209, 102, 0.14), transparent 55%),
+        rgba(34, 22, 42, 0.95);
+      transform: translateY(-2px);
+    }
+
+    .community-support-card::after {
+      position: absolute;
+      top: -48px;
+      right: 8%;
+      width: 140px;
+      height: 140px;
+      border: 1px solid rgba(255, 209, 102, 0.12);
+      border-radius: 44%;
+      content: "";
+      transform: rotate(30deg);
+      pointer-events: none;
+    }
+
+    .community-support-icon {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 auto;
+      place-items: center;
+      border: 1px solid rgba(255, 209, 102, 0.34);
+      border-radius: 15px;
+      background: rgba(255, 209, 102, 0.1);
+      color: var(--accent-bright);
+      font-size: 1.25rem;
+    }
+
+    .community-support-copy {
+      position: relative;
+      z-index: 1;
+      flex: 1 1 auto;
+    }
+
+    .community-support-copy strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent-bright);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.98rem;
+    }
+
+    .community-support-copy p {
+      margin: 0;
+      color: #d0bdcc;
+      font-size: 0.87rem;
+      line-height: 1.55;
+    }
+
+    .community-support-open-hint {
+      position: relative;
+      z-index: 1;
+      color: #ffe9a9;
+      font-size: 1.2rem;
+    }
+
     .ecosystem-section {
       scroll-margin-top: 20px;
     }
 
-.gallery-toolbar {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
-  margin: 20px 0 19px;
-}
+    .gallery-toolbar {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      margin: 20px 0 19px;
+    }
 
     #ecosystemFilters {
       display: flex;
@@ -936,6 +1022,52 @@
       color: var(--accent);
     }
 
+    .support-dialog-copy {
+      color: #dfcbd9;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .support-token-id {
+      display: block;
+      margin-top: 8px;
+      padding: 13px;
+      overflow-wrap: anywhere;
+      border: 1px solid rgba(255, 168, 201, 0.2);
+      border-radius: 13px;
+      background: rgba(9, 7, 13, 0.58);
+      color: #ffe8aa;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      user-select: text !important;
+      -webkit-user-select: text !important;
+    }
+
+    .support-link {
+      display: inline-flex;
+      min-height: 43px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 10px 16px;
+      border: 1px solid rgba(255, 209, 102, 0.38);
+      border-radius: 13px;
+      background: rgba(255, 209, 102, 0.09);
+      color: #ffe8aa;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .support-link:hover {
+      border-color: var(--accent-bright);
+      background: rgba(255, 209, 102, 0.17);
+      transform: translateY(-1px);
+    }
+
     #videoGalleryOverlay {
       z-index: 2400;
     }
@@ -1256,6 +1388,27 @@
         flex-basis: min(82vw, 360px);
       }
 
+      .community-support-card {
+        align-items: flex-start;
+        gap: 12px;
+        margin: 23px 0 18px;
+        padding: 15px;
+      }
+
+      .community-support-icon {
+        width: 37px;
+        height: 37px;
+        border-radius: 13px;
+      }
+
+      .community-support-copy p {
+        font-size: 0.81rem;
+      }
+
+      .community-support-open-hint {
+        padding-top: 7px;
+      }
+
       #ecosystemFilters {
         gap: 6px;
       }
@@ -1458,6 +1611,22 @@
         <div id="videoGallery" class="video-gallery" aria-label="Seven most recent Bitcoin Cash and Furu videos"></div>
       </section>
 
+      <button
+        id="communitySupportButton"
+        class="community-support-card"
+        type="button"
+        aria-haspopup="dialog"
+        aria-controls="communitySupportOverlay"
+        aria-label="Learn how FURU holders and solo miners can support each other"
+      >
+        <span class="community-support-icon" aria-hidden="true">✦</span>
+        <span class="community-support-copy">
+          <strong>Community support</strong>
+          <p>FURU holders value decentralization. Solo miners and community members are welcome to support one another through Dropship.cash.</p>
+        </span>
+        <span class="community-support-open-hint" aria-hidden="true">↗</span>
+      </button>
+
       <section id="ecosystem" class="ecosystem-section" aria-labelledby="ecosystem-title">
         <div class="section-heading">
           <div>
@@ -1506,6 +1675,51 @@
   </div>
 
   <button id="backToTop" class="hidden" type="button" aria-label="Back to top">↑</button>
+
+  <div
+    id="communitySupportOverlay"
+    class="dialog-overlay"
+    role="presentation"
+    aria-hidden="true"
+  >
+    <section
+      id="communitySupportPanel"
+      class="dialog-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="communitySupportTitle"
+      aria-describedby="communitySupportDescription"
+      tabindex="-1"
+    >
+      <button
+        id="communitySupportClose"
+        class="dialog-close"
+        type="button"
+        aria-label="Close community support"
+      >×</button>
+
+      <span class="section-kicker">FURU community</span>
+      <h2 id="communitySupportTitle" class="dialog-title">Supporting decentralization together</h2>
+
+      <p id="communitySupportDescription" class="support-dialog-copy">
+        FURU holders appreciate decentralization. Solo miners and community members are welcome to support one another through Dropship.cash at any time.
+      </p>
+
+      <p class="support-dialog-copy">
+        FURU CashToken ID:
+        <code class="support-token-id">d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea</code>
+      </p>
+
+      <a
+        class="support-link"
+        href="https://dropship.cash/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Visit Dropship.cash ↗
+      </a>
+    </section>
+  </div>
 
   <div id="videoGalleryOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
     <section
@@ -1640,24 +1854,6 @@
       "https://youtu.be/Do4n3uCJT7Q?si=ayeVUDSQmq7SQO57",
       "https://youtu.be/QJECkbuK3qo?si=V0yNB-5Ta2arQjQO"
     ];
-
-const categoryOrder = [
-  "Wallets",
-  "Exchanges",
-  "DeFi",
-  "DEX",
-  "CashTokens",
-  "Wrapped BCH",
-  "Explorer",
-  "Developer tools",
-  "Infrastructure",
-  "Privacy",
-  "Gaming",
-  "Community",
-  "Projects",
-  "Merchants",
-  "Other"
-];
 
 const figures = [
   { href: "https://wallet.bitcoin.com", src: "https://www.google.com/s2/favicons?domain=wallet.bitcoin.com&sz=128", caption: "Bitcoin.com", detail: "Wallets", description: "Easy-to-use mobile wallet for BCH and other chains.", categories: ["Wallets"] },
@@ -1977,6 +2173,24 @@ const figures = [
   { href: "https://pagoconbit.com/", src: "https://www.google.com/s2/favicons?domain=pagoconbit.com&sz=128", caption: "PagoConBit", detail: "Merchants", description: "Argentina-based BCH service for bills, gift cards, and digital goods.", categories: ["Merchants"] }
 ];
 
+    const categoryOrder = [
+      "Wallets",
+      "Exchanges",
+      "DeFi",
+      "DEX",
+      "CashTokens",
+      "Wrapped BCH",
+      "Explorer",
+      "Developer tools",
+      "Infrastructure",
+      "Privacy",
+      "Gaming",
+      "Community",
+      "Projects",
+      "Merchants",
+      "Other"
+    ];
+
     function getYouTubeId(link) {
       try {
         const url = new URL(link);
@@ -2080,74 +2294,6 @@ const figures = [
         `${validVideos.length} videos in the feed. Scroll the grid to explore them all.`;
     }
 
-    function getMinerAddressText() {
-      return soloMinerAddresses
-        .map(address => String(address).trim())
-        .filter(Boolean)
-        .join("\n");
-    }
-
-    function renderMinerAddresses() {
-      const addresses = soloMinerAddresses
-        .map(address => String(address).trim())
-        .filter(Boolean);
-
-      document.getElementById("minerDialogAddressList").value =
-        addresses.join("\n");
-
-      document.getElementById("minerAddressCount").textContent =
-        `${addresses.length.toLocaleString()} ${addresses.length === 1 ? "address" : "addresses"}`;
-    }
-
-    async function copyMinerAddresses() {
-      const addresses = soloMinerAddresses
-        .map(address => String(address).trim())
-        .filter(Boolean);
-      const addressText = addresses.join("\n");
-      const status = document.getElementById("minerCopyStatus");
-      const copyButton = document.getElementById("copyMinerAddresses");
-
-      if (!addressText) {
-        status.textContent = "There are no addresses to copy.";
-        return;
-      }
-
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(addressText);
-        } else {
-          const temporaryTextarea = document.createElement("textarea");
-          temporaryTextarea.value = addressText;
-          temporaryTextarea.setAttribute("readonly", "");
-          temporaryTextarea.style.position = "fixed";
-          temporaryTextarea.style.left = "-9999px";
-          temporaryTextarea.style.top = "0";
-          document.body.appendChild(temporaryTextarea);
-          temporaryTextarea.focus();
-          temporaryTextarea.select();
-
-          const copied = document.execCommand("copy");
-          temporaryTextarea.remove();
-
-          if (!copied) {
-            throw new Error("Copy command was not successful");
-          }
-        }
-
-        status.textContent = `Copied all ${addresses.length.toLocaleString()} addresses.`;
-        copyButton.innerHTML = "<span aria-hidden=\"true\">✓</span> Copied";
-      } catch (error) {
-        console.warn("Unable to copy miner addresses:", error);
-        status.textContent = "Copy failed. Select the addresses below and copy them manually.";
-      }
-
-      window.setTimeout(() => {
-        if (copyButton.isConnected) {
-          copyButton.innerHTML = "<span aria-hidden=\"true\">▣</span> Copy all addresses";
-        }
-      }, 2200);
-    }
-
     function getFigureCategories(item) {
       if (!Array.isArray(item.categories)) return [];
 
@@ -2212,14 +2358,14 @@ const figures = [
 
         const imageLink = document.createElement("a");
         imageLink.className = "card-image-link";
-        imageLink.href = item.href;
+        imageLink.href = item.href || "#";
         imageLink.target = "_blank";
         imageLink.rel = "noopener noreferrer";
-        imageLink.setAttribute("aria-label", `Visit ${item.caption}`);
+        imageLink.setAttribute("aria-label", `Visit ${item.caption || "project"}`);
 
         const image = document.createElement("img");
-        image.src = item.src;
-        image.alt = item.caption;
+        image.src = item.src || "";
+        image.alt = item.caption || "Project";
         image.loading = "lazy";
         image.onerror = () => {
           image.alt = "Project image unavailable";
@@ -2233,8 +2379,7 @@ const figures = [
 
         const captionName = document.createElement("span");
         captionName.className = "card-caption-name";
-        captionName.textContent = item.caption;
-
+        captionName.textContent = item.caption || "Unnamed project";
         caption.appendChild(captionName);
 
         if (item.detail) {
@@ -2532,25 +2677,21 @@ const figures = [
 
     document.addEventListener("DOMContentLoaded", () => {
       renderVideos();
-      renderMinerAddresses();
       createCategoryFilters();
       populateFigures();
       initMarketCapCalculator();
 
-      document.getElementById("appreciationButton").addEventListener("click", event => {
-        document.getElementById("minerCopyStatus").textContent = "";
-        openDialog("minerOverlay", "minerPanel", event.currentTarget);
+      document.getElementById("communitySupportButton").addEventListener("click", event => {
+        openDialog("communitySupportOverlay", "communitySupportPanel", event.currentTarget);
       });
 
-      document.getElementById("minerClose").addEventListener("click", () => {
-        closeDialog("minerOverlay");
+      document.getElementById("communitySupportClose").addEventListener("click", () => {
+        closeDialog("communitySupportOverlay");
       });
 
-      document.getElementById("copyMinerAddresses").addEventListener("click", copyMinerAddresses);
-
-      document.getElementById("minerOverlay").addEventListener("click", event => {
-        if (event.target.id === "minerOverlay") {
-          closeDialog("minerOverlay");
+      document.getElementById("communitySupportOverlay").addEventListener("click", event => {
+        if (event.target.id === "communitySupportOverlay") {
+          closeDialog("communitySupportOverlay");
         }
       });
 
