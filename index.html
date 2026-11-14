@@ -2751,23 +2751,6 @@ const figures = [
       populateFigures();
       initMarketCapCalculator();
 
-      document.getElementById("appreciationButton").addEventListener("click", event => {
-        document.getElementById("minerCopyStatus").textContent = "";
-        openDialog("minerOverlay", "minerPanel", event.currentTarget);
-      });
-
-      document.getElementById("minerClose").addEventListener("click", () => {
-        closeDialog("minerOverlay");
-      });
-
-      document.getElementById("copyMinerAddresses").addEventListener("click", copyMinerAddresses);
-
-      document.getElementById("minerOverlay").addEventListener("click", event => {
-        if (event.target.id === "minerOverlay") {
-          closeDialog("minerOverlay");
-        }
-      });
-
       document.getElementById("openVideoGallery").addEventListener("click", event => {
         openDialog("videoGalleryOverlay", "videoGalleryPanel", event.currentTarget);
       });
