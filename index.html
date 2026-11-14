@@ -1700,19 +1700,20 @@
       </section>
 
       <button
-  id="appreciationButton"
-  class="appreciation-card"
-  type="button"
-  aria-haspopup="dialog"
-  aria-controls="communityOverlay"
->
-  <span class="appreciation-icon" aria-hidden="true">✦</span>
-  <span class="appreciation-copy">
-    <strong>FURU community</strong>
-    <p>Our community appreciates network decentralization. Learn how to support it.</p>
-  </span>
-  <span class="appreciation-open-hint" aria-hidden="true">↗</span>
-</button>
+        id="appreciationButton"
+        class="appreciation-card"
+        type="button"
+        aria-haspopup="dialog"
+        aria-controls="minerOverlay"
+        aria-label="Open solo miner addresses and pool link"
+      >
+        <span class="appreciation-icon" aria-hidden="true">✦</span>
+        <span class="appreciation-copy">
+          <strong>Network appreciation</strong>
+          <p>Support solo miners and help sustain a more decentralized network.</p>
+        </span>
+        <span class="appreciation-open-hint" aria-hidden="true">↗</span>
+      </button>
 
       <section id="ecosystem" class="ecosystem-section" aria-labelledby="ecosystem-title">
         <div class="section-heading">
@@ -1763,48 +1764,48 @@
 
   <button id="backToTop" class="hidden" type="button" aria-label="Back to top">↑</button>
 
-<div id="communityOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
-  <section
-    id="communityPanel"
-    class="dialog-panel"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="communityTitle"
-    aria-describedby="communityDescription"
-    tabindex="-1"
-  >
-    <button id="communityClose" class="dialog-close" type="button" aria-label="Close community tab">×</button>
+  <div id="minerOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
+    <section
+      id="minerPanel"
+      class="dialog-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="minerDialogTitle"
+      aria-describedby="minerDialogDescription"
+      tabindex="-1"
+    >
+      <div class="miner-dialog-heading">
+        <button id="minerClose" class="dialog-close" type="button" aria-label="Close solo miner addresses">×</button>
+        <span class="section-kicker">Supporting decentralization</span>
+        <h2 id="minerDialogTitle" class="dialog-title">Solo miner addresses</h2>
+      </div>
 
-    <span class="section-kicker">FURU community</span>
-    <h2 id="communityTitle" class="dialog-title">Supporting network decentralization</h2>
+      <div class="miner-dialog-toolbar">
+        <span id="minerAddressCount" class="miner-address-count" aria-live="polite"></span>
+        <button id="copyMinerAddresses" class="miner-copy-button" type="button">
+          <span aria-hidden="true">▣</span>
+          Copy all addresses
+        </button>
+        <a
+          class="miner-pool-link"
+          href="https://bch.solopool.org/miners"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          All solo miners ↗
+        </a>
+      </div>
 
-    <p id="communityDescription" class="dialog-subtitle">
-      FURU holders collectively appreciate a decentralized network and the people who help keep it that way.
-      We welcome solo mining operations to hold FURU and be part of the community.
-    </p>
-
-    <p>
-      Anyone is welcome to support the community with a contribution through Dropship.cash.
-      Use the FURU token ID below when giving.
-    </p>
-
-    <div class="calculator-results">
-      <p>FURU token ID:</p>
-      <p><strong id="furuTokenId">d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea</strong></p>
-    </div>
-
-    <p style="margin: 18px 0 0;">
-      <a
-        class="miner-pool-link"
-        href="https://dropship.cash/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Support with Dropship.cash ↗
-      </a>
-    </p>
-  </section>
-</div>
+      <p id="minerCopyStatus" class="miner-copy-status" aria-live="polite"></p>
+      <textarea
+        id="minerDialogAddressList"
+        class="miner-dialog-addresses"
+        aria-label="Solo miner addresses, one address per line"
+        readonly
+        spellcheck="false"
+      ></textarea>
+    </section>
+  </div>
 
   <div id="videoGalleryOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
     <section
@@ -1939,8 +1940,6 @@
       "https://youtu.be/Do4n3uCJT7Q?si=ayeVUDSQmq7SQO57",
       "https://youtu.be/QJECkbuK3qo?si=V0yNB-5Ta2arQjQO"
     ];
-
-
 
 const categoryOrder = [
   "Wallets",
