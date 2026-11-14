@@ -9,10 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -516,90 +513,84 @@
       transform: translateY(-2px);
     }
 
-    .community-support-card {
-      position: relative;
-      display: flex;
-      width: 100%;
-      align-items: center;
-      gap: 16px;
-      margin: 30px 0 22px;
-      padding: 20px 23px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 209, 102, 0.29);
-      border-radius: 20px;
-      background:
-        linear-gradient(105deg, rgba(255, 209, 102, 0.1), transparent 55%),
-        rgba(28, 19, 36, 0.88);
-      color: inherit;
-      text-align: left;
-      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
-      backdrop-filter: blur(12px);
-      cursor: pointer;
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-    }
-
-    .community-support-card:hover {
-      border-color: rgba(255, 209, 102, 0.58);
-      background:
-        linear-gradient(105deg, rgba(255, 209, 102, 0.14), transparent 55%),
-        rgba(34, 22, 42, 0.95);
-      transform: translateY(-2px);
-    }
-
-    .community-support-card::after {
-      position: absolute;
-      top: -48px;
-      right: 8%;
-      width: 140px;
-      height: 140px;
-      border: 1px solid rgba(255, 209, 102, 0.12);
-      border-radius: 44%;
-      content: "";
-      transform: rotate(30deg);
-      pointer-events: none;
-    }
-
-    .community-support-icon {
-      position: relative;
-      z-index: 1;
+    .support-note {
       display: grid;
-      width: 44px;
-      height: 44px;
-      flex: 0 0 auto;
-      place-items: center;
-      border: 1px solid rgba(255, 209, 102, 0.34);
-      border-radius: 15px;
-      background: rgba(255, 209, 102, 0.1);
-      color: var(--accent-bright);
-      font-size: 1.25rem;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+      gap: 18px 28px;
+      margin: 30px 0 22px;
+      padding: 18px 20px;
+      border: 1px solid rgba(255, 209, 102, 0.2);
+      border-radius: 16px;
+      background: rgba(28, 19, 36, 0.72);
     }
 
-    .community-support-copy {
-      position: relative;
-      z-index: 1;
-      flex: 1 1 auto;
-    }
-
-    .community-support-copy strong {
-      display: block;
-      margin-bottom: 4px;
+    .support-note strong {
       color: var(--accent-bright);
       font-family: "Space Grotesk", sans-serif;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
     }
 
-    .community-support-copy p {
-      margin: 0;
+    .support-note p {
+      margin: 6px 0 0;
       color: #d0bdcc;
-      font-size: 0.87rem;
+      font-size: 0.84rem;
       line-height: 1.55;
     }
 
-    .community-support-open-hint {
-      position: relative;
-      z-index: 1;
-      color: #ffe9a9;
-      font-size: 1.2rem;
+    .support-note a {
+      color: #ffd5e5;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .support-token label {
+      display: block;
+      margin-bottom: 6px;
+      color: #d0bdcc;
+      font-size: 0.75rem;
+    }
+
+    .support-token-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .support-token input {
+      width: 100%;
+      min-width: 0;
+      padding: 9px 10px;
+      border: 1px solid rgba(255, 168, 201, 0.18);
+      border-radius: 9px;
+      background: rgba(9, 7, 13, 0.65);
+      color: #fff2f8;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.74rem;
+      user-select: text !important;
+      -webkit-user-select: text !important;
+      -webkit-touch-callout: default;
+    }
+
+    .support-token button {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 168, 201, 0.3);
+      border-radius: 9px;
+      background: rgba(255, 168, 201, 0.08);
+      color: #ffd5e5;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+
+    .support-token button:hover {
+      background: rgba(255, 168, 201, 0.16);
+    }
+
+    #copyFuruStatus {
+      display: block;
+      min-height: 16px;
+      margin-top: 5px;
+      color: #a9efc2;
+      font-size: 0.72rem;
     }
 
     .ecosystem-section {
@@ -1022,52 +1013,6 @@
       color: var(--accent);
     }
 
-    .support-dialog-copy {
-      color: #dfcbd9;
-      font-size: 0.92rem;
-      line-height: 1.7;
-    }
-
-    .support-token-id {
-      display: block;
-      margin-top: 8px;
-      padding: 13px;
-      overflow-wrap: anywhere;
-      border: 1px solid rgba(255, 168, 201, 0.2);
-      border-radius: 13px;
-      background: rgba(9, 7, 13, 0.58);
-      color: #ffe8aa;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.78rem;
-      line-height: 1.6;
-      user-select: text !important;
-      -webkit-user-select: text !important;
-    }
-
-    .support-link {
-      display: inline-flex;
-      min-height: 43px;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 18px;
-      padding: 10px 16px;
-      border: 1px solid rgba(255, 209, 102, 0.38);
-      border-radius: 13px;
-      background: rgba(255, 209, 102, 0.09);
-      color: #ffe8aa;
-      font-size: 0.84rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-    }
-
-    .support-link:hover {
-      border-color: var(--accent-bright);
-      background: rgba(255, 209, 102, 0.17);
-      transform: translateY(-1px);
-    }
-
     #videoGalleryOverlay {
       z-index: 2400;
     }
@@ -1325,6 +1270,14 @@
       }
     }
 
+    @media (max-width: 650px) {
+      .support-note {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 15px;
+      }
+    }
+
     @media (max-width: 520px) {
       .page-shell {
         padding: 18px 14px 100px;
@@ -1386,27 +1339,6 @@
 
       .youtube-embed {
         flex-basis: min(82vw, 360px);
-      }
-
-      .community-support-card {
-        align-items: flex-start;
-        gap: 12px;
-        margin: 23px 0 18px;
-        padding: 15px;
-      }
-
-      .community-support-icon {
-        width: 37px;
-        height: 37px;
-        border-radius: 13px;
-      }
-
-      .community-support-copy p {
-        font-size: 0.81rem;
-      }
-
-      .community-support-open-hint {
-        padding-top: 7px;
       }
 
       #ecosystemFilters {
@@ -1611,21 +1543,31 @@
         <div id="videoGallery" class="video-gallery" aria-label="Seven most recent Bitcoin Cash and Furu videos"></div>
       </section>
 
-      <button
-        id="communitySupportButton"
-        class="community-support-card"
-        type="button"
-        aria-haspopup="dialog"
-        aria-controls="communitySupportOverlay"
-        aria-label="Learn how FURU holders and solo miners can support each other"
-      >
-        <span class="community-support-icon" aria-hidden="true">✦</span>
-        <span class="community-support-copy">
-          <strong>Community support</strong>
-          <p>FURU holders value decentralization. Solo miners and community members are welcome to support one another through Dropship.cash.</p>
-        </span>
-        <span class="community-support-open-hint" aria-hidden="true">↗</span>
-      </button>
+      <section class="support-note" aria-labelledby="supportTitle">
+        <div>
+          <strong id="supportTitle">Support FURU solo miners</strong>
+          <p>
+            Solo miners holding FURU are welcome in the community. We value network
+            decentralization, and everyone is invited to support one another through
+            <a href="https://dropship.cash/" target="_blank" rel="noopener noreferrer">dropship.cash</a>.
+          </p>
+        </div>
+
+        <div class="support-token">
+          <label for="furuTokenId">FURU CashTokens ID</label>
+          <div class="support-token-row">
+            <input
+              id="furuTokenId"
+              type="text"
+              value="d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea"
+              readonly
+              aria-label="FURU CashTokens ID"
+            />
+            <button id="copyFuruTokenId" type="button">Copy</button>
+          </div>
+          <span id="copyFuruStatus" aria-live="polite"></span>
+        </div>
+      </section>
 
       <section id="ecosystem" class="ecosystem-section" aria-labelledby="ecosystem-title">
         <div class="section-heading">
@@ -1675,51 +1617,6 @@
   </div>
 
   <button id="backToTop" class="hidden" type="button" aria-label="Back to top">↑</button>
-
-  <div
-    id="communitySupportOverlay"
-    class="dialog-overlay"
-    role="presentation"
-    aria-hidden="true"
-  >
-    <section
-      id="communitySupportPanel"
-      class="dialog-panel"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="communitySupportTitle"
-      aria-describedby="communitySupportDescription"
-      tabindex="-1"
-    >
-      <button
-        id="communitySupportClose"
-        class="dialog-close"
-        type="button"
-        aria-label="Close community support"
-      >×</button>
-
-      <span class="section-kicker">FURU community</span>
-      <h2 id="communitySupportTitle" class="dialog-title">Supporting decentralization together</h2>
-
-      <p id="communitySupportDescription" class="support-dialog-copy">
-        FURU holders appreciate decentralization. Solo miners and community members are welcome to support one another through Dropship.cash at any time.
-      </p>
-
-      <p class="support-dialog-copy">
-        FURU CashToken ID:
-        <code class="support-token-id">d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea</code>
-      </p>
-
-      <a
-        class="support-link"
-        href="https://dropship.cash/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Visit Dropship.cash ↗
-      </a>
-    </section>
-  </div>
 
   <div id="videoGalleryOverlay" class="dialog-overlay" role="presentation" aria-hidden="true">
     <section
@@ -1853,6 +1750,24 @@
       "https://youtu.be/xIBJJo7KeLY?si=9X8v7masPVrce3FU",
       "https://youtu.be/Do4n3uCJT7Q?si=ayeVUDSQmq7SQO57",
       "https://youtu.be/QJECkbuK3qo?si=V0yNB-5Ta2arQjQO"
+    ];
+
+    const categoryOrder = [
+      "Wallets",
+      "Exchanges",
+      "DeFi",
+      "DEX",
+      "CashTokens",
+      "Wrapped BCH",
+      "Explorer",
+      "Developer tools",
+      "Infrastructure",
+      "Privacy",
+      "Gaming",
+      "Community",
+      "Projects",
+      "Merchants",
+      "Other"
     ];
 
 const figures = [
@@ -2173,24 +2088,6 @@ const figures = [
   { href: "https://pagoconbit.com/", src: "https://www.google.com/s2/favicons?domain=pagoconbit.com&sz=128", caption: "PagoConBit", detail: "Merchants", description: "Argentina-based BCH service for bills, gift cards, and digital goods.", categories: ["Merchants"] }
 ];
 
-    const categoryOrder = [
-      "Wallets",
-      "Exchanges",
-      "DeFi",
-      "DEX",
-      "CashTokens",
-      "Wrapped BCH",
-      "Explorer",
-      "Developer tools",
-      "Infrastructure",
-      "Privacy",
-      "Gaming",
-      "Community",
-      "Projects",
-      "Merchants",
-      "Other"
-    ];
-
     function getYouTubeId(link) {
       try {
         const url = new URL(link);
@@ -2222,8 +2119,7 @@ const figures = [
       const placeholder = document.createElement("button");
       placeholder.className = "youtube-placeholder";
       placeholder.type = "button";
-      placeholder.style.backgroundImage =
-        `url("https://i.ytimg.com/vi/${videoId}/hqdefault.jpg")`;
+      placeholder.style.backgroundImage = `url("https://i.ytimg.com/vi/${videoId}/hqdefault.jpg")`;
       placeholder.setAttribute("aria-label", `Play video ${index + 1}`);
 
       const playIcon = document.createElement("span");
@@ -2239,7 +2135,7 @@ const figures = [
         iframe.title = `Video ${index + 1}`;
         iframe.src =
           `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}` +
-          `?autoplay=1&playsinline=1&rel=0`;
+          "?autoplay=1&playsinline=1&rel=0";
         iframe.referrerPolicy = "strict-origin-when-cross-origin";
         iframe.allow =
           "autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
@@ -2365,7 +2261,7 @@ const figures = [
 
         const image = document.createElement("img");
         image.src = item.src || "";
-        image.alt = item.caption || "Project";
+        image.alt = item.caption || "Ecosystem project";
         image.loading = "lazy";
         image.onerror = () => {
           image.alt = "Project image unavailable";
@@ -2379,7 +2275,7 @@ const figures = [
 
         const captionName = document.createElement("span");
         captionName.className = "card-caption-name";
-        captionName.textContent = item.caption || "Unnamed project";
+        captionName.textContent = item.caption || "Untitled project";
         caption.appendChild(captionName);
 
         if (item.detail) {
@@ -2471,17 +2367,19 @@ const figures = [
       document.getElementById("galleryCount").textContent =
         `Showing ${visibleCount} of ${cards.length} items`;
 
-      document.querySelector(".empty-state")?.remove();
+      document.querySelector("#figures .empty-state")?.remove();
 
       if (visibleCount === 0) {
         const emptyState = document.createElement("div");
         emptyState.className = "empty-state";
 
         const title = document.createElement("strong");
-        title.textContent = "No matches found";
+        title.textContent = figures.length === 0 ? "Directory coming soon" : "No matches found";
 
         const message = document.createElement("span");
-        message.textContent = "Try another search or choose a different category.";
+        message.textContent = figures.length === 0
+          ? "Ecosystem projects will appear here."
+          : "Try another search or choose a different category.";
 
         emptyState.append(title, message);
         document.getElementById("figures").appendChild(emptyState);
@@ -2681,17 +2579,22 @@ const figures = [
       populateFigures();
       initMarketCapCalculator();
 
-      document.getElementById("communitySupportButton").addEventListener("click", event => {
-        openDialog("communitySupportOverlay", "communitySupportPanel", event.currentTarget);
-      });
+      document.getElementById("copyFuruTokenId").addEventListener("click", async () => {
+        const input = document.getElementById("furuTokenId");
+        const status = document.getElementById("copyFuruStatus");
 
-      document.getElementById("communitySupportClose").addEventListener("click", () => {
-        closeDialog("communitySupportOverlay");
-      });
-
-      document.getElementById("communitySupportOverlay").addEventListener("click", event => {
-        if (event.target.id === "communitySupportOverlay") {
-          closeDialog("communitySupportOverlay");
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(input.value.trim());
+          } else {
+            input.select();
+            if (!document.execCommand("copy")) throw new Error("Copy failed");
+            input.setSelectionRange(0, 0);
+          }
+          status.textContent = "Copied.";
+        } catch (error) {
+          console.warn("Unable to copy FURU CashTokens ID:", error);
+          status.textContent = "Copy failed; select the ID to copy manually.";
         }
       });
 
