@@ -14,9 +14,8 @@
   <script>
     (() => {
       try {
-        const savedTheme = localStorage.getItem("furu-theme");
         document.documentElement.dataset.theme =
-          savedTheme === "dark" ? "dark" : "light";
+          localStorage.getItem("furu-theme") === "dark" ? "dark" : "light";
       } catch {
         document.documentElement.dataset.theme = "light";
       }
@@ -26,7 +25,7 @@
   <style>
     :root {
       color-scheme: light;
-      --green: #0AC18E;
+      --green: #0ac18e;
       --green-dark: #078c68;
       --green-deep: #075c47;
       --ink: #10251e;
@@ -42,7 +41,7 @@
       --dialog-backdrop: rgba(9, 31, 23, 0.64);
       --hero-bg:
         radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.2), transparent 20rem),
-        linear-gradient(118deg, #0AC18E 0%, #08a87c 52%, #087f61 100%);
+        linear-gradient(118deg, #0ac18e 0%, #08a87c 52%, #087f61 100%);
       --hero-text: #062a20;
       --hero-kicker: #064a37;
       --hero-heading-accent: #f5fff9;
@@ -60,12 +59,8 @@
     }
 
     html[data-theme="dark"] {
-      /*
-       * Keep the browser's native controls and scrollbar behavior constant.
-       * Theme changes are handled by the page's explicit colors below.
-       */
       color-scheme: light;
-      --green: #0AC18E;
+      --green: #0ac18e;
       --green-dark: #11bd8d;
       --green-deep: #7ce8bd;
       --ink: #f0f6f2;
@@ -83,7 +78,7 @@
         linear-gradient(118deg, #13281f 0%, #10251d 58%, #0e1e17 100%);
       --hero-text: #f0f6f2;
       --hero-kicker: #7ce8bd;
-      --hero-heading-accent: #0AC18E;
+      --hero-heading-accent: #0ac18e;
       --hero-shadow: 0 18px 48px rgba(0, 0, 0, 0.2);
       --control-bg: #13221a;
       --control-hover: #1a2d22;
@@ -336,9 +331,9 @@
       position: relative;
       display: grid;
       min-height: 365px;
-      grid-template-columns: minmax(0, 1fr) minmax(160px, 260px);
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
       align-items: center;
-      gap: 25px;
+      gap: clamp(24px, 4vw, 50px);
       padding: clamp(28px, 5vw, 56px);
       overflow: hidden;
       border: 1px solid transparent;
@@ -421,80 +416,141 @@
       color: var(--hero-heading-accent);
     }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 28px;
-      padding: 9px 15px 9px 9px;
-      border: 1px solid rgba(255, 255, 255, 0.48);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.16);
-      color: #fff;
-      font-size: 0.78rem;
-      font-weight: 700;
-      backdrop-filter: blur(8px);
-    }
-
-    html[data-theme="dark"] .hero-badge {
-      border-color: rgba(10, 193, 142, 0.32);
-      background: rgba(10, 193, 142, 0.1);
-      color: #d7f8e9;
-    }
-
-    .hero-badge-symbol {
-      display: grid;
-      width: 35px;
-      height: 35px;
-      flex: 0 0 auto;
-      place-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.66);
-      border-radius: 50%;
-      background: #fff;
-      color: var(--green-dark);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
-    html[data-theme="dark"] .hero-badge-symbol {
-      border-color: rgba(10, 193, 142, 0.48);
-      background: #12281f;
-      color: #7ce8bd;
-    }
-
     .hero-stats-button {
-      position: relative;
-      z-index: 1;
-      display: block;
-      width: min(100%, 225px);
-      aspect-ratio: 1;
-      justify-self: center;
-      padding: 9px;
-      border: 2px solid rgba(255, 255, 255, 0.72);
-      border-radius: 38% 62% 52% 48%;
-      background: rgba(255, 255, 255, 0.18);
-      box-shadow: 0 18px 40px rgba(3, 70, 50, 0.22);
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      gap: 9px;
+      margin-top: 23px;
+      padding: 6px 12px 6px 7px;
+      border: 1px solid rgba(255, 255, 255, 0.44);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+      color: #10251e;
+      box-shadow: 0 3px 12px rgba(3, 70, 50, 0.08);
+      font-size: 0.76rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    html[data-theme="dark"] .hero-stats-button {
-      border-color: rgba(10, 193, 142, 0.67);
-      background: rgba(10, 193, 142, 0.11);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2), 0 0 35px rgba(10, 193, 142, 0.09);
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
 
     .hero-stats-button:hover {
-      box-shadow: 0 22px 48px rgba(3, 70, 50, 0.32);
-      transform: scale(1.04) rotate(3deg);
+      border-color: #fff;
+      background: #fff;
+      transform: translateY(-1px);
     }
 
     .hero-stats-button img {
-      width: 100%;
-      height: 100%;
-      border-radius: 36% 64% 50% 50%;
+      display: block;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
       object-fit: cover;
+    }
+
+    .hero-stats-arrow {
+      color: var(--green-deep);
+      font-size: 0.9rem;
+    }
+
+    .hero-support {
+      position: relative;
+      z-index: 1;
+      padding: 21px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.13);
+      backdrop-filter: blur(10px);
+    }
+
+    html[data-theme="dark"] .hero-support {
+      border-color: rgba(10, 193, 142, 0.28);
+      background: rgba(10, 193, 142, 0.07);
+    }
+
+    .hero-support h2 {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: -0.035em;
+    }
+
+    .hero-support p {
+      margin: 8px 0 0;
+      color: inherit;
+      font-size: 0.81rem;
+      line-height: 1.65;
+      opacity: 0.92;
+    }
+
+    .hero-support a {
+      color: inherit;
+      font-weight: 700;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .token-box {
+      margin-top: 17px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    html[data-theme="dark"] .token-box {
+      border-top-color: rgba(10, 193, 142, 0.25);
+    }
+
+    .token-box label {
+      display: block;
+      margin-bottom: 7px;
+      color: inherit;
+      font-size: 0.72rem;
+      font-weight: 700;
+      opacity: 0.88;
+    }
+
+    .token-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .token-row input {
+      width: 100%;
+      min-width: 0;
+      padding: 10px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #10251e;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.66rem;
+      user-select: text;
+      -webkit-user-select: text;
+      -webkit-touch-callout: default;
+    }
+
+    .token-row button {
+      flex: 0 0 auto;
+      padding: 9px 13px;
+      border: 0;
+      border-radius: 10px;
+      background: #fff;
+      color: #075c47;
+      font-size: 0.77rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .token-row button:hover {
+      background: #eafff5;
+    }
+
+    #copyFuruStatus {
+      display: block;
+      min-height: 16px;
+      margin-top: 5px;
+      color: inherit;
+      font-size: 0.69rem;
     }
 
     .section {
@@ -619,92 +675,6 @@
 
     .youtube-placeholder:hover .youtube-play {
       transform: translate(-50%, -50%) scale(1.08);
-    }
-
-    .support-panel {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(250px, 0.7fr);
-      gap: 22px;
-      align-items: center;
-      margin-top: 39px;
-      padding: 23px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: var(--white);
-      box-shadow: var(--shadow);
-    }
-
-    .support-panel h2 {
-      margin: 0;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.05rem;
-      letter-spacing: -0.035em;
-    }
-
-    .support-panel p {
-      margin: 7px 0 0;
-      color: var(--muted);
-      font-size: 0.83rem;
-      line-height: 1.65;
-    }
-
-    .support-panel a {
-      color: var(--green-dark);
-      font-weight: 700;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
-    }
-
-    .token-box label {
-      display: block;
-      margin-bottom: 7px;
-      color: var(--muted);
-      font-size: 0.73rem;
-      font-weight: 700;
-    }
-
-    .token-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .token-row input {
-      width: 100%;
-      min-width: 0;
-      padding: 11px 12px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: var(--surface-soft);
-      color: var(--ink);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.7rem;
-      user-select: text;
-      -webkit-user-select: text;
-      -webkit-touch-callout: default;
-    }
-
-    .token-row button {
-      flex: 0 0 auto;
-      padding: 9px 13px;
-      border: 0;
-      border-radius: 10px;
-      background: var(--green);
-      color: #05291e;
-      font-size: 0.78rem;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .token-row button:hover {
-      background: #13d09b;
-    }
-
-    #copyFuruStatus {
-      display: block;
-      min-height: 16px;
-      margin-top: 5px;
-      color: var(--green-dark);
-      font-size: 0.7rem;
     }
 
     .directory {
@@ -1331,11 +1301,6 @@
         var(--paper);
     }
 
-    html[data-theme="dark"] .hero {
-      /* A fixed transparent border in light mode reserves this same space. */
-      border-color: rgba(10, 193, 142, 0.38);
-    }
-
     @media (min-width: 1050px) {
       .gallery-toolbar {
         flex-direction: row;
@@ -1351,6 +1316,10 @@
       #allVideosGrid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr) minmax(270px, 0.9fr);
+      }
     }
 
     @media (max-width: 700px) {
@@ -1359,17 +1328,14 @@
       }
 
       .hero {
-        min-height: 315px;
-        grid-template-columns: minmax(0, 1fr) 150px;
+        min-height: 0;
+        grid-template-columns: 1fr;
+        gap: 27px;
         padding: 32px;
       }
 
-      .hero-stats-button {
-        width: 145px;
-      }
-
-      .support-panel {
-        grid-template-columns: 1fr;
+      .hero-support {
+        max-width: 560px;
       }
     }
 
@@ -1431,10 +1397,8 @@
       }
 
       .hero {
-        min-height: 285px;
-        grid-template-columns: minmax(0, 1fr) 88px;
-        gap: 8px;
-        padding: 25px 18px;
+        gap: 23px;
+        padding: 26px 19px;
         border-radius: 22px;
       }
 
@@ -1447,21 +1411,12 @@
         font-size: clamp(3rem, 12vw, 4.35rem);
       }
 
-      .hero-badge {
-        margin-top: 22px;
-        padding: 7px 11px 7px 7px;
-        font-size: 0.69rem;
+      .hero-support {
+        padding: 17px;
       }
 
-      .hero-badge-symbol {
-        width: 31px;
-        height: 31px;
-        font-size: 1rem;
-      }
-
-      .hero-stats-button {
-        width: 82px;
-        padding: 5px;
+      .token-row input {
+        font-size: 0.59rem;
       }
 
       .section {
@@ -1484,12 +1439,6 @@
 
       .youtube-embed {
         flex-basis: min(82vw, 350px);
-      }
-
-      .support-panel {
-        gap: 16px;
-        margin-top: 31px;
-        padding: 17px;
       }
 
       .gallery-toolbar {
@@ -1643,12 +1592,7 @@
       }
 
       .hero {
-        grid-template-columns: minmax(0, 1fr) 70px;
         padding-inline: 15px;
-      }
-
-      .hero-stats-button {
-        width: 68px;
       }
     }
 
@@ -1684,10 +1628,6 @@
       <a class="brand" href="#" aria-label="Furu Nation home">
         <span class="brand-mark">
           <img src="https://i.postimg.cc/9MJrV5TZ/furunation.webp" alt="" />
-        </span>
-        <span class="brand-copy">
-          <span class="brand-name">Furu Nation</span>
-          <span class="brand-subtitle">Bitcoin Cash community</span>
         </span>
       </a>
 
@@ -1735,22 +1675,45 @@
         <div class="hero-copy">
           <p class="hero-kicker">Powered by Bitcoin Cash</p>
           <h1 id="page-title">The Furu<br><span>community.</span></h1>
-          <div class="hero-badge" aria-label="Think in satoshis">
-            <span class="hero-badge-symbol" aria-hidden="true">Ꞩ</span>
-            <span>Think in sats.</span>
-          </div>
+
+          <button
+            id="heroStatsButton"
+            class="hero-stats-button"
+            type="button"
+            aria-label="Open FURU statistics and market cap calculator"
+            aria-haspopup="dialog"
+            aria-controls="statsOverlay"
+          >
+            <img src="https://i.postimg.cc/RhC6LpcV/furu.png" alt="" />
+            <span>FURU stats</span>
+            <span class="hero-stats-arrow" aria-hidden="true">↗</span>
+          </button>
         </div>
 
-        <button
-          id="heroStatsButton"
-          class="hero-stats-button"
-          type="button"
-          aria-label="Open FURU statistics and market cap calculator"
-          aria-haspopup="dialog"
-          aria-controls="statsOverlay"
-        >
-          <img src="https://i.postimg.cc/RhC6LpcV/furu.png" alt="" />
-        </button>
+        <aside class="hero-support" aria-labelledby="supportTitle">
+          <h2 id="supportTitle">A decentralized support network</h2>
+          <p>
+            We appreciate everyone who mines solo and holds FURU. Support fellow community members through
+            <a href="https://dropship.cash/" target="_blank" rel="noopener noreferrer">dropship.cash</a>
+            and help strengthen the network by mining independently with
+            <a href="https://bch.solopool.org/miners" target="_blank" rel="noopener noreferrer">bch.solopool</a>.
+          </p>
+
+          <div class="token-box">
+            <label for="furuTokenId">FURU CashTokens ID</label>
+            <div class="token-row">
+              <input
+                id="furuTokenId"
+                type="text"
+                value="d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea"
+                readonly
+                aria-label="FURU CashTokens ID"
+              />
+              <button id="copyFuruTokenId" type="button">Copy</button>
+            </div>
+            <span id="copyFuruStatus" aria-live="polite"></span>
+          </div>
+        </aside>
       </section>
 
       <section class="section" aria-labelledby="videos-title">
@@ -1771,33 +1734,6 @@
         </div>
 
         <div id="videoGallery" class="video-gallery" aria-label="Seven most recent Bitcoin Cash and Furu videos"></div>
-      </section>
-
-      <section class="support-panel" aria-labelledby="supportTitle">
-        <div>
-          <h2 id="supportTitle">A decentralized support network</h2>
-          <p>
-            We appreciate everyone who mines solo and holds FURU. Support fellow community members through
-            <a href="https://dropship.cash/" target="_blank" rel="noopener noreferrer">dropship.cash</a>
-            and help strengthen the network by mining independently with
-            <a href="https://bch.solopool.org/miners" target="_blank" rel="noopener noreferrer">bch.solopool</a>.
-          </p>
-        </div>
-
-        <div class="token-box">
-          <label for="furuTokenId">FURU CashTokens ID</label>
-          <div class="token-row">
-            <input
-              id="furuTokenId"
-              type="text"
-              value="d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea"
-              readonly
-              aria-label="FURU CashTokens ID"
-            />
-            <button id="copyFuruTokenId" type="button">Copy</button>
-          </div>
-          <span id="copyFuruStatus" aria-live="polite"></span>
-        </div>
       </section>
 
       <section id="ecosystem" class="section directory" aria-labelledby="ecosystem-title">
@@ -1932,7 +1868,7 @@
         </div>
       </div>
 
-      <p class="stat-note">Statistics displayed as provided.</p>
+      <p class="stat-note">Add your figures when ready.</p>
 
       <section class="market-cap-calculator" aria-labelledby="calculatorTitle">
         <h3 id="calculatorTitle">Market cap calculator</h3>
@@ -2019,6 +1955,24 @@
       "https://youtu.be/xIBJJo7KeLY?si=9X8v7masPVrce3FU",
       "https://youtu.be/Do4n3uCJT7Q?si=ayeVUDSQmq7SQO57",
       "https://youtu.be/QJECkbuK3qo?si=V0yNB-5Ta2arQjQO"
+    ];
+
+    const categoryOrder = [
+      "Wallets",
+      "Exchanges",
+      "DeFi",
+      "DEX",
+      "CashTokens",
+      "Wrapped BCH",
+      "Explorer",
+      "Developer tools",
+      "Infrastructure",
+      "Privacy",
+      "Gaming",
+      "Community",
+      "Projects",
+      "Merchants",
+      "Other"
     ];
 
         const figures = [
@@ -2340,24 +2294,6 @@
   { href: "https://pagoconbit.com/", src: "https://www.google.com/s2/favicons?domain=pagoconbit.com&sz=128", caption: "PagoConBit", detail: "Merchants", description: "Argentina-based BCH service for bills, gift cards, and digital goods.", categories: ["Merchants"] }
 ];
 
-    const categoryOrder = [
-      "Wallets",
-      "Exchanges",
-      "DeFi",
-      "DEX",
-      "CashTokens",
-      "Wrapped BCH",
-      "Explorer",
-      "Developer tools",
-      "Infrastructure",
-      "Privacy",
-      "Gaming",
-      "Community",
-      "Projects",
-      "Merchants",
-      "Other"
-    ];
-
     function getYouTubeId(link) {
       try {
         const url = new URL(link);
@@ -2518,7 +2454,7 @@
         front.className = "card-face card-front";
         front.tabIndex = 0;
         front.setAttribute("role", "button");
-        front.setAttribute("aria-label", "Show description");
+        front.setAttribute("aria-label", `Show description for ${item.caption || "project"}`);
         front.setAttribute("aria-expanded", "false");
 
         const imageLink = document.createElement("a");
@@ -2560,7 +2496,7 @@
         back.className = "card-face card-back";
         back.tabIndex = 0;
         back.setAttribute("role", "button");
-        back.setAttribute("aria-label", "Hide description");
+        back.setAttribute("aria-label", `Hide description for ${item.caption || "project"}`);
 
         const description = document.createElement("p");
         description.className = "card-description";
@@ -2733,7 +2669,6 @@
       const note = document.getElementById("calculatorNote");
 
       const SATS_PER_BCH = 100_000_000;
-      const satsSymbol = "Ꞩ";
       const formatter = new Intl.NumberFormat("en-US", {
         maximumFractionDigits: 2
       });
@@ -2786,7 +2721,7 @@
         const values = getInputValues();
 
         if (!values) {
-          satsOutput.textContent = `${satsSymbol}0`;
+          satsOutput.textContent = "Ꞩ0";
           vndOutput.textContent = bchRates ? formatCurrency(0, "VND") : "Rate unavailable";
           phpOutput.textContent = bchRates ? formatCurrency(0, "PHP") : "Rate unavailable";
           usdOutput.textContent = bchRates ? formatCurrency(0, "USD") : "Rate unavailable";
@@ -2803,7 +2738,7 @@
           return;
         }
 
-        satsOutput.textContent = `${satsSymbol}${satsFormatter.format(marketCapSats)}`;
+        satsOutput.textContent = `Ꞩ${satsFormatter.format(marketCapSats)}`;
 
         if (!bchRates) {
           const message = ratesUnavailable ? "Rate unavailable" : "Loading exchange rate…";
