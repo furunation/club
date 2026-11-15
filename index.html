@@ -34,7 +34,7 @@
       --white: #ffffff;
       --surface-soft: #f7faf8;
       --line: #dce8e1;
-      --gold: #e4ad17;
+      --gold: #d9a91e;
       --content-width: 1160px;
       --scrollbar-track: #e4ede7;
       --dialog-backdrop: rgba(9, 31, 23, 0.64);
@@ -43,7 +43,7 @@
         linear-gradient(118deg, #0ac18e 0%, #08a87c 52%, #087f61 100%);
       --hero-text: #062a20;
       --hero-kicker: #064a37;
-      --hero-heading-accent: #f5fff9;
+      --hero-heading-accent: #fff8dc;
       --hero-shadow: 0 24px 58px rgba(7, 122, 89, 0.2);
       --control-bg: #ffffff;
       --control-hover: #f3fff9;
@@ -58,7 +58,7 @@
     }
 
     html[data-theme="dark"] {
-      color-scheme: light;
+      color-scheme: dark;
       --green: #0ac18e;
       --green-dark: #11bd8d;
       --green-deep: #7ce8bd;
@@ -76,7 +76,7 @@
         linear-gradient(118deg, #13281f 0%, #10251d 58%, #0e1e17 100%);
       --hero-text: #f0f6f2;
       --hero-kicker: #7ce8bd;
-      --hero-heading-accent: #0ac18e;
+      --hero-heading-accent: #f0c64b;
       --hero-shadow: 0 18px 48px rgba(0, 0, 0, 0.2);
       --control-bg: #13221a;
       --control-hover: #1a2d22;
@@ -375,7 +375,6 @@
       border-color: rgba(10, 193, 142, 0.13);
     }
 
-    /* Gradient sats bubbles: light mint/teal gradients only, no black text gradient. */
     .hero-bubbles {
       position: absolute;
       z-index: 0;
@@ -407,13 +406,7 @@
 
     .hero-bubble::after {
       content: "Ꞩ";
-      background: linear-gradient(
-        145deg,
-        #d5fff0 8%,
-        #8ff0cd 32%,
-        #35dba5 62%,
-        #13b783 92%
-      );
+      background: linear-gradient(145deg, #d5fff0 8%, #8ff0cd 32%, #35dba5 62%, #13b783 92%);
       background-clip: text;
       color: transparent;
       font-family: "Space Grotesk", sans-serif;
@@ -436,13 +429,7 @@
     }
 
     html[data-theme="dark"] .hero-bubble::after {
-      background: linear-gradient(
-        145deg,
-        #f0fff8 8%,
-        #c9ffe6 32%,
-        #84efc5 62%,
-        #42dca9 92%
-      );
+      background: linear-gradient(145deg, #f0fff8 8%, #c9ffe6 32%, #84efc5 62%, #42dca9 92%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -1352,12 +1339,6 @@
       line-height: 1.5;
     }
 
-    .stat-note {
-      margin: 13px 0 0;
-      color: var(--muted);
-      font-size: 0.75rem;
-    }
-
     .market-cap-calculator {
       margin-top: 24px;
       padding-top: 21px;
@@ -1833,7 +1814,8 @@
 
   <div class="page-shell">
     <header class="site-header">
-      <a class="brand" href="#" aria-label="Furu Nation home"></a>
+      <a class="brand" href="#" aria-label="Furu Nation home">
+      </a>
 
       <div class="header-actions">
         <span class="network-pill">
@@ -1886,8 +1868,7 @@
         </div>
 
         <div class="hero-copy">
-          <p class="hero-kicker">Powered by Satoshis</p>
-          <h1 id="page-title">Furu<br><span>Nation</span></h1>
+          <h1 id="page-title">The Furu<br><span>community</span></h1>
 
           <button
             id="heroStatsButton"
@@ -2167,25 +2148,6 @@
       "https://youtu.be/Do4n3uCJT7Q?si=ayeVUDSQmq7SQO57",
       "https://youtu.be/QJECkbuK3qo?si=V0yNB-5Ta2arQjQO"
     ];
-
-    const categoryOrder = [
-      "Wallets",
-      "Exchanges",
-      "DeFi",
-      "DEX",
-      "CashTokens",
-      "Wrapped BCH",
-      "Explorer",
-      "Developer tools",
-      "Infrastructure",
-      "Privacy",
-      "Gaming",
-      "Community",
-      "Projects",
-      "Merchants",
-      "Other"
-    ];
-
         const figures = [
   { href: "https://wallet.bitcoin.com", src: "https://www.google.com/s2/favicons?domain=wallet.bitcoin.com&sz=128", caption: "Bitcoin.com", detail: "Wallets", description: "Easy-to-use mobile wallet for BCH and other chains.", categories: ["Wallets"] },
   { href: "https://electroncash.org", src: "https://i.postimg.cc/GtChXFrN/electroncash.png", caption: "Electron Cash", detail: "Wallets", description: "BCH wallet with CashFusion privacy and CashTokens support.", categories: ["Wallets"] },
@@ -2504,6 +2466,24 @@
   { href: "https://solidswap.cash", src: "https://www.google.com/s2/favicons?domain=solidswap.cash&sz=128", caption: "SolidSwap DEX", detail: "DEX", description: "BCH DEX for trading tokens and providing liquidity; in development.", categories: ["DEX"] },
   { href: "https://pagoconbit.com/", src: "https://www.google.com/s2/favicons?domain=pagoconbit.com&sz=128", caption: "PagoConBit", detail: "Merchants", description: "Argentina-based BCH service for bills, gift cards, and digital goods.", categories: ["Merchants"] }
 ];
+
+    const categoryOrder = [
+      "Wallets",
+      "Exchanges",
+      "DeFi",
+      "DEX",
+      "CashTokens",
+      "Wrapped BCH",
+      "Explorer",
+      "Developer tools",
+      "Infrastructure",
+      "Privacy",
+      "Gaming",
+      "Community",
+      "Projects",
+      "Merchants",
+      "Other"
+    ];
 
     function getYouTubeId(link) {
       try {
