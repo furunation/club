@@ -35,7 +35,6 @@
       --surface-soft: #f7faf8;
       --line: #dce8e1;
       --gold: #e4ad17;
-      --shadow: 0 18px 50px rgba(14, 51, 37, 0.09);
       --content-width: 1160px;
       --scrollbar-track: #e4ede7;
       --dialog-backdrop: rgba(9, 31, 23, 0.64);
@@ -48,14 +47,14 @@
       --hero-shadow: 0 24px 58px rgba(7, 122, 89, 0.2);
       --control-bg: #ffffff;
       --control-hover: #f3fff9;
-      --card-shadow: 0 8px 25px rgba(17, 50, 36, 0.055);
-      --card-hover-shadow: 0 14px 30px rgba(17, 50, 36, 0.1);
       --note-bg: #fff9e8;
       --note-border: #efdfa9;
       --note-text: #655421;
       --note-strong: #8a6500;
       --social-bg: #eafff5;
       --social-border: #b8ebd7;
+      --card-shadow: 0 8px 25px rgba(17, 50, 36, 0.055);
+      --card-hover-shadow: 0 14px 30px rgba(17, 50, 36, 0.1);
     }
 
     html[data-theme="dark"] {
@@ -70,7 +69,6 @@
       --surface-soft: #0d1812;
       --line: #294135;
       --gold: #f0c64b;
-      --shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
       --scrollbar-track: #1b2b22;
       --dialog-backdrop: rgba(2, 8, 5, 0.78);
       --hero-bg:
@@ -82,14 +80,14 @@
       --hero-shadow: 0 18px 48px rgba(0, 0, 0, 0.2);
       --control-bg: #13221a;
       --control-hover: #1a2d22;
-      --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.14);
-      --card-hover-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
       --note-bg: rgba(240, 198, 75, 0.07);
       --note-border: rgba(240, 198, 75, 0.23);
       --note-text: #e2d9b8;
       --note-strong: #f0c64b;
       --social-bg: rgba(10, 193, 142, 0.09);
       --social-border: rgba(10, 193, 142, 0.32);
+      --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.14);
+      --card-hover-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
     }
 
     *,
@@ -177,7 +175,7 @@
       place-items: center;
       overflow: hidden;
       border: 2px solid var(--green);
-      border-radius: 15px;
+      border-radius: 50%;
       background: var(--white);
       box-shadow: 0 6px 16px rgba(10, 193, 142, 0.16);
     }
@@ -351,8 +349,8 @@
     .hero::before,
     .hero::after {
       position: absolute;
-      z-index: -1;
-      border: 1px solid rgba(255, 255, 255, 0.22);
+      z-index: 0;
+      border: 1px solid rgba(255, 255, 255, 0.17);
       border-radius: 50%;
       content: "";
       pointer-events: none;
@@ -375,6 +373,133 @@
     html[data-theme="dark"] .hero::before,
     html[data-theme="dark"] .hero::after {
       border-color: rgba(10, 193, 142, 0.13);
+    }
+
+    /* Gradient sats bubbles: light mint/teal gradients only, no black text gradient. */
+    .hero-bubbles {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-bubble {
+      position: absolute;
+      display: grid;
+      width: var(--bubble-size);
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 28% 23%, rgba(255, 255, 255, 0.82), transparent 37%),
+        linear-gradient(145deg, #eafff5 0%, #b9f9df 30%, #65e8bb 64%, #21c992 100%);
+      box-shadow:
+        0 14px 32px rgba(0, 91, 64, 0.13),
+        inset 0 2px 7px rgba(255, 255, 255, 0.72),
+        inset 0 -8px 17px rgba(0, 153, 104, 0.12);
+      opacity: var(--bubble-opacity);
+      filter: blur(var(--bubble-blur));
+      transform: rotate(var(--bubble-rotation));
+    }
+
+    .hero-bubble::after {
+      content: "Ꞩ";
+      background: linear-gradient(
+        145deg,
+        #d5fff0 8%,
+        #8ff0cd 32%,
+        #35dba5 62%,
+        #13b783 92%
+      );
+      background-clip: text;
+      color: transparent;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: calc(var(--bubble-size) * 0.55);
+      font-weight: 700;
+      line-height: 1;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    html[data-theme="dark"] .hero-bubble {
+      border-color: rgba(202, 255, 229, 0.66);
+      background:
+        radial-gradient(circle at 28% 23%, rgba(255, 255, 255, 0.52), transparent 37%),
+        linear-gradient(145deg, #c9ffe6 0%, #75e9be 34%, #25c991 70%, #0da878 100%);
+      box-shadow:
+        0 14px 32px rgba(0, 0, 0, 0.2),
+        inset 0 2px 7px rgba(255, 255, 255, 0.54),
+        inset 0 -8px 17px rgba(0, 93, 62, 0.2);
+    }
+
+    html[data-theme="dark"] .hero-bubble::after {
+      background: linear-gradient(
+        145deg,
+        #f0fff8 8%,
+        #c9ffe6 32%,
+        #84efc5 62%,
+        #42dca9 92%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-bubble--one {
+      --bubble-size: clamp(135px, 19vw, 220px);
+      --bubble-opacity: 0.78;
+      --bubble-blur: 1.2px;
+      --bubble-rotation: -14deg;
+      top: 16%;
+      left: 45%;
+    }
+
+    .hero-bubble--two {
+      --bubble-size: clamp(92px, 12vw, 142px);
+      --bubble-opacity: 0.52;
+      --bubble-blur: 3px;
+      --bubble-rotation: 18deg;
+      top: -12%;
+      right: 4%;
+    }
+
+    .hero-bubble--three {
+      --bubble-size: clamp(68px, 8vw, 100px);
+      --bubble-opacity: 0.62;
+      --bubble-blur: 0.4px;
+      --bubble-rotation: 31deg;
+      right: 28%;
+      bottom: -19%;
+    }
+
+    .hero-bubble--four {
+      --bubble-size: clamp(48px, 6vw, 72px);
+      --bubble-opacity: 0.42;
+      --bubble-blur: 4.5px;
+      --bubble-rotation: -27deg;
+      top: 11%;
+      right: 26%;
+    }
+
+    .hero-bubble--five {
+      --bubble-size: clamp(106px, 14vw, 160px);
+      --bubble-opacity: 0.22;
+      --bubble-blur: 7px;
+      --bubble-rotation: 12deg;
+      right: -2%;
+      bottom: 13%;
+    }
+
+    .hero-bubble--six {
+      --bubble-size: clamp(42px, 5vw, 58px);
+      --bubble-opacity: 0.55;
+      --bubble-blur: 1.8px;
+      --bubble-rotation: -36deg;
+      left: 36%;
+      bottom: 9%;
     }
 
     .hero-copy {
@@ -403,6 +528,8 @@
     }
 
     .hero h1 {
+      position: relative;
+      z-index: 1;
       max-width: 700px;
       margin: 0;
       font-family: "Space Grotesk", sans-serif;
@@ -1320,6 +1447,18 @@
       .hero {
         grid-template-columns: minmax(0, 1fr) minmax(270px, 0.9fr);
       }
+
+      .hero-bubble--one {
+        left: 43%;
+      }
+
+      .hero-bubble--two {
+        right: -3%;
+      }
+
+      .hero-bubble--four {
+        right: 25%;
+      }
     }
 
     @media (max-width: 700px) {
@@ -1336,6 +1475,21 @@
 
       .hero-support {
         max-width: 560px;
+      }
+
+      .hero-bubble--one {
+        top: 10%;
+        left: 46%;
+      }
+
+      .hero-bubble--two {
+        top: -14%;
+        right: 2%;
+      }
+
+      .hero-bubble--three {
+        right: 18%;
+        bottom: 28%;
       }
     }
 
@@ -1361,7 +1515,6 @@
       .brand-mark {
         width: 44px;
         height: 44px;
-        border-radius: 14px;
       }
 
       .brand-name {
@@ -1409,6 +1562,42 @@
 
       .hero h1 {
         font-size: clamp(3rem, 12vw, 4.35rem);
+      }
+
+      .hero-bubble--one {
+        --bubble-size: clamp(102px, 32vw, 140px);
+        top: 9%;
+        left: 50%;
+      }
+
+      .hero-bubble--two {
+        --bubble-size: clamp(65px, 19vw, 90px);
+        top: -9%;
+        right: -3%;
+      }
+
+      .hero-bubble--three {
+        --bubble-size: clamp(46px, 13vw, 64px);
+        right: 15%;
+        bottom: 33%;
+      }
+
+      .hero-bubble--four {
+        --bubble-size: 45px;
+        top: 3%;
+        right: 23%;
+      }
+
+      .hero-bubble--five {
+        --bubble-size: 95px;
+        right: -4%;
+        bottom: 23%;
+      }
+
+      .hero-bubble--six {
+        --bubble-size: 40px;
+        left: 39%;
+        bottom: 38%;
       }
 
       .hero-support {
@@ -1594,6 +1783,25 @@
       .hero {
         padding-inline: 15px;
       }
+
+      .hero-bubble--one {
+        --bubble-size: 92px;
+        left: 52%;
+      }
+
+      .hero-bubble--two {
+        --bubble-size: 58px;
+      }
+
+      .hero-bubble--three {
+        --bubble-size: 41px;
+        right: 11%;
+        bottom: 37%;
+      }
+
+      .hero-bubble--five {
+        --bubble-size: 75px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1625,8 +1833,7 @@
 
   <div class="page-shell">
     <header class="site-header">
-      <a class="brand" href="#" aria-label="Furu Nation home">
-      </a>
+      <a class="brand" href="#" aria-label="Furu Nation home"></a>
 
       <div class="header-actions">
         <span class="network-pill">
@@ -1669,8 +1876,17 @@
 
     <main>
       <section class="hero" aria-labelledby="page-title">
+        <div class="hero-bubbles" aria-hidden="true">
+          <span class="hero-bubble hero-bubble--one"></span>
+          <span class="hero-bubble hero-bubble--two"></span>
+          <span class="hero-bubble hero-bubble--three"></span>
+          <span class="hero-bubble hero-bubble--four"></span>
+          <span class="hero-bubble hero-bubble--five"></span>
+          <span class="hero-bubble hero-bubble--six"></span>
+        </div>
+
         <div class="hero-copy">
-          <p class="hero-kicker">Powered by Bitcoin Cash</p>
+          <p class="hero-kicker">Powered by Satoshis</p>
           <h1 id="page-title">Furu<br><span>Nation</span></h1>
 
           <button
@@ -1761,7 +1977,7 @@
     </main>
 
     <footer class="footer">
-      <span>Furu Nation · Powered by Bitcoin Cash</span>
+      <span>Furu Nation · Powered by Satoshis</span>
       <div class="footer-follow">
         <span>Follow Furu Nation</span>
         <a
@@ -1864,8 +2080,6 @@
           <span class="stat-label">Total FURU</span>
         </div>
       </div>
-
-      <p class="stat-note">Add your figures when ready.</p>
 
       <section class="market-cap-calculator" aria-labelledby="calculatorTitle">
         <h3 id="calculatorTitle">Market cap calculator</h3>
