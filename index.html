@@ -329,6 +329,7 @@
       display: block;
     }
 
+    /* Animated top banner */
     .hero {
       position: relative;
       display: grid;
@@ -341,9 +342,14 @@
       border: 1px solid transparent;
       border-radius: 30px;
       background: var(--hero-bg);
+      background-size: 100% 100%, 100% 100%, 180% 180%;
+      background-position: 0 0, 0 0, 0% 50%;
       color: var(--hero-text);
       box-shadow: var(--hero-shadow);
       isolation: isolate;
+      animation:
+        hero-enter 850ms cubic-bezier(.2, .75, .25, 1) both,
+        hero-glow 18s ease-in-out 850ms infinite alternate;
     }
 
     html[data-theme="dark"] .hero {
@@ -365,6 +371,7 @@
       right: 90px;
       width: 480px;
       height: 480px;
+      animation: orbit-drift 19s ease-in-out infinite alternate;
     }
 
     .hero::after {
@@ -372,6 +379,7 @@
       bottom: -265px;
       width: 510px;
       height: 510px;
+      animation: orbit-drift 24s ease-in-out -6s infinite alternate-reverse;
     }
 
     html[data-theme="dark"] .hero::before,
@@ -406,6 +414,8 @@
       opacity: var(--bubble-opacity);
       filter: blur(var(--bubble-blur));
       transform: rotate(var(--bubble-rotation));
+      animation: bubble-float var(--float-duration, 8s) ease-in-out var(--float-delay, 0s) infinite alternate;
+      will-change: transform;
     }
 
     .hero-bubble::after {
@@ -429,8 +439,9 @@
       --bubble-opacity: 0.78;
       --bubble-blur: 1.2px;
       --bubble-rotation: -14deg;
-      top: 16%;
-      left: 45%;
+      --float-duration: 8.5s;
+      top: 7%;
+      right: 19%;
     }
 
     .hero-bubble--two {
@@ -438,8 +449,10 @@
       --bubble-opacity: 0.52;
       --bubble-blur: 3px;
       --bubble-rotation: 18deg;
-      top: -12%;
-      right: 4%;
+      --float-duration: 10s;
+      --float-delay: -2.5s;
+      top: -15%;
+      right: -1%;
     }
 
     .hero-bubble--three {
@@ -447,8 +460,10 @@
       --bubble-opacity: 0.62;
       --bubble-blur: 0.4px;
       --bubble-rotation: 31deg;
-      right: 28%;
-      bottom: -19%;
+      --float-duration: 7.5s;
+      --float-delay: -1.2s;
+      right: 7%;
+      bottom: 8%;
     }
 
     .hero-bubble--four {
@@ -456,8 +471,10 @@
       --bubble-opacity: 0.42;
       --bubble-blur: 4.5px;
       --bubble-rotation: -27deg;
-      top: 11%;
-      right: 26%;
+      --float-duration: 9s;
+      --float-delay: -4s;
+      top: 39%;
+      right: 35%;
     }
 
     .hero-bubble--five {
@@ -465,8 +482,10 @@
       --bubble-opacity: 0.22;
       --bubble-blur: 7px;
       --bubble-rotation: 12deg;
-      right: -2%;
-      bottom: 13%;
+      --float-duration: 11s;
+      --float-delay: -3s;
+      right: -3%;
+      bottom: -10%;
     }
 
     .hero-bubble--six {
@@ -474,7 +493,9 @@
       --bubble-opacity: 0.55;
       --bubble-blur: 1.8px;
       --bubble-rotation: -36deg;
-      left: 36%;
+      --float-duration: 7s;
+      --float-delay: -2s;
+      right: 29%;
       bottom: 9%;
     }
 
@@ -492,6 +513,7 @@
       max-width: 100%;
       grid-column: 1;
       grid-row: 1;
+      animation: hero-copy-enter 750ms cubic-bezier(.2, .75, .25, 1) 140ms both;
     }
 
     .hero-kicker {
@@ -541,7 +563,7 @@
       min-height: 42px;
       align-items: center;
       gap: 9px;
-      padding: 6px 12px 6px 7px;
+      padding: 8px 14px;
       border: 1px solid rgba(255, 255, 255, 0.52);
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.92);
@@ -551,20 +573,13 @@
       font-weight: 700;
       cursor: pointer;
       transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      animation: button-enter 550ms ease 420ms both;
     }
 
     .hero-stats-button:hover {
       border-color: #fff;
       background: #fff;
       transform: translateY(-2px);
-    }
-
-    .hero-stats-button img {
-      display: block;
-      width: 27px;
-      height: 27px;
-      border-radius: 50%;
-      object-fit: cover;
     }
 
     .hero-stats-arrow {
@@ -582,6 +597,7 @@
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.13);
       backdrop-filter: blur(10px);
+      animation: hero-copy-enter 800ms cubic-bezier(.2, .75, .25, 1) 260ms both;
     }
 
     html[data-theme="dark"] .hero-support {
@@ -609,6 +625,54 @@
       font-weight: 700;
       text-decoration-thickness: 1px;
       text-underline-offset: 3px;
+    }
+
+    @keyframes hero-enter {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes hero-glow {
+      from { background-position: 0 0, 0 0, 0% 50%; }
+      to { background-position: 0 0, 0 0, 100% 50%; }
+    }
+
+    @keyframes hero-copy-enter {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes button-enter {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bubble-float {
+      from { translate: 0 0; }
+      to { translate: 0 -13px; }
+    }
+
+    @keyframes orbit-drift {
+      from { transform: translate3d(0, 0, 0) rotate(0deg); }
+      to { transform: translate3d(-14px, 12px, 0) rotate(5deg); }
     }
 
     .section {
@@ -1378,8 +1442,8 @@
       .hero {
         min-height: 0;
         grid-template-columns: minmax(0, 1fr);
-        gap: 27px;
-        padding: 32px;
+        gap: 18px;
+        padding: 28px;
       }
 
       .hero-copy {
@@ -1391,21 +1455,6 @@
         grid-column: 1;
         grid-row: 2;
         max-width: 560px;
-      }
-
-      .hero-bubble--one {
-        top: 10%;
-        left: 46%;
-      }
-
-      .hero-bubble--two {
-        top: -14%;
-        right: 2%;
-      }
-
-      .hero-bubble--three {
-        right: 18%;
-        bottom: 28%;
       }
     }
 
@@ -1465,60 +1514,82 @@
         font-size: 0.68rem;
       }
 
+      /* Shorter mobile banner */
       .hero {
-        gap: 23px;
-        padding: 26px 19px;
+        min-height: 205px;
+        grid-template-columns: minmax(0, 1fr);
+        align-content: start;
+        gap: 14px;
+        padding: 24px 18px 58px;
         border-radius: 22px;
       }
 
+      .hero-copy {
+        max-width: 100%;
+        padding-right: 0;
+      }
+
       .hero-kicker {
-        margin-bottom: 14px;
-        font-size: 0.63rem;
+        margin-bottom: 10px;
+        font-size: 0.6rem;
       }
 
       .hero h1 {
-        font-size: clamp(2.25rem, 10.5vw, 4.5rem);
+        max-width: 100%;
+        font-size: clamp(2rem, 9.5vw, 3.5rem);
+        line-height: 0.98;
       }
 
       .hero-stats-button {
-        right: 15px;
-        bottom: 15px;
+        right: 13px;
+        bottom: 12px;
+        min-height: 36px;
+        padding: 7px 12px;
+        font-size: 0.72rem;
       }
 
       .hero-bubble--one {
-        --bubble-size: clamp(102px, 32vw, 140px);
-        top: 9%;
-        left: 50%;
+        --bubble-size: 78px;
+        --bubble-opacity: 0.58;
+        top: 36%;
+        right: 29%;
+        left: auto;
       }
 
       .hero-bubble--two {
-        --bubble-size: clamp(65px, 19vw, 90px);
-        top: -9%;
-        right: -3%;
+        --bubble-size: 52px;
+        --bubble-opacity: 0.42;
+        top: 14%;
+        right: 4%;
       }
 
       .hero-bubble--three {
-        --bubble-size: clamp(46px, 13vw, 64px);
-        right: 15%;
-        bottom: 33%;
+        --bubble-size: 41px;
+        --bubble-opacity: 0.5;
+        right: 9%;
+        bottom: 15%;
       }
 
       .hero-bubble--four {
-        --bubble-size: 45px;
-        top: 3%;
-        right: 23%;
+        --bubble-size: 30px;
+        --bubble-opacity: 0.35;
+        top: 57%;
+        right: 47%;
       }
 
       .hero-bubble--five {
-        --bubble-size: 95px;
-        right: -4%;
-        bottom: 23%;
+        --bubble-size: 63px;
+        --bubble-opacity: 0.18;
+        right: -5%;
+        bottom: -8%;
       }
 
       .hero-bubble--six {
-        --bubble-size: 40px;
-        left: 39%;
-        bottom: 38%;
+        --bubble-size: 29px;
+        --bubble-opacity: 0.43;
+        right: 37%;
+        bottom: 11%;
+        left: auto;
       }
 
       .hero-support {
@@ -1699,31 +1770,50 @@
       }
 
       .hero {
-        padding-inline: 15px;
+        min-height: 190px;
+        padding: 22px 15px 55px;
+      }
+
+      .hero h1 {
+        font-size: clamp(1.9rem, 9vw, 2.6rem);
       }
 
       .hero-stats-button {
-        right: 12px;
-        bottom: 12px;
+        right: 11px;
+        bottom: 10px;
       }
 
       .hero-bubble--one {
-        --bubble-size: 92px;
-        left: 52%;
+        --bubble-size: 68px;
+        top: 37%;
+        right: 27%;
       }
 
       .hero-bubble--two {
-        --bubble-size: 58px;
+        --bubble-size: 46px;
+        top: 13%;
+        right: 4%;
       }
 
       .hero-bubble--three {
-        --bubble-size: 41px;
+        --bubble-size: 36px;
         right: 11%;
-        bottom: 37%;
+        bottom: 15%;
+      }
+
+      .hero-bubble--four {
+        --bubble-size: 27px;
+        right: 47%;
       }
 
       .hero-bubble--five {
-        --bubble-size: 75px;
+        --bubble-size: 57px;
+        right: -6%;
+      }
+
+      .hero-bubble--six {
+        --bubble-size: 26px;
+        right: 39%;
       }
     }
 
@@ -1830,7 +1920,6 @@
           aria-haspopup="dialog"
           aria-controls="statsOverlay"
         >
-          <img src="https://i.postimg.cc/gkBVRT65/satsnation.jpg" alt="" />
           <span>SATS stats</span>
           <span class="hero-stats-arrow" aria-hidden="true">↗</span>
         </button>
