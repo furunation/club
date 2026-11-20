@@ -56,6 +56,20 @@
       --social-border: #c7e9dc;
       --card-shadow: 0 8px 25px rgba(17, 28, 39, 0.06);
       --card-hover-shadow: 0 14px 30px rgba(17, 28, 39, 0.12);
+
+      /* Purchasing-power banner theme */
+      --pp-bg: #0b0e12;
+      --pp-panel: #121820;
+      --pp-line: rgba(162, 182, 198, .16);
+      --pp-text: #f3f7fa;
+      --pp-muted: #a3b0bb;
+      --pp-green: #55e0a8;
+      --pp-green-soft: rgba(85, 224, 168, .13);
+      --pp-blue: #79b5ff;
+      --pp-red: #ffa27f;
+      --pp-shadow: 0 26px 80px rgba(0, 0, 0, .34);
+      --pp-surface: rgba(8, 13, 18, .48);
+      --pp-control: #131b23;
     }
 
     html[data-theme="dark"] {
@@ -604,6 +618,277 @@
     .hero-stats-arrow {
       color: #13775e;
       font-size: 0.9rem;
+    }
+
+    /* Purchasing-power banner */
+    .purchasing-banner {
+      position: relative;
+      isolation: isolate;
+      width: 100%;
+      margin-top: 28px;
+      padding: clamp(24px, 4vw, 42px);
+      overflow: hidden;
+      border: 1px solid var(--pp-line);
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 88% 8%, rgba(85, 224, 168, .12), transparent 22rem),
+        linear-gradient(135deg, #121a20, #101720 56%, #111c28);
+      color: var(--pp-text);
+      box-shadow: var(--pp-shadow);
+    }
+
+    .purchasing-banner::before,
+    .purchasing-banner::after {
+      position: absolute;
+      z-index: -1;
+      border: 1px solid rgba(130, 201, 174, .10);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .purchasing-banner::before {
+      top: -245px;
+      right: -120px;
+      width: 550px;
+      height: 550px;
+    }
+
+    .purchasing-banner::after {
+      right: 34%;
+      bottom: -340px;
+      width: 470px;
+      height: 470px;
+    }
+
+    .pp-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 15px;
+      color: var(--pp-green);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .pp-eyebrow::before {
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+      content: "";
+    }
+
+    .pp-title {
+      max-width: 780px;
+      margin: 0;
+      color: var(--pp-text);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.2rem, 6.7vw, 5.25rem);
+      line-height: .99;
+      letter-spacing: -.075em;
+      text-wrap: balance;
+    }
+
+    .pp-title span {
+      color: var(--pp-green);
+    }
+
+    .pp-intro {
+      max-width: 720px;
+      margin: 18px 0 0;
+      color: var(--pp-muted);
+      font-size: clamp(.95rem, 1.7vw, 1.08rem);
+      line-height: 1.7;
+    }
+
+    .pp-chart-card {
+      margin-top: 30px;
+      padding: clamp(16px, 3vw, 25px);
+      border: 1px solid var(--pp-line);
+      border-radius: 21px;
+      background: var(--pp-surface);
+    }
+
+    .pp-chart-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 12px;
+    }
+
+    .pp-chart-heading h3 {
+      margin: 0;
+      color: var(--pp-text);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      letter-spacing: -.04em;
+    }
+
+    .pp-chart-heading p {
+      margin: 5px 0 0;
+      color: var(--pp-muted);
+      font-size: .78rem;
+      line-height: 1.5;
+    }
+
+    .pp-chart-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      justify-content: flex-end;
+    }
+
+    .pp-range-button {
+      min-height: 34px;
+      padding: 6px 11px;
+      border: 1px solid var(--pp-line);
+      border-radius: 999px;
+      background: var(--pp-control);
+      color: var(--pp-muted);
+      font-size: .73rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: color .2s, background .2s, border-color .2s;
+    }
+
+    .pp-range-button:hover,
+    .pp-range-button[aria-pressed="true"] {
+      border-color: rgba(85, 224, 168, .55);
+      background: var(--pp-green-soft);
+      color: var(--pp-green);
+    }
+
+    .pp-chart-wrap {
+      position: relative;
+      width: 100%;
+      height: clamp(235px, 36vw, 360px);
+      margin-top: 18px;
+    }
+
+    .pp-chart-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .pp-chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      margin-top: 14px;
+      color: var(--pp-muted);
+      font-size: .78rem;
+    }
+
+    .pp-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pp-legend-line {
+      width: 24px;
+      height: 3px;
+      border-radius: 4px;
+      background: var(--pp-green);
+    }
+
+    .pp-legend-line--usd {
+      background: repeating-linear-gradient(
+        90deg,
+        var(--pp-red) 0 6px,
+        transparent 6px 10px
+      );
+    }
+
+    .pp-insights {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: 18px;
+    }
+
+    .pp-insight {
+      min-width: 0;
+      padding: 17px 18px;
+      border: 1px solid var(--pp-line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .025);
+    }
+
+    .pp-insight-label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--pp-muted);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .pp-insight strong {
+      display: block;
+      color: var(--pp-text);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1rem, 2.3vw, 1.3rem);
+      letter-spacing: -.04em;
+    }
+
+    .pp-insight--sats strong {
+      color: var(--pp-green);
+    }
+
+    .pp-insight--usd strong {
+      color: var(--pp-red);
+    }
+
+    .pp-fine-print {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 10px;
+      margin: 17px 0 0;
+      padding: 14px 15px;
+      border: 1px solid rgba(121, 181, 255, .19);
+      border-radius: 13px;
+      background: rgba(121, 181, 255, .055);
+      color: #bdcbd8;
+      font-size: .76rem;
+      line-height: 1.6;
+    }
+
+    .pp-fine-print b {
+      color: var(--pp-blue);
+    }
+
+    .pp-fine-print-icon {
+      display: grid;
+      width: 19px;
+      height: 19px;
+      place-items: center;
+      border: 1px solid rgba(121, 181, 255, .55);
+      border-radius: 50%;
+      color: var(--pp-blue);
+      font-size: .75rem;
+      font-weight: 800;
+    }
+
+    .pp-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 19px;
+      color: var(--pp-muted);
+      font-size: .73rem;
+    }
+
+    .pp-live-date {
+      color: #d3dde4;
+      font-weight: 700;
     }
 
     .section {
@@ -1259,6 +1544,30 @@
       }
     }
 
+    @media (max-width: 620px) {
+      .purchasing-banner {
+        padding: 24px 17px;
+        border-radius: 21px;
+      }
+
+      .pp-chart-heading {
+        flex-direction: column;
+      }
+
+      .pp-chart-controls {
+        justify-content: flex-start;
+      }
+
+      .pp-insights {
+        grid-template-columns: 1fr;
+      }
+
+      .pp-footer-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
     @media (max-width: 600px) {
       .page-shell {
         padding: 17px 14px 90px;
@@ -1697,6 +2006,81 @@
         </button>
       </section>
 
+      <!-- Purchasing power comparison banner -->
+      <section class="purchasing-banner" aria-labelledby="pp-title">
+        <p class="pp-eyebrow">Sats Nation · Money over time</p>
+
+        <h2 class="pp-title" id="pp-title">
+          One satoshi.<br />
+          <span>One dollar.</span><br />
+          Two different stories.
+        </h2>
+
+        <p class="pp-intro">
+          A conceptual look at Bitcoin Cash satoshis and U.S. dollars from their beginnings to today.
+          BCH’s market value has moved up and down; the dollar’s purchasing power has generally eroded
+          over time through inflation.
+        </p>
+
+        <div class="pp-chart-card">
+          <div class="pp-chart-heading">
+            <div>
+              <h3>Purchasing power, illustrated</h3>
+              <p>Indexed to 100 at each currency’s starting point · illustrative, not to scale</p>
+            </div>
+
+            <nav class="pp-chart-controls" aria-label="Choose chart time range">
+              <button class="pp-range-button" type="button" data-pp-range="all" aria-pressed="true">Inception → now</button>
+              <button class="pp-range-button" type="button" data-pp-range="10" aria-pressed="false">10 years</button>
+              <button class="pp-range-button" type="button" data-pp-range="5" aria-pressed="false">5 years</button>
+            </nav>
+          </div>
+
+          <div class="pp-chart-wrap">
+            <canvas
+              id="purchasingPowerChart"
+              class="pp-chart-canvas"
+              role="img"
+              aria-label="Illustrative indexed comparison. Bitcoin Cash market purchasing power is volatile. The dollar's purchasing power trends downward over time."
+            >
+              Illustrative chart comparing volatile BCH purchasing power with the generally declining purchasing power of the U.S. dollar.
+            </canvas>
+          </div>
+
+          <div class="pp-chart-legend" aria-label="Chart legend">
+            <span class="pp-legend-item"><span class="pp-legend-line"></span> BCH satoshi: market value fluctuates</span>
+            <span class="pp-legend-item"><span class="pp-legend-line pp-legend-line--usd"></span> U.S. dollar: purchasing power trends down</span>
+          </div>
+
+          <div class="pp-insights">
+            <div class="pp-insight pp-insight--sats">
+              <span class="pp-insight-label">Bitcoin Cash satoshi</span>
+              <strong>Scarce unit · market-priced</strong>
+            </div>
+            <div class="pp-insight pp-insight--usd">
+              <span class="pp-insight-label">U.S. dollar</span>
+              <strong>Purchasing power erodes with inflation</strong>
+            </div>
+          </div>
+
+          <p class="pp-fine-print">
+            <span class="pp-fine-print-icon" aria-hidden="true">i</span>
+            <span>
+              <b>Important:</b> This is a schematic illustration, not historical price or CPI data.
+              BCH’s fiat purchasing power is volatile and has not moved continuously in one direction.
+              A satoshi is 1/100,000,000 of a BCH; its purchasing power depends on BCH’s exchange rate
+              and the prices of goods and services. For a measured USD inflation comparison, use CPI
+              data; for BCH, use dated market prices and a defined basket of goods.
+            </span>
+          </p>
+        </div>
+
+        <div class="pp-footer-row">
+          <span>Indexed concept chart · no investment advice</span>
+          <span class="pp-live-date">Banner date: <time id="todayDate"></time></span>
+        </div>
+      </section>
+
       <section id="ecosystem" class="section directory" aria-labelledby="ecosystem-title">
         <div class="section-heading">
           <div>
@@ -1965,46 +2349,39 @@
         const tilt = Math.sin(time * 0.00023 + emerald.phase) * 0.33;
         const r = emerald.radius;
 
-        /*
-         * A cut emerald wireframe: top table ring, crown girdle,
-         * lower pavilion ring, and pointed culet.
-         */
         const vertices = [
-          { x: 0, y: -0.92, z: 0 },         // 0: table center
-          { x: -0.45, y: -0.92, z: -0.34 }, // 1
-          { x: 0.45, y: -0.92, z: -0.34 },  // 2
-          { x: 0.61, y: -0.92, z: 0 },      // 3
-          { x: 0.45, y: -0.92, z: 0.34 },   // 4
-          { x: -0.45, y: -0.92, z: 0.34 },  // 5
-          { x: -0.61, y: -0.92, z: 0 },     // 6
+          { x: 0, y: -0.92, z: 0 },
+          { x: -0.45, y: -0.92, z: -0.34 },
+          { x: 0.45, y: -0.92, z: -0.34 },
+          { x: 0.61, y: -0.92, z: 0 },
+          { x: 0.45, y: -0.92, z: 0.34 },
+          { x: -0.45, y: -0.92, z: 0.34 },
+          { x: -0.61, y: -0.92, z: 0 },
 
-          { x: -0.78, y: -0.42, z: -0.53 }, // 7: crown rim
-          { x: 0.78, y: -0.42, z: -0.53 },  // 8
-          { x: 0.96, y: -0.42, z: 0 },      // 9
-          { x: 0.78, y: -0.42, z: 0.53 },   // 10
-          { x: -0.78, y: -0.42, z: 0.53 },  // 11
-          { x: -0.96, y: -0.42, z: 0 },     // 12
+          { x: -0.78, y: -0.42, z: -0.53 },
+          { x: 0.78, y: -0.42, z: -0.53 },
+          { x: 0.96, y: -0.42, z: 0 },
+          { x: 0.78, y: -0.42, z: 0.53 },
+          { x: -0.78, y: -0.42, z: 0.53 },
+          { x: -0.96, y: -0.42, z: 0 },
 
-          { x: -0.72, y: 0.22, z: -0.49 },  // 13: girdle
-          { x: 0.72, y: 0.22, z: -0.49 },   // 14
-          { x: 0.89, y: 0.22, z: 0 },       // 15
-          { x: 0.72, y: 0.22, z: 0.49 },    // 16
-          { x: -0.72, y: 0.22, z: 0.49 },  // 17
-          { x: -0.89, y: 0.22, z: 0 },      // 18
+          { x: -0.72, y: 0.22, z: -0.49 },
+          { x: 0.72, y: 0.22, z: -0.49 },
+          { x: 0.89, y: 0.22, z: 0 },
+          { x: 0.72, y: 0.22, z: 0.49 },
+          { x: -0.72, y: 0.22, z: 0.49 },
+          { x: -0.89, y: 0.22, z: 0 },
 
-          { x: 0, y: 0.98, z: 0 }           // 19: culet
+          { x: 0, y: 0.98, z: 0 }
         ];
 
         const edges = [
           [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 1],
           [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6],
-
           [7, 8], [8, 9], [9, 10], [10, 11], [11, 12], [12, 7],
           [1, 7], [2, 8], [3, 9], [4, 10], [5, 11], [6, 12],
-
           [13, 14], [14, 15], [15, 16], [16, 17], [17, 18], [18, 13],
           [7, 13], [8, 14], [9, 15], [10, 16], [11, 17], [12, 18],
-
           [19, 13], [19, 14], [19, 15], [19, 16], [19, 17], [19, 18],
           [7, 14], [8, 15], [9, 16], [10, 17], [11, 18], [12, 13],
           [1, 8], [2, 9], [3, 10], [4, 11], [5, 12], [6, 7]
@@ -2034,16 +2411,9 @@
             : emerald.opacity * 0.14;
           const color = showingFront ? colors.bright : colors.dim;
 
-          drawLine(
-            a,
-            b,
-            color,
-            alpha,
-            showingFront ? 1.05 : 0.7
-          );
+          drawLine(a, b, color, alpha, showingFront ? 1.05 : 0.7);
         }
 
-        // Small specular point on the table gives each wireframe a gem-like glint.
         const glint = projected[0];
         ctx.beginPath();
         ctx.arc(glint.x, glint.y, Math.max(1.2, r * 0.024), 0, Math.PI * 2);
@@ -2053,7 +2423,6 @@
 
       function drawFrame(time, staticFrame = false) {
         ctx.clearRect(0, 0, width, height);
-
         const colors = getColors();
         const frameTime = staticFrame ? 0 : time;
 
@@ -2064,7 +2433,6 @@
 
       function animate(time) {
         rafId = 0;
-
         if (!visible || reducedMotion.matches) return;
 
         if (time - lastFrame < 30) {
@@ -2117,6 +2485,250 @@
       } else if (typeof reducedMotion.addListener === "function") {
         reducedMotion.addListener(updateAnimationState);
       }
+    })();
+
+    /*
+     * Purchasing-power chart. Values are synthetic illustrations, not
+     * historical BCH prices or U.S. CPI observations.
+     */
+    (() => {
+      const canvas = document.getElementById("purchasingPowerChart");
+      const ctx = canvas?.getContext("2d");
+      const buttons = [...document.querySelectorAll("[data-pp-range]")];
+      if (!canvas || !ctx) return;
+
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let selectedRange = "all";
+      let animationFrame = 0;
+      let drawProgress = reducedMotion.matches ? 1 : 0;
+      let lastTime = 0;
+
+      const series = {
+        all: {
+          labels: ["Start", "Early", "Growth", "Volatility", "Today"],
+          bch: [100, 72, 143, 91, 126],
+          usd: [100, 88, 75, 61, 49]
+        },
+        10: {
+          labels: ["10 years ago", "Year 3", "Year 5", "Year 8", "Today"],
+          bch: [100, 136, 82, 151, 119],
+          usd: [100, 94, 87, 80, 73]
+        },
+        5: {
+          labels: ["5 years ago", "Year 1", "Year 2", "Year 3", "Today"],
+          bch: [100, 74, 113, 86, 128],
+          usd: [100, 96, 91, 86, 81]
+        }
+      };
+
+      function smoothValue(values, position) {
+        const scaled = Math.max(0, Math.min(values.length - 1, position));
+        const i = Math.floor(scaled);
+        const t = scaled - i;
+        const eased = t * t * (3 - 2 * t);
+        return values[i] + (
+          values[Math.min(i + 1, values.length - 1)] - values[i]
+        ) * eased;
+      }
+
+      function drawSeries(values, xFor, yFor, progress, color, dashed = false) {
+        const segments = values.length - 1;
+        const end = Math.max(0.01, progress * segments);
+        const points = [];
+
+        for (let i = 0; i <= Math.ceil(end); i++) {
+          const position = Math.min(i, end);
+          points.push({
+            x: xFor(position),
+            y: yFor(smoothValue(values, position))
+          });
+        }
+
+        if (points.length < 2) {
+          points.push({
+            x: xFor(end),
+            y: yFor(smoothValue(values, end))
+          });
+        }
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+
+        for (let i = 1; i < points.length; i++) {
+          const previous = points[i - 1];
+          const current = points[i];
+          const midpoint = (previous.x + current.x) / 2;
+          ctx.quadraticCurveTo(midpoint, previous.y, current.x, current.y);
+        }
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        ctx.setLineDash(dashed ? [7, 7] : []);
+        ctx.shadowColor = color;
+        ctx.shadowBlur = dashed ? 0 : 12;
+        ctx.stroke();
+        ctx.restore();
+
+        const lastPoint = points[points.length - 1];
+        ctx.beginPath();
+        ctx.arc(lastPoint.x, lastPoint.y, 4.5, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+      }
+
+      function draw() {
+        const rect = canvas.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(rect.width * dpr);
+        canvas.height = Math.round(rect.height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const width = rect.width;
+        const height = rect.height;
+        const data = series[selectedRange];
+        const padding = {
+          top: 24,
+          right: width < 430 ? 13 : 22,
+          bottom: 39,
+          left: width < 430 ? 40 : 52
+        };
+        const plotWidth = width - padding.left - padding.right;
+        const plotHeight = height - padding.top - padding.bottom;
+        const minValue = 35;
+        const maxValue = 165;
+
+        const xFor = index =>
+          padding.left + (index / (data.labels.length - 1)) * plotWidth;
+        const yFor = value =>
+          padding.top + ((maxValue - value) / (maxValue - minValue)) * plotHeight;
+
+        ctx.clearRect(0, 0, width, height);
+        ctx.font = '11px "DM Sans", sans-serif';
+        ctx.textBaseline = "middle";
+
+        [150, 100, 50].forEach(value => {
+          const y = yFor(value);
+          ctx.beginPath();
+          ctx.moveTo(padding.left, y);
+          ctx.lineTo(width - padding.right, y);
+          ctx.strokeStyle = value === 100
+            ? "rgba(220,235,245,.20)"
+            : "rgba(220,235,245,.09)";
+          ctx.lineWidth = 1;
+          ctx.setLineDash(value === 100 ? [4, 5] : []);
+          ctx.stroke();
+
+          ctx.fillStyle = "rgba(176,190,201,.72)";
+          ctx.textAlign = "right";
+          ctx.fillText(String(value), padding.left - 9, y);
+        });
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = "rgba(176,190,201,.76)";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top";
+        data.labels.forEach((label, index) => {
+          ctx.fillText(label, xFor(index), height - padding.bottom + 13);
+        });
+
+        const bchPoints = data.bch.map((value, index) => ({
+          x: xFor(index),
+          y: yFor(value)
+        }));
+        const fillProgress = Math.max(.01, drawProgress);
+        const fillEndPosition = fillProgress * (bchPoints.length - 1);
+        const fillEndX = xFor(fillEndPosition);
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(bchPoints[0].x, yFor(minValue));
+        ctx.lineTo(bchPoints[0].x, bchPoints[0].y);
+
+        for (let i = 1; i < bchPoints.length; i++) {
+          if (i > fillEndPosition) break;
+          const previous = bchPoints[i - 1];
+          const current = bchPoints[i];
+          const mid = (previous.x + current.x) / 2;
+          ctx.quadraticCurveTo(mid, previous.y, current.x, current.y);
+        }
+
+        const finalY = yFor(smoothValue(data.bch, fillEndPosition));
+        ctx.lineTo(fillEndX, finalY);
+        ctx.lineTo(fillEndX, yFor(minValue));
+        ctx.closePath();
+
+        const gradient = ctx.createLinearGradient(
+          0,
+          padding.top,
+          0,
+          height - padding.bottom
+        );
+        gradient.addColorStop(0, "rgba(85,224,168,.15)");
+        gradient.addColorStop(1, "rgba(85,224,168,0)");
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        ctx.restore();
+
+        drawSeries(data.usd, xFor, yFor, drawProgress, "#ffa27f", true);
+        drawSeries(data.bch, xFor, yFor, drawProgress, "#55e0a8", false);
+      }
+
+      function animate(time) {
+        if (!lastTime) lastTime = time;
+        const delta = Math.min(time - lastTime, 40);
+        lastTime = time;
+
+        drawProgress = Math.min(1, drawProgress + delta / 950);
+        draw();
+
+        if (drawProgress < 1) {
+          animationFrame = requestAnimationFrame(animate);
+        } else {
+          animationFrame = 0;
+        }
+      }
+
+      function renderChart(animateIn = false) {
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+        lastTime = 0;
+
+        if (animateIn && !reducedMotion.matches) {
+          drawProgress = 0;
+          animationFrame = requestAnimationFrame(animate);
+        } else {
+          drawProgress = 1;
+          draw();
+        }
+      }
+
+      buttons.forEach(button => {
+        button.addEventListener("click", () => {
+          selectedRange = button.dataset.ppRange;
+          buttons.forEach(item => {
+            item.setAttribute("aria-pressed", String(item === button));
+          });
+          renderChart(true);
+        });
+      });
+
+      const resizeObserver = new ResizeObserver(() => draw());
+      resizeObserver.observe(canvas);
+      window.addEventListener("resize", draw, { passive: true });
+
+      document.getElementById("todayDate").textContent =
+        new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          timeZone: "UTC"
+        }).format(new Date());
+
+      renderChart(true);
     })();
 
     const categoryOrder = [
@@ -2504,7 +3116,6 @@
 
       shuffleArray(figures).forEach(item => {
         const categories = getFigureCategories(item);
-
         const card = document.createElement("article");
         card.className = "ecosystem-card";
         card.dataset.categories = JSON.stringify(categories);
