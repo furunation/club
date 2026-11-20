@@ -37,7 +37,6 @@
       --line: #dfe3e8;
       --gold: #55a4ff;
       --content-width: 1160px;
-      --scrollbar-track: #e5e9ed;
       --dialog-backdrop: rgba(8, 12, 18, 0.72);
       --hero-bg:
         radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.22), transparent 21rem),
@@ -72,7 +71,6 @@
       --surface-soft: #10151b;
       --line: #29333d;
       --gold: #73b3ff;
-      --scrollbar-track: #1c242c;
       --dialog-backdrop: rgba(0, 0, 0, 0.82);
       --hero-bg:
         radial-gradient(circle at 82% 18%, rgba(32, 216, 149, 0.18), transparent 21rem),
@@ -112,6 +110,7 @@
     }
 
     body {
+      position: relative;
       min-height: 100vh;
       margin: 0;
       overflow-x: hidden;
@@ -120,6 +119,35 @@
       font-family: "DM Sans", Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+    }
+
+    /* Fixed viewport background; wireframes are decorative and behind all content. */
+    #emeraldBackground {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.82;
+      contain: strict;
+    }
+
+    html[data-theme="light"] #emeraldBackground {
+      opacity: 0.3;
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+      width: min(var(--content-width), 100%);
+      margin-inline: auto;
+      padding: 24px 28px 72px;
+    }
+
+    #backToTop,
+    .dialog-overlay {
+      position: fixed;
     }
 
     body.dialog-open {
@@ -147,12 +175,6 @@
     :focus-visible {
       outline: 3px solid var(--gold);
       outline-offset: 3px;
-    }
-
-    .page-shell {
-      width: min(var(--content-width), 100%);
-      margin-inline: auto;
-      padding: 24px 28px 72px;
     }
 
     .site-header {
@@ -913,7 +935,6 @@
     }
 
     #backToTop {
-      position: fixed;
       right: 22px;
       bottom: 22px;
       z-index: 1200;
@@ -942,7 +963,6 @@
     }
 
     .dialog-overlay {
-      position: fixed;
       inset: 0;
       z-index: 2500;
       display: none;
@@ -1571,6 +1591,10 @@
         scroll-behavior: auto;
       }
 
+      #emeraldBackground {
+        display: none;
+      }
+
       *,
       *::before,
       *::after {
@@ -1587,6 +1611,8 @@
 </head>
 
 <body>
+  <canvas id="emeraldBackground" aria-hidden="true"></canvas>
+
   <script
     data-goatcounter="https://satsnation.goatcounter.com/count"
     async
@@ -1826,6 +1852,273 @@
   </div>
 
   <script>
+    /*
+     * Canvas-drawn, rotating and floating 3D wireframe emeralds.
+     * The canvas is fixed to the viewport, so the emeralds stay behind
+     * the entire site while the page scrolls.
+     */
+    (() => {
+      const canvas = document.getElementById("emeraldBackground");
+      const ctx = canvas?.getContext("2d", { alpha: true });
+      if (!canvas || !ctx) return;
+
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+      let rafId = 0;
+      let lastFrame = 0;
+      let visible = !document.hidden;
+      let emeralds = [];
+
+      const emeraldSettings = [
+        { x: 0.11, y: 0.18, size: 92, speed: 0.36, phase: 0.5, float: 15, opacity: 0.65 },
+        { x: 0.82, y: 0.15, size: 67, speed: -0.29, phase: 2.1, float: 19, opacity: 0.55 },
+        { x: 0.52, y: 0.43, size: 53, speed: 0.24, phase: 4.3, float: 13, opacity: 0.4 },
+        { x: 0.18, y: 0.66, size: 72, speed: -0.31, phase: 3.2, float: 18, opacity: 0.57 },
+        { x: 0.77, y: 0.68, size: 105, speed: 0.2, phase: 1.1, float: 22, opacity: 0.6 },
+        { x: 0.43, y: 0.9, size: 58, speed: -0.34, phase: 5.1, float: 14, opacity: 0.47 },
+        { x: 0.96, y: 0.43, size: 52, speed: 0.28, phase: 2.8, float: 17, opacity: 0.42 },
+        { x: 0.03, y: 0.91, size: 61, speed: -0.22, phase: 0.9, float: 20, opacity: 0.48 }
+      ];
+
+      function makeEmeralds() {
+        const scale = Math.min(width, height);
+        const mobileScale = width < 600 ? 0.7 : 1;
+
+        emeralds = emeraldSettings.map((item, index) => ({
+          ...item,
+          cx: item.x * width,
+          cy: item.y * height,
+          radius: Math.max(23, Math.min(item.size * mobileScale, scale * 0.18)),
+          index
+        }));
+      }
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        makeEmeralds();
+        drawFrame(performance.now(), true);
+      }
+
+      function getColors() {
+        if (document.documentElement.dataset.theme === "light") {
+          return {
+            bright: [14, 130, 88],
+            mid: [24, 157, 112],
+            dim: [31, 117, 100],
+            glow: [28, 179, 127]
+          };
+        }
+
+        return {
+          bright: [91, 255, 190],
+          mid: [32, 226, 151],
+          dim: [20, 132, 98],
+          glow: [32, 216, 149]
+        };
+      }
+
+      function project(point, rotation, tilt, centerX, centerY, radius) {
+        const cosY = Math.cos(rotation);
+        const sinY = Math.sin(rotation);
+        const cosX = Math.cos(tilt);
+        const sinX = Math.sin(tilt);
+
+        const rotatedX = point.x * cosY - point.z * sinY;
+        const rotatedZ = point.x * sinY + point.z * cosY;
+        const rotatedY = point.y * cosX - rotatedZ * sinX;
+        const finalZ = point.y * sinX + rotatedZ * cosX;
+
+        const perspective = 3.5 / (3.5 + finalZ * 0.44);
+        return {
+          x: centerX + rotatedX * radius * perspective,
+          y: centerY + rotatedY * radius * perspective,
+          z: finalZ
+        };
+      }
+
+      function drawLine(a, b, color, alpha, lineWidth) {
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `rgba(${color.join(",")}, ${alpha})`;
+        ctx.lineWidth = lineWidth;
+        ctx.stroke();
+      }
+
+      function drawEmerald(emerald, time, colors) {
+        const floatOffset = Math.sin(time * 0.0007 + emerald.phase) * emerald.float;
+        const centerX = emerald.cx;
+        const centerY = emerald.cy + floatOffset;
+        const rotation = time * 0.00032 * emerald.speed + emerald.phase;
+        const tilt = Math.sin(time * 0.00023 + emerald.phase) * 0.33;
+        const r = emerald.radius;
+
+        /*
+         * A cut emerald wireframe: top table ring, crown girdle,
+         * lower pavilion ring, and pointed culet.
+         */
+        const vertices = [
+          { x: 0, y: -0.92, z: 0 },         // 0: table center
+          { x: -0.45, y: -0.92, z: -0.34 }, // 1
+          { x: 0.45, y: -0.92, z: -0.34 },  // 2
+          { x: 0.61, y: -0.92, z: 0 },      // 3
+          { x: 0.45, y: -0.92, z: 0.34 },   // 4
+          { x: -0.45, y: -0.92, z: 0.34 },  // 5
+          { x: -0.61, y: -0.92, z: 0 },     // 6
+
+          { x: -0.78, y: -0.42, z: -0.53 }, // 7: crown rim
+          { x: 0.78, y: -0.42, z: -0.53 },  // 8
+          { x: 0.96, y: -0.42, z: 0 },      // 9
+          { x: 0.78, y: -0.42, z: 0.53 },   // 10
+          { x: -0.78, y: -0.42, z: 0.53 },  // 11
+          { x: -0.96, y: -0.42, z: 0 },     // 12
+
+          { x: -0.72, y: 0.22, z: -0.49 },  // 13: girdle
+          { x: 0.72, y: 0.22, z: -0.49 },   // 14
+          { x: 0.89, y: 0.22, z: 0 },       // 15
+          { x: 0.72, y: 0.22, z: 0.49 },    // 16
+          { x: -0.72, y: 0.22, z: 0.49 },  // 17
+          { x: -0.89, y: 0.22, z: 0 },      // 18
+
+          { x: 0, y: 0.98, z: 0 }           // 19: culet
+        ];
+
+        const edges = [
+          [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 1],
+          [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6],
+
+          [7, 8], [8, 9], [9, 10], [10, 11], [11, 12], [12, 7],
+          [1, 7], [2, 8], [3, 9], [4, 10], [5, 11], [6, 12],
+
+          [13, 14], [14, 15], [15, 16], [16, 17], [17, 18], [18, 13],
+          [7, 13], [8, 14], [9, 15], [10, 16], [11, 17], [12, 18],
+
+          [19, 13], [19, 14], [19, 15], [19, 16], [19, 17], [19, 18],
+          [7, 14], [8, 15], [9, 16], [10, 17], [11, 18], [12, 13],
+          [1, 8], [2, 9], [3, 10], [4, 11], [5, 12], [6, 7]
+        ];
+
+        const projected = vertices.map(point =>
+          project(point, rotation, tilt, centerX, centerY, r)
+        );
+
+        const glow = ctx.createRadialGradient(centerX, centerY, r * 0.08, centerX, centerY, r * 1.55);
+        glow.addColorStop(0, `rgba(${colors.glow.join(",")}, ${emerald.opacity * 0.1})`);
+        glow.addColorStop(1, `rgba(${colors.glow.join(",")}, 0)`);
+
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, r * 1.55, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+
+        for (let i = 0; i < edges.length; i++) {
+          const [aIndex, bIndex] = edges[i];
+          const a = projected[aIndex];
+          const b = projected[bIndex];
+          const averageZ = (a.z + b.z) * 0.5;
+          const showingFront = averageZ < 0.1;
+          const alpha = showingFront
+            ? emerald.opacity * (0.42 + (1 - Math.max(-1, Math.min(1, averageZ))) * 0.25)
+            : emerald.opacity * 0.14;
+          const color = showingFront ? colors.bright : colors.dim;
+
+          drawLine(
+            a,
+            b,
+            color,
+            alpha,
+            showingFront ? 1.05 : 0.7
+          );
+        }
+
+        // Small specular point on the table gives each wireframe a gem-like glint.
+        const glint = projected[0];
+        ctx.beginPath();
+        ctx.arc(glint.x, glint.y, Math.max(1.2, r * 0.024), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(226, 255, 247, ${emerald.opacity * 0.58})`;
+        ctx.fill();
+      }
+
+      function drawFrame(time, staticFrame = false) {
+        ctx.clearRect(0, 0, width, height);
+
+        const colors = getColors();
+        const frameTime = staticFrame ? 0 : time;
+
+        for (const emerald of emeralds) {
+          drawEmerald(emerald, frameTime, colors);
+        }
+      }
+
+      function animate(time) {
+        rafId = 0;
+
+        if (!visible || reducedMotion.matches) return;
+
+        if (time - lastFrame < 30) {
+          rafId = requestAnimationFrame(animate);
+          return;
+        }
+
+        lastFrame = time;
+        drawFrame(time);
+        rafId = requestAnimationFrame(animate);
+      }
+
+      function startAnimation() {
+        if (!reducedMotion.matches && visible && !rafId) {
+          rafId = requestAnimationFrame(animate);
+        }
+      }
+
+      function stopAnimation() {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = 0;
+        }
+      }
+
+      function updateAnimationState() {
+        if (reducedMotion.matches || !visible) {
+          stopAnimation();
+          drawFrame(0, true);
+        } else {
+          startAnimation();
+        }
+      }
+
+      resizeCanvas();
+      startAnimation();
+
+      window.addEventListener("resize", () => {
+        resizeCanvas();
+        updateAnimationState();
+      }, { passive: true });
+
+      document.addEventListener("visibilitychange", () => {
+        visible = !document.hidden;
+        updateAnimationState();
+      });
+
+      if (typeof reducedMotion.addEventListener === "function") {
+        reducedMotion.addEventListener("change", updateAnimationState);
+      } else if (typeof reducedMotion.addListener === "function") {
+        reducedMotion.addListener(updateAnimationState);
+      }
+    })();
+
     const categoryOrder = [
       "Wallets",
       "Exchanges",
