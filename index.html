@@ -8,7 +8,7 @@
   <title>Sats Nation — The Bitcoin Cash Ecosystem</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <script>
@@ -65,6 +65,8 @@
       --chart-line: rgba(22,47,57,.14);
       --chart-line-strong: rgba(22,47,57,.24);
       --chart-axis: #52616b;
+      --chart-top: rgba(13,159,104,.15);
+      --chart-bottom: rgba(13,159,104,0);
     }
 
     html[data-theme="dark"] {
@@ -108,9 +110,13 @@
       --chart-line: rgba(220,235,245,.11);
       --chart-line-strong: rgba(220,235,245,.23);
       --chart-axis: rgba(204,218,228,.8);
+      --chart-top: rgba(32,216,149,.16);
+      --chart-bottom: rgba(32,216,149,0);
     }
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent !important;
     }
@@ -148,7 +154,9 @@
       contain: strict;
     }
 
-    html[data-theme="light"] #emeraldBackground { opacity: .3; }
+    html[data-theme="light"] #emeraldBackground {
+      opacity: .3;
+    }
 
     .page-shell {
       position: relative;
@@ -158,12 +166,32 @@
       padding: 24px 28px 72px;
     }
 
-    #backToTop, .dialog-overlay { position: fixed; }
-    body.dialog-open { overflow: hidden; overscroll-behavior: none; }
-    button, input { font: inherit; }
-    button { color: inherit; }
-    a { color: inherit; }
-    [hidden] { display: none !important; }
+    #backToTop,
+    .dialog-overlay {
+      position: fixed;
+    }
+
+    body.dialog-open {
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      color: inherit;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
 
     :focus-visible {
       outline: 3px solid var(--gold);
@@ -298,7 +326,11 @@
       transform: rotate(-8deg);
     }
 
-    .theme-toggle-icon { display: block; width: 18px; height: 18px; }
+    .theme-toggle-icon {
+      display: block;
+      width: 18px;
+      height: 18px;
+    }
 
     .theme-toggle-icon svg {
       display: block;
@@ -311,10 +343,19 @@
       stroke-linejoin: round;
     }
 
-    .theme-toggle .sun-icon { display: none; }
-    html[data-theme="dark"] .theme-toggle .moon-icon { display: none; }
-    html[data-theme="dark"] .theme-toggle .sun-icon { display: block; }
+    .theme-toggle .sun-icon {
+      display: none;
+    }
 
+    html[data-theme="dark"] .theme-toggle .moon-icon {
+      display: none;
+    }
+
+    html[data-theme="dark"] .theme-toggle .sun-icon {
+      display: block;
+    }
+
+    /* Banner intentionally has no decorative SATS bubbles. */
     .hero {
       position: relative;
       display: grid;
@@ -337,7 +378,8 @@
         hero-glow 18s ease-in-out 750ms infinite alternate;
     }
 
-    .hero::before, .hero::after {
+    .hero::before,
+    .hero::after {
       position: absolute;
       z-index: -1;
       border: 1px solid color-mix(in srgb, var(--hero-text) 12%, transparent);
@@ -369,6 +411,28 @@
       animation: hero-copy-enter 700ms ease 100ms both;
     }
 
+    .hero-kicker,
+    .chart-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 14px;
+      color: var(--hero-accent);
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .hero-kicker::before,
+    .chart-eyebrow::before {
+      width: 20px;
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+      content: "";
+    }
+
     .hero h1 {
       max-width: 620px;
       margin: 0;
@@ -381,7 +445,9 @@
       text-wrap: balance;
     }
 
-    .hero h1 span { color: var(--hero-accent); }
+    .hero h1 span {
+      color: var(--hero-accent);
+    }
 
     .hero-description {
       max-width: 445px;
@@ -415,8 +481,14 @@
       transition: transform .2s ease, background .2s ease;
     }
 
-    .hero-stats-button:hover { background: #fff; transform: translateY(-2px); }
-    .hero-stats-arrow { color: var(--green-deep); }
+    .hero-stats-button:hover {
+      background: #fff;
+      transform: translateY(-2px);
+    }
+
+    .hero-stats-arrow {
+      color: var(--green-deep);
+    }
 
     .hero-chart {
       position: relative;
@@ -439,6 +511,12 @@
       gap: 12px;
     }
 
+    .chart-eyebrow {
+      margin-bottom: 8px;
+      color: var(--hero-accent);
+      font-size: .59rem;
+    }
+
     .chart-title {
       margin: 0;
       color: var(--chart-text);
@@ -453,27 +531,6 @@
       color: var(--chart-muted);
       font-size: .69rem;
       line-height: 1.45;
-    }
-
-    .chart-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 6px;
-      color: var(--chart-muted);
-      font-size: .62rem;
-    }
-
-    .chart-status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #eaa928;
-    }
-
-    .chart-status-dot.is-live {
-      background: #18c985;
-      box-shadow: 0 0 0 3px rgba(24,201,133,.15);
     }
 
     .chart-controls {
@@ -497,37 +554,24 @@
       transition: color .2s, background .2s, border-color .2s;
     }
 
-    .range-button:hover, .range-button[aria-pressed="true"] {
+    .range-button:hover,
+    .range-button[aria-pressed="true"] {
       border-color: var(--chart-green);
       background: var(--chart-green-soft);
       color: var(--chart-green);
     }
 
-    .chart-summary {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 6px 14px;
-      margin-top: 10px;
-      padding-top: 9px;
-      border-top: 1px solid var(--chart-line);
-      color: var(--chart-muted);
-      font-size: .72rem;
-      line-height: 1.45;
-    }
-
-    .chart-summary strong { color: var(--chart-text); }
-    #bchChange.is-positive { color: var(--chart-green); }
-    #bchChange.is-negative { color: var(--chart-usd); }
-
     .chart-wrap {
-      position: relative;
       width: 100%;
       height: clamp(155px, 18vw, 205px);
       margin-top: 10px;
     }
 
-    .chart-canvas { display: block; width: 100%; height: 100%; }
+    .chart-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
 
     .chart-legend {
       display: flex;
@@ -539,7 +583,11 @@
       line-height: 1.4;
     }
 
-    .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
 
     .legend-line {
       width: 18px;
@@ -549,6 +597,35 @@
       background: var(--chart-green);
     }
 
+    .legend-line--usd {
+      background: repeating-linear-gradient(
+        90deg,
+        var(--chart-usd) 0 5px,
+        transparent 5px 8px
+      );
+    }
+
+    .chart-summary {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 6px 14px;
+      margin-top: 10px;
+      padding-top: 9px;
+      border-top: 1px solid var(--chart-line);
+      color: var(--chart-muted);
+      font-size: .64rem;
+      line-height: 1.45;
+    }
+
+    .chart-summary strong {
+      color: var(--chart-text);
+    }
+
+    .chart-summary .usd-label {
+      color: var(--chart-usd);
+    }
+
     .chart-note {
       margin: 7px 0 0;
       color: var(--chart-muted);
@@ -556,7 +633,16 @@
       line-height: 1.45;
     }
 
-    .section { margin-top: 48px; }
+    .chart-date {
+      margin: 7px 0 0;
+      color: var(--chart-muted);
+      font-size: .58rem;
+      text-align: right;
+    }
+
+    .section {
+      margin-top: 48px;
+    }
 
     .section-heading {
       display: flex;
@@ -589,7 +675,10 @@
       line-height: 1.55;
     }
 
-    .directory { padding-top: 4px; scroll-margin-top: 20px; }
+    .directory {
+      padding-top: 4px;
+      scroll-margin-top: 20px;
+    }
 
     .gallery-toolbar {
       display: flex;
@@ -660,7 +749,9 @@
       font-size: .84rem;
     }
 
-    #gallery-search::placeholder { color: var(--muted); }
+    #gallery-search::placeholder {
+      color: var(--muted);
+    }
 
     #gallery-search:focus {
       border-color: var(--green);
@@ -765,7 +856,9 @@
       transition: transform .2s ease;
     }
 
-    .card-image-link:hover img { transform: scale(1.05); }
+    .card-image-link:hover img {
+      transform: scale(1.05);
+    }
 
     .card-caption {
       display: flex;
@@ -869,7 +962,11 @@
       transform: translateY(-2px);
     }
 
-    .footer-social-link svg { width: 19px; height: 19px; fill: currentColor; }
+    .footer-social-link svg {
+      width: 19px;
+      height: 19px;
+      fill: currentColor;
+    }
 
     #backToTop {
       right: 22px;
@@ -889,7 +986,9 @@
       cursor: pointer;
     }
 
-    #backToTop:hover { transform: translateY(-3px); }
+    #backToTop:hover {
+      transform: translateY(-3px);
+    }
 
     #backToTop.hidden {
       opacity: 0;
@@ -908,7 +1007,9 @@
       overscroll-behavior: contain;
     }
 
-    .dialog-overlay.is-open { display: grid; }
+    .dialog-overlay.is-open {
+      display: grid;
+    }
 
     .dialog-panel {
       position: relative;
@@ -1016,7 +1117,9 @@
       line-height: 1.55;
     }
 
-    .consensus-note strong { color: var(--note-strong); }
+    .consensus-note strong {
+      color: var(--note-strong);
+    }
 
     .stats-grid {
       display: grid;
@@ -1062,7 +1165,9 @@
       text-underline-offset: 4px;
     }
 
-    .blockchair-link:hover { color: var(--green-deep); }
+    .blockchair-link:hover {
+      color: var(--green-deep);
+    }
 
     .market-cap-calculator {
       margin-top: 24px;
@@ -1116,8 +1221,13 @@
       box-shadow: inset 3px 0 0 var(--green);
     }
 
-    .calculator-results p { margin: 0; }
-    .calculator-results strong { color: var(--green-deep); }
+    .calculator-results p {
+      margin: 0;
+    }
+
+    .calculator-results strong {
+      color: var(--green-deep);
+    }
 
     .calculator-note {
       margin: 10px 0 0;
@@ -1147,8 +1257,14 @@
     }
 
     @media (min-width: 1050px) {
-      .gallery-toolbar { flex-direction: row; align-items: center; }
-      .search-wrap { flex: 0 0 290px; }
+      .gallery-toolbar {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .search-wrap {
+        flex: 0 0 290px;
+      }
     }
 
     @media (max-width: 800px) {
@@ -1159,13 +1275,23 @@
         padding: 27px;
       }
 
-      .hero h1 { font-size: clamp(2.6rem, 7vw, 4.3rem); }
-      .chart-header { flex-direction: column; }
-      .chart-controls { justify-content: flex-start; }
+      .hero h1 {
+        font-size: clamp(2.6rem, 7vw, 4.3rem);
+      }
+
+      .chart-header {
+        flex-direction: column;
+      }
+
+      .chart-controls {
+        justify-content: flex-start;
+      }
     }
 
     @media (max-width: 650px) {
-      .page-shell { padding: 17px 14px 90px; }
+      .page-shell {
+        padding: 17px 14px 90px;
+      }
 
       .site-header {
         display: grid;
@@ -1174,12 +1300,37 @@
         margin-bottom: 18px;
       }
 
-      .brand { gap: 11px; width: fit-content; max-width: 100%; }
-      .brand-mark { width: 44px; height: 44px; }
-      .brand-name { font-size: 1rem; }
-      .header-actions { width: 100%; justify-content: flex-start; gap: 8px; }
-      .network-pill { gap: 6px; padding: 8px 10px; font-size: .68rem; }
-      .theme-toggle { width: 36px; height: 36px; }
+      .brand {
+        gap: 11px;
+        width: fit-content;
+        max-width: 100%;
+      }
+
+      .brand-mark {
+        width: 44px;
+        height: 44px;
+      }
+
+      .brand-name {
+        font-size: 1rem;
+      }
+
+      .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 8px;
+      }
+
+      .network-pill {
+        gap: 6px;
+        padding: 8px 10px;
+        font-size: .68rem;
+      }
+
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+      }
 
       #openConsensus {
         min-height: 36px;
@@ -1196,8 +1347,18 @@
         border-radius: 21px;
       }
 
-      .hero-copy { padding: 1px; }
-      .hero h1 { font-size: clamp(2.65rem, 12vw, 4.5rem); }
+      .hero-copy {
+        padding: 1px;
+      }
+
+      .hero-kicker {
+        margin-bottom: 10px;
+        font-size: .61rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.65rem, 12vw, 4.5rem);
+      }
 
       .hero-description {
         max-width: 430px;
@@ -1205,13 +1366,34 @@
         font-size: .84rem;
       }
 
-      .hero-actions { margin-top: 14px; }
-      .hero-chart { padding: 14px 12px 12px; border-radius: 15px; }
-      .chart-header { gap: 8px; }
-      .chart-wrap { height: 190px; }
-      .chart-summary { font-size: .67rem; }
-      .chart-note { font-size: .57rem; }
-      .section { margin-top: 37px; }
+      .hero-actions {
+        margin-top: 14px;
+      }
+
+      .hero-chart {
+        padding: 14px 12px 12px;
+        border-radius: 15px;
+      }
+
+      .chart-header {
+        gap: 8px;
+      }
+
+      .chart-wrap {
+        height: 190px;
+      }
+
+      .chart-summary {
+        font-size: .61rem;
+      }
+
+      .chart-note {
+        font-size: .57rem;
+      }
+
+      .section {
+        margin-top: 37px;
+      }
 
       .section-heading {
         align-items: flex-start;
@@ -1219,9 +1401,17 @@
         gap: 12px;
       }
 
-      .section-heading h2 { font-size: 1.65rem; }
-      .gallery-toolbar { gap: 12px; }
-      #ecosystemFilters { gap: 6px; }
+      .section-heading h2 {
+        font-size: 1.65rem;
+      }
+
+      .gallery-toolbar {
+        gap: 12px;
+      }
+
+      #ecosystemFilters {
+        gap: 6px;
+      }
 
       .category-btn {
         min-height: 33px;
@@ -1229,22 +1419,54 @@
         font-size: .72rem;
       }
 
-      .search-wrap { width: 100%; }
+      .search-wrap {
+        width: 100%;
+      }
 
       #figures {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 9px;
       }
 
-      .ecosystem-card, .card-inner { min-height: 199px; }
-      .card-face { padding: 10px 8px; border-radius: 15px; }
-      .card-image-link { height: 100px; margin-bottom: 8px; }
-      .card-image-link img { width: 82px; height: 82px; }
-      .card-caption { min-height: 40px; }
-      .card-caption-name { font-size: .79rem; }
-      .card-caption-detail { font-size: .63rem; }
-      .card-back { padding: 15px; }
-      .card-description { font-size: .77rem; }
+      .ecosystem-card,
+      .card-inner {
+        min-height: 199px;
+      }
+
+      .card-face {
+        padding: 10px 8px;
+        border-radius: 15px;
+      }
+
+      .card-image-link {
+        height: 100px;
+        margin-bottom: 8px;
+      }
+
+      .card-image-link img {
+        width: 82px;
+        height: 82px;
+      }
+
+      .card-caption {
+        min-height: 40px;
+      }
+
+      .card-caption-name {
+        font-size: .79rem;
+      }
+
+      .card-caption-detail {
+        font-size: .63rem;
+      }
+
+      .card-back {
+        padding: 15px;
+      }
+
+      .card-description {
+        font-size: .77rem;
+      }
 
       .footer {
         align-items: flex-start;
@@ -1274,17 +1496,31 @@
         border-radius: 19px;
       }
 
-      .dialog-title { font-size: 1.38rem; }
+      .dialog-title {
+        font-size: 1.38rem;
+      }
 
       .consensus-list li {
         padding: 12px 11px 12px 50px;
         font-size: .78rem;
       }
 
-      .consensus-list li::before { left: 11px; }
-      .stats-grid { grid-template-columns: 1fr; gap: 9px; }
-      .stat-card { padding: 15px; }
-      .stat-value { font-size: clamp(1.55rem, 8vw, 2rem); }
+      .consensus-list li::before {
+        left: 11px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 9px;
+      }
+
+      .stat-card {
+        padding: 15px;
+      }
+
+      .stat-value {
+        font-size: clamp(1.55rem, 8vw, 2rem);
+      }
 
       .market-cap-calculator {
         margin-top: 20px;
@@ -1293,22 +1529,43 @@
     }
 
     @media (max-width: 380px) {
-      .header-actions { flex-wrap: wrap; }
-      #openConsensus { margin-left: 0; }
-      .chart-wrap { height: 170px; }
+      .header-actions {
+        flex-wrap: wrap;
+      }
+
+      #openConsensus {
+        margin-left: 0;
+      }
+
+      .chart-wrap {
+        height: 170px;
+      }
+
+      .chart-summary {
+        flex-direction: column;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      #emeraldBackground { display: none; }
+      html {
+        scroll-behavior: auto;
+      }
 
-      *, *::before, *::after {
+      #emeraldBackground {
+        display: none;
+      }
+
+      *,
+      *::before,
+      *::after {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
       }
 
-      .card-inner { transition: none; }
+      .card-inner {
+        transition: none;
+      }
     }
   </style>
 </head>
@@ -1394,47 +1651,47 @@
         <section class="hero-chart" aria-labelledby="chart-title">
           <div class="chart-header">
             <div>
-              <h2 id="chart-title" class="chart-title">Bitcoin Cash price</h2>
-              <p class="chart-description">Live BCH market price in USD</p>
-              <div class="chart-status" aria-live="polite">
-                <span id="marketStatusDot" class="chart-status-dot" aria-hidden="true"></span>
-                <span id="marketStatusText">Connecting to live exchange…</span>
-              </div>
+              <p class="chart-description">Illustrative purchasing-power comparison</p>
             </div>
 
             <nav class="chart-controls" aria-label="Choose chart time range">
-              <button class="range-button" type="button" data-range="1" aria-pressed="false">24h</button>
-              <button class="range-button" type="button" data-range="7" aria-pressed="true">7d</button>
-              <button class="range-button" type="button" data-range="30" aria-pressed="false">30d</button>
+              <button class="range-button" type="button" data-pp-range="all" aria-pressed="true">All</button>
+              <button class="range-button" type="button" data-pp-range="10" aria-pressed="false">10y</button>
+              <button class="range-button" type="button" data-pp-range="5" aria-pressed="false">5y</button>
             </nav>
-          </div>
-
-          <div class="chart-summary" aria-live="polite">
-            <span><strong>BCH:</strong> <strong id="bchPrice">Connecting…</strong></span>
-            <span><strong>24h:</strong> <strong id="bchChange">—</strong></span>
           </div>
 
           <div class="chart-wrap">
             <canvas
-              id="priceChart"
+              id="purchasingPowerChart"
               class="chart-canvas"
               role="img"
-              aria-label="Live Bitcoin Cash price chart in U.S. dollars."
+              aria-label="Illustrative chart showing volatile BCH market purchasing power and generally declining U.S. dollar purchasing power."
             >
-              Live Bitcoin Cash price chart in U.S. dollars.
+              Illustrative comparison: BCH purchasing power fluctuates; dollar purchasing power generally trends downward with inflation.
             </canvas>
           </div>
 
-          <div class="chart-legend">
+          <div class="chart-legend" aria-label="Chart legend">
             <span class="legend-item">
               <span class="legend-line" aria-hidden="true"></span>
-              BCH / USD
+              BCH satoshi
+            </span>
+            <span class="legend-item">
+              <span class="legend-line legend-line--usd" aria-hidden="true"></span>
+              U.S. dollar
             </span>
           </div>
 
-          <p id="marketNote" class="chart-note">
-            Connecting to Binance public market data.
+          <div class="chart-summary">
+            <span><strong style="color:var(--chart-green)">BCH:</strong> volatile market value</span>
+            <span><strong class="usd-label">USD:</strong> purchasing power erodes to inflation</span>
+          </div>
+
+          <p class="chart-note">
+            Schematic illustration, not historical price or CPI data.
           </p>
+          <p class="chart-date">Updated <time id="todayDate"></time></p>
         </section>
       </section>
 
@@ -1550,7 +1807,7 @@
 
       <a
         class="blockchair-link"
-        href="https://blockchair.com/bitcoin-cash"
+        href="https://blockchair.com/bitcoin-cash?utm_referrer=https%3A%2F%2Fwww.google.com%2F"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -1572,27 +1829,13 @@
           <p>Market cap (USD): <strong id="marketCapUsd">Loading exchange rate…</strong></p>
         </div>
         <p class="calculator-note" id="calculatorNote">
-          USD conversion uses the current BCH/USD price when available.
+          Enter the token price in sats. USD conversion uses the BCH exchange rate when available.
         </p>
       </section>
     </section>
   </div>
 
   <script>
-    /*
-      Add directory entries to this array when ready.
-      {
-        caption: "Project name",
-        detail: "Optional short detail",
-        description: "Project description",
-        src: "https://example.com/logo.png",
-        href: "https://example.com",
-        categories: ["Wallets"]
-      }
-    */
-    const figures = [];
-
-    // Decorative animated background.
     (() => {
       const canvas = document.getElementById("emeraldBackground");
       const ctx = canvas?.getContext("2d", { alpha: true });
@@ -1698,7 +1941,8 @@
         edges.forEach(([aIndex, bIndex]) => {
           const a = points[aIndex];
           const b = points[bIndex];
-          const front = (a.z + b.z) * .5 < .1;
+          const z = (a.z + b.z) * .5;
+          const front = z < .1;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -1758,73 +2002,88 @@
       }
     })();
 
-    // Fast live BCH/USDT trades from Binance, converted to USD using a live USDT/USD ticker.
-    // The historical range is fetched separately and live trades are drawn on top.
     (() => {
-      const canvas = document.getElementById("priceChart");
+      const canvas = document.getElementById("purchasingPowerChart");
       const ctx = canvas?.getContext("2d");
-      const priceOutput = document.getElementById("bchPrice");
-      const changeOutput = document.getElementById("bchChange");
-      const statusText = document.getElementById("marketStatusText");
-      const statusDot = document.getElementById("marketStatusDot");
-      const note = document.getElementById("marketNote");
-      const rangeButtons = [...document.querySelectorAll("[data-range]")];
-
+      const buttons = [...document.querySelectorAll("[data-pp-range]")];
       if (!canvas || !ctx) return;
 
-      const historyRanges = {
-        "1": { interval: "5m", limit: 288, label: "24 hours" },
-        "7": { interval: "1h", limit: 168, label: "7 days" },
-        "30": { interval: "4h", limit: 180, label: "30 days" }
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let range = "all";
+      let progress = 1;
+
+      const data = {
+        all: {
+          labels: ["Start", "Early", "Growth", "Swings", "Today"],
+          bch: [100, 72, 143, 91, 126],
+          usd: [100, 88, 75, 61, 49]
+        },
+        10: {
+          labels: ["10y ago", "Year 3", "Year 5", "Year 8", "Today"],
+          bch: [100, 136, 82, 151, 119],
+          usd: [100, 94, 87, 80, 73]
+        },
+        5: {
+          labels: ["5y ago", "Year 1", "Year 2", "Year 3", "Today"],
+          bch: [100, 74, 113, 86, 128],
+          usd: [100, 96, 91, 86, 81]
+        }
       };
 
-      const usdFormatter = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        maximumFractionDigits: 4
-      });
-
-      let selectedRange = "7";
-      let history = [];
-      let livePriceUsdt = null;
-      let usdtUsd = 1;
-      let convertedLivePrice = null;
-      let ws = null;
-      let reconnectTimer = null;
-      let restTimer = null;
-      let historyController = null;
-      let reconnectDelay = 1000;
-      let pageActive = !document.hidden;
-      let destroyed = false;
-      let lastTradeTime = 0;
-      let latest24hChange = null;
-
-      function setStatus(message, isLive = false) {
-        statusText.textContent = message;
-        statusDot.classList.toggle("is-live", isLive);
-      }
-
-      function themeColor(name) {
+      function css(name) {
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
       }
 
-      function renderPrice() {
-        if (livePriceUsdt !== null) {
-          convertedLivePrice = livePriceUsdt * usdtUsd;
-          priceOutput.textContent = usdFormatter.format(convertedLivePrice);
-        }
-
-        if (Number.isFinite(latest24hChange)) {
-          changeOutput.textContent =
-            `${latest24hChange >= 0 ? "+" : ""}${latest24hChange.toFixed(2)}%`;
-          changeOutput.classList.toggle("is-positive", latest24hChange >= 0);
-          changeOutput.classList.toggle("is-negative", latest24hChange < 0);
-        }
-
-        drawChart();
+      function interpolate(values, position) {
+        const p = Math.max(0, Math.min(values.length - 1, position));
+        const i = Math.floor(p);
+        const t = p - i;
+        const eased = t * t * (3 - 2 * t);
+        return values[i] + (values[Math.min(i + 1, values.length - 1)] - values[i]) * eased;
       }
 
-      function drawChart() {
+      function drawLine(values, x, y, color, dashed = false) {
+        const end = Math.max(.01, progress * (values.length - 1));
+        const points = [];
+
+        for (let i = 0; i <= Math.ceil(end); i++) {
+          const p = Math.min(i, end);
+          points.push({ x: x(p), y: y(interpolate(values, p)) });
+        }
+
+        if (points.length < 2) {
+          points.push({ x: x(end), y: y(interpolate(values, end)) });
+        }
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+
+        for (let i = 1; i < points.length; i++) {
+          const prev = points[i - 1];
+          const current = points[i];
+          const mid = (prev.x + current.x) / 2;
+          ctx.quadraticCurveTo(mid, prev.y, current.x, current.y);
+        }
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2.8;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.setLineDash(dashed ? [6, 6] : []);
+        ctx.shadowColor = color;
+        ctx.shadowBlur = dashed ? 0 : 8;
+        ctx.stroke();
+        ctx.restore();
+
+        const last = points[points.length - 1];
+        ctx.beginPath();
+        ctx.arc(last.x, last.y, 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+      }
+
+      function draw() {
         const rect = canvas.getBoundingClientRect();
         if (!rect.width || !rect.height) return;
 
@@ -1835,394 +2094,95 @@
 
         const width = rect.width;
         const height = rect.height;
-        ctx.clearRect(0, 0, width, height);
-
+        const chart = data[range];
         const pad = {
-          top: 12,
-          right: 12,
-          bottom: 27,
-          left: width < 360 ? 52 : 62
+          top: 14,
+          right: 11,
+          bottom: 30,
+          left: width < 360 ? 31 : 38
         };
+        const plotW = width - pad.left - pad.right;
+        const plotH = height - pad.top - pad.bottom;
+        const min = 35;
+        const max = 165;
+        const x = index => pad.left + index / (chart.labels.length - 1) * plotW;
+        const y = value => pad.top + (max - value) / (max - min) * plotH;
 
-        const plotWidth = width - pad.left - pad.right;
-        const plotHeight = height - pad.top - pad.bottom;
-
-        if (!history.length || plotWidth <= 0 || plotHeight <= 0) {
-          ctx.fillStyle = themeColor("--chart-muted");
-          ctx.font = '12px "DM Sans", sans-serif';
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText("Loading price history…", width / 2, height / 2);
-          return;
-        }
-
-        const points = history.map(item => ({ time: item.time, price: item.price }));
-
-        if (convertedLivePrice !== null && Number.isFinite(convertedLivePrice)) {
-          const now = Date.now();
-          const cutoff = now - 5000;
-          while (points.length && points[points.length - 1].time > cutoff) {
-            points.pop();
-          }
-          points.push({ time: now, price: convertedLivePrice });
-        }
-
-        const prices = points.map(point => point.price).filter(Number.isFinite);
-        if (!prices.length) return;
-
-        let minPrice = Math.min(...prices);
-        let maxPrice = Math.max(...prices);
-        if (minPrice === maxPrice) {
-          minPrice *= .995;
-          maxPrice *= 1.005;
-        } else {
-          const margin = (maxPrice - minPrice) * .12;
-          minPrice -= margin;
-          maxPrice += margin;
-        }
-
-        const firstTime = points[0].time;
-        const lastTime = points[points.length - 1].time;
-        const timeSpan = Math.max(1, lastTime - firstTime);
-
-        const x = time => pad.left + ((time - firstTime) / timeSpan) * plotWidth;
-        const y = price => pad.top + ((maxPrice - price) / (maxPrice - minPrice)) * plotHeight;
-
+        ctx.clearRect(0, 0, width, height);
         ctx.font = '9px "DM Sans", sans-serif';
         ctx.textBaseline = "middle";
-        ctx.textAlign = "right";
 
-        for (let step = 0; step <= 3; step++) {
-          const value = maxPrice - ((maxPrice - minPrice) * step / 3);
-          const lineY = pad.top + plotHeight * step / 3;
-
+        [150, 100, 50].forEach(value => {
+          const lineY = y(value);
           ctx.beginPath();
           ctx.moveTo(pad.left, lineY);
           ctx.lineTo(width - pad.right, lineY);
-          ctx.strokeStyle = themeColor("--chart-line");
+          ctx.strokeStyle = value === 100 ? css("--chart-line-strong") : css("--chart-line");
           ctx.lineWidth = 1;
+          ctx.setLineDash(value === 100 ? [3, 4] : []);
           ctx.stroke();
 
-          ctx.fillStyle = themeColor("--chart-axis");
-          ctx.fillText(usdFormatter.format(value), pad.left - 6, lineY);
-        }
-
-        const coords = points.map(point => ({ x: x(point.time), y: y(point.price) }));
-        const gradient = ctx.createLinearGradient(0, pad.top, 0, pad.top + plotHeight);
-        gradient.addColorStop(0, themeColor("--chart-green-soft"));
-        gradient.addColorStop(1, "rgba(0,0,0,0)");
-
-        ctx.beginPath();
-        ctx.moveTo(coords[0].x, coords[0].y);
-        for (let i = 1; i < coords.length; i++) {
-          const previous = coords[i - 1];
-          const current = coords[i];
-          const middleX = (previous.x + current.x) / 2;
-          ctx.quadraticCurveTo(middleX, previous.y, current.x, current.y);
-        }
-        ctx.lineTo(coords[coords.length - 1].x, pad.top + plotHeight);
-        ctx.lineTo(coords[0].x, pad.top + plotHeight);
-        ctx.closePath();
-        ctx.fillStyle = gradient;
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.moveTo(coords[0].x, coords[0].y);
-        for (let i = 1; i < coords.length; i++) {
-          const previous = coords[i - 1];
-          const current = coords[i];
-          const middleX = (previous.x + current.x) / 2;
-          ctx.quadraticCurveTo(middleX, previous.y, current.x, current.y);
-        }
-        ctx.strokeStyle = themeColor("--chart-green");
-        ctx.lineWidth = 2.5;
-        ctx.lineCap = "round";
-        ctx.lineJoin = "round";
-        ctx.stroke();
-
-        const dateLabel = new Intl.DateTimeFormat(undefined, {
-          month: "short",
-          day: "numeric",
-          hour: selectedRange === "1" ? "numeric" : undefined
+          ctx.fillStyle = css("--chart-axis");
+          ctx.textAlign = "right";
+          ctx.fillText(String(value), pad.left - 6, lineY);
         });
 
-        ctx.fillStyle = themeColor("--chart-axis");
-        ctx.font = '9px "DM Sans", sans-serif';
+        ctx.setLineDash([]);
+        ctx.fillStyle = css("--chart-axis");
+        ctx.textAlign = "center";
         ctx.textBaseline = "top";
-        ctx.textAlign = "left";
-        ctx.fillText(dateLabel.format(new Date(firstTime)), pad.left, height - pad.bottom + 8);
-        ctx.textAlign = "right";
-        ctx.fillText(dateLabel.format(new Date(lastTime)), width - pad.right, height - pad.bottom + 8);
+        chart.labels.forEach((label, index) => {
+          ctx.fillText(label, x(index), height - pad.bottom + 9);
+        });
 
-        const finalPoint = coords[coords.length - 1];
-        ctx.beginPath();
-        ctx.arc(finalPoint.x, finalPoint.y, 3.5, 0, Math.PI * 2);
-        ctx.fillStyle = themeColor("--chart-green");
-        ctx.fill();
+        drawLine(chart.usd, x, y, css("--chart-usd"), true);
+        drawLine(chart.bch, x, y, css("--chart-green"), false);
       }
 
-      async function fetchHistory() {
-        if (historyController) historyController.abort();
-        historyController = new AbortController();
-
-        const config = historyRanges[selectedRange];
-        const url =
-          `https://api.binance.com/api/v3/klines?symbol=BCHUSDT&interval=${config.interval}&limit=${config.limit}`;
-
-        try {
-          const response = await fetch(url, {
-            signal: historyController.signal,
-            cache: "no-store",
-            headers: { Accept: "application/json" }
-          });
-
-          if (!response.ok) throw new Error(`Exchange returned HTTP ${response.status}`);
-
-          const rows = await response.json();
-          if (!Array.isArray(rows) || !rows.length) throw new Error("No candle history returned");
-
-          history = rows
-            .filter(row => Array.isArray(row) && Number.isFinite(Number(row[0])) && Number.isFinite(Number(row[4])))
-            .map(row => ({
-              time: Number(row[0]),
-              price: Number(row[4])
-            }));
-
-          renderPrice();
-        } catch (error) {
-          if (error.name === "AbortError") return;
-          console.warn("Unable to load BCH chart history:", error);
-
-          if (!history.length) {
-            note.textContent = "Live trades may load, but historical chart data is currently unavailable.";
-          }
-          drawChart();
-        }
-      }
-
-      async function fetchRestTicker() {
-        try {
-          const [tickerResponse, statsResponse] = await Promise.all([
-            fetch("https://api.binance.com/api/v3/ticker/price?symbol=BCHUSDT", {
-              cache: "no-store",
-              headers: { Accept: "application/json" }
-            }),
-            fetch("https://api.binance.com/api/v3/ticker/24hr?symbol=BCHUSDT", {
-              cache: "no-store",
-              headers: { Accept: "application/json" }
-            })
-          ]);
-
-          if (!tickerResponse.ok) throw new Error("Ticker request failed");
-          const ticker = await tickerResponse.json();
-          const price = Number(ticker?.price);
-          if (!Number.isFinite(price)) throw new Error("Invalid ticker price");
-
-          livePriceUsdt = price;
-
-          if (statsResponse.ok) {
-            const stats = await statsResponse.json();
-            const change = Number(stats?.priceChangePercent);
-            if (Number.isFinite(change)) latest24hChange = change;
-          }
-
-          if (usdtUsd === 1) {
-            setStatus("Exchange data loaded; reconnecting live feed", false);
-          }
-          renderPrice();
-        } catch (error) {
-          console.warn("BCH REST ticker fallback failed:", error);
-        }
-      }
-
-      function scheduleRestFallback() {
-        if (restTimer) clearInterval(restTimer);
-        restTimer = window.setInterval(() => {
-          if (!document.hidden && pageActive) fetchRestTicker();
-        }, 2500);
-      }
-
-      function stopRestFallback() {
-        if (restTimer) {
-          clearInterval(restTimer);
-          restTimer = null;
-        }
-      }
-
-      function scheduleReconnect() {
-        if (destroyed || !pageActive || document.hidden || reconnectTimer) return;
-
-        reconnectTimer = window.setTimeout(() => {
-          reconnectTimer = null;
-          connectWebSockets();
-        }, reconnectDelay);
-
-        reconnectDelay = Math.min(reconnectDelay * 1.7, 30000);
-      }
-
-      function connectWebSockets() {
-        if (destroyed || !pageActive || document.hidden) return;
-
-        if (ws) {
-          try {
-            ws.close();
-          } catch {}
-          ws = null;
-        }
-
-        setStatus("Connecting to live exchange…", false);
-
-        try {
-          // Binance public spot-stream endpoints; the first is primary.
-          ws = new WebSocket("wss://stream.binance.com:9443/ws/bchusdt@trade");
-        } catch (error) {
-          console.warn("WebSocket connection could not be created:", error);
-          setStatus("Live feed unavailable; using fallback", false);
-          scheduleRestFallback();
-          scheduleReconnect();
+      function animateToRange() {
+        if (reducedMotion.matches) {
+          progress = 1;
+          draw();
           return;
         }
 
-        ws.onopen = () => {
-          reconnectDelay = 1000;
-          stopRestFallback();
-          setStatus("Live exchange feed connected", true);
-        };
+        const started = performance.now();
+        const duration = 500;
 
-        ws.onmessage = event => {
-          try {
-            const trade = JSON.parse(event.data);
-            const price = Number(trade?.p);
-            const tradeTime = Number(trade?.T || Date.now());
+        function frame(now) {
+          progress = Math.min(1, (now - started) / duration);
+          draw();
+          if (progress < 1) requestAnimationFrame(frame);
+        }
 
-            if (!Number.isFinite(price)) return;
-
-            livePriceUsdt = price;
-            lastTradeTime = tradeTime;
-            if (usdtUsd === 1 && convertedLivePrice === null) fetchUsdtUsd();
-            renderPrice();
-            setStatus("Live exchange feed connected", true);
-          } catch (error) {
-            console.warn("Unable to read exchange trade message:", error);
-          }
-        };
-
-        ws.onerror = () => {
-          setStatus("Live feed reconnecting", false);
-        };
-
-        ws.onclose = () => {
-          ws = null;
-          setStatus(livePriceUsdt === null ? "Reconnecting to live price…" : "Reconnecting; latest price retained", false);
-          scheduleRestFallback();
-          scheduleReconnect();
-        };
+        progress = 0;
+        requestAnimationFrame(frame);
       }
 
-      async function fetchUsdtUsd() {
-        try {
-          const response = await fetch(
-            "https://api.binance.com/api/v3/ticker/price?symbol=USDTUSDC",
-            {
-              cache: "no-store",
-              headers: { Accept: "application/json" }
-            }
-          );
-
-          if (!response.ok) return;
-
-          const result = await response.json();
-          const rate = Number(result?.price);
-          if (Number.isFinite(rate) && rate > 0) {
-            usdtUsd = rate;
-            renderPrice();
-          }
-        } catch (error) {
-          console.warn("Unable to update USDT/USD conversion:", error);
-        }
-      }
-
-      function stopConnections() {
-        if (reconnectTimer) {
-          clearTimeout(reconnectTimer);
-          reconnectTimer = null;
-        }
-        stopRestFallback();
-
-        if (ws) {
-          ws.onclose = null;
-          ws.onerror = null;
-          ws.onmessage = null;
-          ws.onopen = null;
-          try {
-            ws.close();
-          } catch {}
-          ws = null;
-        }
-      }
-
-      rangeButtons.forEach(button => {
+      buttons.forEach(button => {
         button.addEventListener("click", () => {
-          selectedRange = button.dataset.range;
-          rangeButtons.forEach(item => {
+          range = button.dataset.ppRange;
+          buttons.forEach(item => {
             item.setAttribute("aria-pressed", String(item === button));
           });
-          fetchHistory();
+          animateToRange();
         });
       });
 
-      const resizeObserver = new ResizeObserver(drawChart);
-      resizeObserver.observe(canvas);
-      window.addEventListener("resize", drawChart, { passive: true });
-      window.addEventListener("satsnation-theme-change", drawChart);
+      new ResizeObserver(draw).observe(canvas);
+      window.addEventListener("resize", draw, { passive: true });
+      window.addEventListener("satsnation-theme-change", draw);
 
-      document.addEventListener("visibilitychange", () => {
-        pageActive = !document.hidden;
+      document.getElementById("todayDate").textContent =
+        new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          timeZone: "UTC"
+        }).format(new Date());
 
-        if (document.hidden) {
-          stopConnections();
-        } else {
-          connectWebSockets();
-          fetchRestTicker();
-          fetchHistory();
-        }
-      });
-
-      window.addEventListener("beforeunload", () => {
-        destroyed = true;
-        stopConnections();
-        if (historyController) historyController.abort();
-        resizeObserver.disconnect();
-      });
-
-      fetchHistory();
-      fetchRestTicker();
-      fetchUsdtUsd();
-      connectWebSockets();
-
-      // Keep the USD conversion current, without polling the BCH live trade price.
-      window.setInterval(() => {
-        if (!document.hidden) fetchUsdtUsd();
-      }, 60000);
+      draw();
     })();
-
-    const categoryOrder = [
-      "Wallets",
-      "Exchanges",
-      "DeFi",
-      "DEX",
-      "CashTokens",
-      "Wrapped BCH",
-      "Explorer",
-      "Developer tools",
-      "Infrastructure",
-      "Privacy",
-      "Gaming",
-      "Community",
-      "Projects",
-      "Merchants",
-      "Other"
-    ];
 
         const figures = [
   { href: "https://wallet.bitcoin.com", src: "https://i.postimg.cc/j5NS6g0r/bcom-logo.png", caption: "Bitcoin.com", detail: "Wallets", description: "Easy-to-use mobile wallet for BCH and other chains.", categories: ["Wallets"] },
@@ -2544,6 +2504,24 @@
   { href: "https://pagoconbit.com/", src: "https://www.google.com/s2/favicons?domain=pagoconbit.com&sz=128", caption: "PagoConBit", detail: "Merchants", description: "Argentina-based BCH service for bills, gift cards, and digital goods.", categories: ["Merchants"] }
 ];
 
+    const categoryOrder = [
+      "Wallets",
+      "Exchanges",
+      "DeFi",
+      "DEX",
+      "CashTokens",
+      "Wrapped BCH",
+      "Explorer",
+      "Developer tools",
+      "Infrastructure",
+      "Privacy",
+      "Gaming",
+      "Community",
+      "Projects",
+      "Merchants",
+      "Other"
+    ];
+
     function getFigureCategories(item) {
       if (!Array.isArray(item.categories)) return [];
       return [...new Set(
@@ -2586,7 +2564,7 @@
       const container = document.getElementById("figures");
       container.replaceChildren();
 
-      shuffleArray(Array.isArray(figures) ? figures : []).forEach(item => {
+      shuffleArray(figures).forEach(item => {
         const categories = getFigureCategories(item);
         const card = document.createElement("article");
         card.className = "ecosystem-card";
@@ -2691,7 +2669,6 @@
       const query = activeSearch.toLocaleLowerCase();
       const cards = [...document.querySelectorAll("#figures .ecosystem-card")];
       let visibleCount = 0;
-      const itemCount = Array.isArray(figures) ? figures.length : 0;
 
       cards.forEach(card => {
         const categories = JSON.parse(card.dataset.categories || "[]");
@@ -2718,13 +2695,13 @@
         empty.className = "empty-state";
 
         const title = document.createElement("strong");
-        title.textContent = itemCount === 0
+        title.textContent = figures.length === 0
           ? "Directory ready for your figures"
           : "No matches found";
 
         const message = document.createElement("span");
-        message.textContent = itemCount === 0
-          ? "Add project entries to the figures array in this page's script."
+        message.textContent = figures.length === 0
+          ? "Add projects, tools, wallets, and communities to the figures array in the page script."
           : "Try another search or choose a different category.";
 
         empty.append(title, message);
@@ -2762,7 +2739,9 @@
 
       try {
         localStorage.setItem("satsnation-theme", selected);
-      } catch {}
+      } catch {
+        // Theme still works when storage is unavailable.
+      }
 
       window.dispatchEvent(new CustomEvent("satsnation-theme-change"));
     }
@@ -2802,6 +2781,16 @@
       const numberFormat = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });
       const satsFormat = new Intl.NumberFormat("en-US", { maximumFractionDigits: 8 });
       let bchUsdRate = null;
+      let rateUnavailable = false;
+
+      function dollars(value) {
+        if (!Number.isFinite(value)) return "Value too large";
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 2
+        }).format(value);
+      }
 
       function update() {
         const priceText = priceInput.value.trim();
@@ -2811,8 +2800,8 @@
           satsOutput.textContent = "0 sats";
           bchOutput.textContent = "0 BCH";
           usdOutput.textContent = bchUsdRate === null
-            ? "Waiting for live BCH price…"
-            : new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(0);
+            ? (rateUnavailable ? "Rate unavailable" : "Loading exchange rate…")
+            : dollars(0);
           return;
         }
 
@@ -2837,35 +2826,44 @@
         const totalBch = totalSats / satsPerBch;
         satsOutput.textContent = `${satsFormat.format(totalSats)} sats`;
         bchOutput.textContent = `${numberFormat.format(totalBch)} BCH`;
-
-        if (bchUsdRate === null) {
-          usdOutput.textContent = "Waiting for live BCH price…";
-        } else {
-          usdOutput.textContent = new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-            maximumFractionDigits: 2
-          }).format(totalBch * bchUsdRate);
-        }
+        usdOutput.textContent = bchUsdRate === null
+          ? (rateUnavailable ? "Rate unavailable" : "Loading exchange rate…")
+          : dollars(totalBch * bchUsdRate);
       }
 
-      window.addEventListener("satsnation-bch-price", event => {
-        const rate = Number(event.detail?.usd);
-        if (Number.isFinite(rate) && rate > 0) {
+      async function loadRate() {
+        try {
+          const response = await fetch(
+            "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash&vs_currencies=usd",
+            { headers: { Accept: "application/json" } }
+          );
+          if (!response.ok) throw new Error(`Exchange-rate service returned ${response.status}`);
+
+          const result = await response.json();
+          const rate = Number(result?.["bitcoin-cash"]?.usd);
+          if (!Number.isFinite(rate) || rate <= 0) throw new Error("Invalid exchange rate");
+
           bchUsdRate = rate;
-          note.textContent = "USD estimate uses the latest BCH/USD market price received by the live chart.";
-          update();
+          rateUnavailable = false;
+          note.textContent = "USD estimate uses the BCH exchange rate available when this page loads.";
+        } catch (error) {
+          console.warn("Unable to load BCH exchange rate:", error);
+          bchUsdRate = null;
+          rateUnavailable = true;
+          note.textContent = "Live USD conversion is unavailable right now.";
         }
-      });
+
+        update();
+      }
 
       priceInput.addEventListener("input", update);
       quantityInput.addEventListener("input", update);
       update();
+      loadRate();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
       setTheme(document.documentElement.dataset.theme || "dark");
-
       document.getElementById("themeToggle").addEventListener("click", () => {
         setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
       });
@@ -2877,15 +2875,12 @@
       document.getElementById("openConsensus").addEventListener("click", event => {
         openDialog("consensusOverlay", "consensusPanel", event.currentTarget);
       });
-
       document.getElementById("consensusClose").addEventListener("click", () => {
         closeDialog("consensusOverlay");
       });
-
       document.getElementById("heroStatsButton").addEventListener("click", event => {
         openDialog("statsOverlay", "statsPanel", event.currentTarget);
       });
-
       document.getElementById("statsClose").addEventListener("click", () => {
         closeDialog("statsOverlay");
       });
