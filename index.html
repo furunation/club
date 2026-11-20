@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0b0e12" />
-  <meta name="description" content="Explore Sats Nation, the SATS-focused Bitcoin Cash ecosystem." />
+  <meta name="description" content="Explore Sats Nation and the Bitcoin Cash ecosystem." />
   <title>Sats Nation — The Bitcoin Cash Ecosystem</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,18 +35,18 @@
       --white: #ffffff;
       --surface-soft: #f1f3f5;
       --line: #dfe3e8;
-      --gold: #55a4ff;
+      --gold: #176bb2;
       --content-width: 1160px;
-      --dialog-backdrop: rgba(8, 12, 18, 0.72);
+      --dialog-backdrop: rgba(8, 12, 18, .62);
       --hero-bg:
-        radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.22), transparent 21rem),
-        radial-gradient(circle at 12% 100%, rgba(22, 199, 132, 0.3), transparent 24rem),
-        linear-gradient(118deg, #174e40 0%, #126b66 46%, #225b99 100%);
-      --hero-text: #ffffff;
-      --hero-kicker: #d8ffed;
-      --hero-heading-accent: #a9f5d0;
-      --hero-shadow: 0 24px 58px rgba(20, 67, 82, 0.19);
-      --control-bg: #ffffff;
+        radial-gradient(circle at 84% 14%, rgba(255,255,255,.2), transparent 20rem),
+        radial-gradient(circle at 5% 100%, rgba(22,199,132,.25), transparent 22rem),
+        linear-gradient(118deg, #174e40 0%, #126b66 48%, #225b99 100%);
+      --hero-text: #fff;
+      --hero-muted: rgba(255,255,255,.8);
+      --hero-accent: #a9f5d0;
+      --hero-shadow: 0 24px 58px rgba(20,67,82,.19);
+      --control-bg: #fff;
       --control-hover: #effaf6;
       --note-bg: #eff8ff;
       --note-border: #c8e3fa;
@@ -54,22 +54,19 @@
       --note-strong: #176bb2;
       --social-bg: #eef8f5;
       --social-border: #c7e9dc;
-      --card-shadow: 0 8px 25px rgba(17, 28, 39, 0.06);
-      --card-hover-shadow: 0 14px 30px rgba(17, 28, 39, 0.12);
-
-      /* Purchasing-power banner theme */
-      --pp-bg: #0b0e12;
-      --pp-panel: #121820;
-      --pp-line: rgba(162, 182, 198, .16);
-      --pp-text: #f3f7fa;
-      --pp-muted: #a3b0bb;
-      --pp-green: #55e0a8;
-      --pp-green-soft: rgba(85, 224, 168, .13);
-      --pp-blue: #79b5ff;
-      --pp-red: #ffa27f;
-      --pp-shadow: 0 26px 80px rgba(0, 0, 0, .34);
-      --pp-surface: rgba(8, 13, 18, .48);
-      --pp-control: #131b23;
+      --card-shadow: 0 8px 25px rgba(17,28,39,.06);
+      --card-hover-shadow: 0 14px 30px rgba(17,28,39,.12);
+      --chart-text: #111318;
+      --chart-muted: #68717c;
+      --chart-green: var(--green-dark);
+      --chart-green-soft: rgba(13,159,104,.12);
+      --chart-usd: #b42318;
+      --chart-card: rgba(255,255,255,.82);
+      --chart-line: rgba(22,47,57,.14);
+      --chart-line-strong: rgba(22,47,57,.24);
+      --chart-axis: #52616b;
+      --chart-top: rgba(13,159,104,.15);
+      --chart-bottom: rgba(13,159,104,0);
     }
 
     html[data-theme="dark"] {
@@ -85,25 +82,36 @@
       --surface-soft: #10151b;
       --line: #29333d;
       --gold: #73b3ff;
-      --dialog-backdrop: rgba(0, 0, 0, 0.82);
+      --dialog-backdrop: rgba(0,0,0,.82);
       --hero-bg:
-        radial-gradient(circle at 82% 18%, rgba(32, 216, 149, 0.18), transparent 21rem),
-        radial-gradient(circle at 12% 100%, rgba(58, 139, 255, 0.18), transparent 24rem),
+        radial-gradient(circle at 84% 14%, rgba(32,216,149,.17), transparent 20rem),
+        radial-gradient(circle at 5% 100%, rgba(58,139,255,.16), transparent 22rem),
         linear-gradient(118deg, #10221d 0%, #102725 48%, #14243a 100%);
       --hero-text: #f3f6f8;
-      --hero-kicker: #8af0c4;
-      --hero-heading-accent: #75edbd;
-      --hero-shadow: 0 18px 48px rgba(0, 0, 0, 0.3);
+      --hero-muted: rgba(243,246,248,.78);
+      --hero-accent: #75edbd;
+      --hero-shadow: 0 20px 58px rgba(0,0,0,.34);
       --control-bg: #151a20;
       --control-hover: #202a32;
-      --note-bg: rgba(101, 168, 255, 0.08);
-      --note-border: rgba(101, 168, 255, 0.24);
+      --note-bg: rgba(101,168,255,.08);
+      --note-border: rgba(101,168,255,.24);
       --note-text: #c3d3e3;
       --note-strong: #8bbcff;
-      --social-bg: rgba(32, 216, 149, 0.08);
-      --social-border: rgba(32, 216, 149, 0.28);
-      --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
-      --card-hover-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+      --social-bg: rgba(32,216,149,.08);
+      --social-border: rgba(32,216,149,.28);
+      --card-shadow: 0 8px 25px rgba(0,0,0,.18);
+      --card-hover-shadow: 0 14px 30px rgba(0,0,0,.28);
+      --chart-text: #f3f7fa;
+      --chart-muted: #aebbc6;
+      --chart-green: var(--green);
+      --chart-green-soft: rgba(32,216,149,.14);
+      --chart-usd: #ff766f;
+      --chart-card: rgba(8,13,18,.48);
+      --chart-line: rgba(220,235,245,.11);
+      --chart-line-strong: rgba(220,235,245,.23);
+      --chart-axis: rgba(204,218,228,.8);
+      --chart-top: rgba(32,216,149,.16);
+      --chart-bottom: rgba(32,216,149,0);
     }
 
     *,
@@ -135,7 +143,6 @@
       text-rendering: optimizeLegibility;
     }
 
-    /* Fixed viewport background; wireframes are decorative and behind all content. */
     #emeraldBackground {
       position: fixed;
       inset: 0;
@@ -143,12 +150,12 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      opacity: 0.82;
+      opacity: .82;
       contain: strict;
     }
 
     html[data-theme="light"] #emeraldBackground {
-      opacity: 0.3;
+      opacity: .3;
     }
 
     .page-shell {
@@ -217,7 +224,7 @@
       border: 2px solid var(--green);
       border-radius: 50%;
       background: var(--white);
-      box-shadow: 0 6px 16px rgba(22, 199, 132, 0.16);
+      box-shadow: 0 6px 16px color-mix(in srgb, var(--green) 16%, transparent);
     }
 
     .brand-mark img {
@@ -227,26 +234,11 @@
       object-fit: cover;
     }
 
-    .brand-copy {
-      display: grid;
-      min-width: 0;
-      gap: 2px;
-    }
-
     .brand-name {
       font-family: "Space Grotesk", sans-serif;
       font-size: 1.04rem;
       font-weight: 700;
-      letter-spacing: -0.045em;
-      white-space: nowrap;
-    }
-
-    .brand-subtitle {
-      color: var(--muted);
-      font-size: 0.66rem;
-      font-weight: 600;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
+      letter-spacing: -.045em;
       white-space: nowrap;
     }
 
@@ -266,7 +258,7 @@
       border-radius: 999px;
       background: var(--social-bg);
       color: var(--green-deep);
-      font-size: 0.76rem;
+      font-size: .76rem;
       font-weight: 700;
       white-space: nowrap;
     }
@@ -277,7 +269,7 @@
       flex: 0 0 auto;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--green), var(--blue));
-      box-shadow: 0 0 0 4px rgba(22, 199, 132, 0.14);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 14%, transparent);
     }
 
     .button {
@@ -291,16 +283,15 @@
       border-radius: 12px;
       background: linear-gradient(115deg, var(--green), var(--blue));
       color: #07130f;
-      font-size: 0.82rem;
+      font-size: .82rem;
       font-weight: 700;
       text-decoration: none;
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      transition: transform .2s ease, box-shadow .2s ease;
       cursor: pointer;
     }
 
     .button:hover {
-      background: linear-gradient(115deg, #36dfa5, #65a8ff);
-      box-shadow: 0 8px 22px rgba(30, 180, 150, 0.22);
+      box-shadow: 0 8px 22px color-mix(in srgb, var(--green) 22%, transparent);
       transform: translateY(-2px);
     }
 
@@ -311,7 +302,6 @@
     }
 
     .button--quiet:hover {
-      border-color: var(--line);
       background: var(--control-hover);
       box-shadow: none;
     }
@@ -328,7 +318,7 @@
       background: var(--control-bg);
       color: var(--ink);
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
+      transition: transform .2s ease, background .2s ease;
     }
 
     .theme-toggle:hover {
@@ -365,17 +355,18 @@
       display: block;
     }
 
+    /* Banner intentionally has no decorative SATS bubbles. */
     .hero {
       position: relative;
       display: grid;
-      min-height: 365px;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.72fr);
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr);
       align-items: center;
-      gap: clamp(24px, 4vw, 50px);
-      padding: clamp(28px, 5vw, 56px);
+      gap: clamp(24px, 4vw, 48px);
+      min-height: 410px;
+      padding: clamp(24px, 4vw, 44px);
       overflow: hidden;
-      border: 1px solid transparent;
-      border-radius: 30px;
+      border: 1px solid color-mix(in srgb, var(--hero-text) 18%, transparent);
+      border-radius: 28px;
       background: var(--hero-bg);
       background-size: 100% 100%, 100% 100%, 180% 180%;
       background-position: 0 0, 0 0, 0% 50%;
@@ -383,512 +374,270 @@
       box-shadow: var(--hero-shadow);
       isolation: isolate;
       animation:
-        hero-enter 850ms cubic-bezier(.2, .75, .25, 1) both,
-        hero-glow 18s ease-in-out 850ms infinite alternate;
-    }
-
-    html[data-theme="dark"] .hero {
-      border-color: rgba(32, 216, 149, 0.3);
+        hero-enter 750ms cubic-bezier(.2, .75, .25, 1) both,
+        hero-glow 18s ease-in-out 750ms infinite alternate;
     }
 
     .hero::before,
     .hero::after {
       position: absolute;
-      z-index: 0;
-      border: 1px solid rgba(255, 255, 255, 0.17);
+      z-index: -1;
+      border: 1px solid color-mix(in srgb, var(--hero-text) 12%, transparent);
       border-radius: 50%;
       content: "";
       pointer-events: none;
     }
 
     .hero::before {
-      top: -180px;
-      right: 90px;
-      width: 480px;
-      height: 480px;
+      top: -235px;
+      right: 6%;
+      width: 500px;
+      height: 500px;
       animation: orbit-drift 19s ease-in-out infinite alternate;
     }
 
     .hero::after {
-      right: -80px;
-      bottom: -265px;
-      width: 510px;
-      height: 510px;
+      right: 30%;
+      bottom: -390px;
+      width: 560px;
+      height: 560px;
       animation: orbit-drift 24s ease-in-out -6s infinite alternate-reverse;
-    }
-
-    html[data-theme="dark"] .hero::before,
-    html[data-theme="dark"] .hero::after {
-      border-color: rgba(101, 168, 255, 0.16);
-    }
-
-    .hero-bubbles {
-      position: absolute;
-      z-index: 0;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .hero-bubble {
-      position: absolute;
-      display: grid;
-      width: var(--bubble-size);
-      aspect-ratio: 1;
-      place-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.75);
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 28% 23%, rgba(255, 255, 255, 0.86), transparent 37%),
-        linear-gradient(145deg, #d9fff0 0%, #72e8bb 42%, #5ca7ff 100%);
-      box-shadow:
-        0 14px 32px rgba(0, 45, 48, 0.16),
-        inset 0 2px 7px rgba(255, 255, 255, 0.76),
-        inset 0 -8px 17px rgba(20, 110, 135, 0.12);
-      opacity: var(--bubble-opacity);
-      filter: blur(var(--bubble-blur));
-      transform: rotate(var(--bubble-rotation));
-      animation: bubble-float var(--float-duration, 8s) ease-in-out var(--float-delay, 0s) infinite alternate;
-      will-change: transform;
-    }
-
-    .hero-bubble::after {
-      content: "Ꞩ";
-      display: block;
-      background: linear-gradient(145deg, #ffffff 8%, #b8ffe0 42%, #8dc0ff 92%);
-      background-clip: text;
-      color: transparent;
-      font-family: "Space Grotesk", "DM Sans", sans-serif;
-      font-size: calc(var(--bubble-size) * 0.55);
-      font-weight: 700;
-      line-height: 1;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-bubble--one {
-      --bubble-size: clamp(135px, 19vw, 220px);
-      --bubble-opacity: 0.78;
-      --bubble-blur: 0px;
-      --bubble-rotation: -14deg;
-      --float-duration: 8.5s;
-      top: 7%;
-      right: 19%;
-    }
-
-    .hero-bubble--two {
-      --bubble-size: clamp(92px, 12vw, 142px);
-      --bubble-opacity: 0.52;
-      --bubble-blur: 3px;
-      --bubble-rotation: 18deg;
-      --float-duration: 10s;
-      --float-delay: -2.5s;
-      top: -15%;
-      right: -1%;
-    }
-
-    .hero-bubble--three {
-      --bubble-size: clamp(68px, 8vw, 100px);
-      --bubble-opacity: 0.62;
-      --bubble-blur: 0.4px;
-      --bubble-rotation: 31deg;
-      --float-duration: 7.5s;
-      --float-delay: -1.2s;
-      right: 7%;
-      bottom: 8%;
-    }
-
-    .hero-bubble--four {
-      --bubble-size: clamp(48px, 6vw, 72px);
-      --bubble-opacity: 0.42;
-      --bubble-blur: 4.5px;
-      --bubble-rotation: -27deg;
-      --float-duration: 9s;
-      --float-delay: -4s;
-      top: 39%;
-      right: 35%;
-    }
-
-    .hero-bubble--five {
-      --bubble-size: clamp(106px, 14vw, 160px);
-      --bubble-opacity: 0.22;
-      --bubble-blur: 7px;
-      --bubble-rotation: 12deg;
-      --float-duration: 11s;
-      --float-delay: -3s;
-      right: -3%;
-      bottom: -10%;
-    }
-
-    .hero-bubble--six {
-      --bubble-size: clamp(42px, 5vw, 58px);
-      --bubble-opacity: 0.55;
-      --bubble-blur: 1.8px;
-      --bubble-rotation: -36deg;
-      --float-duration: 7s;
-      --float-delay: -2s;
-      right: 29%;
-      bottom: 9%;
-    }
-
-    html[data-theme="dark"] .hero-bubble {
-      border-color: rgba(226, 255, 243, 0.62);
-      background:
-        radial-gradient(circle at 28% 23%, rgba(255, 255, 255, 0.58), transparent 37%),
-        linear-gradient(145deg, #d6fff0 0%, #55dfad 37%, #4e91e7 100%);
     }
 
     .hero-copy {
       position: relative;
       z-index: 1;
       min-width: 0;
-      max-width: 100%;
-      grid-column: 1;
-      grid-row: 1;
-      animation: hero-copy-enter 750ms cubic-bezier(.2, .75, .25, 1) 140ms both;
+      animation: hero-copy-enter 700ms ease 100ms both;
     }
 
-    .hero-kicker {
+    .hero-kicker,
+    .chart-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin: 0 0 18px;
-      color: var(--hero-kicker);
-      font-size: 0.72rem;
+      margin: 0 0 14px;
+      color: var(--hero-accent);
+      font-size: .68rem;
       font-weight: 800;
-      letter-spacing: 0.16em;
+      letter-spacing: .15em;
       text-transform: uppercase;
     }
 
-    .hero-kicker::before {
-      width: 23px;
-      height: 2px;
-      border-radius: 99px;
-      background: currentColor;
-      content: "";
-    }
-
-    .hero h1 {
-      position: relative;
-      z-index: 1;
-      max-width: 100%;
-      margin: 0;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.4rem, 8.5vw, 7rem);
-      font-weight: 700;
-      letter-spacing: -0.075em;
-      line-height: 0.98;
-      overflow-wrap: anywhere;
-      text-wrap: balance;
-    }
-
-    .hero h1 span {
-      color: var(--hero-heading-accent);
-    }
-
-    .hero-stats-button {
-      position: absolute;
-      right: clamp(20px, 3vw, 34px);
-      bottom: clamp(18px, 3vw, 30px);
-      z-index: 2;
-      display: inline-flex;
-      min-height: 42px;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 14px;
-      border: 1px solid rgba(255, 255, 255, 0.52);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.92);
-      color: #111318;
-      box-shadow: 0 3px 12px rgba(3, 29, 35, 0.1);
-      font-size: 0.76rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-      animation: button-enter 550ms ease 420ms both;
-    }
-
-    .hero-stats-button:hover {
-      border-color: #fff;
-      background: #fff;
-      transform: translateY(-2px);
-    }
-
-    .hero-stats-arrow {
-      color: #13775e;
-      font-size: 0.9rem;
-    }
-
-    /* Purchasing-power banner */
-    .purchasing-banner {
-      position: relative;
-      isolation: isolate;
-      width: 100%;
-      margin-top: 28px;
-      padding: clamp(24px, 4vw, 42px);
-      overflow: hidden;
-      border: 1px solid var(--pp-line);
-      border-radius: 26px;
-      background:
-        radial-gradient(circle at 88% 8%, rgba(85, 224, 168, .12), transparent 22rem),
-        linear-gradient(135deg, #121a20, #101720 56%, #111c28);
-      color: var(--pp-text);
-      box-shadow: var(--pp-shadow);
-    }
-
-    .purchasing-banner::before,
-    .purchasing-banner::after {
-      position: absolute;
-      z-index: -1;
-      border: 1px solid rgba(130, 201, 174, .10);
-      border-radius: 50%;
-      content: "";
-      pointer-events: none;
-    }
-
-    .purchasing-banner::before {
-      top: -245px;
-      right: -120px;
-      width: 550px;
-      height: 550px;
-    }
-
-    .purchasing-banner::after {
-      right: 34%;
-      bottom: -340px;
-      width: 470px;
-      height: 470px;
-    }
-
-    .pp-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      margin: 0 0 15px;
-      color: var(--pp-green);
-      font-size: .72rem;
-      font-weight: 800;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .pp-eyebrow::before {
-      width: 22px;
+    .hero-kicker::before,
+    .chart-eyebrow::before {
+      width: 20px;
       height: 2px;
       border-radius: 2px;
       background: currentColor;
       content: "";
     }
 
-    .pp-title {
-      max-width: 780px;
+    .hero h1 {
+      max-width: 620px;
       margin: 0;
-      color: var(--pp-text);
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.2rem, 6.7vw, 5.25rem);
-      line-height: .99;
-      letter-spacing: -.075em;
+      font-size: clamp(2.6rem, 6.6vw, 5.7rem);
+      font-weight: 700;
+      letter-spacing: -.078em;
+      line-height: .94;
+      overflow-wrap: anywhere;
       text-wrap: balance;
     }
 
-    .pp-title span {
-      color: var(--pp-green);
+    .hero h1 span {
+      color: var(--hero-accent);
     }
 
-    .pp-intro {
-      max-width: 720px;
-      margin: 18px 0 0;
-      color: var(--pp-muted);
-      font-size: clamp(.95rem, 1.7vw, 1.08rem);
-      line-height: 1.7;
+    .hero-description {
+      max-width: 445px;
+      margin: 16px 0 0;
+      color: var(--hero-muted);
+      font-size: .92rem;
+      line-height: 1.6;
     }
 
-    .pp-chart-card {
-      margin-top: 30px;
-      padding: clamp(16px, 3vw, 25px);
-      border: 1px solid var(--pp-line);
-      border-radius: 21px;
-      background: var(--pp-surface);
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 19px;
     }
 
-    .pp-chart-heading {
+    .hero-stats-button {
+      display: inline-flex;
+      min-height: 39px;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 13px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      color: #111318;
+      font-size: .75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .hero-stats-button:hover {
+      background: #fff;
+      transform: translateY(-2px);
+    }
+
+    .hero-stats-arrow {
+      color: var(--green-deep);
+    }
+
+    .hero-chart {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+      padding: clamp(16px, 2.4vw, 23px);
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 19px;
+      background: var(--chart-card);
+      color: var(--chart-text);
+      box-shadow: 0 15px 38px rgba(0,0,0,.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .chart-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 12px;
+      gap: 12px;
     }
 
-    .pp-chart-heading h3 {
+    .chart-eyebrow {
+      margin-bottom: 8px;
+      color: var(--hero-accent);
+      font-size: .59rem;
+    }
+
+    .chart-title {
       margin: 0;
-      color: var(--pp-text);
+      color: var(--chart-text);
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
-      letter-spacing: -.04em;
+      font-size: clamp(1rem, 2vw, 1.34rem);
+      letter-spacing: -.045em;
+      line-height: 1.15;
     }
 
-    .pp-chart-heading p {
+    .chart-description {
       margin: 5px 0 0;
-      color: var(--pp-muted);
-      font-size: .78rem;
-      line-height: 1.5;
+      color: var(--chart-muted);
+      font-size: .69rem;
+      line-height: 1.45;
     }
 
-    .pp-chart-controls {
+    .chart-controls {
       display: flex;
+      flex: 0 0 auto;
       flex-wrap: wrap;
-      gap: 7px;
       justify-content: flex-end;
+      gap: 5px;
     }
 
-    .pp-range-button {
-      min-height: 34px;
-      padding: 6px 11px;
-      border: 1px solid var(--pp-line);
+    .range-button {
+      min-height: 28px;
+      padding: 4px 8px;
+      border: 1px solid var(--chart-line-strong);
       border-radius: 999px;
-      background: var(--pp-control);
-      color: var(--pp-muted);
-      font-size: .73rem;
+      background: rgba(255,255,255,.1);
+      color: var(--chart-muted);
+      font-size: .61rem;
       font-weight: 700;
       cursor: pointer;
       transition: color .2s, background .2s, border-color .2s;
     }
 
-    .pp-range-button:hover,
-    .pp-range-button[aria-pressed="true"] {
-      border-color: rgba(85, 224, 168, .55);
-      background: var(--pp-green-soft);
-      color: var(--pp-green);
+    .range-button:hover,
+    .range-button[aria-pressed="true"] {
+      border-color: var(--chart-green);
+      background: var(--chart-green-soft);
+      color: var(--chart-green);
     }
 
-    .pp-chart-wrap {
-      position: relative;
+    .chart-wrap {
       width: 100%;
-      height: clamp(235px, 36vw, 360px);
-      margin-top: 18px;
+      height: clamp(155px, 18vw, 205px);
+      margin-top: 10px;
     }
 
-    .pp-chart-canvas {
+    .chart-canvas {
       display: block;
       width: 100%;
       height: 100%;
     }
 
-    .pp-chart-legend {
+    .chart-legend {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px 22px;
-      margin-top: 14px;
-      color: var(--pp-muted);
-      font-size: .78rem;
+      gap: 7px 14px;
+      margin-top: 6px;
+      color: var(--chart-muted);
+      font-size: .63rem;
+      line-height: 1.4;
     }
 
-    .pp-legend-item {
+    .legend-item {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
-    .pp-legend-line {
-      width: 24px;
+    .legend-line {
+      width: 18px;
       height: 3px;
-      border-radius: 4px;
-      background: var(--pp-green);
+      flex: 0 0 auto;
+      border-radius: 3px;
+      background: var(--chart-green);
     }
 
-    .pp-legend-line--usd {
+    .legend-line--usd {
       background: repeating-linear-gradient(
         90deg,
-        var(--pp-red) 0 6px,
-        transparent 6px 10px
+        var(--chart-usd) 0 5px,
+        transparent 5px 8px
       );
     }
 
-    .pp-insights {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 13px;
-      margin-top: 18px;
-    }
-
-    .pp-insight {
-      min-width: 0;
-      padding: 17px 18px;
-      border: 1px solid var(--pp-line);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, .025);
-    }
-
-    .pp-insight-label {
-      display: block;
-      margin-bottom: 7px;
-      color: var(--pp-muted);
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .pp-insight strong {
-      display: block;
-      color: var(--pp-text);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1rem, 2.3vw, 1.3rem);
-      letter-spacing: -.04em;
-    }
-
-    .pp-insight--sats strong {
-      color: var(--pp-green);
-    }
-
-    .pp-insight--usd strong {
-      color: var(--pp-red);
-    }
-
-    .pp-fine-print {
-      display: grid;
-      grid-template-columns: 20px 1fr;
-      gap: 10px;
-      margin: 17px 0 0;
-      padding: 14px 15px;
-      border: 1px solid rgba(121, 181, 255, .19);
-      border-radius: 13px;
-      background: rgba(121, 181, 255, .055);
-      color: #bdcbd8;
-      font-size: .76rem;
-      line-height: 1.6;
-    }
-
-    .pp-fine-print b {
-      color: var(--pp-blue);
-    }
-
-    .pp-fine-print-icon {
-      display: grid;
-      width: 19px;
-      height: 19px;
-      place-items: center;
-      border: 1px solid rgba(121, 181, 255, .55);
-      border-radius: 50%;
-      color: var(--pp-blue);
-      font-size: .75rem;
-      font-weight: 800;
-    }
-
-    .pp-footer-row {
+    .chart-summary {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       justify-content: space-between;
-      gap: 14px;
-      margin-top: 19px;
-      color: var(--pp-muted);
-      font-size: .73rem;
+      gap: 6px 14px;
+      margin-top: 10px;
+      padding-top: 9px;
+      border-top: 1px solid var(--chart-line);
+      color: var(--chart-muted);
+      font-size: .64rem;
+      line-height: 1.45;
     }
 
-    .pp-live-date {
-      color: #d3dde4;
-      font-weight: 700;
+    .chart-summary strong {
+      color: var(--chart-text);
+    }
+
+    .chart-summary .usd-label {
+      color: var(--chart-usd);
+    }
+
+    .chart-note {
+      margin: 7px 0 0;
+      color: var(--chart-muted);
+      font-size: .59rem;
+      line-height: 1.45;
+    }
+
+    .chart-date {
+      margin: 7px 0 0;
+      color: var(--chart-muted);
+      font-size: .58rem;
+      text-align: right;
     }
 
     .section {
@@ -905,9 +654,9 @@
 
     .section-kicker {
       color: var(--green-dark);
-      font-size: 0.67rem;
+      font-size: .67rem;
       font-weight: 800;
-      letter-spacing: 0.15em;
+      letter-spacing: .15em;
       text-transform: uppercase;
     }
 
@@ -915,14 +664,14 @@
       margin: 5px 0 0;
       font-family: "Space Grotesk", sans-serif;
       font-size: clamp(1.5rem, 3vw, 2.2rem);
-      letter-spacing: -0.06em;
+      letter-spacing: -.06em;
       line-height: 1.1;
     }
 
     .section-heading p {
       margin: 7px 0 0;
       color: var(--muted);
-      font-size: 0.88rem;
+      font-size: .88rem;
       line-height: 1.55;
     }
 
@@ -954,9 +703,9 @@
       border-radius: 999px;
       background: var(--control-bg);
       color: var(--ink);
-      font-size: 0.77rem;
+      font-size: .77rem;
       font-weight: 700;
-      transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.18s;
+      transition: background .18s, border-color .18s, color .18s, transform .18s;
       cursor: pointer;
     }
 
@@ -968,7 +717,7 @@
 
     .category-btn[aria-pressed="true"] {
       border-color: var(--green);
-      background: linear-gradient(115deg, var(--green), #58a4ff);
+      background: linear-gradient(115deg, var(--green), var(--blue));
       color: #07130f;
     }
 
@@ -997,7 +746,7 @@
       border-radius: 999px;
       background: var(--control-bg);
       color: var(--ink);
-      font-size: 0.84rem;
+      font-size: .84rem;
     }
 
     #gallery-search::placeholder {
@@ -1006,13 +755,13 @@
 
     #gallery-search:focus {
       border-color: var(--green);
-      outline: 3px solid rgba(22, 199, 132, 0.13);
+      outline: 3px solid color-mix(in srgb, var(--green) 13%, transparent);
     }
 
     .gallery-count {
       margin: -4px 0 13px;
       color: var(--muted);
-      font-size: 0.78rem;
+      font-size: .78rem;
     }
 
     #figures {
@@ -1037,7 +786,7 @@
       min-height: 220px;
       transform-style: preserve-3d;
       -webkit-transform-style: preserve-3d;
-      transition: transform 0.5s ease;
+      transition: transform .5s ease;
     }
 
     .ecosystem-card.is-flipped .card-inner {
@@ -1067,7 +816,7 @@
     .card-front {
       z-index: 2;
       cursor: pointer;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color .2s, box-shadow .2s;
     }
 
     .card-front:hover {
@@ -1104,7 +853,7 @@
       max-width: 100%;
       border-radius: 12px;
       object-fit: contain;
-      transition: transform 0.2s ease;
+      transition: transform .2s ease;
     }
 
     .card-image-link:hover img {
@@ -1127,9 +876,9 @@
       max-width: 100%;
       color: var(--ink);
       font-family: "Space Grotesk", sans-serif;
-      font-size: 0.9rem;
+      font-size: .9rem;
       font-weight: 700;
-      letter-spacing: -0.025em;
+      letter-spacing: -.025em;
       line-height: 1.2;
       overflow-wrap: anywhere;
     }
@@ -1138,7 +887,7 @@
       display: block;
       max-width: 100%;
       color: var(--muted);
-      font-size: 0.69rem;
+      font-size: .69rem;
       line-height: 1.25;
       overflow-wrap: anywhere;
     }
@@ -1146,7 +895,7 @@
     .card-description {
       margin: 0;
       color: var(--muted);
-      font-size: 0.83rem;
+      font-size: .83rem;
       line-height: 1.6;
       overflow-wrap: anywhere;
     }
@@ -1154,7 +903,7 @@
     .card-hint {
       margin: 12px 0 0;
       color: var(--green-dark);
-      font-size: 0.7rem;
+      font-size: .7rem;
       font-weight: 700;
     }
 
@@ -1185,7 +934,7 @@
       padding-top: 19px;
       border-top: 1px solid var(--line);
       color: var(--muted);
-      font-size: 0.77rem;
+      font-size: .77rem;
     }
 
     .footer-follow {
@@ -1205,11 +954,11 @@
       border-radius: 12px;
       background: var(--social-bg);
       color: var(--green-deep);
-      transition: background 0.2s, transform 0.2s;
+      transition: background .2s, transform .2s;
     }
 
     .footer-social-link:hover {
-      background: rgba(22, 199, 132, 0.16);
+      background: color-mix(in srgb, var(--green) 16%, transparent);
       transform: translateY(-2px);
     }
 
@@ -1231,9 +980,9 @@
       border-radius: 15px;
       background: var(--control-bg);
       color: var(--green-deep);
-      box-shadow: 0 8px 25px rgba(16, 24, 32, 0.14);
+      box-shadow: 0 8px 25px rgba(16,24,32,.14);
       font-size: 1.3rem;
-      transition: opacity 0.25s, transform 0.25s;
+      transition: opacity .25s, transform .25s;
       cursor: pointer;
     }
 
@@ -1275,20 +1024,20 @@
       border-radius: 23px;
       background: var(--white);
       color: var(--ink);
-      box-shadow: 0 28px 90px rgba(5, 12, 18, 0.34);
+      box-shadow: 0 28px 90px rgba(5,12,18,.34);
     }
 
     .dialog-title {
       margin: 0 55px 7px 0;
       font-family: "Space Grotesk", sans-serif;
       font-size: 1.6rem;
-      letter-spacing: -0.055em;
+      letter-spacing: -.055em;
     }
 
     .dialog-subtitle {
       margin: 0 0 20px;
       color: var(--muted);
-      font-size: 0.86rem;
+      font-size: .86rem;
       line-height: 1.55;
     }
 
@@ -1331,7 +1080,7 @@
       border-radius: 14px;
       background: var(--surface-soft);
       color: var(--muted);
-      font-size: 0.84rem;
+      font-size: .84rem;
       line-height: 1.55;
       counter-increment: steps;
     }
@@ -1345,9 +1094,9 @@
       height: 28px;
       place-items: center;
       border-radius: 9px;
-      background: rgba(22, 199, 132, 0.13);
+      background: color-mix(in srgb, var(--green) 13%, transparent);
       color: var(--green-deep);
-      font: 700 0.82rem "Space Grotesk", sans-serif;
+      font: 700 .82rem "Space Grotesk", sans-serif;
       content: counter(steps);
     }
 
@@ -1364,7 +1113,7 @@
       border-radius: 13px;
       background: var(--note-bg);
       color: var(--note-text);
-      font-size: 0.79rem;
+      font-size: .79rem;
       line-height: 1.55;
     }
 
@@ -1392,7 +1141,7 @@
       font-family: "Space Grotesk", sans-serif;
       font-size: clamp(1.6rem, 4vw, 2.2rem);
       font-weight: 700;
-      letter-spacing: -0.06em;
+      letter-spacing: -.06em;
       line-height: 1.15;
       overflow-wrap: anywhere;
     }
@@ -1401,7 +1150,7 @@
       display: block;
       margin-top: 8px;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: .82rem;
       line-height: 1.5;
     }
 
@@ -1411,7 +1160,7 @@
       gap: 7px;
       margin-top: 18px;
       color: var(--green-dark);
-      font-size: 0.84rem;
+      font-size: .84rem;
       font-weight: 700;
       text-underline-offset: 4px;
     }
@@ -1436,7 +1185,7 @@
       display: block;
       margin: 15px 0 7px;
       color: var(--ink);
-      font-size: 0.81rem;
+      font-size: .81rem;
       font-weight: 700;
     }
 
@@ -1452,17 +1201,21 @@
 
     .market-cap-calculator input:focus {
       border-color: var(--green);
-      outline: 3px solid rgba(22, 199, 132, 0.13);
+      outline: 3px solid color-mix(in srgb, var(--green) 13%, transparent);
     }
 
     .calculator-results {
       margin-top: 16px;
       padding: 14px 16px;
-      border: 1px solid rgba(22, 199, 132, 0.24);
+      border: 1px solid color-mix(in srgb, var(--green) 24%, transparent);
       border-radius: 13px;
-      background: linear-gradient(110deg, rgba(22, 199, 132, 0.07), rgba(54, 135, 255, 0.07));
+      background: linear-gradient(
+        110deg,
+        color-mix(in srgb, var(--green) 7%, transparent),
+        color-mix(in srgb, var(--blue) 7%, transparent)
+      );
       color: var(--muted);
-      font-size: 0.84rem;
+      font-size: .84rem;
       line-height: 1.9;
       overflow-wrap: anywhere;
       box-shadow: inset 3px 0 0 var(--green);
@@ -1479,19 +1232,12 @@
     .calculator-note {
       margin: 10px 0 0;
       color: var(--muted);
-      font-size: 0.73rem;
+      font-size: .73rem;
       line-height: 1.55;
     }
 
-    html[data-theme="dark"] body {
-      background:
-        radial-gradient(ellipse at 12% 0%, rgba(32, 216, 149, 0.08), transparent 30rem),
-        radial-gradient(ellipse at 93% 32%, rgba(101, 168, 255, 0.06), transparent 28rem),
-        var(--paper);
-    }
-
     @keyframes hero-enter {
-      from { opacity: 0; transform: translateY(18px) scale(0.985); }
+      from { opacity: 0; transform: translateY(15px) scale(.99); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
@@ -1501,23 +1247,13 @@
     }
 
     @keyframes hero-copy-enter {
-      from { opacity: 0; transform: translateY(14px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes button-enter {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes bubble-float {
-      from { translate: 0 0; }
-      to { translate: 0 -13px; }
     }
 
     @keyframes orbit-drift {
-      from { transform: translate3d(0, 0, 0) rotate(0deg); }
-      to { transform: translate3d(-14px, 12px, 0) rotate(5deg); }
+      from { transform: translate3d(0,0,0) rotate(0deg); }
+      to { transform: translate3d(-14px,12px,0) rotate(5deg); }
     }
 
     @media (min-width: 1050px) {
@@ -1531,44 +1267,28 @@
       }
     }
 
-    @media (max-width: 700px) {
-      .page-shell {
-        padding-inline: 20px;
-      }
-
+    @media (max-width: 800px) {
       .hero {
-        min-height: 0;
-        grid-template-columns: minmax(0, 1fr);
-        gap: 18px;
-        padding: 28px;
-      }
-    }
-
-    @media (max-width: 620px) {
-      .purchasing-banner {
-        padding: 24px 17px;
-        border-radius: 21px;
+        grid-template-columns: minmax(0, 1fr) minmax(270px, .95fr);
+        gap: 20px;
+        min-height: 390px;
+        padding: 27px;
       }
 
-      .pp-chart-heading {
+      .hero h1 {
+        font-size: clamp(2.6rem, 7vw, 4.3rem);
+      }
+
+      .chart-header {
         flex-direction: column;
       }
 
-      .pp-chart-controls {
+      .chart-controls {
         justify-content: flex-start;
       }
-
-      .pp-insights {
-        grid-template-columns: 1fr;
-      }
-
-      .pp-footer-row {
-        align-items: flex-start;
-        flex-direction: column;
-      }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       .page-shell {
         padding: 17px 14px 90px;
       }
@@ -1576,7 +1296,6 @@
       .site-header {
         display: grid;
         grid-template-columns: minmax(0, 1fr);
-        align-items: center;
         gap: 12px;
         margin-bottom: 18px;
       }
@@ -1596,10 +1315,6 @@
         font-size: 1rem;
       }
 
-      .brand-subtitle {
-        font-size: 0.58rem;
-      }
-
       .header-actions {
         width: 100%;
         justify-content: flex-start;
@@ -1609,7 +1324,7 @@
       .network-pill {
         gap: 6px;
         padding: 8px 10px;
-        font-size: 0.68rem;
+        font-size: .68rem;
       }
 
       .theme-toggle {
@@ -1621,84 +1336,59 @@
         min-height: 36px;
         margin-left: auto;
         padding: 7px 10px;
-        font-size: 0.68rem;
+        font-size: .68rem;
       }
 
       .hero {
-        min-height: 205px;
         grid-template-columns: minmax(0, 1fr);
-        align-content: start;
-        gap: 14px;
-        padding: 24px 18px 58px;
-        border-radius: 22px;
+        gap: 19px;
+        min-height: 0;
+        padding: 23px 16px 16px;
+        border-radius: 21px;
       }
 
       .hero-copy {
-        max-width: 100%;
-        padding-right: 0;
+        padding: 1px;
       }
 
       .hero-kicker {
         margin-bottom: 10px;
-        font-size: 0.6rem;
+        font-size: .61rem;
       }
 
       .hero h1 {
-        max-width: 100%;
-        font-size: clamp(2rem, 9.5vw, 3.5rem);
-        line-height: 0.98;
+        font-size: clamp(2.65rem, 12vw, 4.5rem);
       }
 
-      .hero-stats-button {
-        right: 13px;
-        bottom: 12px;
-        min-height: 36px;
-        padding: 7px 12px;
-        font-size: 0.72rem;
+      .hero-description {
+        max-width: 430px;
+        margin-top: 11px;
+        font-size: .84rem;
       }
 
-      .hero-bubble--one {
-        --bubble-size: 78px;
-        --bubble-opacity: 0.58;
-        top: 36%;
-        right: 29%;
-        left: auto;
+      .hero-actions {
+        margin-top: 14px;
       }
 
-      .hero-bubble--two {
-        --bubble-size: 52px;
-        --bubble-opacity: 0.42;
-        top: 14%;
-        right: 4%;
+      .hero-chart {
+        padding: 14px 12px 12px;
+        border-radius: 15px;
       }
 
-      .hero-bubble--three {
-        --bubble-size: 41px;
-        --bubble-opacity: 0.5;
-        right: 9%;
-        bottom: 15%;
+      .chart-header {
+        gap: 8px;
       }
 
-      .hero-bubble--four {
-        --bubble-size: 30px;
-        --bubble-opacity: 0.35;
-        top: 57%;
-        right: 47%;
+      .chart-wrap {
+        height: 190px;
       }
 
-      .hero-bubble--five {
-        --bubble-size: 63px;
-        --bubble-opacity: 0.18;
-        right: -5%;
-        bottom: -8%;
+      .chart-summary {
+        font-size: .61rem;
       }
 
-      .hero-bubble--six {
-        --bubble-size: 29px;
-        --bubble-opacity: 0.43;
-        right: 37%;
-        bottom: 11%;
-        left: auto;
+      .chart-note {
+        font-size: .57rem;
       }
 
       .section {
@@ -1726,7 +1416,7 @@
       .category-btn {
         min-height: 33px;
         padding: 6px 10px;
-        font-size: 0.72rem;
+        font-size: .72rem;
       }
 
       .search-wrap {
@@ -1763,11 +1453,11 @@
       }
 
       .card-caption-name {
-        font-size: 0.79rem;
+        font-size: .79rem;
       }
 
       .card-caption-detail {
-        font-size: 0.63rem;
+        font-size: .63rem;
       }
 
       .card-back {
@@ -1775,7 +1465,7 @@
       }
 
       .card-description {
-        font-size: 0.77rem;
+        font-size: .77rem;
       }
 
       .footer {
@@ -1812,7 +1502,7 @@
 
       .consensus-list li {
         padding: 12px 11px 12px 50px;
-        font-size: 0.78rem;
+        font-size: .78rem;
       }
 
       .consensus-list li::before {
@@ -1838,7 +1528,7 @@
       }
     }
 
-    @media (max-width: 360px) {
+    @media (max-width: 380px) {
       .header-actions {
         flex-wrap: wrap;
       }
@@ -1847,51 +1537,12 @@
         margin-left: 0;
       }
 
-      .hero {
-        min-height: 190px;
-        padding: 22px 15px 55px;
+      .chart-wrap {
+        height: 170px;
       }
 
-      .hero h1 {
-        font-size: clamp(1.9rem, 9vw, 2.6rem);
-      }
-
-      .hero-stats-button {
-        right: 11px;
-        bottom: 10px;
-      }
-
-      .hero-bubble--one {
-        --bubble-size: 68px;
-        top: 37%;
-        right: 27%;
-      }
-
-      .hero-bubble--two {
-        --bubble-size: 46px;
-        top: 13%;
-        right: 4%;
-      }
-
-      .hero-bubble--three {
-        --bubble-size: 36px;
-        right: 11%;
-        bottom: 15%;
-      }
-
-      .hero-bubble--four {
-        --bubble-size: 27px;
-        right: 47%;
-      }
-
-      .hero-bubble--five {
-        --bubble-size: 57px;
-        right: -6%;
-      }
-
-      .hero-bubble--six {
-        --bubble-size: 26px;
-        right: 39%;
+      .chart-summary {
+        flex-direction: column;
       }
     }
 
@@ -1907,9 +1558,9 @@
       *,
       *::before,
       *::after {
-        animation-duration: 0.01ms !important;
+        animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        transition-duration: .01ms !important;
       }
 
       .card-inner {
@@ -1934,9 +1585,7 @@
         <span class="brand-mark">
           <img src="https://i.postimg.cc/kXHDMrkz/sats.png" alt="Sats Nation logo" />
         </span>
-        <span class="brand-copy">
-          <span class="brand-name">Sats Nation</span>
-        </span>
+        <span class="brand-name">Sats Nation</span>
       </a>
 
       <div class="header-actions">
@@ -1980,105 +1629,71 @@
 
     <main>
       <section class="hero" aria-labelledby="page-title">
-        <div class="hero-bubbles" aria-hidden="true">
-          <span class="hero-bubble hero-bubble--one"></span>
-          <span class="hero-bubble hero-bubble--two"></span>
-          <span class="hero-bubble hero-bubble--three"></span>
-          <span class="hero-bubble hero-bubble--four"></span>
-          <span class="hero-bubble hero-bubble--five"></span>
-          <span class="hero-bubble hero-bubble--six"></span>
-        </div>
-
         <div class="hero-copy">
-          <h1 id="page-title">Satoshi's<br><span>Standard</span></h1>
+          <p class="hero-kicker">The Bitcoin Cash ecosystem</p>
+          <h1 id="page-title">Satoshi's<br /><span>Standard</span></h1>
+          <p class="hero-description">
+            Explore the Bitcoin Cash ecosystem and see how satoshis and dollars differ over time.
+          </p>
+          <div class="hero-actions">
+            <button
+              id="heroStatsButton"
+              class="hero-stats-button"
+              type="button"
+              aria-label="Open SATS statistics and market cap calculator"
+              aria-haspopup="dialog"
+              aria-controls="statsOverlay"
+            >
+              SATS stats <span class="hero-stats-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
         </div>
 
-        <button
-          id="heroStatsButton"
-          class="hero-stats-button"
-          type="button"
-          aria-label="Open SATS statistics and market cap calculator"
-          aria-haspopup="dialog"
-          aria-controls="statsOverlay"
-        >
-          <span>SATS stats</span>
-          <span class="hero-stats-arrow" aria-hidden="true">↗</span>
-        </button>
-      </section>
-
-      <!-- Purchasing power comparison banner -->
-      <section class="purchasing-banner" aria-labelledby="pp-title">
-        <p class="pp-eyebrow">Money over time</p>
-
-        <h2 class="pp-title" id="pp-title">
-          One satoshi.<br />
-          <span>One dollar.</span><br />
-          Two different stories.
-        </h2>
-
-        <p class="pp-intro">
-          A conceptual look at Bitcoin Cash satoshis and U.S. dollars from their beginnings to today.
-          BCH’s market value has moved up and down; the dollar’s purchasing power has generally eroded
-          over time through inflation.
-        </p>
-
-        <div class="pp-chart-card">
-          <div class="pp-chart-heading">
+        <section class="hero-chart" aria-labelledby="chart-title">
+          <div class="chart-header">
             <div>
-              <h3>Purchasing power, illustrated</h3>
-              <p>Indexed to 100 at each currency’s starting point · illustrative, not to scale</p>
+              <p class="chart-description">Illustrative purchasing-power comparison</p>
             </div>
 
-            <nav class="pp-chart-controls" aria-label="Choose chart time range">
-              <button class="pp-range-button" type="button" data-pp-range="all" aria-pressed="true">Inception → now</button>
-              <button class="pp-range-button" type="button" data-pp-range="10" aria-pressed="false">10 years</button>
-              <button class="pp-range-button" type="button" data-pp-range="5" aria-pressed="false">5 years</button>
+            <nav class="chart-controls" aria-label="Choose chart time range">
+              <button class="range-button" type="button" data-pp-range="all" aria-pressed="true">All</button>
+              <button class="range-button" type="button" data-pp-range="10" aria-pressed="false">10y</button>
+              <button class="range-button" type="button" data-pp-range="5" aria-pressed="false">5y</button>
             </nav>
           </div>
 
-          <div class="pp-chart-wrap">
+          <div class="chart-wrap">
             <canvas
               id="purchasingPowerChart"
-              class="pp-chart-canvas"
+              class="chart-canvas"
               role="img"
-              aria-label="Illustrative indexed comparison. Bitcoin Cash market purchasing power is volatile. The dollar's purchasing power trends downward over time."
+              aria-label="Illustrative chart showing volatile BCH market purchasing power and generally declining U.S. dollar purchasing power."
             >
-              Illustrative chart comparing volatile BCH purchasing power with the generally declining purchasing power of the U.S. dollar.
+              Illustrative comparison: BCH purchasing power fluctuates; dollar purchasing power generally trends downward with inflation.
             </canvas>
           </div>
 
-          <div class="pp-chart-legend" aria-label="Chart legend">
-            <span class="pp-legend-item"><span class="pp-legend-line"></span> BCH satoshi: market value fluctuates</span>
-            <span class="pp-legend-item"><span class="pp-legend-line pp-legend-line--usd"></span> U.S. dollar: purchasing power trends down</span>
-          </div>
-
-          <div class="pp-insights">
-            <div class="pp-insight pp-insight--sats">
-              <span class="pp-insight-label">Bitcoin Cash satoshi</span>
-              <strong>Scarce unit · market-priced</strong>
-            </div>
-            <div class="pp-insight pp-insight--usd">
-              <span class="pp-insight-label">U.S. dollar</span>
-              <strong>Purchasing power erodes with inflation</strong>
-            </div>
-          </div>
-
-          <p class="pp-fine-print">
-            <span class="pp-fine-print-icon" aria-hidden="true">i</span>
-            <span>
-              <b>Important:</b> This is a schematic illustration, not historical price or CPI data.
-              BCH’s fiat purchasing power is volatile and has not moved continuously in one direction.
-              A satoshi is 1/100,000,000 of a BCH; its purchasing power depends on BCH’s exchange rate
-              and the prices of goods and services. For a measured USD inflation comparison, use CPI
-              data; for BCH, use dated market prices and a defined basket of goods.
+          <div class="chart-legend" aria-label="Chart legend">
+            <span class="legend-item">
+              <span class="legend-line" aria-hidden="true"></span>
+              BCH satoshi
             </span>
-          </p>
-        </div>
+            <span class="legend-item">
+              <span class="legend-line legend-line--usd" aria-hidden="true"></span>
+              U.S. dollar
+            </span>
+          </div>
 
-        <div class="pp-footer-row">
-          <span>Indexed concept chart · no investment advice</span>
-          <span class="pp-live-date">Banner date: <time id="todayDate"></time></span>
-        </div>
+          <div class="chart-summary">
+            <span><strong style="color:var(--chart-green)">BCH:</strong> volatile market value</span>
+            <span><strong class="usd-label">USD:</strong> purchasing power erodes to inflation</span>
+          </div>
+
+          <p class="chart-note">
+            Schematic illustration, not historical price or CPI data. A satoshi is 1/100,000,000 BCH.
+          </p>
+          <p class="chart-date">Updated <time id="todayDate"></time></p>
+        </section>
       </section>
 
       <section id="ecosystem" class="section directory" aria-labelledby="ecosystem-title">
@@ -2204,24 +1819,10 @@
         <h3 id="calculatorTitle">SATS market cap calculator</h3>
 
         <label for="tokenPrice">Price per token (sats)</label>
-        <input
-          id="tokenPrice"
-          type="number"
-          min="0"
-          step="any"
-          inputmode="decimal"
-          placeholder="e.g. 100"
-        />
+        <input id="tokenPrice" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 100" />
 
         <label for="tokenQuantity">Number of tokens</label>
-        <input
-          id="tokenQuantity"
-          type="number"
-          min="0"
-          step="any"
-          inputmode="decimal"
-          placeholder="e.g. 1000000"
-        />
+        <input id="tokenQuantity" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 1000000" />
 
         <div class="calculator-results" aria-live="polite" aria-atomic="true">
           <p>Market cap (sats): <strong id="marketCapSats">0 sats</strong></p>
@@ -2236,18 +1837,12 @@
   </div>
 
   <script>
-    /*
-     * Canvas-drawn, rotating and floating 3D wireframe emeralds.
-     * The canvas is fixed to the viewport, so the emeralds stay behind
-     * the entire site while the page scrolls.
-     */
     (() => {
       const canvas = document.getElementById("emeraldBackground");
       const ctx = canvas?.getContext("2d", { alpha: true });
       if (!canvas || !ctx) return;
 
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
       let width = 0;
       let height = 0;
       let dpr = 1;
@@ -2256,27 +1851,25 @@
       let visible = !document.hidden;
       let emeralds = [];
 
-      const emeraldSettings = [
-        { x: 0.11, y: 0.18, size: 92, speed: 0.36, phase: 0.5, float: 15, opacity: 0.65 },
-        { x: 0.82, y: 0.15, size: 67, speed: -0.29, phase: 2.1, float: 19, opacity: 0.55 },
-        { x: 0.52, y: 0.43, size: 53, speed: 0.24, phase: 4.3, float: 13, opacity: 0.4 },
-        { x: 0.18, y: 0.66, size: 72, speed: -0.31, phase: 3.2, float: 18, opacity: 0.57 },
-        { x: 0.77, y: 0.68, size: 105, speed: 0.2, phase: 1.1, float: 22, opacity: 0.6 },
-        { x: 0.43, y: 0.9, size: 58, speed: -0.34, phase: 5.1, float: 14, opacity: 0.47 },
-        { x: 0.96, y: 0.43, size: 52, speed: 0.28, phase: 2.8, float: 17, opacity: 0.42 },
-        { x: 0.03, y: 0.91, size: 61, speed: -0.22, phase: 0.9, float: 20, opacity: 0.48 }
+      const settings = [
+        { x: .11, y: .18, size: 92, speed: .36, phase: .5, float: 15, opacity: .65 },
+        { x: .82, y: .15, size: 67, speed: -.29, phase: 2.1, float: 19, opacity: .55 },
+        { x: .52, y: .43, size: 53, speed: .24, phase: 4.3, float: 13, opacity: .4 },
+        { x: .18, y: .66, size: 72, speed: -.31, phase: 3.2, float: 18, opacity: .57 },
+        { x: .77, y: .68, size: 105, speed: .2, phase: 1.1, float: 22, opacity: .6 },
+        { x: .43, y: .9, size: 58, speed: -.34, phase: 5.1, float: 14, opacity: .47 },
+        { x: .96, y: .43, size: 52, speed: .28, phase: 2.8, float: 17, opacity: .42 },
+        { x: .03, y: .91, size: 61, speed: -.22, phase: .9, float: 20, opacity: .48 }
       ];
 
       function makeEmeralds() {
         const scale = Math.min(width, height);
-        const mobileScale = width < 600 ? 0.7 : 1;
-
-        emeralds = emeraldSettings.map((item, index) => ({
+        const mobileScale = width < 600 ? .7 : 1;
+        emeralds = settings.map(item => ({
           ...item,
           cx: item.x * width,
           cy: item.y * height,
-          radius: Math.max(23, Math.min(item.size * mobileScale, scale * 0.18)),
-          index
+          radius: Math.max(23, Math.min(item.size * mobileScale, scale * .18))
         }));
       }
 
@@ -2284,213 +1877,132 @@
         width = window.innerWidth;
         height = window.innerHeight;
         dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-
         canvas.width = Math.round(width * dpr);
         canvas.height = Math.round(height * dpr);
         canvas.style.width = `${width}px`;
         canvas.style.height = `${height}px`;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
         makeEmeralds();
         drawFrame(performance.now(), true);
       }
 
-      function getColors() {
-        if (document.documentElement.dataset.theme === "light") {
-          return {
-            bright: [14, 130, 88],
-            mid: [24, 157, 112],
-            dim: [31, 117, 100],
-            glow: [28, 179, 127]
-          };
-        }
-
-        return {
-          bright: [91, 255, 190],
-          mid: [32, 226, 151],
-          dim: [20, 132, 98],
-          glow: [32, 216, 149]
-        };
+      function colors() {
+        return document.documentElement.dataset.theme === "light"
+          ? { bright: [14,130,88], dim: [31,117,100], glow: [28,179,127] }
+          : { bright: [91,255,190], dim: [20,132,98], glow: [32,216,149] };
       }
 
-      function project(point, rotation, tilt, centerX, centerY, radius) {
+      function project(p, rotation, tilt, cx, cy, radius) {
         const cosY = Math.cos(rotation);
         const sinY = Math.sin(rotation);
         const cosX = Math.cos(tilt);
         const sinX = Math.sin(tilt);
-
-        const rotatedX = point.x * cosY - point.z * sinY;
-        const rotatedZ = point.x * sinY + point.z * cosY;
-        const rotatedY = point.y * cosX - rotatedZ * sinX;
-        const finalZ = point.y * sinX + rotatedZ * cosX;
-
-        const perspective = 3.5 / (3.5 + finalZ * 0.44);
-        return {
-          x: centerX + rotatedX * radius * perspective,
-          y: centerY + rotatedY * radius * perspective,
-          z: finalZ
-        };
+        const rx = p.x * cosY - p.z * sinY;
+        const rz = p.x * sinY + p.z * cosY;
+        const ry = p.y * cosX - rz * sinX;
+        const z = p.y * sinX + rz * cosX;
+        const perspective = 3.5 / (3.5 + z * .44);
+        return { x: cx + rx * radius * perspective, y: cy + ry * radius * perspective, z };
       }
 
-      function drawLine(a, b, color, alpha, lineWidth) {
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.strokeStyle = `rgba(${color.join(",")}, ${alpha})`;
-        ctx.lineWidth = lineWidth;
-        ctx.stroke();
-      }
-
-      function drawEmerald(emerald, time, colors) {
-        const floatOffset = Math.sin(time * 0.0007 + emerald.phase) * emerald.float;
-        const centerX = emerald.cx;
-        const centerY = emerald.cy + floatOffset;
-        const rotation = time * 0.00032 * emerald.speed + emerald.phase;
-        const tilt = Math.sin(time * 0.00023 + emerald.phase) * 0.33;
-        const r = emerald.radius;
+      function drawEmerald(item, time, palette) {
+        const cx = item.cx;
+        const cy = item.cy + Math.sin(time * .0007 + item.phase) * item.float;
+        const rotation = time * .00032 * item.speed + item.phase;
+        const tilt = Math.sin(time * .00023 + item.phase) * .33;
+        const r = item.radius;
 
         const vertices = [
-          { x: 0, y: -0.92, z: 0 },
-          { x: -0.45, y: -0.92, z: -0.34 },
-          { x: 0.45, y: -0.92, z: -0.34 },
-          { x: 0.61, y: -0.92, z: 0 },
-          { x: 0.45, y: -0.92, z: 0.34 },
-          { x: -0.45, y: -0.92, z: 0.34 },
-          { x: -0.61, y: -0.92, z: 0 },
-
-          { x: -0.78, y: -0.42, z: -0.53 },
-          { x: 0.78, y: -0.42, z: -0.53 },
-          { x: 0.96, y: -0.42, z: 0 },
-          { x: 0.78, y: -0.42, z: 0.53 },
-          { x: -0.78, y: -0.42, z: 0.53 },
-          { x: -0.96, y: -0.42, z: 0 },
-
-          { x: -0.72, y: 0.22, z: -0.49 },
-          { x: 0.72, y: 0.22, z: -0.49 },
-          { x: 0.89, y: 0.22, z: 0 },
-          { x: 0.72, y: 0.22, z: 0.49 },
-          { x: -0.72, y: 0.22, z: 0.49 },
-          { x: -0.89, y: 0.22, z: 0 },
-
-          { x: 0, y: 0.98, z: 0 }
+          {x:0,y:-.92,z:0},{x:-.45,y:-.92,z:-.34},{x:.45,y:-.92,z:-.34},
+          {x:.61,y:-.92,z:0},{x:.45,y:-.92,z:.34},{x:-.45,y:-.92,z:.34},
+          {x:-.61,y:-.92,z:0},{x:-.78,y:-.42,z:-.53},{x:.78,y:-.42,z:-.53},
+          {x:.96,y:-.42,z:0},{x:.78,y:-.42,z:.53},{x:-.78,y:-.42,z:.53},
+          {x:-.96,y:-.42,z:0},{x:-.72,y:.22,z:-.49},{x:.72,y:.22,z:-.49},
+          {x:.89,y:.22,z:0},{x:.72,y:.22,z:.49},{x:-.72,y:.22,z:.49},
+          {x:-.89,y:.22,z:0},{x:0,y:.98,z:0}
         ];
 
         const edges = [
-          [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 1],
-          [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6],
-          [7, 8], [8, 9], [9, 10], [10, 11], [11, 12], [12, 7],
-          [1, 7], [2, 8], [3, 9], [4, 10], [5, 11], [6, 12],
-          [13, 14], [14, 15], [15, 16], [16, 17], [17, 18], [18, 13],
-          [7, 13], [8, 14], [9, 15], [10, 16], [11, 17], [12, 18],
-          [19, 13], [19, 14], [19, 15], [19, 16], [19, 17], [19, 18],
-          [7, 14], [8, 15], [9, 16], [10, 17], [11, 18], [12, 13],
-          [1, 8], [2, 9], [3, 10], [4, 11], [5, 12], [6, 7]
+          [1,2],[2,3],[3,4],[4,5],[5,6],[6,1],[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],
+          [7,8],[8,9],[9,10],[10,11],[11,12],[12,7],[1,7],[2,8],[3,9],[4,10],[5,11],[6,12],
+          [13,14],[14,15],[15,16],[16,17],[17,18],[18,13],[7,13],[8,14],[9,15],[10,16],[11,17],[12,18],
+          [19,13],[19,14],[19,15],[19,16],[19,17],[19,18],[7,14],[8,15],[9,16],[10,17],[11,18],[12,13],
+          [1,8],[2,9],[3,10],[4,11],[5,12],[6,7]
         ];
 
-        const projected = vertices.map(point =>
-          project(point, rotation, tilt, centerX, centerY, r)
-        );
-
-        const glow = ctx.createRadialGradient(centerX, centerY, r * 0.08, centerX, centerY, r * 1.55);
-        glow.addColorStop(0, `rgba(${colors.glow.join(",")}, ${emerald.opacity * 0.1})`);
-        glow.addColorStop(1, `rgba(${colors.glow.join(",")}, 0)`);
-
+        const points = vertices.map(p => project(p, rotation, tilt, cx, cy, r));
+        const glow = ctx.createRadialGradient(cx, cy, r * .08, cx, cy, r * 1.55);
+        glow.addColorStop(0, `rgba(${palette.glow.join(",")}, ${item.opacity * .1})`);
+        glow.addColorStop(1, `rgba(${palette.glow.join(",")}, 0)`);
         ctx.beginPath();
-        ctx.arc(centerX, centerY, r * 1.55, 0, Math.PI * 2);
+        ctx.arc(cx, cy, r * 1.55, 0, Math.PI * 2);
         ctx.fillStyle = glow;
         ctx.fill();
 
-        for (let i = 0; i < edges.length; i++) {
-          const [aIndex, bIndex] = edges[i];
-          const a = projected[aIndex];
-          const b = projected[bIndex];
-          const averageZ = (a.z + b.z) * 0.5;
-          const showingFront = averageZ < 0.1;
-          const alpha = showingFront
-            ? emerald.opacity * (0.42 + (1 - Math.max(-1, Math.min(1, averageZ))) * 0.25)
-            : emerald.opacity * 0.14;
-          const color = showingFront ? colors.bright : colors.dim;
-
-          drawLine(a, b, color, alpha, showingFront ? 1.05 : 0.7);
-        }
-
-        const glint = projected[0];
-        ctx.beginPath();
-        ctx.arc(glint.x, glint.y, Math.max(1.2, r * 0.024), 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(226, 255, 247, ${emerald.opacity * 0.58})`;
-        ctx.fill();
+        edges.forEach(([aIndex, bIndex]) => {
+          const a = points[aIndex];
+          const b = points[bIndex];
+          const z = (a.z + b.z) * .5;
+          const front = z < .1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(${(front ? palette.bright : palette.dim).join(",")}, ${front ? item.opacity * .58 : item.opacity * .14})`;
+          ctx.lineWidth = front ? 1.05 : .7;
+          ctx.stroke();
+        });
       }
 
       function drawFrame(time, staticFrame = false) {
         ctx.clearRect(0, 0, width, height);
-        const colors = getColors();
-        const frameTime = staticFrame ? 0 : time;
-
-        for (const emerald of emeralds) {
-          drawEmerald(emerald, frameTime, colors);
-        }
+        const palette = colors();
+        emeralds.forEach(item => drawEmerald(item, staticFrame ? 0 : time, palette));
       }
 
       function animate(time) {
         rafId = 0;
         if (!visible || reducedMotion.matches) return;
-
         if (time - lastFrame < 30) {
           rafId = requestAnimationFrame(animate);
           return;
         }
-
         lastFrame = time;
         drawFrame(time);
         rafId = requestAnimationFrame(animate);
       }
 
-      function startAnimation() {
-        if (!reducedMotion.matches && visible && !rafId) {
+      function updateAnimation() {
+        if (reducedMotion.matches || !visible) {
+          if (rafId) cancelAnimationFrame(rafId);
+          rafId = 0;
+          drawFrame(0, true);
+        } else if (!rafId) {
           rafId = requestAnimationFrame(animate);
         }
       }
 
-      function stopAnimation() {
-        if (rafId) {
-          cancelAnimationFrame(rafId);
-          rafId = 0;
-        }
-      }
-
-      function updateAnimationState() {
-        if (reducedMotion.matches || !visible) {
-          stopAnimation();
-          drawFrame(0, true);
-        } else {
-          startAnimation();
-        }
-      }
-
       resizeCanvas();
-      startAnimation();
+      updateAnimation();
 
       window.addEventListener("resize", () => {
         resizeCanvas();
-        updateAnimationState();
+        updateAnimation();
       }, { passive: true });
 
       document.addEventListener("visibilitychange", () => {
         visible = !document.hidden;
-        updateAnimationState();
+        updateAnimation();
       });
 
-      if (typeof reducedMotion.addEventListener === "function") {
-        reducedMotion.addEventListener("change", updateAnimationState);
-      } else if (typeof reducedMotion.addListener === "function") {
-        reducedMotion.addListener(updateAnimationState);
+      window.addEventListener("satsnation-theme-change", () => drawFrame(performance.now(), true));
+
+      if (reducedMotion.addEventListener) {
+        reducedMotion.addEventListener("change", updateAnimation);
+      } else if (reducedMotion.addListener) {
+        reducedMotion.addListener(updateAnimation);
       }
     })();
 
-    /*
-     * Purchasing-power chart. Values are synthetic illustrations, not
-     * historical BCH prices or U.S. CPI observations.
-     */
     (() => {
       const canvas = document.getElementById("purchasingPowerChart");
       const ctx = canvas?.getContext("2d");
@@ -2498,57 +2010,50 @@
       if (!canvas || !ctx) return;
 
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      let selectedRange = "all";
-      let animationFrame = 0;
-      let drawProgress = reducedMotion.matches ? 1 : 0;
-      let lastTime = 0;
+      let range = "all";
+      let progress = 1;
 
-      const series = {
+      const data = {
         all: {
-          labels: ["Start", "Early", "Growth", "Volatility", "Today"],
+          labels: ["Start", "Early", "Growth", "Swings", "Today"],
           bch: [100, 72, 143, 91, 126],
           usd: [100, 88, 75, 61, 49]
         },
         10: {
-          labels: ["10 years ago", "Year 3", "Year 5", "Year 8", "Today"],
+          labels: ["10y ago", "Year 3", "Year 5", "Year 8", "Today"],
           bch: [100, 136, 82, 151, 119],
           usd: [100, 94, 87, 80, 73]
         },
         5: {
-          labels: ["5 years ago", "Year 1", "Year 2", "Year 3", "Today"],
+          labels: ["5y ago", "Year 1", "Year 2", "Year 3", "Today"],
           bch: [100, 74, 113, 86, 128],
           usd: [100, 96, 91, 86, 81]
         }
       };
 
-      function smoothValue(values, position) {
-        const scaled = Math.max(0, Math.min(values.length - 1, position));
-        const i = Math.floor(scaled);
-        const t = scaled - i;
-        const eased = t * t * (3 - 2 * t);
-        return values[i] + (
-          values[Math.min(i + 1, values.length - 1)] - values[i]
-        ) * eased;
+      function css(name) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
       }
 
-      function drawSeries(values, xFor, yFor, progress, color, dashed = false) {
-        const segments = values.length - 1;
-        const end = Math.max(0.01, progress * segments);
+      function interpolate(values, position) {
+        const p = Math.max(0, Math.min(values.length - 1, position));
+        const i = Math.floor(p);
+        const t = p - i;
+        const eased = t * t * (3 - 2 * t);
+        return values[i] + (values[Math.min(i + 1, values.length - 1)] - values[i]) * eased;
+      }
+
+      function drawLine(values, x, y, color, dashed = false) {
+        const end = Math.max(.01, progress * (values.length - 1));
         const points = [];
 
         for (let i = 0; i <= Math.ceil(end); i++) {
-          const position = Math.min(i, end);
-          points.push({
-            x: xFor(position),
-            y: yFor(smoothValue(values, position))
-          });
+          const p = Math.min(i, end);
+          points.push({ x: x(p), y: y(interpolate(values, p)) });
         }
 
         if (points.length < 2) {
-          points.push({
-            x: xFor(end),
-            y: yFor(smoothValue(values, end))
-          });
+          points.push({ x: x(end), y: y(interpolate(values, end)) });
         }
 
         ctx.save();
@@ -2556,25 +2061,25 @@
         ctx.moveTo(points[0].x, points[0].y);
 
         for (let i = 1; i < points.length; i++) {
-          const previous = points[i - 1];
+          const prev = points[i - 1];
           const current = points[i];
-          const midpoint = (previous.x + current.x) / 2;
-          ctx.quadraticCurveTo(midpoint, previous.y, current.x, current.y);
+          const mid = (prev.x + current.x) / 2;
+          ctx.quadraticCurveTo(mid, prev.y, current.x, current.y);
         }
 
         ctx.strokeStyle = color;
-        ctx.lineWidth = 3;
-        ctx.lineJoin = "round";
+        ctx.lineWidth = 2.8;
         ctx.lineCap = "round";
-        ctx.setLineDash(dashed ? [7, 7] : []);
+        ctx.lineJoin = "round";
+        ctx.setLineDash(dashed ? [6, 6] : []);
         ctx.shadowColor = color;
-        ctx.shadowBlur = dashed ? 0 : 12;
+        ctx.shadowBlur = dashed ? 0 : 8;
         ctx.stroke();
         ctx.restore();
 
-        const lastPoint = points[points.length - 1];
+        const last = points[points.length - 1];
         ctx.beginPath();
-        ctx.arc(lastPoint.x, lastPoint.y, 4.5, 0, Math.PI * 2);
+        ctx.arc(last.x, last.y, 3.5, 0, Math.PI * 2);
         ctx.fillStyle = color;
         ctx.fill();
       }
@@ -2590,164 +2095,95 @@
 
         const width = rect.width;
         const height = rect.height;
-        const data = series[selectedRange];
-        const padding = {
-          top: 24,
-          right: width < 430 ? 13 : 22,
-          bottom: 39,
-          left: width < 430 ? 40 : 52
+        const chart = data[range];
+        const pad = {
+          top: 14,
+          right: 11,
+          bottom: 30,
+          left: width < 360 ? 31 : 38
         };
-        const plotWidth = width - padding.left - padding.right;
-        const plotHeight = height - padding.top - padding.bottom;
-        const minValue = 35;
-        const maxValue = 165;
-
-        const xFor = index =>
-          padding.left + (index / (data.labels.length - 1)) * plotWidth;
-        const yFor = value =>
-          padding.top + ((maxValue - value) / (maxValue - minValue)) * plotHeight;
+        const plotW = width - pad.left - pad.right;
+        const plotH = height - pad.top - pad.bottom;
+        const min = 35;
+        const max = 165;
+        const x = index => pad.left + index / (chart.labels.length - 1) * plotW;
+        const y = value => pad.top + (max - value) / (max - min) * plotH;
 
         ctx.clearRect(0, 0, width, height);
-        ctx.font = '11px "DM Sans", sans-serif';
+        ctx.font = '9px "DM Sans", sans-serif';
         ctx.textBaseline = "middle";
 
         [150, 100, 50].forEach(value => {
-          const y = yFor(value);
+          const lineY = y(value);
           ctx.beginPath();
-          ctx.moveTo(padding.left, y);
-          ctx.lineTo(width - padding.right, y);
-          ctx.strokeStyle = value === 100
-            ? "rgba(220,235,245,.20)"
-            : "rgba(220,235,245,.09)";
+          ctx.moveTo(pad.left, lineY);
+          ctx.lineTo(width - pad.right, lineY);
+          ctx.strokeStyle = value === 100 ? css("--chart-line-strong") : css("--chart-line");
           ctx.lineWidth = 1;
-          ctx.setLineDash(value === 100 ? [4, 5] : []);
+          ctx.setLineDash(value === 100 ? [3, 4] : []);
           ctx.stroke();
 
-          ctx.fillStyle = "rgba(176,190,201,.72)";
+          ctx.fillStyle = css("--chart-axis");
           ctx.textAlign = "right";
-          ctx.fillText(String(value), padding.left - 9, y);
+          ctx.fillText(String(value), pad.left - 6, lineY);
         });
-        ctx.setLineDash([]);
 
-        ctx.fillStyle = "rgba(176,190,201,.76)";
+        ctx.setLineDash([]);
+        ctx.fillStyle = css("--chart-axis");
         ctx.textAlign = "center";
         ctx.textBaseline = "top";
-        data.labels.forEach((label, index) => {
-          ctx.fillText(label, xFor(index), height - padding.bottom + 13);
+        chart.labels.forEach((label, index) => {
+          ctx.fillText(label, x(index), height - pad.bottom + 9);
         });
 
-        const bchPoints = data.bch.map((value, index) => ({
-          x: xFor(index),
-          y: yFor(value)
-        }));
-        const fillProgress = Math.max(.01, drawProgress);
-        const fillEndPosition = fillProgress * (bchPoints.length - 1);
-        const fillEndX = xFor(fillEndPosition);
-
-        ctx.save();
-        ctx.beginPath();
-        ctx.moveTo(bchPoints[0].x, yFor(minValue));
-        ctx.lineTo(bchPoints[0].x, bchPoints[0].y);
-
-        for (let i = 1; i < bchPoints.length; i++) {
-          if (i > fillEndPosition) break;
-          const previous = bchPoints[i - 1];
-          const current = bchPoints[i];
-          const mid = (previous.x + current.x) / 2;
-          ctx.quadraticCurveTo(mid, previous.y, current.x, current.y);
-        }
-
-        const finalY = yFor(smoothValue(data.bch, fillEndPosition));
-        ctx.lineTo(fillEndX, finalY);
-        ctx.lineTo(fillEndX, yFor(minValue));
-        ctx.closePath();
-
-        const gradient = ctx.createLinearGradient(
-          0,
-          padding.top,
-          0,
-          height - padding.bottom
-        );
-        gradient.addColorStop(0, "rgba(85,224,168,.15)");
-        gradient.addColorStop(1, "rgba(85,224,168,0)");
-        ctx.fillStyle = gradient;
-        ctx.fill();
-        ctx.restore();
-
-        drawSeries(data.usd, xFor, yFor, drawProgress, "#ffa27f", true);
-        drawSeries(data.bch, xFor, yFor, drawProgress, "#55e0a8", false);
+        drawLine(chart.usd, x, y, css("--chart-usd"), true);
+        drawLine(chart.bch, x, y, css("--chart-green"), false);
       }
 
-      function animate(time) {
-        if (!lastTime) lastTime = time;
-        const delta = Math.min(time - lastTime, 40);
-        lastTime = time;
-
-        drawProgress = Math.min(1, drawProgress + delta / 950);
-        draw();
-
-        if (drawProgress < 1) {
-          animationFrame = requestAnimationFrame(animate);
-        } else {
-          animationFrame = 0;
-        }
-      }
-
-      function renderChart(animateIn = false) {
-        if (animationFrame) cancelAnimationFrame(animationFrame);
-        lastTime = 0;
-
-        if (animateIn && !reducedMotion.matches) {
-          drawProgress = 0;
-          animationFrame = requestAnimationFrame(animate);
-        } else {
-          drawProgress = 1;
+      function animateToRange() {
+        if (reducedMotion.matches) {
+          progress = 1;
           draw();
+          return;
         }
+
+        const started = performance.now();
+        const duration = 500;
+
+        function frame(now) {
+          progress = Math.min(1, (now - started) / duration);
+          draw();
+          if (progress < 1) requestAnimationFrame(frame);
+        }
+
+        progress = 0;
+        requestAnimationFrame(frame);
       }
 
       buttons.forEach(button => {
         button.addEventListener("click", () => {
-          selectedRange = button.dataset.ppRange;
+          range = button.dataset.ppRange;
           buttons.forEach(item => {
             item.setAttribute("aria-pressed", String(item === button));
           });
-          renderChart(true);
+          animateToRange();
         });
       });
 
-      const resizeObserver = new ResizeObserver(() => draw());
-      resizeObserver.observe(canvas);
+      new ResizeObserver(draw).observe(canvas);
       window.addEventListener("resize", draw, { passive: true });
+      window.addEventListener("satsnation-theme-change", draw);
 
       document.getElementById("todayDate").textContent =
         new Intl.DateTimeFormat("en-US", {
           year: "numeric",
-          month: "long",
+          month: "short",
           day: "numeric",
           timeZone: "UTC"
         }).format(new Date());
 
-      renderChart(true);
+      draw();
     })();
-
-    const categoryOrder = [
-      "Wallets",
-      "Exchanges",
-      "DeFi",
-      "DEX",
-      "CashTokens",
-      "Wrapped BCH",
-      "Explorer",
-      "Developer tools",
-      "Infrastructure",
-      "Privacy",
-      "Gaming",
-      "Community",
-      "Projects",
-      "Merchants",
-      "Other"
-    ];
 
         const figures = [
   { href: "https://wallet.bitcoin.com", src: "https://i.postimg.cc/j5NS6g0r/bcom-logo.png", caption: "Bitcoin.com", detail: "Wallets", description: "Easy-to-use mobile wallet for BCH and other chains.", categories: ["Wallets"] },
@@ -3069,9 +2505,26 @@
   { href: "https://pagoconbit.com/", src: "https://www.google.com/s2/favicons?domain=pagoconbit.com&sz=128", caption: "PagoConBit", detail: "Merchants", description: "Argentina-based BCH service for bills, gift cards, and digital goods.", categories: ["Merchants"] }
 ];
 
+    const categoryOrder = [
+      "Wallets",
+      "Exchanges",
+      "DeFi",
+      "DEX",
+      "CashTokens",
+      "Wrapped BCH",
+      "Explorer",
+      "Developer tools",
+      "Infrastructure",
+      "Privacy",
+      "Gaming",
+      "Community",
+      "Projects",
+      "Merchants",
+      "Other"
+    ];
+
     function getFigureCategories(item) {
       if (!Array.isArray(item.categories)) return [];
-
       return [...new Set(
         item.categories
           .filter(category => typeof category === "string")
@@ -3081,8 +2534,8 @@
     }
 
     function createCategoryFilters() {
-      const filterContainer = document.getElementById("ecosystemFilters");
-      filterContainer.replaceChildren();
+      const container = document.getElementById("ecosystemFilters");
+      container.replaceChildren();
 
       ["All", ...categoryOrder].forEach(category => {
         const button = document.createElement("button");
@@ -3091,7 +2544,7 @@
         button.dataset.filter = category;
         button.setAttribute("aria-pressed", String(category === "All"));
         button.textContent = category;
-        filterContainer.appendChild(button);
+        container.appendChild(button);
       });
     }
 
@@ -3100,14 +2553,12 @@
     let lastDialogTrigger = null;
 
     function shuffleArray(array) {
-      const shuffled = [...array];
-
-      for (let i = shuffled.length - 1; i > 0; i--) {
+      const result = [...array];
+      for (let i = result.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        [result[i], result[j]] = [result[j], result[i]];
       }
-
-      return shuffled;
+      return result;
     }
 
     function populateFigures() {
@@ -3145,22 +2596,21 @@
           image.alt = "Project image unavailable";
           image.style.visibility = "hidden";
         };
-
         imageLink.appendChild(image);
 
         const caption = document.createElement("span");
         caption.className = "card-caption";
 
-        const captionName = document.createElement("span");
-        captionName.className = "card-caption-name";
-        captionName.textContent = item.caption || "Untitled project";
-        caption.appendChild(captionName);
+        const name = document.createElement("span");
+        name.className = "card-caption-name";
+        name.textContent = item.caption || "Untitled project";
+        caption.appendChild(name);
 
         if (item.detail) {
-          const captionDetail = document.createElement("span");
-          captionDetail.className = "card-caption-detail";
-          captionDetail.textContent = item.detail;
-          caption.appendChild(captionDetail);
+          const detail = document.createElement("span");
+          detail.className = "card-caption-detail";
+          detail.textContent = item.detail;
+          caption.appendChild(detail);
         }
 
         front.append(imageLink, caption);
@@ -3217,7 +2667,7 @@
     }
 
     function applyFigureFilters() {
-      const searchValue = activeSearch.toLocaleLowerCase();
+      const query = activeSearch.toLocaleLowerCase();
       const cards = [...document.querySelectorAll("#figures .ecosystem-card")];
       let visibleCount = 0;
 
@@ -3225,20 +2675,15 @@
         const categories = JSON.parse(card.dataset.categories || "[]");
         const caption = card.querySelector(".card-caption").textContent.toLocaleLowerCase();
         const description = card.querySelector(".card-description").textContent.toLocaleLowerCase();
+        const categoryMatch = activeCategory === "All" || categories.includes(activeCategory);
+        const searchMatch =
+          !query ||
+          caption.includes(query) ||
+          description.includes(query) ||
+          categories.some(category => category.toLocaleLowerCase().includes(query));
 
-        const matchesCategory =
-          activeCategory === "All" || categories.includes(activeCategory);
-
-        const matchesSearch =
-          !searchValue ||
-          caption.includes(searchValue) ||
-          description.includes(searchValue) ||
-          categories.some(category => category.toLocaleLowerCase().includes(searchValue));
-
-        const isVisible = matchesCategory && matchesSearch;
-        card.hidden = !isVisible;
-
-        if (isVisible) visibleCount += 1;
+        card.hidden = !(categoryMatch && searchMatch);
+        if (!card.hidden) visibleCount++;
       });
 
       document.getElementById("galleryCount").textContent =
@@ -3247,8 +2692,8 @@
       document.querySelector("#figures .empty-state")?.remove();
 
       if (visibleCount === 0) {
-        const emptyState = document.createElement("div");
-        emptyState.className = "empty-state";
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
 
         const title = document.createElement("strong");
         title.textContent = figures.length === 0
@@ -3260,14 +2705,13 @@
           ? "Add projects, tools, wallets, and communities to the figures array in the page script."
           : "Try another search or choose a different category.";
 
-        emptyState.append(title, message);
-        document.getElementById("figures").appendChild(emptyState);
+        empty.append(title, message);
+        document.getElementById("figures").appendChild(empty);
       }
     }
 
     function setActiveCategory(category) {
       if (category !== "All" && !categoryOrder.includes(category)) return;
-
       activeCategory = category;
 
       document.querySelectorAll(".category-btn").forEach(button => {
@@ -3278,41 +2722,38 @@
     }
 
     function setTheme(theme) {
-      const safeTheme = theme === "dark" ? "dark" : "light";
-      document.documentElement.dataset.theme = safeTheme;
+      const selected = theme === "dark" ? "dark" : "light";
+      document.documentElement.dataset.theme = selected;
 
       document.querySelector('meta[name="theme-color"]')?.setAttribute(
         "content",
-        safeTheme === "dark" ? "#0b0e12" : "#f6f7f8"
+        selected === "dark" ? "#0b0e12" : "#f6f7f8"
       );
 
       const toggle = document.getElementById("themeToggle");
       if (toggle) {
-        const isDark = safeTheme === "dark";
-        toggle.setAttribute("aria-pressed", String(isDark));
-        toggle.setAttribute(
-          "aria-label",
-          isDark ? "Switch to light mode" : "Switch to dark mode"
-        );
-        toggle.title = isDark ? "Switch to light mode" : "Switch to dark mode";
+        const dark = selected === "dark";
+        toggle.setAttribute("aria-pressed", String(dark));
+        toggle.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+        toggle.title = dark ? "Switch to light mode" : "Switch to dark mode";
       }
 
       try {
-        localStorage.setItem("satsnation-theme", safeTheme);
+        localStorage.setItem("satsnation-theme", selected);
       } catch {
-        // Theme still works if storage is unavailable.
+        // Theme still works when storage is unavailable.
       }
+
+      window.dispatchEvent(new CustomEvent("satsnation-theme-change"));
     }
 
     function openDialog(overlayId, panelId, trigger) {
       const overlay = document.getElementById(overlayId);
-      const panel = document.getElementById(panelId);
-
       lastDialogTrigger = trigger || document.activeElement;
       overlay.classList.add("is-open");
       overlay.setAttribute("aria-hidden", "false");
       document.body.classList.add("dialog-open");
-      panel.focus();
+      document.getElementById(panelId).focus();
     }
 
     function closeDialog(overlayId) {
@@ -3326,151 +2767,106 @@
         document.body.classList.remove("dialog-open");
       }
 
-      if (lastDialogTrigger && typeof lastDialogTrigger.focus === "function") {
-        lastDialogTrigger.focus();
-      }
-
+      if (lastDialogTrigger?.focus) lastDialogTrigger.focus();
       lastDialogTrigger = null;
     }
 
     function initMarketCapCalculator() {
-      const tokenPriceInput = document.getElementById("tokenPrice");
-      const tokenQuantityInput = document.getElementById("tokenQuantity");
+      const priceInput = document.getElementById("tokenPrice");
+      const quantityInput = document.getElementById("tokenQuantity");
       const satsOutput = document.getElementById("marketCapSats");
       const bchOutput = document.getElementById("marketCapBch");
       const usdOutput = document.getElementById("marketCapUsd");
       const note = document.getElementById("calculatorNote");
-
-      const SATS_PER_BCH = 100_000_000;
-      const numberFormatter = new Intl.NumberFormat("en-US", {
-        maximumFractionDigits: 2
-      });
-      const satsFormatter = new Intl.NumberFormat("en-US", {
-        maximumFractionDigits: 8
-      });
-
+      const satsPerBch = 100_000_000;
+      const numberFormat = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });
+      const satsFormat = new Intl.NumberFormat("en-US", { maximumFractionDigits: 8 });
       let bchUsdRate = null;
-      let ratesUnavailable = false;
+      let rateUnavailable = false;
 
-      function formatUsd(amount) {
-        if (!Number.isFinite(amount)) return "Value too large";
-
-        try {
-          return new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-            maximumFractionDigits: 2
-          }).format(amount);
-        } catch {
-          return `USD ${numberFormatter.format(amount)}`;
-        }
+      function dollars(value) {
+        if (!Number.isFinite(value)) return "Value too large";
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 2
+        }).format(value);
       }
 
-      function getInputValues() {
-        const priceText = tokenPriceInput.value.trim();
-        const quantityText = tokenQuantityInput.value.trim();
+      function update() {
+        const priceText = priceInput.value.trim();
+        const quantityText = quantityInput.value.trim();
 
-        if (!priceText || !quantityText) return null;
-
-        const priceSats = Number(priceText);
-        const quantity = Number(quantityText);
-
-        if (
-          !Number.isFinite(priceSats) ||
-          !Number.isFinite(quantity) ||
-          priceSats < 0 ||
-          quantity < 0
-        ) {
-          return null;
-        }
-
-        return { priceSats, quantity };
-      }
-
-      function updateMarketCap() {
-        const values = getInputValues();
-
-        if (!values) {
+        if (!priceText || !quantityText) {
           satsOutput.textContent = "0 sats";
           bchOutput.textContent = "0 BCH";
           usdOutput.textContent = bchUsdRate === null
-            ? (ratesUnavailable ? "Rate unavailable" : "Loading exchange rate…")
-            : formatUsd(0);
+            ? (rateUnavailable ? "Rate unavailable" : "Loading exchange rate…")
+            : dollars(0);
           return;
         }
 
-        const marketCapSats = values.priceSats * values.quantity;
+        const price = Number(priceText);
+        const quantity = Number(quantityText);
 
-        if (!Number.isFinite(marketCapSats)) {
+        if (!Number.isFinite(price) || !Number.isFinite(quantity) || price < 0 || quantity < 0) {
+          satsOutput.textContent = "0 sats";
+          bchOutput.textContent = "0 BCH";
+          usdOutput.textContent = "Enter valid numbers";
+          return;
+        }
+
+        const totalSats = price * quantity;
+        if (!Number.isFinite(totalSats)) {
           satsOutput.textContent = "Value too large";
           bchOutput.textContent = "Value too large";
           usdOutput.textContent = "Value too large";
           return;
         }
 
-        const marketCapBch = marketCapSats / SATS_PER_BCH;
-        satsOutput.textContent = `${satsFormatter.format(marketCapSats)} sats`;
-        bchOutput.textContent = `${numberFormatter.format(marketCapBch)} BCH`;
-
-        if (bchUsdRate === null) {
-          usdOutput.textContent = ratesUnavailable
-            ? "Rate unavailable"
-            : "Loading exchange rate…";
-          return;
-        }
-
-        usdOutput.textContent = formatUsd(marketCapBch * bchUsdRate);
+        const totalBch = totalSats / satsPerBch;
+        satsOutput.textContent = `${satsFormat.format(totalSats)} sats`;
+        bchOutput.textContent = `${numberFormat.format(totalBch)} BCH`;
+        usdOutput.textContent = bchUsdRate === null
+          ? (rateUnavailable ? "Rate unavailable" : "Loading exchange rate…")
+          : dollars(totalBch * bchUsdRate);
       }
 
-      async function fetchBchRate() {
-        ratesUnavailable = false;
-        updateMarketCap();
-
+      async function loadRate() {
         try {
           const response = await fetch(
             "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash&vs_currencies=usd",
             { headers: { Accept: "application/json" } }
           );
+          if (!response.ok) throw new Error(`Exchange-rate service returned ${response.status}`);
 
-          if (!response.ok) {
-            throw new Error(`Exchange-rate service returned ${response.status}`);
-          }
-
-          const data = await response.json();
-          const rate = Number(data?.["bitcoin-cash"]?.usd);
-
-          if (!Number.isFinite(rate) || rate <= 0) {
-            throw new Error("Exchange-rate response is incomplete");
-          }
+          const result = await response.json();
+          const rate = Number(result?.["bitcoin-cash"]?.usd);
+          if (!Number.isFinite(rate) || rate <= 0) throw new Error("Invalid exchange rate");
 
           bchUsdRate = rate;
-          ratesUnavailable = false;
-          note.textContent =
-            "Enter the token price in sats. USD conversion uses the available BCH exchange rate.";
+          rateUnavailable = false;
+          note.textContent = "USD estimate uses the BCH exchange rate available when this page loads.";
         } catch (error) {
           console.warn("Unable to load BCH exchange rate:", error);
           bchUsdRate = null;
-          ratesUnavailable = true;
-          note.textContent =
-            "Enter the token price in sats. Live USD conversion is unavailable right now.";
+          rateUnavailable = true;
+          note.textContent = "Live USD conversion is unavailable right now.";
         }
 
-        updateMarketCap();
+        update();
       }
 
-      tokenPriceInput.addEventListener("input", updateMarketCap);
-      tokenQuantityInput.addEventListener("input", updateMarketCap);
-
-      updateMarketCap();
-      fetchBchRate();
+      priceInput.addEventListener("input", update);
+      quantityInput.addEventListener("input", update);
+      update();
+      loadRate();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
       setTheme(document.documentElement.dataset.theme || "dark");
-
       document.getElementById("themeToggle").addEventListener("click", () => {
-        const currentTheme = document.documentElement.dataset.theme;
-        setTheme(currentTheme === "dark" ? "light" : "dark");
+        setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
       });
 
       createCategoryFilters();
@@ -3480,15 +2876,12 @@
       document.getElementById("openConsensus").addEventListener("click", event => {
         openDialog("consensusOverlay", "consensusPanel", event.currentTarget);
       });
-
       document.getElementById("consensusClose").addEventListener("click", () => {
         closeDialog("consensusOverlay");
       });
-
       document.getElementById("heroStatsButton").addEventListener("click", event => {
         openDialog("statsOverlay", "statsPanel", event.currentTarget);
       });
-
       document.getElementById("statsClose").addEventListener("click", () => {
         closeDialog("statsOverlay");
       });
@@ -3511,20 +2904,18 @@
 
       document.addEventListener("keydown", event => {
         if (event.key === "Escape") {
-          const openOverlay = document.querySelector(".dialog-overlay.is-open");
-          if (openOverlay) closeDialog(openOverlay.id);
+          const overlay = document.querySelector(".dialog-overlay.is-open");
+          if (overlay) closeDialog(overlay.id);
         }
       });
 
       const backToTop = document.getElementById("backToTop");
-      let hideTimeout;
+      let hideTimer;
 
       window.addEventListener("scroll", () => {
         backToTop.classList.remove("hidden");
-        clearTimeout(hideTimeout);
-        hideTimeout = window.setTimeout(() => {
-          backToTop.classList.add("hidden");
-        }, 1800);
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => backToTop.classList.add("hidden"), 1800);
       }, { passive: true });
 
       backToTop.addEventListener("click", () => {
