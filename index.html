@@ -2476,10 +2476,10 @@
         const satsPct = data.satsChange ?? 0;
         const dollarText = data.dollarChange === null
           ? "USD CPI unavailable"
-          : `Dollar ${data.dollarChange >= 0 ? "+" : ""}${data.dollarChange.toFixed(1)}%`;
+          : `USD ${data.dollarChange >= 0 ? "+" : ""}${data.dollarChange.toFixed(1)}%`;
 
         summary.textContent =
-          `Sats/dollar ${satsPct >= 0 ? "+" : ""}${satsPct.toFixed(1)}% · ${dollarText}`;
+          `SATS ${satsPct >= 0 ? "+" : ""}${satsPct.toFixed(1)}% · ${dollarText}`;
 
         currentSats.textContent =
           `${new Intl.NumberFormat("en-US", {
