@@ -2479,7 +2479,7 @@
           : `Dollar purchasing power ${data.dollarChange >= 0 ? "+" : ""}${data.dollarChange.toFixed(1)}%`;
 
         summary.textContent =
-          `Sats/$1 ${satsPct >= 0 ? "+" : ""}${satsPct.toFixed(1)}% · ${dollarText}`;
+          `Sats/dollar ${satsPct >= 0 ? "+" : ""}${satsPct.toFixed(1)}% · ${dollarText}`;
 
         currentSats.textContent =
           `${new Intl.NumberFormat("en-US", {
