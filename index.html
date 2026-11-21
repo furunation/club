@@ -1661,7 +1661,7 @@
             </span>
             <span class="legend-item">
               <span class="legend-line legend-line--usd" aria-hidden="true"></span>
-              one dollar purchasing power · CPI
+              Dollar · CPI
             </span>
           </div>
 
@@ -2476,7 +2476,7 @@
         const satsPct = data.satsChange ?? 0;
         const dollarText = data.dollarChange === null
           ? "USD CPI unavailable"
-          : `Dollar purchasing power ${data.dollarChange >= 0 ? "+" : ""}${data.dollarChange.toFixed(1)}%`;
+          : `Dollar ${data.dollarChange >= 0 ? "+" : ""}${data.dollarChange.toFixed(1)}%`;
 
         summary.textContent =
           `Sats/dollar ${satsPct >= 0 ? "+" : ""}${satsPct.toFixed(1)}% · ${dollarText}`;
